@@ -335,6 +335,13 @@ const Header = () => {
               >
                 {t('appointment')}
               </Link>
+              <Link
+                to="/test-accounts"
+                className="block px-3 py-2 bg-green-600 text-white rounded-md text-center mt-2"
+                onClick={() => setIsOpen(false)}
+              >
+                🔑 Тестовые аккаунты
+              </Link>
             </div>
           </motion.div>
         )}
