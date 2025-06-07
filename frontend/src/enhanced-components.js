@@ -270,9 +270,11 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center">
-              <Brain className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-            </div>
+            <img 
+              src="https://images.pexels.com/photos/6192331/pexels-photo-6192331.jpeg" 
+              alt="Логотип центра нейрохирургии"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl object-cover"
+            />
             <div>
               <h1 className="text-lg sm:text-xl font-bold text-gray-900">NEURO.UZ</h1>
               <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">{t('centerOfNeurosurgery')}</p>
