@@ -552,3 +552,685 @@ export const DoctorDashboard = () => {
     </div>
   );
 };
+
+// Полноценная админ-панель
+export const AdminPanel = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
+  const [editingService, setEditingService] = useState(null);
+  const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+  const [newService, setNewService] = useState({
+    name: '',
+    category: '',
+    price: '',
+    description: ''
+  });
+  
+  const { t } = useLanguage();
+  const { 
+    adminData, 
+    updateSiteSettings, 
+    updateSeoSettings, 
+    addService, 
+    updateService, 
+    deleteService 
+  } = useAdmin();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (loginData.email === 'admin@neuro.uz' && loginData.password === 'admin123') {
+      setIsAuthenticated(true);
+    } else {
+      alert('Неверный email или пароль. Попробуйте: admin@neuro.uz / admin123');
+    }
+  };
+
+  const handleServiceSubmit = (e) => {
+    e.preventDefault();
+    if (editingService) {
+      updateService(editingService.id, {
+        ...newService,
+        price: parseInt(newService.price)
+      });
+    } else {
+      addService({
+        ...newService,
+        price: parseInt(newService.price)
+      });
+    }
+    setIsServiceModalOpen(false);
+    setEditingService(null);
+    setNewService({ name: '', category: '', price: '', description: '' });
+  };
+
+  const startEditService = (service) => {
+    setEditingService(service);
+    setNewService({
+      name: service.name,
+      category: service.category,
+      price: service.price.toString(),
+      description: service.description
+    });
+    setIsServiceModalOpen(true);
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-white rounded-2xl p-8 shadow-lg max-w-md w-full mx-4"
+        >
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Settings className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900">Вход в админ-панель</h1>
+            <p className="text-gray-600 mt-2">Только для администраторов</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                required
+                value={loginData.email}
+                onChange={(e) => setLoginData({...loginData, email: e.target.value})}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                placeholder="admin@neuro.uz"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Пароль
+              </label>
+              <input
+                type="password"
+                required
+                value={loginData.password}
+                onChange={(e) => setLoginData({...loginData, password: e.target.value})}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                placeholder="admin123"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+            >
+              Войти в систему
+            </button>
+          </form>
+
+          <div className="mt-6 p-4 bg-purple-50 rounded-lg">
+            <p className="text-sm text-purple-700">
+              <strong>Демо доступ:</strong><br />
+              Email: admin@neuro.uz<br />
+              Пароль: admin123
+            </p>
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link to="/" className="text-purple-600 hover:text-purple-700">
+              Вернуться на главную
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Link to="/" className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg flex items-center justify-center">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-xl font-bold text-gray-900">NEURO.UZ</span>
+              </Link>
+              <span className="text-gray-400">|</span>
+              <h1 className="text-xl font-semibold text-gray-900">Админ-панель</h1>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Bell className="w-6 h-6 text-gray-400 hover:text-gray-600 cursor-pointer" />
+              <button
+                onClick={() => setIsAuthenticated(false)}
+                className="text-gray-600 hover:text-gray-900 font-medium"
+              >
+                Выйти
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Боковое меню */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow p-6">
+              <nav className="space-y-2">
+                <button
+                  onClick={() => setActiveTab('dashboard')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'dashboard' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <BarChart3 className="w-4 h-4" />
+                  <span>Панель управления</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('services')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'services' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <DollarSign className="w-4 h-4" />
+                  <span>Услуги и цены</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('contacts')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'contacts' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>Контакты и соц.сети</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('seo')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'seo' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Search className="w-4 h-4" />
+                  <span>SEO настройки</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('gallery')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'gallery' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <ImageIcon className="w-4 h-4" />
+                  <span>Галерея</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('analytics')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'analytics' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <TrendingUp className="w-4 h-4" />
+                  <span>Аналитика</span>
+                </button>
+              </nav>
+            </div>
+          </div>
+
+          {/* Основной контент */}
+          <div className="lg:col-span-3">
+            {activeTab === 'dashboard' && (
+              <div className="space-y-6">
+                {/* Статистика */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                  <div className="bg-white rounded-lg shadow p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Всего услуг</h3>
+                        <p className="text-3xl font-bold text-purple-600">{adminData.services.length}</p>
+                      </div>
+                      <DollarSign className="w-8 h-8 text-purple-500" />
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-lg shadow p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Записей сегодня</h3>
+                        <p className="text-3xl font-bold text-blue-600">12</p>
+                      </div>
+                      <Calendar className="w-8 h-8 text-blue-500" />
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-lg shadow p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Активных врачей</h3>
+                        <p className="text-3xl font-bold text-green-600">8</p>
+                      </div>
+                      <Users className="w-8 h-8 text-green-500" />
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-lg shadow p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Просмотров сайта</h3>
+                        <p className="text-3xl font-bold text-orange-600">1,245</p>
+                      </div>
+                      <Eye className="w-8 h-8 text-orange-500" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Последние действия */}
+                <div className="bg-white rounded-lg shadow p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Последние действия</h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                      <span>Новая запись: Иванов А.П.</span>
+                      <span className="text-sm text-gray-600">10:30</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                      <span>Обновлена услуга: МРТ головного мозга</span>
+                      <span className="text-sm text-gray-600">09:15</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                      <span>Добавлена новость</span>
+                      <span className="text-sm text-gray-600">08:45</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'services' && (
+              <div className="space-y-6">
+                <div className="bg-white rounded-lg shadow p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-semibold text-gray-900">Управление услугами</h2>
+                    <button 
+                      onClick={() => setIsServiceModalOpen(true)}
+                      className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                    >
+                      <Plus className="w-4 h-4" />
+                      <span>Добавить услугу</span>
+                    </button>
+                  </div>
+
+                  {/* Услуги по категориям */}
+                  {['Диагностика', 'Хирургия', 'Консультации'].map(category => (
+                    <div key={category} className="mb-8">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">{category}</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {adminData.services
+                          .filter(service => service.category === category)
+                          .map(service => (
+                            <div key={service.id} className="bg-gray-50 rounded-lg p-4">
+                              <div className="flex justify-between items-start mb-2">
+                                <h4 className="font-medium text-gray-900">{service.name}</h4>
+                                <div className="flex space-x-2">
+                                  <button
+                                    onClick={() => startEditService(service)}
+                                    className="text-blue-600 hover:text-blue-700"
+                                  >
+                                    <Edit className="w-4 h-4" />
+                                  </button>
+                                  <button
+                                    onClick={() => deleteService(service.id)}
+                                    className="text-red-600 hover:text-red-700"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </div>
+                              <p className="text-sm text-gray-600 mb-2">{service.description}</p>
+                              <p className="text-lg font-bold text-green-600">
+                                {new Intl.NumberFormat('uz-UZ').format(service.price)} сум
+                              </p>
+                            </div>
+                          ))
+                        }
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'contacts' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Управление контактами</h2>
+                
+                <div className="space-y-8">
+                  {/* Телефоны */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Телефоны</h3>
+                    <div className="space-y-3">
+                      {adminData.siteSettings.phones.map((phone, index) => (
+                        <div key={index} className="flex items-center space-x-4">
+                          <input
+                            type="tel"
+                            value={phone}
+                            onChange={(e) => {
+                              const newPhones = [...adminData.siteSettings.phones];
+                              newPhones[index] = e.target.value;
+                              updateSiteSettings({ phones: newPhones });
+                            }}
+                            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                          />
+                          <button className="text-red-600 hover:text-red-700">
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Email адреса</h3>
+                    <div className="space-y-3">
+                      {adminData.siteSettings.emails.map((email, index) => (
+                        <div key={index} className="flex items-center space-x-4">
+                          <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => {
+                              const newEmails = [...adminData.siteSettings.emails];
+                              newEmails[index] = e.target.value;
+                              updateSiteSettings({ emails: newEmails });
+                            }}
+                            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                          />
+                          <button className="text-red-600 hover:text-red-700">
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Социальные сети */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Социальные сети</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-4">
+                        <Facebook className="w-6 h-6 text-blue-600" />
+                        <input
+                          type="url"
+                          placeholder="https://facebook.com/neuro.uz"
+                          value={adminData.siteSettings.socialMedia.facebook}
+                          onChange={(e) => updateSiteSettings({
+                            socialMedia: { ...adminData.siteSettings.socialMedia, facebook: e.target.value }
+                          })}
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        />
+                      </div>
+                      <div className="flex items-center space-x-4">
+                        <Instagram className="w-6 h-6 text-pink-600" />
+                        <input
+                          type="url"
+                          placeholder="https://instagram.com/neuro.uz"
+                          value={adminData.siteSettings.socialMedia.instagram}
+                          onChange={(e) => updateSiteSettings({
+                            socialMedia: { ...adminData.siteSettings.socialMedia, instagram: e.target.value }
+                          })}
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        />
+                      </div>
+                      <div className="flex items-center space-x-4">
+                        <Youtube className="w-6 h-6 text-red-600" />
+                        <input
+                          type="url"
+                          placeholder="https://youtube.com/@neuro.uz"
+                          value={adminData.siteSettings.socialMedia.youtube}
+                          onChange={(e) => updateSiteSettings({
+                            socialMedia: { ...adminData.siteSettings.socialMedia, youtube: e.target.value }
+                          })}
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Адрес */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Адрес</h3>
+                    <textarea
+                      rows={3}
+                      value={adminData.siteSettings.address}
+                      onChange={(e) => updateSiteSettings({ address: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2">
+                    <Save className="w-4 h-4" />
+                    <span>Сохранить изменения</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'seo' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">SEO настройки</h2>
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Заголовок сайта
+                    </label>
+                    <input
+                      type="text"
+                      value={adminData.seoSettings.title}
+                      onChange={(e) => updateSeoSettings({ title: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Описание сайта
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={adminData.seoSettings.description}
+                      onChange={(e) => updateSeoSettings({ description: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Ключевые слова
+                    </label>
+                    <input
+                      type="text"
+                      value={adminData.seoSettings.keywords}
+                      onChange={(e) => updateSeoSettings({ keywords: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg">
+                    Сохранить настройки
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'gallery' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900">Галерея</h2>
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                    <Upload className="w-4 h-4" />
+                    <span>Загрузить изображение</span>
+                  </button>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[1,2,3,4,5,6,7,8].map((item) => (
+                    <div key={item} className="relative group">
+                      <div className="w-full h-32 bg-gray-200 rounded-lg"></div>
+                      <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                        <button className="text-white text-sm bg-red-600 px-2 py-1 rounded">
+                          Удалить
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'analytics' && (
+              <div className="space-y-6">
+                <div className="bg-white rounded-lg shadow p-6">
+                  <h2 className="text-xl font-semibold text-gray-900 mb-6">Аналитика сайта</h2>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="p-4 bg-blue-50 rounded-lg">
+                      <h3 className="font-semibold text-blue-900 mb-2">Посещения за месяц</h3>
+                      <p className="text-3xl font-bold text-blue-600">24,567</p>
+                      <p className="text-sm text-blue-700">+12% к прошлому месяцу</p>
+                    </div>
+                    
+                    <div className="p-4 bg-green-50 rounded-lg">
+                      <h3 className="font-semibold text-green-900 mb-2">Записей на прием</h3>
+                      <p className="text-3xl font-bold text-green-600">342</p>
+                      <p className="text-sm text-green-700">+8% к прошлому месяцу</p>
+                    </div>
+                    
+                    <div className="p-4 bg-purple-50 rounded-lg">
+                      <h3 className="font-semibold text-purple-900 mb-2">Популярные услуги</h3>
+                      <p className="text-lg font-bold text-purple-600">МРТ головного мозга</p>
+                      <p className="text-sm text-purple-700">156 запросов</p>
+                    </div>
+                    
+                    <div className="p-4 bg-orange-50 rounded-lg">
+                      <h3 className="font-semibold text-orange-900 mb-2">Время на сайте</h3>
+                      <p className="text-3xl font-bold text-orange-600">4:32</p>
+                      <p className="text-sm text-orange-700">среднее время сессии</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Модальное окно для услуг */}
+      <AnimatePresence>
+        {isServiceModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 w-full max-w-md"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold text-gray-900">
+                  {editingService ? 'Редактировать услугу' : 'Добавить услугу'}
+                </h3>
+                <button
+                  onClick={() => {
+                    setIsServiceModalOpen(false);
+                    setEditingService(null);
+                    setNewService({ name: '', category: '', price: '', description: '' });
+                  }}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <form onSubmit={handleServiceSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Название услуги
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={newService.name}
+                    onChange={(e) => setNewService({...newService, name: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Категория
+                  </label>
+                  <select
+                    required
+                    value={newService.category}
+                    onChange={(e) => setNewService({...newService, category: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="">Выберите категорию</option>
+                    <option value="Диагностика">Диагностика</option>
+                    <option value="Хирургия">Хирургия</option>
+                    <option value="Консультации">Консультации</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Цена (сум)
+                  </label>
+                  <input
+                    type="number"
+                    required
+                    value={newService.price}
+                    onChange={(e) => setNewService({...newService, price: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Описание
+                  </label>
+                  <textarea
+                    required
+                    rows={3}
+                    value={newService.description}
+                    onChange={(e) => setNewService({...newService, description: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+
+                <div className="flex space-x-4 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+                  >
+                    {editingService ? 'Сохранить' : 'Добавить'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsServiceModalOpen(false);
+                      setEditingService(null);
+                      setNewService({ name: '', category: '', price: '', description: '' });
+                    }}
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                  >
+                    Отмена
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
