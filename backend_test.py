@@ -70,15 +70,120 @@ class NeuroUzAPITester:
             200,
             data={"client_name": f"test_client_{datetime.now().strftime('%H%M%S')}"}
         )
+    
+    def test_appointment_submission(self):
+        """Test appointment submission"""
+        appointment_data = {
+            "doctor": "Кариев Габрат Маратович",
+            "date": "2025-06-15",
+            "time": "10:00",
+            "patient": {
+                "firstName": "Тест",
+                "lastName": "Тестов",
+                "phone": "+998 90 123-45-67",
+                "email": "test@example.com",
+                "birthDate": "1990-01-01",
+                "address": "г. Ташкент"
+            },
+            "complaint": "Тестовая запись на прием"
+        }
+        
+        return self.run_test(
+            "Appointment Submission",
+            "POST",
+            "appointments",
+            200,
+            data=appointment_data
+        )
+    
+    def test_doctor_login(self):
+        """Test doctor login"""
+        login_data = {
+            "email": "doctor@neuro.uz",
+            "password": "demo123"
+        }
+        
+        return self.run_test(
+            "Doctor Login",
+            "POST",
+            "auth/doctor",
+            200,
+            data=login_data
+        )
+    
+    def test_admin_login(self):
+        """Test admin login"""
+        login_data = {
+            "email": "admin@neuro.uz",
+            "password": "admin123"
+        }
+        
+        return self.run_test(
+            "Admin Login",
+            "POST",
+            "auth/admin",
+            200,
+            data=login_data
+        )
+    
+    def test_services_endpoint(self):
+        """Test services endpoint"""
+        return self.run_test(
+            "Services Endpoint",
+            "GET",
+            "services",
+            200
+        )
+    
+    def test_add_service(self):
+        """Test adding a new service"""
+        service_data = {
+            "name": "Тестовая услуга",
+            "category": "Диагностика",
+            "price": 100000,
+            "description": "Описание тестовой услуги"
+        }
+        
+        return self.run_test(
+            "Add Service",
+            "POST",
+            "services",
+            200,
+            data=service_data
+        )
+    
+    def test_language_content(self):
+        """Test language content endpoint"""
+        return self.run_test(
+            "Language Content",
+            "GET",
+            "languages",
+            200
+        )
 
 def main():
     # Setup
     tester = NeuroUzAPITester()
     
     # Run tests
+    print("\n===== Testing Basic API Endpoints =====")
     tester.test_root_endpoint()
     tester.test_status_endpoint()
     tester.test_create_status()
+    
+    print("\n===== Testing Authentication =====")
+    tester.test_doctor_login()
+    tester.test_admin_login()
+    
+    print("\n===== Testing Services =====")
+    tester.test_services_endpoint()
+    tester.test_add_service()
+    
+    print("\n===== Testing Appointments =====")
+    tester.test_appointment_submission()
+    
+    print("\n===== Testing Multilingual Support =====")
+    tester.test_language_content()
 
     # Print results
     print(f"\n📊 Tests passed: {tester.tests_passed}/{tester.tests_run}")
