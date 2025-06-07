@@ -1361,32 +1361,3 @@ export const AppointmentPage = () => {
   );
 };
 
-// Кабинет врача - простая заглушка
-export const DoctorDashboard = () => {
-  return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Кабинет врача</h1>
-        <p className="text-gray-600 mb-8">Эта функция находится в разработке</p>
-        <Link to="/" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
-          Вернуться на главную
-        </Link>
-      </div>
-    </div>
-  );
-};
-
-// Админ панель - простая заглушка
-export const AdminPanel = () => {
-  return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Админ панель</h1>
-        <p className="text-gray-600 mb-8">Эта функция находится в разработке</p>
-        <Link to="/" className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg">
-          Вернуться на главную
-        </Link>
-      </div>
-    </div>
-  );
-};
