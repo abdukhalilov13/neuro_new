@@ -1,40 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  User,
   Calendar,
-  Settings,
-  BarChart3,
-  FileText,
-  DollarSign,
-  Users,
-  Activity,
-  Brain,
-  Clock,
+  User,
   Phone,
   Mail,
+  Clock,
+  FileText,
   Search,
+  Settings,
+  BarChart3,
+  Image as ImageIcon,
+  Shield,
+  Globe,
+  Facebook,
+  Instagram,
+  Youtube,
   Plus,
   Edit,
   Trash2,
   Save,
   Eye,
   CheckCircle,
-  X,
-  Check,
+  AlertCircle,
+  DollarSign,
+  Users,
+  Activity,
+  TrendingUp,
   Bell,
-  MapPin,
-  RefreshCw,
   Filter,
   Download,
   Upload,
-  ImageIcon,
-  Shield,
-  Globe,
-  TrendingUp,
-  AlertCircle
+  RefreshCw,
+  X,
+  Check,
+  Brain,
+  Building,
+  Briefcase,
+  UserCheck,
+  BookOpen,
+  Award
 } from 'lucide-react';
+import { useLanguage, useAdmin } from './contexts';
 
 // Mock data for doctor dashboard
 const mockAppointments = [
@@ -92,77 +100,26 @@ const mockAppointments = [
   }
 ];
 
-const mockPatients = [
-  {
-    id: 1,
-    name: 'Иванов Алексей Петрович',
-    phone: '+998 90 123-45-67',
-    age: 45,
-    lastVisit: '2025-05-15',
-    diagnosis: 'Вегето-сосудистая дистония',
-    status: 'active'
-  },
-  {
-    id: 2,
-    name: 'Петрова Мария Ивановна',
-    phone: '+998 91 234-56-78',
-    age: 32,
-    lastVisit: '2025-05-20',
-    diagnosis: 'Остеохондроз шейного отдела',
-    status: 'active'
-  },
-  {
-    id: 3,
-    name: 'Сидоров Владимир Николаевич',
-    phone: '+998 93 345-67-89',
-    age: 58,
-    lastVisit: '2025-04-10',
-    diagnosis: 'Радикулопатия',
-    status: 'inactive'
-  }
-];
-
-const mockServices = [
-  { id: 1, name: 'МРТ головного мозга', category: 'Диагностика', price: 350000, description: 'Детальное исследование структур головного мозга' },
-  { id: 2, name: 'КТ позвоночника', category: 'Диагностика', price: 250000, description: 'Компьютерная томография позвоночника' },
-  { id: 3, name: 'Консультация нейрохирурга', category: 'Консультации', price: 150000, description: 'Первичная консультация специалиста' },
-  { id: 4, name: 'Удаление опухоли мозга', category: 'Хирургия', price: 15000000, description: 'Микрохирургическое удаление новообразований' },
-  { id: 5, name: 'Операция на позвоночнике', category: 'Хирургия', price: 8000000, description: 'Хирургическое лечение позвоночника' },
-  { id: 6, name: 'ЭЭГ', category: 'Диагностика', price: 100000, description: 'Электроэнцефалография' }
-];
-
-const mockVacancies = [
-  { id: 1, title: 'Врач-нейрохирург', department: 'Нейрохирургия', requirements: 'Высшее медицинское образование, опыт работы от 3 лет', salary: '15000000', type: 'Полная занятость', status: 'active' },
-  { id: 2, title: 'Медицинская сестра', department: 'Операционный блок', requirements: 'Среднее медицинское образование, сертификат', salary: '5000000', type: 'Полная занятость', status: 'active' },
-  { id: 3, title: 'Врач-анестезиолог', department: 'Анестезиология', requirements: 'Высшее медицинское образование, специализация', salary: '12000000', type: 'Полная занятость', status: 'active' }
-];
-
-// Doctor Dashboard Component
+// Упрощенный кабинет врача
 export const DoctorDashboard = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [loginData, setLoginData] = useState({ username: '', password: '' });
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [appointments, setAppointments] = useState(mockAppointments);
-  const [patients, setPatients] = useState(mockPatients);
-  const [searchTerm, setSearchTerm] = useState('');
+  const { t } = useLanguage();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (loginData.username === 'doctor' && loginData.password === 'demo123') {
+    if (loginData.email === 'doctor@neuro.uz' && loginData.password === 'demo123') {
       setIsAuthenticated(true);
     } else {
-      alert('Неверное имя пользователя или пароль. Попробуйте: doctor / demo123');
+      alert('Неверный email или пароль. Попробуйте: doctor@neuro.uz / demo123');
     }
   };
 
   const filteredAppointments = appointments.filter(apt => 
     apt.date === selectedDate
-  );
-
-  const filteredPatients = patients.filter(patient =>
-    patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    patient.phone.includes(searchTerm)
   );
 
   const updateAppointmentStatus = (id, status) => {
@@ -204,15 +161,15 @@ export const DoctorDashboard = () => {
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Имя пользователя
+                Email
               </label>
               <input
-                type="text"
+                type="email"
                 required
-                value={loginData.username}
-                onChange={(e) => setLoginData({...loginData, username: e.target.value})}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="doctor"
+                value={loginData.email}
+                onChange={(e) => setLoginData({...loginData, email: e.target.value})}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="doctor@neuro.uz"
               />
             </div>
 
@@ -225,7 +182,7 @@ export const DoctorDashboard = () => {
                 required
                 value={loginData.password}
                 onChange={(e) => setLoginData({...loginData, password: e.target.value})}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                 placeholder="demo123"
               />
             </div>
@@ -240,8 +197,8 @@ export const DoctorDashboard = () => {
 
           <div className="mt-6 p-4 bg-blue-50 rounded-lg">
             <p className="text-sm text-blue-700">
-              <strong>🔑 Тестовый доступ:</strong><br />
-              Пользователь: doctor<br />
+              <strong>Демо доступ:</strong><br />
+              Email: doctor@neuro.uz<br />
               Пароль: demo123
             </p>
           </div>
@@ -264,9 +221,11 @@ export const DoctorDashboard = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Link to="/" className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-                  <Brain className="w-6 h-6 text-white" />
-                </div>
+                <img 
+                  src="https://neuro.uz/themes/site/img/logo.png"
+                  alt="NEURO.UZ Logo"
+                  className="w-10 h-10"
+                />
                 <span className="text-xl font-bold text-gray-900">NEURO.UZ</span>
               </Link>
               <span className="text-gray-400">|</span>
@@ -322,22 +281,13 @@ export const DoctorDashboard = () => {
                   <span>Записи пациентов</span>
                 </button>
                 <button
-                  onClick={() => setActiveTab('patients')}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
-                    activeTab === 'patients' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <Users className="w-4 h-4" />
-                  <span>База пациентов</span>
-                </button>
-                <button
                   onClick={() => setActiveTab('schedule')}
                   className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
                     activeTab === 'schedule' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
                   <Clock className="w-4 h-4" />
-                  <span>Расписание</span>
+                  <span>Мое расписание</span>
                 </button>
               </nav>
             </div>
@@ -361,8 +311,8 @@ export const DoctorDashboard = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Всего пациентов</h3>
-                        <p className="text-3xl font-bold text-green-600">{patients.length}</p>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Всего записей</h3>
+                        <p className="text-3xl font-bold text-green-600">{appointments.length}</p>
                       </div>
                       <Users className="w-8 h-8 text-green-500" />
                     </div>
@@ -370,9 +320,9 @@ export const DoctorDashboard = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Активных пациентов</h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Подтвержденных</h3>
                         <p className="text-3xl font-bold text-purple-600">
-                          {patients.filter(p => p.status === 'active').length}
+                          {appointments.filter(a => a.status === 'confirmed').length}
                         </p>
                       </div>
                       <Activity className="w-8 h-8 text-purple-500" />
@@ -494,84 +444,39 @@ export const DoctorDashboard = () => {
               </div>
             )}
 
-            {activeTab === 'patients' && (
-              <div className="bg-white rounded-lg shadow">
-                <div className="p-6 border-b">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-gray-900">База пациентов</h2>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
-                      <Plus className="w-4 h-4" />
-                      <span>Добавить пациента</span>
-                    </button>
-                  </div>
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <input
-                      type="text"
-                      placeholder="Поиск пациентов..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="space-y-3">
-                    {filteredPatients.map((patient) => (
-                      <div key={patient.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-4 mb-2">
-                            <h3 className="font-medium text-gray-900">{patient.name}</h3>
-                            <span className={`px-2 py-1 rounded text-xs font-medium ${
-                              patient.status === 'active' 
-                                ? 'bg-green-100 text-green-800' 
-                                : 'bg-gray-100 text-gray-800'
-                            }`}>
-                              {patient.status === 'active' ? 'Активный' : 'Неактивный'}
-                            </span>
-                          </div>
-                          <div className="text-sm text-gray-600 space-y-1">
-                            <p>{patient.phone}</p>
-                            <p>Возраст: {patient.age} лет • Последний визит: {patient.lastVisit}</p>
-                            <p>Диагноз: {patient.diagnosis}</p>
-                          </div>
-                        </div>
-                        <div className="flex space-x-2">
-                          <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
-                            Просмотреть карту
-                          </button>
-                          <button className="text-green-600 hover:text-green-700 text-sm font-medium">
-                            Записать на прием
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
             {activeTab === 'schedule' && (
               <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Расписание работы</h2>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Мое расписание</h2>
+                <p className="text-gray-600 mb-6">Ваше рабочее расписание (только просмотр)</p>
                 <div className="space-y-4">
                   {[
-                    { day: 'Понедельник', hours: '09:00 - 17:00' },
-                    { day: 'Вторник', hours: '09:00 - 17:00' },
-                    { day: 'Среда', hours: '09:00 - 17:00' },
-                    { day: 'Четверг', hours: '09:00 - 17:00' },
-                    { day: 'Пятница', hours: '09:00 - 17:00' },
-                    { day: 'Суббота', hours: '09:00 - 15:00' },
-                    { day: 'Воскресенье', hours: 'Выходной' }
+                    { day: 'Понедельник', hours: '09:00 - 17:00', status: 'Рабочий день' },
+                    { day: 'Вторник', hours: '09:00 - 17:00', status: 'Рабочий день' },
+                    { day: 'Среда', hours: '09:00 - 17:00', status: 'Рабочий день' },
+                    { day: 'Четверг', hours: '09:00 - 17:00', status: 'Рабочий день' },
+                    { day: 'Пятница', hours: '09:00 - 17:00', status: 'Рабочий день' },
+                    { day: 'Суббота', hours: '09:00 - 15:00', status: 'Сокращенный день' },
+                    { day: 'Воскресенье', hours: 'Выходной', status: 'Выходной' }
                   ].map((schedule, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
-                      <span className="font-medium text-gray-900">{schedule.day}</span>
-                      <span className="text-gray-600">{schedule.hours}</span>
-                      <button className="text-blue-600 hover:text-blue-700 text-sm">
-                        Редактировать
-                      </button>
+                    <div key={index} className="flex items-center justify-between p-4 border rounded-lg bg-gray-50">
+                      <div className="flex items-center space-x-4">
+                        <span className="font-medium text-gray-900 w-24">{schedule.day}</span>
+                        <span className="text-gray-600">{schedule.hours}</span>
+                      </div>
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        schedule.status === 'Рабочий день' ? 'bg-green-100 text-green-800' :
+                        schedule.status === 'Сокращенный день' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-red-100 text-red-800'
+                      }`}>
+                        {schedule.status}
+                      </span>
                     </div>
                   ))}
+                </div>
+                <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                  <p className="text-sm text-blue-800">
+                    <strong>Примечание:</strong> Для изменения расписания обратитесь к администратору.
+                  </p>
                 </div>
               </div>
             )}
@@ -582,89 +487,126 @@ export const DoctorDashboard = () => {
   );
 };
 
-// Admin Panel Component
+// Полноценная админ-панель
 export const AdminPanel = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [loginData, setLoginData] = useState({ username: '', password: '' });
-  const [services, setServices] = useState(mockServices);
-  const [vacancies, setVacancies] = useState(mockVacancies);
-  const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
-  const [isVacancyModalOpen, setIsVacancyModalOpen] = useState(false);
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [editingService, setEditingService] = useState(null);
-  const [editingVacancy, setEditingVacancy] = useState(null);
+  const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
   const [newService, setNewService] = useState({
     name: '',
     category: '',
     price: '',
     description: ''
   });
-  const [newVacancy, setNewVacancy] = useState({
-    title: '',
-    department: '',
-    requirements: '',
-    salary: '',
-    type: '',
-    status: 'active'
+
+  // Новые состояния для управления
+  const [isDepartmentModalOpen, setIsDepartmentModalOpen] = useState(false);
+  const [newDepartment, setNewDepartment] = useState({
+    name: '',
+    description: '',
+    icon: 'Brain',
+    color: 'from-blue-500 to-blue-600'
   });
+
+  const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false);
+  const [newDoctor, setNewDoctor] = useState({
+    name: '',
+    specialization: '',
+    experience: '',
+    email: '',
+    phone: '',
+    reception: '',
+    image: ''
+  });
+
+  const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
+  const [newNews, setNewNews] = useState({
+    title: '',
+    excerpt: '',
+    content: '',
+    image: ''
+  });
+
+  const [newSiteSettings, setNewSiteSettings] = useState({
+    phones: '',
+    emails: '',
+    address: '',
+    workingHours: {
+      weekdays: '',
+      saturday: '',
+      sunday: ''
+    },
+    socialMedia: {
+      facebook: '',
+      instagram: '',
+      youtube: ''
+    }
+  });
+
+  const [newSeoSettings, setNewSeoSettings] = useState({
+    title: '',
+    description: '',
+    keywords: ''
+  });
+
+  const [galleryImages, setGalleryImages] = useState([
+    { id: 1, url: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c', alt: 'Центр 1' },
+    { id: 2, url: 'https://images.unsplash.com/photo-1526930382372-67bf22c0fce2', alt: 'Центр 2' },
+    { id: 3, url: 'https://images.unsplash.com/photo-1512678080530-7760d81faba6', alt: 'Центр 3' },
+    { id: 4, url: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc', alt: 'Центр 4' }
+  ]);
+  
+  const { t } = useLanguage();
+  const { 
+    adminData, 
+    updateSiteSettings, 
+    updateSeoSettings, 
+    addService, 
+    updateService, 
+    deleteService 
+  } = useAdmin();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setNewSiteSettings({
+        phones: adminData.siteSettings.phones.join(', '),
+        emails: adminData.siteSettings.emails.join(', '),
+        address: adminData.siteSettings.address,
+        workingHours: adminData.siteSettings.workingHours,
+        socialMedia: adminData.siteSettings.socialMedia
+      });
+      setNewSeoSettings(adminData.seoSettings);
+    }
+  }, [isAuthenticated, adminData]);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (loginData.username === 'admin' && loginData.password === 'admin123') {
+    if (loginData.email === 'admin@neuro.uz' && loginData.password === 'admin123') {
       setIsAuthenticated(true);
     } else {
-      alert('Неверное имя пользователя или пароль. Попробуйте: admin / admin123');
+      alert('Неверный email или пароль. Попробуйте: admin@neuro.uz / admin123');
     }
   };
 
   const handleServiceSubmit = (e) => {
     e.preventDefault();
     if (editingService) {
-      setServices(services.map(service => 
-        service.id === editingService.id 
-          ? { ...service, ...newService, price: parseInt(newService.price) }
-          : service
-      ));
-      alert('Услуга успешно обновлена!');
+      updateService(editingService.id, {
+        ...newService,
+        price: parseInt(newService.price)
+      });
     } else {
-      setServices([...services, { 
-        ...newService, 
-        id: Date.now(), 
-        price: parseInt(newService.price) 
-      }]);
-      alert('Услуга успешно добавлена!');
+      addService({
+        ...newService,
+        price: parseInt(newService.price)
+      });
     }
     setIsServiceModalOpen(false);
     setEditingService(null);
     setNewService({ name: '', category: '', price: '', description: '' });
-  };
-
-  const handleVacancySubmit = (e) => {
-    e.preventDefault();
-    if (editingVacancy) {
-      setVacancies(vacancies.map(vacancy => 
-        vacancy.id === editingVacancy.id 
-          ? { ...vacancy, ...newVacancy }
-          : vacancy
-      ));
-      alert('Вакансия успешно обновлена!');
-    } else {
-      setVacancies([...vacancies, { 
-        ...newVacancy, 
-        id: Date.now()
-      }]);
-      alert('Вакансия успешно добавлена!');
-    }
-    setIsVacancyModalOpen(false);
-    setEditingVacancy(null);
-    setNewVacancy({
-      title: '',
-      department: '',
-      requirements: '',
-      salary: '',
-      type: '',
-      status: 'active'
-    });
+    alert('Услуга успешно сохранена!');
   };
 
   const startEditService = (service) => {
@@ -678,24 +620,49 @@ export const AdminPanel = () => {
     setIsServiceModalOpen(true);
   };
 
-  const startEditVacancy = (vacancy) => {
-    setEditingVacancy(vacancy);
-    setNewVacancy({...vacancy});
-    setIsVacancyModalOpen(true);
+  const handleSiteSettingsSubmit = (e) => {
+    e.preventDefault();
+    updateSiteSettings({
+      ...adminData.siteSettings,
+      phones: newSiteSettings.phones.split(',').map(p => p.trim()),
+      emails: newSiteSettings.emails.split(',').map(e => e.trim()),
+      address: newSiteSettings.address,
+      workingHours: newSiteSettings.workingHours,
+      socialMedia: newSiteSettings.socialMedia
+    });
+    alert('Настройки сайта успешно обновлены!');
   };
 
-  const deleteService = (id) => {
-    if (confirm('Вы уверены, что хотите удалить эту услугу?')) {
-      setServices(services.filter(service => service.id !== id));
-      alert('Услуга успешно удалена!');
-    }
+  const handleSeoSettingsSubmit = (e) => {
+    e.preventDefault();
+    updateSeoSettings(newSeoSettings);
+    alert('SEO настройки успешно обновлены!');
   };
 
-  const deleteVacancy = (id) => {
-    if (confirm('Вы уверены, что хотите удалить эту вакансию?')) {
-      setVacancies(vacancies.filter(vacancy => vacancy.id !== id));
-      alert('Вакансия успешно удалена!');
-    }
+  const handleDepartmentSubmit = (e) => {
+    e.preventDefault();
+    alert('Отделение успешно добавлено!');
+    setIsDepartmentModalOpen(false);
+    setNewDepartment({ name: '', description: '', icon: 'Brain', color: 'from-blue-500 to-blue-600' });
+  };
+
+  const handleDoctorSubmit = (e) => {
+    e.preventDefault();
+    alert('Врач успешно добавлен!');
+    setIsDoctorModalOpen(false);
+    setNewDoctor({ name: '', specialization: '', experience: '', email: '', phone: '', reception: '', image: '' });
+  };
+
+  const handleNewsSubmit = (e) => {
+    e.preventDefault();
+    alert('Новость успешно добавлена!');
+    setIsNewsModalOpen(false);
+    setNewNews({ title: '', excerpt: '', content: '', image: '' });
+  };
+
+  const removeGalleryImage = (id) => {
+    setGalleryImages(galleryImages.filter(img => img.id !== id));
+    alert('Изображение удалено из галереи!');
   };
 
   if (!isAuthenticated) {
@@ -718,15 +685,15 @@ export const AdminPanel = () => {
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Имя пользователя
+                Email
               </label>
               <input
-                type="text"
+                type="email"
                 required
-                value={loginData.username}
-                onChange={(e) => setLoginData({...loginData, username: e.target.value})}
+                value={loginData.email}
+                onChange={(e) => setLoginData({...loginData, email: e.target.value})}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                placeholder="admin"
+                placeholder="admin@neuro.uz"
               />
             </div>
 
@@ -754,8 +721,8 @@ export const AdminPanel = () => {
 
           <div className="mt-6 p-4 bg-purple-50 rounded-lg">
             <p className="text-sm text-purple-700">
-              <strong>🔑 Тестовый доступ:</strong><br />
-              Пользователь: admin<br />
+              <strong>Демо доступ:</strong><br />
+              Email: admin@neuro.uz<br />
               Пароль: admin123
             </p>
           </div>
@@ -778,9 +745,11 @@ export const AdminPanel = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Link to="/" className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg flex items-center justify-center">
-                  <Brain className="w-6 h-6 text-white" />
-                </div>
+                <img 
+                  src="https://neuro.uz/themes/site/img/logo.png"
+                  alt="NEURO.UZ Logo"
+                  className="w-10 h-10"
+                />
                 <span className="text-xl font-bold text-gray-900">NEURO.UZ</span>
               </Link>
               <span className="text-gray-400">|</span>
@@ -824,13 +793,49 @@ export const AdminPanel = () => {
                   <span>Услуги и цены</span>
                 </button>
                 <button
-                  onClick={() => setActiveTab('vacancies')}
+                  onClick={() => setActiveTab('departments')}
                   className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
-                    activeTab === 'vacancies' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                    activeTab === 'departments' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
-                  <Users className="w-4 h-4" />
-                  <span>Вакансии</span>
+                  <Building className="w-4 h-4" />
+                  <span>Отделения</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('doctors')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'doctors' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <UserCheck className="w-4 h-4" />
+                  <span>Врачи</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('news')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'news' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>Новости</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('contacts')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'contacts' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>Контакты</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('seo')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'seo' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Search className="w-4 h-4" />
+                  <span>SEO настройки</span>
                 </button>
                 <button
                   onClick={() => setActiveTab('gallery')}
@@ -864,7 +869,7 @@ export const AdminPanel = () => {
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="text-lg font-semibold text-gray-900 mb-2">Всего услуг</h3>
-                        <p className="text-3xl font-bold text-purple-600">{services.length}</p>
+                        <p className="text-3xl font-bold text-purple-600">{adminData.services.length}</p>
                       </div>
                       <DollarSign className="w-8 h-8 text-purple-500" />
                     </div>
@@ -881,8 +886,8 @@ export const AdminPanel = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Вакансий</h3>
-                        <p className="text-3xl font-bold text-green-600">{vacancies.length}</p>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Активных врачей</h3>
+                        <p className="text-3xl font-bold text-green-600">8</p>
                       </div>
                       <Users className="w-8 h-8 text-green-500" />
                     </div>
@@ -911,7 +916,7 @@ export const AdminPanel = () => {
                       <span className="text-sm text-gray-600">09:15</span>
                     </div>
                     <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
-                      <span>Добавлена новая вакансия</span>
+                      <span>Добавлена новость</span>
                       <span className="text-sm text-gray-600">08:45</span>
                     </div>
                   </div>
@@ -933,89 +938,368 @@ export const AdminPanel = () => {
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {services.map(service => (
-                      <div key={service.id} className="border rounded-lg p-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">{service.category}</span>
-                          <div className="flex space-x-1">
-                            <button 
-                              onClick={() => startEditService(service)}
-                              className="text-blue-600 hover:text-blue-800"
-                            >
-                              <Edit className="w-4 h-4" />
-                            </button>
-                            <button 
-                              onClick={() => deleteService(service.id)}
-                              className="text-red-600 hover:text-red-800"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-                        <h3 className="font-medium text-gray-900 mb-2">{service.name}</h3>
-                        <p className="text-sm text-gray-600 mb-3">{service.description}</p>
-                        <p className="text-lg font-bold text-green-600">{service.price.toLocaleString()} uzs</p>
+                  {/* Услуги по категориям */}
+                  {['Диагностика', 'Хирургия', 'Консультации'].map(category => (
+                    <div key={category} className="mb-8">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">{category}</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {adminData.services
+                          .filter(service => service.category === category)
+                          .map(service => (
+                            <div key={service.id} className="p-4 border rounded-lg">
+                              <div className="flex items-start justify-between">
+                                <div className="flex-1">
+                                  <h4 className="font-medium text-gray-900">{service.name}</h4>
+                                  <p className="text-sm text-gray-600 mt-1">{service.description}</p>
+                                  <p className="text-lg font-bold text-green-600 mt-2">
+                                    {service.price.toLocaleString()} сум
+                                  </p>
+                                </div>
+                                <div className="flex space-x-2 ml-4">
+                                  <button
+                                    onClick={() => startEditService(service)}
+                                    className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
+                                  >
+                                    <Edit className="w-4 h-4" />
+                                  </button>
+                                  <button
+                                    onClick={() => deleteService(service.id)}
+                                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
 
-            {activeTab === 'vacancies' && (
-              <div className="space-y-6">
-                <div className="bg-white rounded-lg shadow p-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-xl font-semibold text-gray-900">Управление вакансиями</h2>
-                    <button 
-                      onClick={() => setIsVacancyModalOpen(true)}
-                      className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
-                    >
-                      <Plus className="w-4 h-4" />
-                      <span>Добавить вакансию</span>
-                    </button>
-                  </div>
+            {activeTab === 'departments' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900">Управление отделениями</h2>
+                  <button 
+                    onClick={() => setIsDepartmentModalOpen(true)}
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Добавить отделение</span>
+                  </button>
+                </div>
 
-                  <div className="space-y-4">
-                    {vacancies.map(vacancy => (
-                      <div key={vacancy.id} className="border rounded-lg p-4">
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <div className="flex items-center space-x-2 mb-2">
-                              <h3 className="text-lg font-medium text-gray-900">{vacancy.title}</h3>
-                              <span className={`px-2 py-1 rounded text-xs font-medium ${
-                                vacancy.status === 'active' 
-                                  ? 'bg-green-100 text-green-800' 
-                                  : 'bg-gray-100 text-gray-800'
-                              }`}>
-                                {vacancy.status === 'active' ? 'Активная' : 'Неактивная'}
-                              </span>
-                            </div>
-                            <p className="text-sm text-gray-600 mb-1"><strong>Отделение:</strong> {vacancy.department}</p>
-                            <p className="text-sm text-gray-600 mb-1"><strong>Тип:</strong> {vacancy.type}</p>
-                            <p className="text-sm text-gray-600 mb-1"><strong>Зарплата:</strong> {parseInt(vacancy.salary).toLocaleString()} uzs</p>
-                            <p className="text-sm text-gray-600">{vacancy.requirements}</p>
-                          </div>
-                          <div className="flex space-x-2 ml-4">
-                            <button 
-                              onClick={() => startEditVacancy(vacancy)}
-                              className="text-blue-600 hover:text-blue-800"
-                            >
-                              <Edit className="w-4 h-4" />
-                            </button>
-                            <button 
-                              onClick={() => deleteVacancy(vacancy.id)}
-                              className="text-red-600 hover:text-red-800"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[1, 2, 3, 4, 5, 6, 7].map(i => (
+                    <div key={i} className="p-4 border rounded-lg">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-medium text-gray-900">Отделение {i}</h4>
+                          <p className="text-sm text-gray-600 mt-1">Описание отделения</p>
+                        </div>
+                        <div className="flex space-x-2 ml-4">
+                          <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                            <Trash2 className="w-4 h-4" />
+                          </button>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
+              </div>
+            )}
+
+            {activeTab === 'doctors' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900">Управление врачами</h2>
+                  <button 
+                    onClick={() => setIsDoctorModalOpen(true)}
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Добавить врача</span>
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  {[1, 2, 3].map(i => (
+                    <div key={i} className="p-4 border rounded-lg">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <img
+                            src={`https://images.pexels.com/photos/814026${i}/pexels-photo-814026${i}.jpeg`}
+                            alt={`Врач ${i}`}
+                            className="w-16 h-16 rounded-full object-cover"
+                          />
+                          <div>
+                            <h4 className="font-medium text-gray-900">Врач {i}</h4>
+                            <p className="text-sm text-gray-600">Специализация</p>
+                            <p className="text-sm text-green-600">Активен</p>
+                          </div>
+                        </div>
+                        <div className="flex space-x-2">
+                          <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'news' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900">Управление новостями</h2>
+                  <button 
+                    onClick={() => setIsNewsModalOpen(true)}
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Добавить новость</span>
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  {[1, 2, 3].map(i => (
+                    <div key={i} className="p-4 border rounded-lg">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <img
+                            src={`https://images.unsplash.com/photo-15047114349${i}9`}
+                            alt={`Новость ${i}`}
+                            className="w-16 h-16 rounded object-cover"
+                          />
+                          <div>
+                            <h4 className="font-medium text-gray-900">Новость {i}</h4>
+                            <p className="text-sm text-gray-600">Краткое описание новости</p>
+                            <p className="text-sm text-blue-600">Опубликовано</p>
+                          </div>
+                        </div>
+                        <div className="flex space-x-2">
+                          <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'contacts' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Контакты и соцсети</h2>
+                
+                <form onSubmit={handleSiteSettingsSubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Телефоны (через запятую)
+                    </label>
+                    <input
+                      type="text"
+                      value={newSiteSettings.phones}
+                      onChange={(e) => setNewSiteSettings({...newSiteSettings, phones: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                      placeholder="+998 71 264-96-10, +998 71 264-96-09"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email адреса (через запятую)
+                    </label>
+                    <input
+                      type="text"
+                      value={newSiteSettings.emails}
+                      onChange={(e) => setNewSiteSettings({...newSiteSettings, emails: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                      placeholder="admin@neuro.uz, info@neuro.uz"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Адрес
+                    </label>
+                    <input
+                      type="text"
+                      value={newSiteSettings.address}
+                      onChange={(e) => setNewSiteSettings({...newSiteSettings, address: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Пн-Пт
+                      </label>
+                      <input
+                        type="text"
+                        value={newSiteSettings.workingHours.weekdays}
+                        onChange={(e) => setNewSiteSettings({
+                          ...newSiteSettings,
+                          workingHours: {...newSiteSettings.workingHours, weekdays: e.target.value}
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        placeholder="8:00 - 18:00"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Суббота
+                      </label>
+                      <input
+                        type="text"
+                        value={newSiteSettings.workingHours.saturday}
+                        onChange={(e) => setNewSiteSettings({
+                          ...newSiteSettings,
+                          workingHours: {...newSiteSettings.workingHours, saturday: e.target.value}
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        placeholder="9:00 - 15:00"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Воскресенье
+                      </label>
+                      <input
+                        type="text"
+                        value={newSiteSettings.workingHours.sunday}
+                        onChange={(e) => setNewSiteSettings({
+                          ...newSiteSettings,
+                          workingHours: {...newSiteSettings.workingHours, sunday: e.target.value}
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        placeholder="Выходной"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Facebook
+                      </label>
+                      <input
+                        type="url"
+                        value={newSiteSettings.socialMedia.facebook}
+                        onChange={(e) => setNewSiteSettings({
+                          ...newSiteSettings,
+                          socialMedia: {...newSiteSettings.socialMedia, facebook: e.target.value}
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        placeholder="https://facebook.com/neuro.uz"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Instagram
+                      </label>
+                      <input
+                        type="url"
+                        value={newSiteSettings.socialMedia.instagram}
+                        onChange={(e) => setNewSiteSettings({
+                          ...newSiteSettings,
+                          socialMedia: {...newSiteSettings.socialMedia, instagram: e.target.value}
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        placeholder="https://instagram.com/neuro.uz"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        YouTube
+                      </label>
+                      <input
+                        type="url"
+                        value={newSiteSettings.socialMedia.youtube}
+                        onChange={(e) => setNewSiteSettings({
+                          ...newSiteSettings,
+                          socialMedia: {...newSiteSettings.socialMedia, youtube: e.target.value}
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        placeholder="https://youtube.com/@neuro.uz"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition-colors"
+                  >
+                    Сохранить изменения
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {activeTab === 'seo' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">SEO настройки</h2>
+                
+                <form onSubmit={handleSeoSettingsSubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Заголовок сайта
+                    </label>
+                    <input
+                      type="text"
+                      value={newSeoSettings.title}
+                      onChange={(e) => setNewSeoSettings({...newSeoSettings, title: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Описание сайта
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={newSeoSettings.description}
+                      onChange={(e) => setNewSeoSettings({...newSeoSettings, description: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Ключевые слова (через запятую)
+                    </label>
+                    <input
+                      type="text"
+                      value={newSeoSettings.keywords}
+                      onChange={(e) => setNewSeoSettings({...newSeoSettings, keywords: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition-colors"
+                  >
+                    Сохранить изменения
+                  </button>
+                </form>
               </div>
             )}
 
@@ -1032,14 +1316,17 @@ export const AdminPanel = () => {
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
-                    <div key={i} className="relative">
+                  {galleryImages.map(image => (
+                    <div key={image.id} className="relative">
                       <img
-                        src={`https://images.unsplash.com/photo-${1500000000000 + i * 100000}?w=300&h=200&fit=crop`}
-                        alt={`Gallery ${i}`}
+                        src={image.url}
+                        alt={image.alt}
                         className="w-full h-32 object-cover rounded-lg"
                       />
-                      <button className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1">
+                      <button 
+                        onClick={() => removeGalleryImage(image.id)}
+                        className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1"
+                      >
                         <X className="w-4 h-4" />
                       </button>
                     </div>
@@ -1186,143 +1473,6 @@ export const AdminPanel = () => {
                       setIsServiceModalOpen(false);
                       setEditingService(null);
                       setNewService({ name: '', category: '', price: '', description: '' });
-                    }}
-                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
-                  >
-                    Отмена
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          </motion.div>
-        )}
-
-        {isVacancyModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-2xl p-6 w-full max-w-md"
-            >
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold text-gray-900">
-                  {editingVacancy ? 'Редактировать вакансию' : 'Добавить вакансию'}
-                </h3>
-                <button
-                  onClick={() => {
-                    setIsVacancyModalOpen(false);
-                    setEditingVacancy(null);
-                    setNewVacancy({
-                      title: '',
-                      department: '',
-                      requirements: '',
-                      salary: '',
-                      type: '',
-                      status: 'active'
-                    });
-                  }}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-
-              <form onSubmit={handleVacancySubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Название должности
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={newVacancy.title}
-                    onChange={(e) => setNewVacancy({...newVacancy, title: e.target.value})}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Отделение
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={newVacancy.department}
-                    onChange={(e) => setNewVacancy({...newVacancy, department: e.target.value})}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Тип занятости
-                  </label>
-                  <select
-                    required
-                    value={newVacancy.type}
-                    onChange={(e) => setNewVacancy({...newVacancy, type: e.target.value})}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                  >
-                    <option value="">Выберите тип</option>
-                    <option value="Полная занятость">Полная занятость</option>
-                    <option value="Частичная занятость">Частичная занятость</option>
-                    <option value="Совместительство">Совместительство</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Зарплата (сум)
-                  </label>
-                  <input
-                    type="number"
-                    required
-                    value={newVacancy.salary}
-                    onChange={(e) => setNewVacancy({...newVacancy, salary: e.target.value})}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Требования
-                  </label>
-                  <textarea
-                    required
-                    rows={3}
-                    value={newVacancy.requirements}
-                    onChange={(e) => setNewVacancy({...newVacancy, requirements: e.target.value})}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                  />
-                </div>
-
-                <div className="flex space-x-4 pt-4">
-                  <button
-                    type="submit"
-                    className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
-                  >
-                    {editingVacancy ? 'Сохранить' : 'Добавить'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsVacancyModalOpen(false);
-                      setEditingVacancy(null);
-                      setNewVacancy({
-                        title: '',
-                        department: '',
-                        requirements: '',
-                        salary: '',
-                        type: '',
-                        status: 'active'
-                      });
                     }}
                     className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
                   >
