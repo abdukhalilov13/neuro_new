@@ -462,10 +462,16 @@ export const DoctorDashboard = () => {
                                 <span>Подтвердить</span>
                               </button>
                             )}
-                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">
+                            <button 
+                              onClick={() => handleAppointmentAction(appointment.id, 'view')}
+                              className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm"
+                            >
                               Просмотр
                             </button>
-                            <button className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-3 py-1 rounded text-sm">
+                            <button 
+                              onClick={() => handleAppointmentAction(appointment.id, 'cancel')}
+                              className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm"
+                            >
                               Отменить
                             </button>
                           </div>
