@@ -161,6 +161,19 @@ export const DoctorDashboard = () => {
     setAppointments(appointments.map(apt => 
       apt.id === id ? { ...apt, status } : apt
     ));
+    alert(`Статус записи успешно изменен на "${status === 'confirmed' ? 'Подтверждено' : 'Отменено'}"`);
+  };
+
+  const handleAppointmentAction = (id, action) => {
+    if (action === 'view') {
+      const appointment = appointments.find(apt => apt.id === id);
+      alert(`Детали записи:\n\nПациент: ${appointment.patient.name}\nВремя: ${appointment.time}\nТелефон: ${appointment.patient.phone}\nЖалобы: ${appointment.patient.complaint}`);
+    } else if (action === 'cancel') {
+      if (confirm('Вы уверены, что хотите отменить эту запись?')) {
+        setAppointments(appointments.filter(apt => apt.id !== id));
+        alert('Запись успешно отменена');
+      }
+    }
   };
 
   if (!isAuthenticated) {
