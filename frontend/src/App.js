@@ -33,6 +33,7 @@ function App() {
               <Route path="/appointment" element={<AppointmentPage />} />
               <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
               <Route path="/admin" element={<AdminPanel />} />
+              <Route path="/test-accounts" element={<TestAccountsPage />} />
             </Routes>
           </BrowserRouter>
         </div>
