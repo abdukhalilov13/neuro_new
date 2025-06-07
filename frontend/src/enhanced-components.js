@@ -273,9 +273,9 @@ const Header = () => {
         <div className="flex justify-between items-center py-4">
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="https://neuro.uz/themes/site/img/logo.png" 
-              alt="Логотип центра нейрохирургии"
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl object-contain bg-white p-1"
+              src="https://neuro.uz/themes/site/img/logo.png"
+              alt="NEURO.UZ Logo"
+              className="w-10 h-10 sm:w-12 sm:h-12"
             />
             <div>
               <h1 className="text-lg sm:text-xl font-bold text-gray-900">NEURO.UZ</h1>
