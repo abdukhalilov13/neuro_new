@@ -38,7 +38,6 @@ import {
   Brain
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
-import { Header, Footer } from './enhanced-components';
 
 // Mock data for doctor dashboard
 const mockAppointments = [
