@@ -438,8 +438,8 @@ const Footer = () => {
 
           {/* Режим работы */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">{t('workingHours')}</h4>
-            <div className="space-y-2 text-sm">
+            <h4 className="text-lg font-semibold mb-4 text-left">{t('workingHours')}</h4>
+            <div className="space-y-2 text-sm text-left">
               <div className="flex justify-between">
                 <span className="text-gray-300">{t('mondayFriday')}:</span>
                 <span className="text-white">{adminData.siteSettings.workingHours.weekdays}</span>
@@ -452,12 +452,12 @@ const Footer = () => {
                 <span className="text-gray-300">{t('sunday')}:</span>
                 <span className="text-white">{adminData.siteSettings.workingHours.sunday}</span>
               </div>
-              <div className="mt-4 p-3 bg-red-600 rounded-lg">
+              <div className="mt-4 p-3 bg-red-600 rounded-lg text-left">
                 <div className="flex items-center space-x-2">
                   <Phone className="w-4 h-4" />
                   <span className="text-sm font-medium">{t('emergencyHelp')}</span>
                 </div>
-                <p className="text-sm mt-1">{adminData.siteSettings.phones[2]}</p>
+                <p className="text-sm mt-1 text-left">{adminData.siteSettings.phones[2]}</p>
               </div>
             </div>
           </div>
