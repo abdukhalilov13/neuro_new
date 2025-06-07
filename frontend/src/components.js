@@ -193,14 +193,14 @@ export const HomePage = () => {
               transition={{ duration: 0.8 }}
               className="text-white"
             >
-              <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-6">
-                {siteData.hero.title}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                Республиканский Научный Центр Нейрохирургии при Министерстве Здравоохранения Республики Узбекистан
               </h1>
-              <p className="text-xl lg:text-2xl mb-4 text-blue-100">
-                {siteData.hero.subtitle}
+              <p className="text-lg sm:text-xl lg:text-2xl mb-4 text-blue-100">
+                Ведущий центр нейрохирургии в Центральной Азии
               </p>
-              <p className="text-lg mb-8 text-blue-50">
-                {siteData.hero.description}
+              <p className="text-base sm:text-lg mb-8 text-blue-50">
+                Более 25 лет опыта в лечении сложнейших заболеваний нервной системы
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
