@@ -521,9 +521,9 @@ const ServiceCard = ({ service, onEdit, onDelete, isAdmin = false }) => {
       
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <DollarSign className="w-5 h-5 text-green-600" />
+          <span className="text-green-600 font-semibold">uzs</span>
           <span className="text-2xl font-bold text-green-600">
-            {formatPrice(service.price)} {t('sum')}
+            {formatPrice(service.price)}
           </span>
         </div>
         <Link
