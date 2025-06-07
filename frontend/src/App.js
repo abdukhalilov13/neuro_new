@@ -15,6 +15,7 @@ import {
   AdminPanel
 } from "./components";
 import { TestAccountsPage } from "./TestAccounts";
+import { VacanciesPage, GalleryPage } from "./AdditionalPages";
 
 function App() {
   return (
