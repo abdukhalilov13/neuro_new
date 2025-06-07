@@ -495,6 +495,39 @@ export const ContactPage = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Информация о вступлении в ассоциацию */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Вступление в Ассоциацию нейрохирургов Узбекистана</h2>
+                
+                <div className="space-y-4">
+                  <p className="text-gray-700 font-medium">Для вступления в Ассоциацию нейрохирургов Узбекистана необходимо предоставить:</p>
+                  
+                  <ol className="space-y-3 text-gray-600">
+                    <li className="flex items-start space-x-3">
+                      <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">1</span>
+                      <span>Заявление на имя председателя Ассоциации Кариева Г.М.</span>
+                    </li>
+                    <li className="flex items-start space-x-3">
+                      <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">2</span>
+                      <span>Квитанцию об уплате 1 размера минимальной заработной платы.</span>
+                    </li>
+                  </ol>
+
+                  <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-3">Реквизиты Ассоциации нейрохирургов Узбекистана:</h4>
+                    <div className="text-sm text-gray-700 space-y-1">
+                      <p><strong>р/с:</strong> 20212000404984462001</p>
+                      <p><strong>Банк:</strong> Ташкентский городской филиал банка «Асака» (ОАЖ)</p>
+                      <p><strong>МФО:</strong> 00416</p>
+                      <p><strong>ИНН:</strong> 207146456</p>
+                      <p><strong>ОКОНХ:</strong> 98500</p>
+                      <p><strong>От кого:</strong> Ф.И.О.</p>
+                      <p><strong>Основание:</strong> Членский взнос за 2025 год</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
             {/* Форма обратной связи */}
@@ -595,7 +628,7 @@ export const ContactPage = () => {
             </motion.div>
           </div>
 
-          {/* Карта */}
+          {/* Карта с обновленными координатами */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -604,27 +637,25 @@ export const ContactPage = () => {
             className="mt-12"
           >
             <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Как нас найти</h2>
-              <div className="rounded-lg overflow-hidden h-96">
-                <iframe 
-                  src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4b9f7b1b5a1f7a8b4b8e7a7e5c4b7a1e9a5f2f3&amp;source=constructor" 
-                  width="100%" 
-                  height="100%" 
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Где нас найти</h2>
+              <div className="relative">
+                <iframe
+                  src="https://yandex.uz/map-widget/v1/?ll=69.3827488%2C41.342462&mode=search&oid=1104106208&ol=biz&z=17"
+                  width="100%"
+                  height="400"
                   frameBorder="0"
-                  style={{border: 0}}
-                  allowFullScreen
-                  title="Карта центра нейрохирургии"
-                  loading="lazy"
+                  className="rounded-lg"
+                  title="Республиканский Научный Центр Нейрохирургии на карте"
                 ></iframe>
-              </div>
-              <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                <p className="text-sm text-blue-800">
-                  <MapPin className="w-4 h-4 inline mr-2" />
-                  ул. Хумоюн, 40, Мирзо-Улугбекский район, г. Ташкент, 100142
-                </p>
-                <p className="text-sm text-blue-700 mt-2">
-                  Ближайшие станции метро: "Чиланзар", "Ипподром"
-                </p>
+                <div className="absolute top-4 left-4 bg-white rounded-lg p-3 shadow-lg">
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="w-5 h-5 text-blue-600" />
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">Центр нейрохирургии</p>
+                      <p className="text-xs text-gray-600">ул. Хумоюн, 40</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -944,6 +975,21 @@ export const AppointmentPage = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      value={appointmentData.patient.email}
+                      onChange={(e) => setAppointmentData({
+                        ...appointmentData,
+                        patient: {...appointmentData.patient, email: e.target.value}
+                      })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Дата рождения
                     </label>
                     <input
@@ -957,7 +1003,7 @@ export const AppointmentPage = () => {
                     />
                   </div>
 
-                  <div className="md:col-span-2">
+                  <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Адрес
                     </label>
@@ -982,7 +1028,7 @@ export const AppointmentPage = () => {
                     value={appointmentData.complaint}
                     onChange={(e) => setAppointmentData({...appointmentData, complaint: e.target.value})}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    placeholder="Опишите ваши жалобы и симптомы"
+                    placeholder="Опишите ваши симптомы и жалобы"
                   />
                 </div>
 
@@ -1005,7 +1051,7 @@ export const AppointmentPage = () => {
                         <span>Отправка...</span>
                       </>
                     ) : (
-                      <span>Записаться на прием</span>
+                      <span>Записаться</span>
                     )}
                   </button>
                 </div>
@@ -1017,53 +1063,43 @@ export const AppointmentPage = () => {
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <CheckCircle className="w-10 h-10 text-green-600" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Заявка принята!</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Запись успешно создана!</h2>
                 <p className="text-gray-600 mb-6">
-                  Мы получили вашу заявку на прием к врачу. Наш администратор свяжется с вами 
-                  в ближайшее время для подтверждения записи.
+                  Ваша запись на прием к врачу {appointmentData.doctor} на {appointmentData.date} в {appointmentData.time} успешно создана.
+                  Мы свяжемся с вами для подтверждения записи.
                 </p>
-                <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                  <h3 className="font-semibold text-gray-900 mb-4">Детали записи:</h3>
-                  <div className="text-left space-y-2">
-                    <p><strong>Врач:</strong> {appointmentData.doctor}</p>
-                    <p><strong>Дата:</strong> {new Date(appointmentData.date).toLocaleDateString('ru-RU')}</p>
-                    <p><strong>Время:</strong> {appointmentData.time}</p>
-                    <p><strong>Пациент:</strong> {appointmentData.patient.firstName} {appointmentData.patient.lastName}</p>
-                    <p><strong>Телефон:</strong> {appointmentData.patient.phone}</p>
-                    {appointmentData.complaint && <p><strong>Жалобы:</strong> {appointmentData.complaint}</p>}
-                  </div>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="space-y-4">
                   <Link
                     to="/"
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors text-center"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-block"
                   >
-                    Вернуться на главную
+                    На главную
                   </Link>
-                  <button
-                    onClick={() => {
-                      setStep(1);
-                      setAppointmentData({
-                        department: '',
-                        doctor: '',
-                        date: '',
-                        time: '',
-                        patient: {
-                          firstName: '',
-                          lastName: '',
-                          phone: '',
-                          email: '',
-                          birthDate: '',
-                          address: ''
-                        },
-                        complaint: ''
-                      });
-                      setErrors({});
-                    }}
-                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors text-center"
-                  >
-                    Записать еще раз
-                  </button>
+                  <div>
+                    <button
+                      onClick={() => {
+                        setStep(1);
+                        setAppointmentData({
+                          department: '',
+                          doctor: '',
+                          date: '',
+                          time: '',
+                          patient: {
+                            firstName: '',
+                            lastName: '',
+                            phone: '',
+                            email: '',
+                            birthDate: '',
+                            address: ''
+                          },
+                          complaint: ''
+                        });
+                      }}
+                      className="text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      Записаться еще раз
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
