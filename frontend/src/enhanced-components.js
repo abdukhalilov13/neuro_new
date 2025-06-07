@@ -353,9 +353,11 @@ const Footer = () => {
           {/* О центре */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-                <Brain className="w-6 h-6 text-white" />
-              </div>
+              <img 
+                src="https://images.pexels.com/photos/6192331/pexels-photo-6192331.jpeg" 
+                alt="Логотип центра нейрохирургии"
+                className="w-10 h-10 rounded-lg object-cover"
+              />
               <h3 className="text-xl font-bold">NEURO.UZ</h3>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed mb-4">
