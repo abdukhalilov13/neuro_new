@@ -16,6 +16,7 @@ import {
 } from "./components";
 import { TestAccountsPage } from "./TestAccounts";
 import { VacanciesPage, GalleryPage } from "./AdditionalPages";
+import { NewsDetailPage } from "./NewsDetail";
 
 function App() {
   return (
