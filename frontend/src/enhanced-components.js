@@ -356,7 +356,7 @@ const Footer = () => {
               <img 
                 src="https://images.pexels.com/photos/6192331/pexels-photo-6192331.jpeg" 
                 alt="Логотип центра нейрохирургии"
-                className="w-10 h-10 rounded-lg object-cover"
+                className="w-10 h-10 rounded-lg object-cover bg-blue-900 p-1"
               />
               <h3 className="text-xl font-bold">NEURO.UZ</h3>
             </div>
