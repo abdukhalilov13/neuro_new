@@ -908,6 +908,15 @@ export const ServicesPage = () => {
 
 // Новости
 export const NewsPage = () => {
+  const [expandedNews, setExpandedNews] = useState({});
+
+  const toggleNewsExpanded = (newsId) => {
+    setExpandedNews(prev => ({
+      ...prev,
+      [newsId]: !prev[newsId]
+    }));
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -950,9 +959,31 @@ export const NewsPage = () => {
                       <p className="text-sm text-blue-600 mb-2">{news.date}</p>
                       <h2 className="text-2xl font-bold text-gray-900 mb-3">{news.title}</h2>
                       <p className="text-gray-600 mb-4">{news.excerpt}</p>
-                      <p className="text-gray-700 mb-4">{news.content}</p>
-                      <button className="text-blue-600 hover:text-blue-700 font-medium">
-                        Читать полностью
+                      
+                      {expandedNews[news.id] && (
+                        <div className="mb-4">
+                          <p className="text-gray-700 mb-4">
+                            {news.content} Здесь располагается полный текст новости с подробной информацией о событии. 
+                            В статье рассматриваются все аспекты происходящего, приводятся комментарии экспертов и 
+                            дополнительные факты, которые помогают читателю полностью понять суть события.
+                          </p>
+                          <p className="text-gray-700 mb-4">
+                            Специалисты центра отмечают важность данного события для развития нейрохирургии в регионе. 
+                            Данная инициатива позволит улучшить качество медицинской помощи и внедрить новые технологии лечения.
+                          </p>
+                          <p className="text-gray-700">
+                            За дополнительной информацией вы можете обратиться в пресс-службу центра или посетить наш официальный сайт. 
+                            Мы всегда готовы ответить на ваши вопросы и предоставить актуальную информацию о наших достижениях.
+                          </p>
+                        </div>
+                      )}
+                      
+                      <button 
+                        onClick={() => toggleNewsExpanded(news.id)}
+                        className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center"
+                      >
+                        {expandedNews[news.id] ? 'Свернуть' : 'Читать полностью'}
+                        <ChevronRight className={`w-4 h-4 ml-1 transition-transform ${expandedNews[news.id] ? 'rotate-90' : ''}`} />
                       </button>
                     </div>
                   </div>
