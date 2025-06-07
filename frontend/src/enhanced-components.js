@@ -256,7 +256,10 @@ const Header = () => {
                 {t('appointment')}
               </Link>
               <Link to="/doctor-dashboard" className="hover:text-blue-200 transition-colors text-sm">
-                {t('doctorCabinet')}
+                Кабинет врача
+              </Link>
+              <Link to="/admin" className="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-sm transition-colors">
+                Админ-панель
               </Link>
             </div>
           </div>
