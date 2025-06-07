@@ -587,8 +587,52 @@ export const AdminPanel = () => {
     price: '',
     description: ''
   });
-  
-  const { t } = useLanguage();
+  const [newSiteSettings, setNewSiteSettings] = useState({
+    phones: '',
+    emails: '',
+    address: '',
+    workingHours: {
+      weekdays: '',
+      saturday: '',
+      sunday: ''
+    }
+  });
+
+  const [newSeoSettings, setNewSeoSettings] = useState({
+    title: '',
+    description: '',
+    keywords: ''
+  });
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setNewSiteSettings({
+        phones: adminData.siteSettings.phones.join(', '),
+        emails: adminData.siteSettings.emails.join(', '),
+        address: adminData.siteSettings.address,
+        workingHours: adminData.siteSettings.workingHours
+      });
+      setNewSeoSettings(adminData.seoSettings);
+    }
+  }, [isAuthenticated, adminData]);
+
+  const handleSiteSettingsSubmit = (e) => {
+    e.preventDefault();
+    updateSiteSettings({
+      ...adminData.siteSettings,
+      phones: newSiteSettings.phones.split(',').map(p => p.trim()),
+      emails: newSiteSettings.emails.split(',').map(e => e.trim()),
+      address: newSiteSettings.address,
+      workingHours: newSiteSettings.workingHours
+    });
+    alert('Настройки сайта успешно обновлены!');
+  };
+
+  const handleSeoSettingsSubmit = (e) => {
+    e.preventDefault();
+    updateSeoSettings(newSeoSettings);
+    alert('SEO настройки успешно обновлены!');
+  };
   const { 
     adminData, 
     updateSiteSettings, 
