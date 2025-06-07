@@ -1325,24 +1325,41 @@ export const AdminPanel = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {[1, 2, 3, 4, 5, 6, 7].map(i => (
-                    <div key={i} className="p-4 border rounded-lg">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <h4 className="font-medium text-gray-900">Отделение {i}</h4>
-                          <p className="text-sm text-gray-600 mt-1">Описание отделения</p>
-                        </div>
-                        <div className="flex space-x-2 ml-4">
-                          <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
-                            <Edit className="w-4 h-4" />
-                          </button>
-                          <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                  {departments.map(dept => {
+                    const IconComponent = departmentIcons[dept.icon] || Brain;
+                    return (
+                      <div key={dept.id} className="p-4 border rounded-lg">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-3 mb-2">
+                              <div className={`w-10 h-10 bg-gradient-to-br ${dept.color} rounded-lg flex items-center justify-center`}>
+                                <IconComponent className="w-5 h-5 text-white" />
+                              </div>
+                              <h4 className="font-medium text-gray-900">{dept.name}</h4>
+                            </div>
+                            <p className="text-sm text-gray-600 mt-1">{dept.description}</p>
+                            <p className="text-xs text-blue-600 mt-2">
+                              Врачей: {doctors.filter(doctor => doctor.departmentId === dept.id).length}
+                            </p>
+                          </div>
+                          <div className="flex space-x-2 ml-4">
+                            <button 
+                              onClick={() => startEditDepartment(dept)}
+                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
+                            >
+                              <Edit className="w-4 h-4" />
+                            </button>
+                            <button 
+                              onClick={() => deleteDepartment(dept.id)}
+                              className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}
