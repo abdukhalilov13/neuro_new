@@ -1378,32 +1378,48 @@ export const AdminPanel = () => {
                 </div>
 
                 <div className="space-y-4">
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className="p-4 border rounded-lg">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <img
-                            src={`https://images.pexels.com/photos/814026${i}/pexels-photo-814026${i}.jpeg`}
-                            alt={`Врач ${i}`}
-                            className="w-16 h-16 rounded-full object-cover"
-                          />
-                          <div>
-                            <h4 className="font-medium text-gray-900">Врач {i}</h4>
-                            <p className="text-sm text-gray-600">Специализация</p>
-                            <p className="text-sm text-green-600">Активен</p>
+                  {doctors.map(doctor => {
+                    const department = departments.find(dept => dept.id === doctor.departmentId);
+                    return (
+                      <div key={doctor.id} className="p-4 border rounded-lg">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-4">
+                            <img
+                              src={doctor.image}
+                              alt={doctor.name}
+                              className="w-16 h-16 rounded-full object-cover"
+                            />
+                            <div>
+                              <h4 className="font-medium text-gray-900">{doctor.name}</h4>
+                              <p className="text-sm text-gray-600">{doctor.specialization}</p>
+                              <p className="text-sm text-blue-600">{doctor.experience}</p>
+                              {department && (
+                                <p className="text-xs text-green-600">Отделение: {department.name}</p>
+                              )}
+                              <div className="flex items-center space-x-4 mt-1 text-xs text-gray-500">
+                                <span>{doctor.phone}</span>
+                                <span>{doctor.email}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex space-x-2">
+                            <button 
+                              onClick={() => startEditDoctor(doctor)}
+                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
+                            >
+                              <Edit className="w-4 h-4" />
+                            </button>
+                            <button 
+                              onClick={() => deleteDoctor(doctor.id)}
+                              className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
                           </div>
                         </div>
-                        <div className="flex space-x-2">
-                          <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
-                            <Edit className="w-4 h-4" />
-                          </button>
-                          <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}
