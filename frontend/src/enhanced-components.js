@@ -273,7 +273,7 @@ const Header = () => {
             <img 
               src="https://images.pexels.com/photos/6192331/pexels-photo-6192331.jpeg" 
               alt="Логотип центра нейрохирургии"
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl object-cover"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl object-cover bg-blue-900 p-1"
             />
             <div>
               <h1 className="text-lg sm:text-xl font-bold text-gray-900">NEURO.UZ</h1>
