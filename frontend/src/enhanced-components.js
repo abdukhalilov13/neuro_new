@@ -261,9 +261,6 @@ const Header = () => {
               <Link to="/admin" className="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-sm transition-colors">
                 Админ-панель
               </Link>
-              <Link to="/test-accounts" className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-sm transition-colors">
-                🔑 Тесты
-              </Link>
             </div>
           </div>
         </div>
