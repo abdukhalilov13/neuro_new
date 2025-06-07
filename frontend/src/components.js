@@ -25,7 +25,10 @@ import {
   FileText,
   Image as ImageIcon,
   Shield,
-  DollarSign
+  DollarSign,
+  CheckCircle,
+  CreditCard,
+  Smartphone
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
 import { Header, Footer, ServiceCard } from './enhanced-components';
