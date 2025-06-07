@@ -409,7 +409,6 @@ export const HomePage = () => {
             </div>
           </div>
         </section>
-      </section>
 
       {/* Statistics Section */}
       <section className="py-16 bg-gray-50">
