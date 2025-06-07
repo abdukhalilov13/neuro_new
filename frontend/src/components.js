@@ -28,7 +28,8 @@ import {
   DollarSign,
   CheckCircle,
   CreditCard,
-  Smartphone
+  Smartphone,
+  Check
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
 import { Header, Footer, ServiceCard } from './enhanced-components';
@@ -43,10 +44,10 @@ const siteData = {
   },
   
   statistics: [
-    { number: "157", icon: Building },
-    { number: "59", icon: Calendar },
-    { number: "28", icon: Heart },
-    { number: "5000", icon: Users }
+    { number: "157", label: "Общих койко-мест", icon: Building },
+    { number: "59", label: "Плановых мест", icon: Calendar },
+    { number: "28", label: "Детских мест", icon: Heart },
+    { number: "5000+", label: "Пациентов в год", icon: Users }
   ],
 
   departments: [
@@ -161,7 +162,6 @@ const siteData = {
     }
   ]
 };
-
 
 
 
@@ -882,11 +882,24 @@ export const ContactPage = () => {
     phone: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    
+    try {
+      // Имитация отправки
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -986,10 +999,25 @@ export const ContactPage = () => {
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Написать нам</h2>
               
+              {submitStatus === 'success' && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
+                    <p className="text-green-800">Сообщение успешно отправлено!</p>
+                  </div>
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-red-800">Произошла ошибка. Попробуйте еще раз.</p>
+                </div>
+              )}
+              
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Ваше имя
+                    Ваше имя *
                   </label>
                   <input
                     type="text"
@@ -1003,7 +1031,7 @@ export const ContactPage = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email
+                    Email *
                   </label>
                   <input
                     type="email"
@@ -1030,7 +1058,7 @@ export const ContactPage = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Сообщение
+                    Сообщение *
                   </label>
                   <textarea
                     required
@@ -1044,9 +1072,17 @@ export const ContactPage = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
                 >
-                  Отправить сообщение
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <span>Отправка...</span>
+                    </>
+                  ) : (
+                    <span>Отправить сообщение</span>
+                  )}
                 </button>
               </form>
             </motion.div>
@@ -1063,7 +1099,11 @@ export const ContactPage = () => {
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Как нас найти</h2>
               <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
-                <p className="text-gray-600">Интерактивная карта</p>
+                <div className="text-center">
+                  <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                  <p className="text-gray-600">Интерактивная карта</p>
+                  <p className="text-sm text-gray-500 mt-1">ул. Хумоюн, 40, Ташкент</p>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -1094,20 +1134,59 @@ export const AppointmentPage = () => {
     complaint: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const timeSlots = [
     '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
     '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'
   ];
 
+  const validateStep = () => {
+    const newErrors = {};
+    
+    switch (step) {
+      case 1:
+        if (!appointmentData.doctor) {
+          newErrors.doctor = 'Выберите врача';
+        }
+        break;
+      case 2:
+        if (!appointmentData.date) {
+          newErrors.date = 'Выберите дату';
+        }
+        if (!appointmentData.time) {
+          newErrors.time = 'Выберите время';
+        }
+        break;
+      case 3:
+        if (!appointmentData.patient.firstName) {
+          newErrors.firstName = 'Введите имя';
+        }
+        if (!appointmentData.patient.lastName) {
+          newErrors.lastName = 'Введите фамилию';
+        }
+        if (!appointmentData.patient.phone) {
+          newErrors.phone = 'Введите телефон';
+        } else if (!/^\+998\s\d{2}\s\d{3}-\d{2}-\d{2}$/.test(appointmentData.patient.phone)) {
+          newErrors.phone = 'Неверный формат телефона';
+        }
+        break;
+      default:
+        break;
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateStep()) return;
+    
     setIsSubmitting(true);
     
-    // Имитация отправки данных
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
-      alert('Ваша заявка успешно принята! Мы свяжемся с вами для подтверждения записи.');
       setStep(4);
     } catch (error) {
       alert('Произошла ошибка при отправке заявки. Попробуйте еще раз.');
@@ -1116,18 +1195,9 @@ export const AppointmentPage = () => {
     }
   };
 
-  const validateStep = () => {
-    switch (step) {
-      case 1:
-        return appointmentData.doctor;
-      case 2:
-        return appointmentData.date && appointmentData.time;
-      case 3:
-        return appointmentData.patient.firstName && 
-               appointmentData.patient.lastName && 
-               appointmentData.patient.phone;
-      default:
-        return true;
+  const nextStep = () => {
+    if (validateStep()) {
+      setStep(step + 1);
     }
   };
 
@@ -1218,13 +1288,13 @@ export const AppointmentPage = () => {
                         </button>
                       ))}
                     </div>
+                    {errors.doctor && <p className="text-red-600 text-sm mt-2">{errors.doctor}</p>}
                   </div>
 
                   <div className="flex justify-end">
                     <button
-                      onClick={() => setStep(2)}
-                      disabled={!validateStep()}
-                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                      onClick={nextStep}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
                     >
                       Далее
                     </button>
@@ -1249,6 +1319,7 @@ export const AppointmentPage = () => {
                       min={new Date().toISOString().split('T')[0]}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     />
+                    {errors.date && <p className="text-red-600 text-sm mt-2">{errors.date}</p>}
                   </div>
 
                   {appointmentData.date && (
@@ -1271,6 +1342,7 @@ export const AppointmentPage = () => {
                           </button>
                         ))}
                       </div>
+                      {errors.time && <p className="text-red-600 text-sm mt-2">{errors.time}</p>}
                     </div>
                   )}
                 </div>
@@ -1283,9 +1355,8 @@ export const AppointmentPage = () => {
                     Назад
                   </button>
                   <button
-                    onClick={() => setStep(3)}
-                    disabled={!validateStep()}
-                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                    onClick={nextStep}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
                   >
                     Далее
                   </button>
@@ -1312,6 +1383,7 @@ export const AppointmentPage = () => {
                       })}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     />
+                    {errors.firstName && <p className="text-red-600 text-sm mt-1">{errors.firstName}</p>}
                   </div>
 
                   <div>
@@ -1328,6 +1400,7 @@ export const AppointmentPage = () => {
                       })}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     />
+                    {errors.lastName && <p className="text-red-600 text-sm mt-1">{errors.lastName}</p>}
                   </div>
 
                   <div>
@@ -1337,7 +1410,6 @@ export const AppointmentPage = () => {
                     <input
                       type="tel"
                       required
-                      pattern="[+][0-9]{3}[ ][0-9]{2}[ ][0-9]{3}[-][0-9]{2}[-][0-9]{2}"
                       value={appointmentData.patient.phone}
                       onChange={(e) => setAppointmentData({
                         ...appointmentData,
@@ -1346,6 +1418,7 @@ export const AppointmentPage = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                       placeholder="+998 90 123-45-67"
                     />
+                    {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
                   </div>
 
                   <div>
@@ -1417,8 +1490,8 @@ export const AppointmentPage = () => {
                   </button>
                   <button
                     type="submit"
-                    disabled={isSubmitting || !validateStep()}
-                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center space-x-2"
+                    disabled={isSubmitting}
+                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center space-x-2"
                   >
                     {isSubmitting ? (
                       <>
@@ -1480,6 +1553,7 @@ export const AppointmentPage = () => {
                         },
                         complaint: ''
                       });
+                      setErrors({});
                     }}
                     className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors text-center"
                   >
@@ -1496,4 +1570,3 @@ export const AppointmentPage = () => {
     </div>
   );
 };
-
