@@ -1093,16 +1093,42 @@ export const AppointmentPage = () => {
     },
     complaint: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const timeSlots = [
     '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
     '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Ваша заявка принята! Мы свяжемся с вами для подтверждения записи.');
-    setStep(4);
+    setIsSubmitting(true);
+    
+    // Имитация отправки данных
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      alert('Ваша заявка успешно принята! Мы свяжемся с вами для подтверждения записи.');
+      setStep(4);
+    } catch (error) {
+      alert('Произошла ошибка при отправке заявки. Попробуйте еще раз.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const validateStep = () => {
+    switch (step) {
+      case 1:
+        return appointmentData.doctor;
+      case 2:
+        return appointmentData.date && appointmentData.time;
+      case 3:
+        return appointmentData.patient.firstName && 
+               appointmentData.patient.lastName && 
+               appointmentData.patient.phone;
+      default:
+        return true;
+    }
   };
 
   return (
@@ -1131,7 +1157,7 @@ export const AppointmentPage = () => {
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
                     step >= stepNumber ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-600'
                   }`}>
-                    {stepNumber}
+                    {step > stepNumber ? <Check className="w-5 h-5" /> : stepNumber}
                   </div>
                   {stepNumber < 3 && (
                     <div className={`w-16 h-1 mx-2 ${
@@ -1186,6 +1212,7 @@ export const AppointmentPage = () => {
                             <div>
                               <h3 className="font-medium text-gray-900">{doctor.name}</h3>
                               <p className="text-sm text-gray-600">{doctor.specialization}</p>
+                              <p className="text-xs text-blue-600">{doctor.experience}</p>
                             </div>
                           </div>
                         </button>
@@ -1196,8 +1223,8 @@ export const AppointmentPage = () => {
                   <div className="flex justify-end">
                     <button
                       onClick={() => setStep(2)}
-                      disabled={!appointmentData.doctor}
-                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                      disabled={!validateStep()}
+                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-medium transition-colors"
                     >
                       Далее
                     </button>
@@ -1257,8 +1284,8 @@ export const AppointmentPage = () => {
                   </button>
                   <button
                     onClick={() => setStep(3)}
-                    disabled={!appointmentData.date || !appointmentData.time}
-                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                    disabled={!validateStep()}
+                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-medium transition-colors"
                   >
                     Далее
                   </button>
@@ -1310,13 +1337,14 @@ export const AppointmentPage = () => {
                     <input
                       type="tel"
                       required
+                      pattern="[+][0-9]{3}[ ][0-9]{2}[ ][0-9]{3}[-][0-9]{2}[-][0-9]{2}"
                       value={appointmentData.patient.phone}
                       onChange={(e) => setAppointmentData({
                         ...appointmentData,
                         patient: {...appointmentData.patient, phone: e.target.value}
                       })}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                      placeholder="+998 __ ___-__-__"
+                      placeholder="+998 90 123-45-67"
                     />
                   </div>
 
@@ -1330,6 +1358,36 @@ export const AppointmentPage = () => {
                       onChange={(e) => setAppointmentData({
                         ...appointmentData,
                         patient: {...appointmentData.patient, email: e.target.value}
+                      })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Дата рождения
+                    </label>
+                    <input
+                      type="date"
+                      value={appointmentData.patient.birthDate}
+                      onChange={(e) => setAppointmentData({
+                        ...appointmentData,
+                        patient: {...appointmentData.patient, birthDate: e.target.value}
+                      })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Адрес
+                    </label>
+                    <input
+                      type="text"
+                      value={appointmentData.patient.address}
+                      onChange={(e) => setAppointmentData({
+                        ...appointmentData,
+                        patient: {...appointmentData.patient, address: e.target.value}
                       })}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     />
@@ -1359,9 +1417,17 @@ export const AppointmentPage = () => {
                   </button>
                   <button
                     type="submit"
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                    disabled={isSubmitting || !validateStep()}
+                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center space-x-2"
                   >
-                    Записаться на прием
+                    {isSubmitting ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                        <span>Отправка...</span>
+                      </>
+                    ) : (
+                      <span>Записаться на прием</span>
+                    )}
                   </button>
                 </div>
               </form>
@@ -1370,9 +1436,7 @@ export const AppointmentPage = () => {
             {step === 4 && (
               <div className="text-center">
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
+                  <CheckCircle className="w-10 h-10 text-green-600" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Заявка принята!</h2>
                 <p className="text-gray-600 mb-6">
@@ -1380,18 +1444,48 @@ export const AppointmentPage = () => {
                   в ближайшее время для подтверждения записи.
                 </p>
                 <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">Детали записи:</h3>
-                  <p><strong>Врач:</strong> {appointmentData.doctor}</p>
-                  <p><strong>Дата:</strong> {appointmentData.date}</p>
-                  <p><strong>Время:</strong> {appointmentData.time}</p>
-                  <p><strong>Пациент:</strong> {appointmentData.patient.firstName} {appointmentData.patient.lastName}</p>
+                  <h3 className="font-semibold text-gray-900 mb-4">Детали записи:</h3>
+                  <div className="text-left space-y-2">
+                    <p><strong>Врач:</strong> {appointmentData.doctor}</p>
+                    <p><strong>Дата:</strong> {new Date(appointmentData.date).toLocaleDateString('ru-RU')}</p>
+                    <p><strong>Время:</strong> {appointmentData.time}</p>
+                    <p><strong>Пациент:</strong> {appointmentData.patient.firstName} {appointmentData.patient.lastName}</p>
+                    <p><strong>Телефон:</strong> {appointmentData.patient.phone}</p>
+                    {appointmentData.patient.email && <p><strong>Email:</strong> {appointmentData.patient.email}</p>}
+                    {appointmentData.complaint && <p><strong>Жалобы:</strong> {appointmentData.complaint}</p>}
+                  </div>
                 </div>
-                <Link
-                  to="/"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
-                >
-                  Вернуться на главную
-                </Link>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    to="/"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors text-center"
+                  >
+                    Вернуться на главную
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setStep(1);
+                      setAppointmentData({
+                        department: '',
+                        doctor: '',
+                        date: '',
+                        time: '',
+                        patient: {
+                          firstName: '',
+                          lastName: '',
+                          phone: '',
+                          email: '',
+                          birthDate: '',
+                          address: ''
+                        },
+                        complaint: ''
+                      });
+                    }}
+                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors text-center"
+                  >
+                    Записать еще раз
+                  </button>
+                </div>
               </div>
             )}
           </motion.div>
