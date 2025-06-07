@@ -394,8 +394,8 @@ const Footer = () => {
 
           {/* Контакты */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">{t('contacts')}</h4>
-            <div className="space-y-3">
+            <h4 className="text-lg font-semibold mb-4 text-left">{t('contacts')}</h4>
+            <div className="space-y-3 text-left">
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
                 <span className="text-gray-300 text-sm">
@@ -415,8 +415,8 @@ const Footer = () => {
 
           {/* Навигация */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">{t('navigation')}</h4>
-            <div className="space-y-2">
+            <h4 className="text-lg font-semibold mb-4 text-left">{t('navigation')}</h4>
+            <div className="space-y-2 text-left">
               {[
                 { name: t('about'), href: '/about' },
                 { name: t('departments'), href: '/departments' },
