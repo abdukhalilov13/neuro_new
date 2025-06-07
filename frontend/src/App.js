@@ -14,6 +14,7 @@ import {
   DoctorDashboard,
   AdminPanel
 } from "./components";
+import { TestAccountsPage } from "./TestAccounts";
 
 function App() {
   return (
