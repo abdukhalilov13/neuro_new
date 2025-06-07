@@ -485,68 +485,65 @@ export const DoctorDashboard = () => {
 
 // Полноценная админ-панель
 export const AdminPanel = () => {
+  const { adminData, updateAdminData } = useAdmin();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [loginData, setLoginData] = useState({ email: '', password: '' });
-  const [editingService, setEditingService] = useState(null);
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
-  const [newService, setNewService] = useState({
-    name: '',
-    category: '',
-    price: '',
-    description: ''
-  });
-
-  // Новые состояния для управления
   const [isDepartmentModalOpen, setIsDepartmentModalOpen] = useState(false);
-  const [newDepartment, setNewDepartment] = useState({
-    name: '',
-    description: '',
-    icon: 'Brain',
-    color: 'from-blue-500 to-blue-600'
-  });
-
   const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false);
-  const [newDoctor, setNewDoctor] = useState({
-    name: '',
-    specialization: '',
-    experience: '',
-    email: '',
-    phone: '',
-    reception: '',
-    image: ''
-  });
-
   const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
-  const [newNews, setNewNews] = useState({
-    title: '',
-    excerpt: '',
-    content: '',
-    image: ''
-  });
-
+  const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
+  const [editingService, setEditingService] = useState(null);
+  const [editingDepartment, setEditingDepartment] = useState(null);
+  const [editingDoctor, setEditingDoctor] = useState(null);
+  const [editingNews, setEditingNews] = useState(null);
+  const [editingAccount, setEditingAccount] = useState(null);
+  
+  // Данные отделений
+  const [departments, setDepartments] = useState(siteData.departments);
+  
+  // Данные врачей
+  const [doctors, setDoctors] = useState(siteData.doctors.map(doctor => ({
+    ...doctor,
+    departmentId: doctor.id // Связываем с отделениями
+  })));
+  
+  // Данные новостей
+  const [news, setNews] = useState(siteData.news);
+  
+  // Аккаунты пользователей
+  const [accounts, setAccounts] = useState([
+    { id: 1, name: 'Админ', email: 'admin@neuro.uz', role: 'admin', status: 'active', createdAt: '2025-01-01' },
+    { id: 2, name: 'Доктор Кариев', email: 'kariev@neuro.uz', role: 'doctor', status: 'active', createdAt: '2025-01-15' },
+    { id: 3, name: 'Доктор Асадуллаев', email: 'asadullaev@neuro.uz', role: 'doctor', status: 'inactive', createdAt: '2025-02-01' }
+  ]);
+  
+  const [newService, setNewService] = useState({ name: '', category: '', price: '', description: '' });
+  const [newDepartment, setNewDepartment] = useState({ name: '', description: '', icon: 'Brain', color: 'from-blue-500 to-blue-600' });
+  const [newDoctor, setNewDoctor] = useState({ name: '', specialization: '', experience: '', image: '', email: '', phone: '', reception: '', departmentId: '' });
+  const [newNews, setNewNews] = useState({ title: '', excerpt: '', content: '', image: '' });
+  const [newAccount, setNewAccount] = useState({ name: '', email: '', role: 'doctor', password: '' });
+  
   const [newSiteSettings, setNewSiteSettings] = useState({
-    phones: '',
-    emails: '',
-    address: '',
+    phones: '+998 71 264-96-10, +998 71 264-96-09',
+    emails: 'admin@neuro.uz, info@neuro.uz',
+    address: 'ул. Хумоюн, 40, Мирзо-Улугбекский район, г. Ташкент, 100142',
     workingHours: {
-      weekdays: '',
-      saturday: '',
-      sunday: ''
+      weekdays: '8:00 - 18:00',
+      saturday: '9:00 - 15:00',
+      sunday: 'Выходной'
     },
     socialMedia: {
-      facebook: '',
-      instagram: '',
-      youtube: ''
+      facebook: 'https://facebook.com/neuro.uz',
+      instagram: 'https://instagram.com/neuro.uz',
+      youtube: 'https://youtube.com/@neuro.uz'
     }
   });
-
   const [newSeoSettings, setNewSeoSettings] = useState({
-    title: '',
-    description: '',
-    keywords: ''
+    title: 'Республиканский Научный Центр Нейрохирургии',
+    description: 'Ведущий центр нейрохирургии в Центральной Азии. Более 25 лет опыта в лечении заболеваний нервной системы.',
+    keywords: 'нейрохирургия, мозг, спинной мозг, операции, Узбекистан, Ташкент'
   });
-
   const [galleryImages, setGalleryImages] = useState([
     { id: 1, url: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c', alt: 'Центр 1' },
     { id: 2, url: 'https://images.unsplash.com/photo-1526930382372-67bf22c0fce2', alt: 'Центр 2' },
