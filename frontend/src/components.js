@@ -39,7 +39,7 @@ import { DoctorDashboard, AdminPanel } from './doctor-admin-components';
 const siteData = {
   hero: {
     doctorImage: "https://images.unsplash.com/photo-1638202993928-7267aad84c31",
-    buildingImage: "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc",
+    buildingImage: "https://neuro.uz/storage/uploads/page/large/30.06.2021/nnnn.jpg.1625052184.jpeg.1625058347.jpeg",
     phone: "+998 71 264-96-10",
     emergency: "+998 78 113-33-78"
   },
@@ -475,7 +475,7 @@ export const AboutPage = () => {
               viewport={{ once: true }}
             >
               <img
-                src="https://images.unsplash.com/photo-1490351267196-b7a67e26e41b"
+                src="https://neuro.uz/storage/uploads/page/large/30.06.2021/nnnn.jpg.1625052184.jpeg.1625058347.jpeg"
                 alt="Здание центра"
                 className="rounded-2xl shadow-2xl"
               />
@@ -489,22 +489,44 @@ export const AboutPage = () => {
               className="space-y-6"
             >
               <h2 className="text-3xl font-bold text-gray-900">История и миссия</h2>
-              <p className="text-gray-600 leading-relaxed">
-                В 1997 году был основан Республиканский Научный Центр Нейрохирургии при 
-                Министерстве Здравоохранения Республики Узбекистан. Центр был создан 
-                профессором Маратом Хикматовичем Кариевым, выдающимся специалистом 
-                в области здравоохранения страны.
-              </p>
-              <p className="text-gray-600 leading-relaxed">
-                Сегодня центр является ведущим учреждением нейрохирургии в регионе, 
-                предоставляющим высококачественную медицинскую помощь пациентам из 
-                Узбекистана и соседних стран.
-              </p>
+              <div className="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  В 1986 году организовано Научное общество нейрохирургов, а в 1998 г. создана Ассоциация нейрохирургов Узбекистана, которая является также и членом Ассоциации нейрохирургов стран Тихоокеанского региона и Всемирной Ассоциации нейрохирургов (WFNS).
+                </p>
+                <p>
+                  Общество сотрудничает с научными коллективами и отдельными учеными многих стран дальнего и ближнего зарубежья (США, Германия, Россия, Индия, Азербайджан, Украина, Белоруссия, Казахстан, Киргизия, Грузия, Таджикистан и др.).
+                </p>
+                <p>
+                  Основными целями общества нейрохирургов являются: содействие реализации творческого потенциала членов Общества в интересах решения актуальных теоретических, практических и научных проблем в области нейрохирургии.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Задачи Ассоциации:</h3>
+                <ul className="space-y-2 text-gray-600">
+                  <li className="flex items-start space-x-2">
+                    <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Осуществление мероприятий, направленных на повышение квалификации членов Ассоциации</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Содействие развитию приоритетных направлений научных исследований в области нейрохирургии</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Оказание научной и практической помощи членам Общества, молодым ученым и врачам</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Развитие сотрудничества с международными и национальными научными медицинскими обществами и ассоциациями</span>
+                  </li>
+                </ul>
+              </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-blue-50 p-4 rounded-xl">
                   <h4 className="font-semibold text-gray-900 mb-2">Год основания</h4>
-                  <p className="text-2xl font-bold text-blue-600">1997</p>
+                  <p className="text-2xl font-bold text-blue-600">1986</p>
                 </div>
                 <div className="bg-green-50 p-4 rounded-xl">
                   <h4 className="font-semibold text-gray-900 mb-2">Пациентов в год</h4>
@@ -1021,6 +1043,38 @@ export const ContactPage = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Информация о вступлении в ассоциацию */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Вступление в Ассоциацию нейрохирургов Узбекистана</h2>
+                
+                <div className="space-y-4">
+                  <p className="text-gray-700 font-medium">Для вступления в Ассоциацию нейрохирургов Узбекистана необходимо предоставить:</p>
+                  
+                  <ol className="space-y-3 text-gray-600">
+                    <li className="flex items-start space-x-3">
+                      <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">1</span>
+                      <span>Заявление на имя председателя Ассоциации Кариева Г.М.</span>
+                    </li>
+                    <li className="flex items-start space-x-3">
+                      <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">2</span>
+                      <span>Квитанцию об уплате 1 размера минимальной заработной платы.</span>
+                    </li>
+                  </ol>
+
+                  <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-3">Реквизиты Ассоциации нейрохирургов Узбекистана:</h4>
+                    <div className="text-sm text-gray-700 space-y-1">
+                      <p><strong>р/с:</strong> 20212000404984462001</p>
+                      <p><strong>Банк:</strong> Ташкентский городской филиал банка «Асака» (ОАЖ)</p>
+                      <p><strong>МФО:</strong> 00416</p>
+                      <p><strong>ИНН:</strong> 207146456</p>
+                      <p><strong>ОКОНХ:</strong> 98500</p>
+                      <p><strong>Основание:</strong> Членский взнос за 2018 год</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
             {/* Форма обратной связи */}
@@ -1121,7 +1175,7 @@ export const ContactPage = () => {
             </motion.div>
           </div>
 
-          {/* Яндекс карта */}
+          {/* Карта с обновленными координатами */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1130,10 +1184,10 @@ export const ContactPage = () => {
             className="mt-12"
           >
             <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Как нас найти</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Где нас найти</h2>
               <div className="relative">
                 <iframe
-                  src="https://yandex.uz/map-widget/v1/?ll=69.280782%2C41.305856&mode=search&oid=1104106208&ol=biz&z=17"
+                  src="https://yandex.uz/map-widget/v1/?ll=69.3827488%2C41.342462&mode=search&oid=1104106208&ol=biz&z=17"
                   width="100%"
                   height="400"
                   frameBorder="0"
