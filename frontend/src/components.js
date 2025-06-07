@@ -619,44 +619,17 @@ export const DoctorsPage = () => {
 
 // Услуги
 export const ServicesPage = () => {
-  const services = [
-    {
-      title: "Диагностические услуги",
-      description: "Комплексная диагностика заболеваний нервной системы",
-      image: "https://images.unsplash.com/photo-1526930382372-67bf22c0fce2",
-      items: [
-        "Компьютерная томография (КТ)",
-        "Магнитно-резонансная томография (МРТ)",
-        "Ангиография сосудов головного мозга",
-        "Электроэнцефалография (ЭЭГ)",
-        "Ультразвуковое исследование"
-      ]
-    },
-    {
-      title: "Хирургические операции",
-      description: "Современные методы нейрохирургического лечения",
-      image: "https://images.unsplash.com/photo-1579165466991-467135ad3110",
-      items: [
-        "Удаление опухолей головного и спинного мозга",
-        "Лечение аневризм и АВМ",
-        "Операции на позвоночнике",
-        "Эндоскопические вмешательства",
-        "Стереотаксические операции"
-      ]
-    },
-    {
-      title: "Реабилитация",
-      description: "Комплексная программа восстановления",
-      image: "https://images.unsplash.com/photo-1512678080530-7760d81faba6",
-      items: [
-        "Физиотерапия",
-        "Лечебная физкультура",
-        "Логопедическая реабилитация",
-        "Психологическая поддержка",
-        "Социальная адаптация"
-      ]
+  const { adminData } = useAdmin();
+  const { t } = useLanguage();
+
+  // Группируем услуги по категориям
+  const servicesByCategory = adminData.services.reduce((acc, service) => {
+    if (!acc[service.category]) {
+      acc[service.category] = [];
     }
-  ];
+    acc[service.category].push(service);
+    return acc;
+  }, {});
 
   return (
     <div className="min-h-screen">
@@ -672,50 +645,116 @@ export const ServicesPage = () => {
           >
             <h1 className="text-5xl font-bold text-gray-900 mb-6">Наши услуги</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Полный спектр медицинских услуг в области нейрохирургии
+              Полный спектр медицинских услуг в области нейрохирургии с прозрачным ценообразованием
             </p>
           </motion.div>
 
-          <div className="space-y-12">
-            {services.map((service, index) => (
+          {/* Услуги по категориям */}
+          <div className="space-y-16">
+            {Object.entries(servicesByCategory).map(([category, services], categoryIndex) => (
               <motion.div
-                key={index}
+                key={category}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg"
               >
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
-                  <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-64 lg:h-full object-cover"
+                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{category}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {services.map((service, index) => (
+                    <ServiceCard
+                      key={service.id}
+                      service={service}
+                      isAdmin={false}
                     />
-                  </div>
-                  <div className="p-8 flex flex-col justify-center">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4">{service.title}</h2>
-                    <p className="text-gray-600 mb-6">{service.description}</p>
-                    <ul className="space-y-2 mb-6">
-                      {service.items.map((item, itemIndex) => (
-                        <li key={itemIndex} className="flex items-center space-x-3">
-                          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                          <span className="text-gray-700">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      to="/appointment"
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors inline-block w-fit"
-                    >
-                      Записаться на консультацию
-                    </Link>
-                  </div>
+                  ))}
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {/* Дополнительная информация */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-16 bg-white rounded-2xl p-8 shadow-lg"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Принципы ценообразования</h3>
+                <ul className="space-y-3 text-gray-600">
+                  <li className="flex items-start space-x-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span>Прозрачная система цен без скрытых доплат</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span>Индивидуальный подход к каждому пациенту</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span>Возможность рассрочки платежа</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span>Бесплатные повторные консультации в течение месяца</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Способы оплаты</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 bg-blue-50 rounded-lg text-center">
+                    <DollarSign className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+                    <p className="font-medium text-gray-900">Наличные</p>
+                  </div>
+                  <div className="p-4 bg-green-50 rounded-lg text-center">
+                    <CreditCard className="w-8 h-8 text-green-600 mx-auto mb-2" />
+                    <p className="font-medium text-gray-900">Банковская карта</p>
+                  </div>
+                  <div className="p-4 bg-purple-50 rounded-lg text-center">
+                    <Smartphone className="w-8 h-8 text-purple-600 mx-auto mb-2" />
+                    <p className="font-medium text-gray-900">Мобильные платежи</p>
+                  </div>
+                  <div className="p-4 bg-orange-50 rounded-lg text-center">
+                    <Building className="w-8 h-8 text-orange-600 mx-auto mb-2" />
+                    <p className="font-medium text-gray-900">Банковский перевод</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Контактная информация */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Нужна консультация по услугам?</h3>
+            <p className="text-gray-600 mb-6">
+              Наши специалисты ответят на все ваши вопросы и помогут выбрать оптимальное лечение
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/appointment"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+              >
+                Записаться на консультацию
+              </Link>
+              <Link
+                to="/contact"
+                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors"
+              >
+                Связаться с нами
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
