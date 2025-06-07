@@ -107,6 +107,20 @@ export const DoctorDashboard = () => {
               Войти
             </button>
           </form>
+
+          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+            <p className="text-sm text-blue-700">
+              <strong>🔑 Тестовый доступ:</strong><br />
+              Email: doctor@neuro.uz<br />
+              Пароль: demo123
+            </p>
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link to="/" className="text-blue-600 hover:text-blue-700">
+              Вернуться на главную
+            </Link>
+          </div>
         </motion.div>
       </div>
     );
