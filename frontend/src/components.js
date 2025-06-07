@@ -24,25 +24,26 @@ import {
   BarChart3,
   FileText,
   Image as ImageIcon,
-  Shield
+  Shield,
+  DollarSign
 } from 'lucide-react';
+import { useLanguage, useAdmin } from './contexts';
+import { Header, Footer, ServiceCard } from './enhanced-components';
+import { DoctorDashboard, AdminPanel } from './doctor-admin-components';
 
-// Данные для сайта
+// Обновленные данные для сайта
 const siteData = {
   hero: {
-    title: "Республиканский Научный Центр Нейрохирургии при Министерстве Здравоохранения Республики Узбекистан",
-    subtitle: "Ведущий центр нейрохирургии в Центральной Азии",
-    description: "Более 25 лет опыта в лечении сложнейших заболеваний нервной системы",
     doctorImage: "https://images.unsplash.com/photo-1638202993928-7267aad84c31",
     phone: "+998 71 264-96-10",
     emergency: "+998 78 113-33-78"
   },
   
   statistics: [
-    { number: "157", label: "Общая вместимость коек", icon: Building },
-    { number: "59", label: "Плановых мест", icon: Calendar },
-    { number: "28", label: "Детских мест", icon: Heart },
-    { number: "5000", label: "Пациентов в год", icon: Users }
+    { number: "157", icon: Building },
+    { number: "59", icon: Calendar },
+    { number: "28", icon: Heart },
+    { number: "5000", icon: Users }
   ],
 
   departments: [
