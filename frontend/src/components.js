@@ -178,8 +178,8 @@ export const HomePage = () => {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-800/80 z-10"></div>
           <img 
-            src={siteData.hero.doctorImage}
-            alt="Врач нейрохирург"
+            src="https://images.unsplash.com/photo-1476889155166-39ae3886a3ef"
+            alt="Здание центра нейрохирургии"
             className="w-full h-full object-cover"
           />
         </div>
