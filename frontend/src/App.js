@@ -10,10 +10,9 @@ import {
   ServicesPage,
   NewsPage,
   ContactPage,
-  AppointmentPage,
-  DoctorDashboard,
-  AdminPanel
+  AppointmentPage
 } from "./components";
+import { DoctorDashboard, AdminPanel } from "./doctor-admin-components";
 
 function App() {
   return (
