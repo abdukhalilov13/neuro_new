@@ -66,7 +66,25 @@ const translations = {
     reception: 'Прием',
     price: 'Цена',
     from: 'от',
-    sum: 'сум'
+    sum: 'сум',
+    
+    // Additional translations
+    centerOfNeurosurgery: 'Центр нейрохирургии',
+    footerDescription: 'Республиканский Научный Центр Нейрохирургии - ведущее медицинское учреждение Узбекистана, специализирующееся на лечении заболеваний нервной системы.',
+    mondayFriday: 'Пн-Пт',
+    saturday: 'Суббота',
+    sunday: 'Воскресенье',
+    centerName: 'Республиканский Научный Центр Нейрохирургии',
+    ourDepartments: 'Наши отделения',
+    departmentsSubtitle: 'Специализированные подразделения центра',
+    latestNews: 'Последние новости',
+    newsSubtitle: 'События и достижения центра',
+    centerInNumbers: 'Центр в цифрах',
+    numbersSubtitle: 'Факты и достижения нашего центра',
+    totalBeds: 'Общая вместимость коек',
+    plannedPlaces: 'Плановых мест',
+    childrenPlaces: 'Детских мест',
+    patientsPerYear: 'Пациентов в год'
   },
   
   en: {
