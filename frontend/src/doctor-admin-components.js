@@ -1327,11 +1327,186 @@ export const AdminPanel = () => {
                 </div>
               </div>
             )}
-              <div className="space-y-6">
-                <div className="bg-white rounded-lg shadow p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-6">Аналитика сайта</h2>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {activeTab === 'contacts' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Контакты и соцсети</h2>
+                
+                <form onSubmit={handleSiteSettingsSubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Телефоны (через запятую)
+                    </label>
+                    <input
+                      type="text"
+                      value={newSiteSettings.phones}
+                      onChange={(e) => setNewSiteSettings({...newSiteSettings, phones: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                      placeholder="+998 71 264-96-10, +998 71 264-96-09"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email адреса (через запятую)
+                    </label>
+                    <input
+                      type="text"
+                      value={newSiteSettings.emails}
+                      onChange={(e) => setNewSiteSettings({...newSiteSettings, emails: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                      placeholder="admin@neuro.uz, info@neuro.uz"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Адрес
+                    </label>
+                    <input
+                      type="text"
+                      value={newSiteSettings.address}
+                      onChange={(e) => setNewSiteSettings({...newSiteSettings, address: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Пн-Пт
+                      </label>
+                      <input
+                        type="text"
+                        value={newSiteSettings.workingHours.weekdays}
+                        onChange={(e) => setNewSiteSettings({
+                          ...newSiteSettings,
+                          workingHours: {...newSiteSettings.workingHours, weekdays: e.target.value}
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        placeholder="8:00 - 18:00"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Суббота
+                      </label>
+                      <input
+                        type="text"
+                        value={newSiteSettings.workingHours.saturday}
+                        onChange={(e) => setNewSiteSettings({
+                          ...newSiteSettings,
+                          workingHours: {...newSiteSettings.workingHours, saturday: e.target.value}
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        placeholder="9:00 - 15:00"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Воскресенье
+                      </label>
+                      <input
+                        type="text"
+                        value={newSiteSettings.workingHours.sunday}
+                        onChange={(e) => setNewSiteSettings({
+                          ...newSiteSettings,
+                          workingHours: {...newSiteSettings.workingHours, sunday: e.target.value}
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        placeholder="Выходной"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition-colors"
+                  >
+                    Сохранить изменения
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {activeTab === 'seo' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">SEO настройки</h2>
+                
+                <form onSubmit={handleSeoSettingsSubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Заголовок сайта
+                    </label>
+                    <input
+                      type="text"
+                      value={newSeoSettings.title}
+                      onChange={(e) => setNewSeoSettings({...newSeoSettings, title: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Описание сайта
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={newSeoSettings.description}
+                      onChange={(e) => setNewSeoSettings({...newSeoSettings, description: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Ключевые слова (через запятую)
+                    </label>
+                    <input
+                      type="text"
+                      value={newSeoSettings.keywords}
+                      onChange={(e) => setNewSeoSettings({...newSeoSettings, keywords: e.target.value})}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition-colors"
+                  >
+                    Сохранить изменения
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {activeTab === 'gallery' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Управление галереей</h2>
+                
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center mb-6">
+                  <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-600 mb-2">Перетащите изображения сюда или</p>
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg">
+                    Выберите файлы
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[1, 2, 3, 4].map(i => (
+                    <div key={i} className="relative">
+                      <img
+                        src={`https://images.unsplash.com/photo-${1500000000000 + i * 100000}?w=300&h=200&fit=crop`}
+                        alt={`Gallery ${i}`}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <button className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1">
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
                     <div className="p-4 bg-blue-50 rounded-lg">
                       <h3 className="font-semibold text-blue-900 mb-2">Посещения за месяц</h3>
                       <p className="text-3xl font-bold text-blue-600">24,567</p>
