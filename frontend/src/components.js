@@ -1076,9 +1076,9 @@ export const ContactPage = () => {
                     <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Адрес</h3>
-                      <p className="text-gray-600">
+                    <div className="text-left flex-1">
+                      <h3 className="font-semibold text-gray-900 mb-1 text-left">Адрес</h3>
+                      <p className="text-gray-600 text-left">
                         ул. Хумоюн, 40, Мирзо-Улугбекский район,<br />
                         г. Ташкент, 100142, Республика Узбекистан
                       </p>
@@ -1089,9 +1089,9 @@ export const ContactPage = () => {
                     <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Phone className="w-6 h-6 text-white" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Телефоны</h3>
-                      <p className="text-gray-600">
+                    <div className="text-left flex-1">
+                      <h3 className="font-semibold text-gray-900 mb-1 text-left">Телефоны</h3>
+                      <p className="text-gray-600 text-left">
                         Приемная: +998 71 264-96-10<br />
                         Регистратура: +998 71 264-96-09<br />
                         Экстренная помощь: +998 78 113-33-78
@@ -1103,9 +1103,9 @@ export const ContactPage = () => {
                     <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Mail className="w-6 h-6 text-white" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                      <p className="text-gray-600">
+                    <div className="text-left flex-1">
+                      <h3 className="font-semibold text-gray-900 mb-1 text-left">Email</h3>
+                      <p className="text-gray-600 text-left">
                         admin@neuro.uz<br />
                         info@neuro.uz
                       </p>
@@ -1116,9 +1116,9 @@ export const ContactPage = () => {
                     <div className="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Clock className="w-6 h-6 text-white" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Режим работы</h3>
-                      <p className="text-gray-600">
+                    <div className="text-left flex-1">
+                      <h3 className="font-semibold text-gray-900 mb-1 text-left">Режим работы</h3>
+                      <p className="text-gray-600 text-left">
                         Понедельник - Пятница: 8:00 - 18:00<br />
                         Суббота: 9:00 - 15:00<br />
                         Воскресенье: Выходной<br />
