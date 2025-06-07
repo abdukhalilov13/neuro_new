@@ -312,6 +312,20 @@ export const AdminPanel = () => {
               Войти
             </button>
           </form>
+
+          <div className="mt-6 p-4 bg-purple-50 rounded-lg">
+            <p className="text-sm text-purple-700">
+              <strong>🔑 Тестовый доступ:</strong><br />
+              Email: admin@neuro.uz<br />
+              Пароль: admin123
+            </p>
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link to="/" className="text-purple-600 hover:text-purple-700">
+              Вернуться на главную
+            </Link>
+          </div>
         </motion.div>
       </div>
     );
