@@ -529,7 +529,7 @@ export const HomePage = () => {
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{news.title}</h3>
                   <p className="text-gray-600 mb-4">{news.excerpt}</p>
                   <Link
-                    to="/news"
+                    to={`/news/${news.id}`}
                     className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center"
                   >
                     Читать далее <ChevronRight className="w-4 h-4 ml-1" />
