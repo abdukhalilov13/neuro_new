@@ -220,49 +220,6 @@ export const HomePage = () => {
             </motion.div>
           </div>
         </div>
-
-        {/* Contact Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-        >
-          <div className="flex flex-wrap justify-center gap-4">
-            {/* Телефон */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 flex items-center space-x-3 shadow-lg">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Phone className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Связаться с нами</p>
-                <p className="font-semibold text-gray-900">{siteData.hero.phone}</p>
-              </div>
-            </div>
-
-            {/* Адрес */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 flex items-center space-x-3 shadow-lg">
-              <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-                <MapPin className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Адрес</p>
-                <p className="font-semibold text-gray-900">ул. Хумоюн, 40</p>
-              </div>
-            </div>
-
-            {/* Экстренная помощь */}
-            <div className="bg-red-500/90 backdrop-blur-sm rounded-xl p-4 flex items-center space-x-3 shadow-lg text-white">
-              <div className="w-12 h-12 bg-red-700 rounded-lg flex items-center justify-center">
-                <Heart className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <p className="text-sm text-red-100">Экстренная помощь 24/7</p>
-                <p className="font-semibold">{siteData.hero.emergency}</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </section>
 
       {/* Statistics Section */}
