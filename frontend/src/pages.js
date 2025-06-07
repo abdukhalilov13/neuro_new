@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
 import { Header, Footer, ServiceCard } from './enhanced-components';
-import { siteData } from './components-fixed';
+import { siteData } from './components';
 
 // Отделения
 export const DepartmentsPage = () => {
