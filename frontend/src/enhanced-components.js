@@ -360,7 +360,7 @@ const Footer = () => {
               />
               <h3 className="text-xl font-bold">NEURO.UZ</h3>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed mb-4">
+            <p className="text-gray-300 text-sm leading-relaxed mb-4 text-left">
               {t('footerDescription')}
             </p>
             {/* Social Media */}
