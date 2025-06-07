@@ -4,16 +4,17 @@ import "./App.css";
 import { LanguageProvider, AdminProvider } from "./contexts";
 import {
   HomePage,
-  AboutPage,
+  AboutPage
+} from "./components";
+import {
   DepartmentsPage,
   DoctorsPage,
   ServicesPage,
   NewsPage,
   ContactPage,
-  AppointmentPage,
-  DoctorDashboard,
-  AdminPanel
-} from "./components";
+  AppointmentPage
+} from "./pages";
+import { DoctorDashboard, AdminPanel } from "./doctor-admin-components";
 import { TestAccountsPage } from "./TestAccounts";
 import { VacanciesPage, GalleryPage } from "./AdditionalPages";
 import { NewsDetailPage } from "./NewsDetail";
