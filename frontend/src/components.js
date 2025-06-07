@@ -1036,8 +1036,1014 @@ export const ContactPage = () => {
   );
 };
 
-// Главная страница
-export const HomePage = () => {
+// Запись на прием
+export const AppointmentPage = () => {
+  const [step, setStep] = useState(1);
+  const [appointmentData, setAppointmentData] = useState({
+    department: '',
+    doctor: '',
+    date: '',
+    time: '',
+    patient: {
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: '',
+      birthDate: '',
+      address: ''
+    },
+    complaint: ''
+  });
+
+  const timeSlots = [
+    '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+    '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Ваша заявка принята! Мы свяжемся с вами для подтверждения записи.');
+    setStep(4);
+  };
+
+  return (
+    <div className="min-h-screen">
+      <Header />
+      
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8"
+          >
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Запись на прием</h1>
+            <p className="text-xl text-gray-600">
+              Выберите удобное время для консультации с нашими специалистами
+            </p>
+          </motion.div>
+
+          {/* Прогресс-бар */}
+          <div className="mb-8">
+            <div className="flex items-center justify-center">
+              {[1, 2, 3].map((stepNumber) => (
+                <div key={stepNumber} className="flex items-center">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
+                    step >= stepNumber ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-600'
+                  }`}>
+                    {stepNumber}
+                  </div>
+                  {stepNumber < 3 && (
+                    <div className={`w-16 h-1 mx-2 ${
+                      step > stepNumber ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}></div>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-center mt-2 text-sm text-gray-600">
+              <div className="grid grid-cols-3 gap-8 text-center">
+                <span>Выбор врача</span>
+                <span>Дата и время</span>
+                <span>Личные данные</span>
+              </div>
+            </div>
+          </div>
+
+          <motion.div
+            key={step}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-white rounded-2xl p-8 shadow-lg"
+          >
+            {step === 1 && (
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Выберите отделение и врача</h2>
+                
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                      Отделение
+                    </label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {siteData.departments.slice(0, 4).map((dept) => (
+                        <button
+                          key={dept.id}
+                          onClick={() => setAppointmentData({...appointmentData, department: dept.name})}
+                          className={`p-4 text-left border-2 rounded-lg transition-colors ${
+                            appointmentData.department === dept.name
+                              ? 'border-blue-500 bg-blue-50'
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <h3 className="font-medium text-gray-900">{dept.name}</h3>
+                          <p className="text-sm text-gray-600 mt-1">{dept.description}</p>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {appointmentData.department && (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        Врач
+                      </label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {siteData.doctors.map((doctor) => (
+                          <button
+                            key={doctor.id}
+                            onClick={() => setAppointmentData({...appointmentData, doctor: doctor.name})}
+                            className={`p-4 text-left border-2 rounded-lg transition-colors ${
+                              appointmentData.doctor === doctor.name
+                                ? 'border-blue-500 bg-blue-50'
+                                : 'border-gray-200 hover:border-gray-300'
+                            }`}
+                          >
+                            <div className="flex items-center space-x-3">
+                              <img
+                                src={doctor.image}
+                                alt={doctor.name}
+                                className="w-12 h-12 rounded-full object-cover"
+                              />
+                              <div>
+                                <h3 className="font-medium text-gray-900">{doctor.name}</h3>
+                                <p className="text-sm text-gray-600">{doctor.specialization}</p>
+                              </div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => setStep(2)}
+                      disabled={!appointmentData.department || !appointmentData.doctor}
+                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                    >
+                      Далее
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Выберите дату и время</h2>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                      Дата приема
+                    </label>
+                    <input
+                      type="date"
+                      value={appointmentData.date}
+                      onChange={(e) => setAppointmentData({...appointmentData, date: e.target.value})}
+                      min={new Date().toISOString().split('T')[0]}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  {appointmentData.date && (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        Время приема
+                      </label>
+                      <div className="grid grid-cols-3 gap-2">
+                        {timeSlots.map((time) => (
+                          <button
+                            key={time}
+                            onClick={() => setAppointmentData({...appointmentData, time})}
+                            className={`p-3 text-center border-2 rounded-lg transition-colors ${
+                              appointmentData.time === time
+                                ? 'border-blue-500 bg-blue-50'
+                                : 'border-gray-200 hover:border-gray-300'
+                            }`}
+                          >
+                            {time}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex justify-between mt-8">
+                  <button
+                    onClick={() => setStep(1)}
+                    className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-8 py-3 rounded-lg font-medium transition-colors"
+                  >
+                    Назад
+                  </button>
+                  <button
+                    onClick={() => setStep(3)}
+                    disabled={!appointmentData.date || !appointmentData.time}
+                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                  >
+                    Далее
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {step === 3 && (
+              <form onSubmit={handleSubmit}>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Личные данные</h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Имя *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={appointmentData.patient.firstName}
+                      onChange={(e) => setAppointmentData({
+                        ...appointmentData,
+                        patient: {...appointmentData.patient, firstName: e.target.value}
+                      })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Фамилия *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={appointmentData.patient.lastName}
+                      onChange={(e) => setAppointmentData({
+                        ...appointmentData,
+                        patient: {...appointmentData.patient, lastName: e.target.value}
+                      })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Телефон *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={appointmentData.patient.phone}
+                      onChange={(e) => setAppointmentData({
+                        ...appointmentData,
+                        patient: {...appointmentData.patient, phone: e.target.value}
+                      })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder="+998 __ ___-__-__"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      value={appointmentData.patient.email}
+                      onChange={(e) => setAppointmentData({
+                        ...appointmentData,
+                        patient: {...appointmentData.patient, email: e.target.value}
+                      })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Дата рождения *
+                    </label>
+                    <input
+                      type="date"
+                      required
+                      value={appointmentData.patient.birthDate}
+                      onChange={(e) => setAppointmentData({
+                        ...appointmentData,
+                        patient: {...appointmentData.patient, birthDate: e.target.value}
+                      })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Адрес
+                    </label>
+                    <input
+                      type="text"
+                      value={appointmentData.patient.address}
+                      onChange={(e) => setAppointmentData({
+                        ...appointmentData,
+                        patient: {...appointmentData.patient, address: e.target.value}
+                      })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Жалобы и симптомы
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={appointmentData.complaint}
+                    onChange={(e) => setAppointmentData({...appointmentData, complaint: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="Опишите ваши жалобы и симптомы"
+                  />
+                </div>
+
+                <div className="flex justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setStep(2)}
+                    className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-8 py-3 rounded-lg font-medium transition-colors"
+                  >
+                    Назад
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                  >
+                    Записаться на прием
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {step === 4 && (
+              <div className="text-center">
+                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Заявка принята!</h2>
+                <p className="text-gray-600 mb-6">
+                  Мы получили вашу заявку на прием к врачу. Наш администратор свяжется с вами 
+                  в ближайшее время для подтверждения записи.
+                </p>
+                <div className="bg-blue-50 p-6 rounded-lg mb-6">
+                  <h3 className="font-semibold text-gray-900 mb-2">Детали записи:</h3>
+                  <p><strong>Врач:</strong> {appointmentData.doctor}</p>
+                  <p><strong>Дата:</strong> {appointmentData.date}</p>
+                  <p><strong>Время:</strong> {appointmentData.time}</p>
+                  <p><strong>Пациент:</strong> {appointmentData.patient.firstName} {appointmentData.patient.lastName}</p>
+                </div>
+                <Link
+                  to="/"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                >
+                  Вернуться на главную
+                </Link>
+              </div>
+            )}
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+// Кабинет врача
+export const DoctorDashboard = () => {
+  const [activeTab, setActiveTab] = useState('appointments');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Простая проверка для демо
+    if (loginData.email === 'doctor@neuro.uz' && loginData.password === 'demo123') {
+      setIsAuthenticated(true);
+    } else {
+      alert('Неверный email или пароль. Попробуйте: doctor@neuro.uz / demo123');
+    }
+  };
+
+  const mockAppointments = [
+    {
+      id: 1,
+      date: '2025-03-20',
+      time: '09:00',
+      patient: 'Иванов Алексей Петрович',
+      phone: '+998 90 123-45-67',
+      status: 'confirmed',
+      complaint: 'Головные боли'
+    },
+    {
+      id: 2,
+      date: '2025-03-20',
+      time: '10:30',
+      patient: 'Петрова Мария Ивановна',
+      phone: '+998 91 234-56-78',
+      status: 'pending',
+      complaint: 'Онемение в руке'
+    },
+    {
+      id: 3,
+      date: '2025-03-21',
+      time: '14:00',
+      patient: 'Сидоров Владимир Николаевич',
+      phone: '+998 93 345-67-89',
+      status: 'confirmed',
+      complaint: 'Боли в спине'
+    }
+  ];
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-white rounded-2xl p-8 shadow-lg max-w-md w-full mx-4"
+        >
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <User className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900">Вход в кабинет врача</h1>
+            <p className="text-gray-600 mt-2">Введите ваши учетные данные</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                required
+                value={loginData.email}
+                onChange={(e) => setLoginData({...loginData, email: e.target.value})}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="doctor@neuro.uz"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Пароль
+              </label>
+              <input
+                type="password"
+                required
+                value={loginData.password}
+                onChange={(e) => setLoginData({...loginData, password: e.target.value})}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="demo123"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+            >
+              Войти
+            </button>
+          </form>
+
+          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+            <p className="text-sm text-blue-700">
+              <strong>Демо доступ:</strong><br />
+              Email: doctor@neuro.uz<br />
+              Пароль: demo123
+            </p>
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link to="/" className="text-blue-600 hover:text-blue-700">
+              Вернуться на главную
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Link to="/" className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-xl font-bold text-gray-900">NEURO.UZ</span>
+              </Link>
+              <span className="text-gray-400">|</span>
+              <h1 className="text-xl font-semibold text-gray-900">Кабинет врача</h1>
+            </div>
+            <button
+              onClick={() => setIsAuthenticated(false)}
+              className="text-gray-600 hover:text-gray-900 font-medium"
+            >
+              Выйти
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Боковое меню */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow p-6">
+              <div className="flex items-center space-x-3 mb-6">
+                <img
+                  src={siteData.doctors[0].image}
+                  alt="Врач"
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <h3 className="font-semibold text-gray-900">Д-р Кариев</h3>
+                  <p className="text-sm text-gray-600">Нейрохирург</p>
+                </div>
+              </div>
+
+              <nav className="space-y-2">
+                <button
+                  onClick={() => setActiveTab('appointments')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                    activeTab === 'appointments' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Записи пациентов
+                </button>
+                <button
+                  onClick={() => setActiveTab('schedule')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                    activeTab === 'schedule' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Расписание
+                </button>
+                <button
+                  onClick={() => setActiveTab('patients')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                    activeTab === 'patients' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Пациенты
+                </button>
+              </nav>
+            </div>
+          </div>
+
+          {/* Основной контент */}
+          <div className="lg:col-span-3">
+            {activeTab === 'appointments' && (
+              <div className="bg-white rounded-lg shadow">
+                <div className="p-6 border-b">
+                  <h2 className="text-xl font-semibold text-gray-900">Записи пациентов</h2>
+                </div>
+                <div className="p-6">
+                  <div className="space-y-4">
+                    {mockAppointments.map((appointment) => (
+                      <div key={appointment.id} className="border rounded-lg p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-4 mb-2">
+                              <span className="font-medium text-gray-900">{appointment.patient}</span>
+                              <span className={`px-2 py-1 rounded text-xs font-medium ${
+                                appointment.status === 'confirmed' 
+                                  ? 'bg-green-100 text-green-800' 
+                                  : 'bg-yellow-100 text-yellow-800'
+                              }`}>
+                                {appointment.status === 'confirmed' ? 'Подтверждено' : 'Ожидает'}
+                              </span>
+                            </div>
+                            <div className="text-sm text-gray-600 space-y-1">
+                              <p><Calendar className="w-4 h-4 inline mr-2" />{appointment.date} в {appointment.time}</p>
+                              <p><Phone className="w-4 h-4 inline mr-2" />{appointment.phone}</p>
+                              <p><FileText className="w-4 h-4 inline mr-2" />{appointment.complaint}</p>
+                            </div>
+                          </div>
+                          <div className="space-x-2">
+                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">
+                              Принять
+                            </button>
+                            <button className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-3 py-1 rounded text-sm">
+                              Отменить
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'schedule' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Расписание работы</h2>
+                <div className="space-y-4">
+                  {['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'].map((day, index) => (
+                    <div key={day} className="flex items-center justify-between p-4 border rounded-lg">
+                      <span className="font-medium text-gray-900">{day}</span>
+                      <span className="text-gray-600">09:00 - 17:00</span>
+                    </div>
+                  ))}
+                  <div className="flex items-center justify-between p-4 border rounded-lg bg-gray-50">
+                    <span className="font-medium text-gray-900">Воскресенье</span>
+                    <span className="text-gray-600">Выходной</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'patients' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">База пациентов</h2>
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    placeholder="Поиск пациентов..."
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="space-y-3">
+                  {mockAppointments.map((appointment) => (
+                    <div key={appointment.id} className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                      <div>
+                        <h3 className="font-medium text-gray-900">{appointment.patient}</h3>
+                        <p className="text-sm text-gray-600">{appointment.phone}</p>
+                      </div>
+                      <button className="text-blue-600 hover:text-blue-700 text-sm">
+                        Просмотреть карту
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Админ-панель
+export const AdminPanel = () => {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (loginData.email === 'admin@neuro.uz' && loginData.password === 'admin123') {
+      setIsAuthenticated(true);
+    } else {
+      alert('Неверный email или пароль. Попробуйте: admin@neuro.uz / admin123');
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-white rounded-2xl p-8 shadow-lg max-w-md w-full mx-4"
+        >
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Settings className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900">Вход в админ-панель</h1>
+            <p className="text-gray-600 mt-2">Только для администраторов</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                required
+                value={loginData.email}
+                onChange={(e) => setLoginData({...loginData, email: e.target.value})}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                placeholder="admin@neuro.uz"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Пароль
+              </label>
+              <input
+                type="password"
+                required
+                value={loginData.password}
+                onChange={(e) => setLoginData({...loginData, password: e.target.value})}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                placeholder="admin123"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+            >
+              Войти в систему
+            </button>
+          </form>
+
+          <div className="mt-6 p-4 bg-purple-50 rounded-lg">
+            <p className="text-sm text-purple-700">
+              <strong>Демо доступ:</strong><br />
+              Email: admin@neuro.uz<br />
+              Пароль: admin123
+            </p>
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link to="/" className="text-purple-600 hover:text-purple-700">
+              Вернуться на главную
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Link to="/" className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg flex items-center justify-center">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-xl font-bold text-gray-900">NEURO.UZ</span>
+              </Link>
+              <span className="text-gray-400">|</span>
+              <h1 className="text-xl font-semibold text-gray-900">Админ-панель</h1>
+            </div>
+            <button
+              onClick={() => setIsAuthenticated(false)}
+              className="text-gray-600 hover:text-gray-900 font-medium"
+            >
+              Выйти
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Боковое меню */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow p-6">
+              <nav className="space-y-2">
+                <button
+                  onClick={() => setActiveTab('dashboard')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'dashboard' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <BarChart3 className="w-4 h-4" />
+                  <span>Панель управления</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('doctors')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'doctors' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Users className="w-4 h-4" />
+                  <span>Врачи</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('news')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'news' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>Новости и блог</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('gallery')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'gallery' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <ImageIcon className="w-4 h-4" />
+                  <span>Галерея</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('seo')}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+                    activeTab === 'seo' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <Search className="w-4 h-4" />
+                  <span>SEO настройки</span>
+                </button>
+              </nav>
+            </div>
+          </div>
+
+          {/* Основной контент */}
+          <div className="lg:col-span-3">
+            {activeTab === 'dashboard' && (
+              <div className="space-y-6">
+                {/* Статистика */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-white rounded-lg shadow p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Записей сегодня</h3>
+                    <p className="text-3xl font-bold text-blue-600">12</p>
+                  </div>
+                  <div className="bg-white rounded-lg shadow p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Активных врачей</h3>
+                    <p className="text-3xl font-bold text-green-600">8</p>
+                  </div>
+                  <div className="bg-white rounded-lg shadow p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Новых пациентов</h3>
+                    <p className="text-3xl font-bold text-purple-600">5</p>
+                  </div>
+                </div>
+
+                {/* Последние действия */}
+                <div className="bg-white rounded-lg shadow p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Последние действия</h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                      <span>Новая запись: Иванов А.П.</span>
+                      <span className="text-sm text-gray-600">10:30</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                      <span>Обновлена информация о враче</span>
+                      <span className="text-sm text-gray-600">09:15</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                      <span>Добавлена новость</span>
+                      <span className="text-sm text-gray-600">08:45</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'doctors' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900">Управление врачами</h2>
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg">
+                    Добавить врача
+                  </button>
+                </div>
+                <div className="space-y-4">
+                  {siteData.doctors.map((doctor) => (
+                    <div key={doctor.id} className="flex items-center justify-between p-4 border rounded-lg">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          src={doctor.image}
+                          alt={doctor.name}
+                          className="w-12 h-12 rounded-full object-cover"
+                        />
+                        <div>
+                          <h3 className="font-medium text-gray-900">{doctor.name}</h3>
+                          <p className="text-sm text-gray-600">{doctor.specialization}</p>
+                        </div>
+                      </div>
+                      <div className="space-x-2">
+                        <button className="text-blue-600 hover:text-blue-700 text-sm">Редактировать</button>
+                        <button className="text-red-600 hover:text-red-700 text-sm">Удалить</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'news' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900">Управление новостями</h2>
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg">
+                    Добавить новость
+                  </button>
+                </div>
+                <div className="space-y-4">
+                  {siteData.news.map((news) => (
+                    <div key={news.id} className="flex items-center justify-between p-4 border rounded-lg">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          src={news.image}
+                          alt={news.title}
+                          className="w-16 h-16 rounded object-cover"
+                        />
+                        <div>
+                          <h3 className="font-medium text-gray-900">{news.title}</h3>
+                          <p className="text-sm text-gray-600">{news.date}</p>
+                        </div>
+                      </div>
+                      <div className="space-x-2">
+                        <button className="text-blue-600 hover:text-blue-700 text-sm">Редактировать</button>
+                        <button className="text-red-600 hover:text-red-700 text-sm">Удалить</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'gallery' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900">Галерея</h2>
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg">
+                    Загрузить изображение
+                  </button>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[1,2,3,4,5,6,7,8].map((item) => (
+                    <div key={item} className="relative group">
+                      <div className="w-full h-32 bg-gray-200 rounded-lg"></div>
+                      <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                        <button className="text-white text-sm">Удалить</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'seo' && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">SEO настройки</h2>
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Заголовок сайта
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                      defaultValue="Республиканский Научный Центр Нейрохирургии"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Описание сайта
+                    </label>
+                    <textarea
+                      rows={3}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                      defaultValue="Ведущий центр нейрохирургии в Узбекистане. Современные методы лечения заболеваний нервной системы."
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Ключевые слова
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                      defaultValue="нейрохирургия, мозг, операции, Ташкент, Узбекистан"
+                    />
+                  </div>
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg">
+                    Сохранить настройки
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
   return (
     <div className="min-h-screen">
       <Header />
