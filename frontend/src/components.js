@@ -379,6 +379,663 @@ const Footer = () => {
   );
 };
 
+// О центре
+export const AboutPage = () => {
+  return (
+    <div className="min-h-screen">
+      <Header />
+      
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">О центре</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Республиканский Научный Центр Нейрохирургии - ведущее медицинское учреждение 
+              Центральной Азии в области нейрохирургии
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <img
+                src="https://images.unsplash.com/photo-1490351267196-b7a67e26e41b"
+                alt="Здание центра"
+                className="rounded-2xl shadow-2xl"
+              />
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <h2 className="text-3xl font-bold text-gray-900">История и миссия</h2>
+              <p className="text-gray-600 leading-relaxed">
+                В 1997 году был основан Республиканский Научный Центр Нейрохирургии при 
+                Министерстве Здравоохранения Республики Узбекистан. Центр был создан 
+                профессором Маратом Хикматовичем Кариевым, выдающимся специалистом 
+                в области здравоохранения страны.
+              </p>
+              <p className="text-gray-600 leading-relaxed">
+                Сегодня центр является ведущим учреждением нейрохирургии в регионе, 
+                предоставляющим высококачественную медицинскую помощь пациентам из 
+                Узбекистана и соседних стран.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-blue-50 p-4 rounded-xl">
+                  <h4 className="font-semibold text-gray-900 mb-2">Год основания</h4>
+                  <p className="text-2xl font-bold text-blue-600">1997</p>
+                </div>
+                <div className="bg-green-50 p-4 rounded-xl">
+                  <h4 className="font-semibold text-gray-900 mb-2">Пациентов в год</h4>
+                  <p className="text-2xl font-bold text-green-600">5000+</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Достижения */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="bg-white rounded-2xl p-8 shadow-lg mb-16"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Наши достижения</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Передовые технологии</h3>
+                <p className="text-gray-600">Использование современного оборудования и инновационных методов лечения</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Опытная команда</h3>
+                <p className="text-gray-600">Высококвалифицированные специалисты с многолетним опытом</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Heart className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Забота о пациентах</h3>
+                <p className="text-gray-600">Индивидуальный подход и комплексная реабилитация</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+// Отделения
+export const DepartmentsPage = () => {
+  return (
+    <div className="min-h-screen">
+      <Header />
+      
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">Отделения центра</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Семь специализированных отделений с передовыми технологиями и опытными специалистами
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {siteData.departments.map((dept, index) => (
+              <motion.div
+                key={dept.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2"
+              >
+                <div className="flex items-start space-x-6">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${dept.color} rounded-2xl flex items-center justify-center flex-shrink-0`}>
+                    <dept.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{dept.name}</h3>
+                    <p className="text-gray-600 mb-4">{dept.description}</p>
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-gray-900">Основные услуги:</h4>
+                      <ul className="text-sm text-gray-600 space-y-1">
+                        <li>• Диагностика и консультации</li>
+                        <li>• Хирургическое лечение</li>
+                        <li>• Послеоперационная реабилитация</li>
+                        <li>• Амбулаторное наблюдение</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+// Врачи
+export const DoctorsPage = () => {
+  return (
+    <div className="min-h-screen">
+      <Header />
+      
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">Наши врачи</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Команда высококвалифицированных специалистов с многолетним опытом
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {siteData.doctors.map((doctor, index) => (
+              <motion.div
+                key={doctor.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2"
+              >
+                <img
+                  src={doctor.image}
+                  alt={doctor.name}
+                  className="w-full h-64 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{doctor.name}</h3>
+                  <p className="text-blue-600 font-medium mb-3">{doctor.specialization}</p>
+                  <p className="text-gray-600 mb-4">{doctor.experience}</p>
+                  
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center space-x-2 text-sm">
+                      <Mail className="w-4 h-4 text-gray-400" />
+                      <span className="text-gray-600">{doctor.email}</span>
+                    </div>
+                    <div className="flex items-center space-x-2 text-sm">
+                      <Phone className="w-4 h-4 text-gray-400" />
+                      <span className="text-gray-600">{doctor.phone}</span>
+                    </div>
+                    <div className="flex items-center space-x-2 text-sm">
+                      <Clock className="w-4 h-4 text-gray-400" />
+                      <span className="text-gray-600">{doctor.reception}</span>
+                    </div>
+                  </div>
+
+                  <Link
+                    to="/appointment"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors text-center block"
+                  >
+                    Записаться на прием
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+// Услуги
+export const ServicesPage = () => {
+  const services = [
+    {
+      title: "Диагностические услуги",
+      description: "Комплексная диагностика заболеваний нервной системы",
+      image: "https://images.unsplash.com/photo-1526930382372-67bf22c0fce2",
+      items: [
+        "Компьютерная томография (КТ)",
+        "Магнитно-резонансная томография (МРТ)",
+        "Ангиография сосудов головного мозга",
+        "Электроэнцефалография (ЭЭГ)",
+        "Ультразвуковое исследование"
+      ]
+    },
+    {
+      title: "Хирургические операции",
+      description: "Современные методы нейрохирургического лечения",
+      image: "https://images.unsplash.com/photo-1579165466991-467135ad3110",
+      items: [
+        "Удаление опухолей головного и спинного мозга",
+        "Лечение аневризм и АВМ",
+        "Операции на позвоночнике",
+        "Эндоскопические вмешательства",
+        "Стереотаксические операции"
+      ]
+    },
+    {
+      title: "Реабилитация",
+      description: "Комплексная программа восстановления",
+      image: "https://images.unsplash.com/photo-1512678080530-7760d81faba6",
+      items: [
+        "Физиотерапия",
+        "Лечебная физкультура",
+        "Логопедическая реабилитация",
+        "Психологическая поддержка",
+        "Социальная адаптация"
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen">
+      <Header />
+      
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">Наши услуги</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Полный спектр медицинских услуг в области нейрохирургии
+            </p>
+          </motion.div>
+
+          <div className="space-y-12">
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl overflow-hidden shadow-lg"
+              >
+                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+                  <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-64 lg:h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8 flex flex-col justify-center">
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4">{service.title}</h2>
+                    <p className="text-gray-600 mb-6">{service.description}</p>
+                    <ul className="space-y-2 mb-6">
+                      {service.items.map((item, itemIndex) => (
+                        <li key={itemIndex} className="flex items-center space-x-3">
+                          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                          <span className="text-gray-700">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      to="/appointment"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors inline-block w-fit"
+                    >
+                      Записаться на консультацию
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+// Новости
+export const NewsPage = () => {
+  return (
+    <div className="min-h-screen">
+      <Header />
+      
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">Новости и события</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Последние новости, достижения и события нашего центра
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Основные новости */}
+            <div className="lg:col-span-2 space-y-8">
+              {siteData.news.map((news, index) => (
+                <motion.article
+                  key={news.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                >
+                  <div className="md:flex">
+                    <div className="md:w-1/3">
+                      <img
+                        src={news.image}
+                        alt={news.title}
+                        className="w-full h-48 md:h-full object-cover"
+                      />
+                    </div>
+                    <div className="md:w-2/3 p-6">
+                      <p className="text-sm text-blue-600 mb-2">{news.date}</p>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-3">{news.title}</h2>
+                      <p className="text-gray-600 mb-4">{news.excerpt}</p>
+                      <p className="text-gray-700 mb-4">{news.content}</p>
+                      <button className="text-blue-600 hover:text-blue-700 font-medium">
+                        Читать полностью
+                      </button>
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+
+            {/* Боковая панель */}
+            <div className="space-y-8">
+              {/* Последние события */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-6 shadow-lg"
+              >
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Ближайшие события</h3>
+                <div className="space-y-4">
+                  <div className="border-l-4 border-blue-600 pl-4">
+                    <p className="text-sm text-blue-600 mb-1">25 марта 2025</p>
+                    <p className="text-gray-900 font-medium">Научная конференция по нейрохирургии</p>
+                  </div>
+                  <div className="border-l-4 border-green-600 pl-4">
+                    <p className="text-sm text-green-600 mb-1">30 марта 2025</p>
+                    <p className="text-gray-900 font-medium">День открытых дверей</p>
+                  </div>
+                  <div className="border-l-4 border-purple-600 pl-4">
+                    <p className="text-sm text-purple-600 mb-1">5 апреля 2025</p>
+                    <p className="text-gray-900 font-medium">Мастер-класс по эндоскопии</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Контакты */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="bg-blue-600 rounded-2xl p-6 text-white"
+              >
+                <h3 className="text-xl font-bold mb-4">Нужна консультация?</h3>
+                <p className="mb-4">Свяжитесь с нами для получения профессиональной медицинской помощи</p>
+                <Link
+                  to="/appointment"
+                  className="bg-white text-blue-600 hover:bg-gray-100 px-4 py-2 rounded-lg font-medium transition-colors block text-center"
+                >
+                  Записаться на прием
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+// Контакты
+export const ContactPage = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+    setFormData({ name: '', email: '', phone: '', message: '' });
+  };
+
+  return (
+    <div className="min-h-screen">
+      <Header />
+      
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">Контакты</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Свяжитесь с нами для получения консультации или записи на прием
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Контактная информация */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-8"
+            >
+              <div className="bg-white rounded-2xl p-8 shadow-lg">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Контактная информация</h2>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-1">Адрес</h3>
+                      <p className="text-gray-600">
+                        ул. Хумоюн, 40, Мирзо-Улугбекский район,<br />
+                        г. Ташкент, 100142, Республика Узбекистан
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-1">Телефоны</h3>
+                      <p className="text-gray-600">
+                        Приемная: +998 71 264-96-10<br />
+                        Регистратура: +998 71 264-96-09<br />
+                        Экстренная помощь: +998 78 113-33-78
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
+                      <p className="text-gray-600">
+                        admin@neuro.uz<br />
+                        info@neuro.uz
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-1">Режим работы</h3>
+                      <p className="text-gray-600">
+                        Понедельник - Пятница: 8:00 - 18:00<br />
+                        Суббота: 9:00 - 15:00<br />
+                        Воскресенье: Выходной<br />
+                        <span className="text-red-600 font-medium">Экстренная помощь: 24/7</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Форма обратной связи */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-white rounded-2xl p-8 shadow-lg"
+            >
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Написать нам</h2>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Ваше имя
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Введите ваше имя"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Введите ваш email"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Телефон
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="+998 __ ___-__-__"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Сообщение
+                  </label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Введите ваше сообщение"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                >
+                  Отправить сообщение
+                </button>
+              </form>
+            </motion.div>
+          </div>
+
+          {/* Карта */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Как нас найти</h2>
+              <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
+                <p className="text-gray-600">Интерактивная карта</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
 // Главная страница
 export const HomePage = () => {
   return (
