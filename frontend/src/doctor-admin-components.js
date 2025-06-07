@@ -1537,8 +1537,10 @@ export const AdminPanel = () => {
           </div>
         </div>
       </div>
+      </>
 
       {/* Модальное окно для услуг */}
+      <>
       <AnimatePresence>
         {isServiceModalOpen && (
           <motion.div
