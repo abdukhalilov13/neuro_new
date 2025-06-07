@@ -1238,12 +1238,26 @@ export const ContactPage = () => {
           >
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Как нас найти</h2>
-              <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-600">Интерактивная карта</p>
-                  <p className="text-sm text-gray-500 mt-1">ул. Хумоюн, 40, Ташкент</p>
-                </div>
+              <div className="rounded-lg overflow-hidden h-96">
+                <iframe 
+                  src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad4b9f7b1b5a1f7a8b4b8e7a7e5c4b7a1e9a5f2f3&amp;source=constructor" 
+                  width="100%" 
+                  height="100%" 
+                  frameBorder="0"
+                  style={{border: 0}}
+                  allowFullScreen
+                  title="Карта центра нейрохирургии"
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <MapPin className="w-4 h-4 inline mr-2" />
+                  ул. Хумоюн, 40, Мирзо-Улугбекский район, г. Ташкент, 100142
+                </p>
+                <p className="text-sm text-blue-700 mt-2">
+                  Ближайшие станции метро: "Чиланзар", "Ипподром"
+                </p>
               </div>
             </div>
           </motion.div>
