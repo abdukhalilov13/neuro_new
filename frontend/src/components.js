@@ -399,7 +399,7 @@ export const AboutPage = () => {
               viewport={{ once: true }}
             >
               <img
-                src="https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg"
+                src="https://images.unsplash.com/photo-1476889155166-39ae3886a3ef"
                 alt="Здание центра"
                 className="rounded-2xl shadow-2xl"
               />
