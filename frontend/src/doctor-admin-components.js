@@ -394,7 +394,10 @@ export const DoctorDashboard = () => {
                           </div>
                         </div>
                         <div className="flex space-x-2">
-                          <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">
+                          <button 
+                            onClick={() => handleAppointmentAction(appointment.id, 'view')}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm"
+                          >
                             Просмотр
                           </button>
                         </div>
