@@ -410,8 +410,8 @@ export const HomePage = () => {
   );
 };
 
-// Экспорт общих компонентов и данных
-export { Header, Footer, siteData };
+// Экспорт всех компонентов
+export { Header, Footer, siteData, DoctorDashboard, AdminPanel };
 
 // О центре
 export const AboutPage = () => {
