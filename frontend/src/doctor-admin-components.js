@@ -830,6 +830,41 @@ export const AdminPanel = () => {
     ));
   };
 
+  // Функции для управления руководством
+  const handleLeadershipSubmit = (e) => {
+    e.preventDefault();
+    if (editingLeadership) {
+      setLeadership(leadership.map(leader => 
+        leader.id === editingLeadership.id ? { ...newLeadership, id: editingLeadership.id } : leader
+      ));
+      setEditingLeadership(null);
+    } else {
+      const newId = Math.max(...leadership.map(l => l.id)) + 1;
+      setLeadership([...leadership, { ...newLeadership, id: newId }]);
+    }
+    setNewLeadership({ name: '', position: '', image: '', email: '', phone: '', biography: '' });
+    setIsLeadershipModalOpen(false);
+  };
+
+  const startEditLeadership = (leader) => {
+    setEditingLeadership(leader);
+    setNewLeadership({
+      name: leader.name,
+      position: leader.position,
+      image: leader.image,
+      email: leader.email,
+      phone: leader.phone,
+      biography: leader.biography
+    });
+    setIsLeadershipModalOpen(true);
+  };
+
+  const deleteLeadership = (id) => {
+    if (window.confirm('Вы уверены, что хотите удалить этого руководителя?')) {
+      setLeadership(leadership.filter(leader => leader.id !== id));
+    }
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
     if (loginData.email === 'admin@neuro.uz' && loginData.password === 'admin123') {
