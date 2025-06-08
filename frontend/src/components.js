@@ -33,7 +33,7 @@ import {
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
 import { Header, Footer, ServiceCard } from './enhanced-components';
-import { DoctorDashboard, AdminPanel } from './doctor-admin-components';
+import { DoctorDashboard, AdminPanel, leadershipData, BiographyModal } from './doctor-admin-components';
 
 // Обновленные данные для сайта
 const siteData = {
