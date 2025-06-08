@@ -641,11 +641,42 @@ export const AboutPage = () => {
       </section>
 
       {/* Модальное окно биографии */}
-      <BiographyModal 
-        leader={selectedLeader}
-        isOpen={isBioModalOpen}
-        onClose={closeBioModal}
-      />
+      {isBioModalOpen && selectedLeader && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={closeBioModal}>
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="relative">
+              <button onClick={closeBioModal} className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 bg-white rounded-full shadow-lg z-10">
+                <X className="w-5 h-5" />
+              </button>
+              
+              <div className="p-8">
+                <div className="flex items-start space-x-6 mb-6">
+                  <img src={selectedLeader.image} alt={selectedLeader.name} className="w-24 h-24 rounded-full object-cover" />
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">{selectedLeader.name}</h2>
+                    <p className="text-lg text-blue-600 font-medium mb-3">{selectedLeader.position}</p>
+                    <div className="flex flex-col space-y-1 text-sm text-gray-600">
+                      <div className="flex items-center space-x-2">
+                        <Phone className="w-4 h-4" />
+                        <span>{selectedLeader.phone}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Mail className="w-4 h-4" />
+                        <span>{selectedLeader.email}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Биография</h3>
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">{selectedLeader.biography}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
