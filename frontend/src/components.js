@@ -39,7 +39,7 @@ import { DoctorDashboard, AdminPanel } from './doctor-admin-components';
 const siteData = {
   hero: {
     doctorImage: "https://images.unsplash.com/photo-1638202993928-7267aad84c31",
-    buildingImage: "https://neuro.uz/storage/uploads/page/large/30.06.2021/nnnn.jpg.1625052184.jpeg.1625058347.jpeg",
+    buildingImage: "/images/neuro-building.jpg",
     phone: "+998 71 264-96-10",
     emergency: "+998 78 113-33-78"
   },
