@@ -445,8 +445,6 @@ export const HomePage = () => {
 
 // Экспорт всех компонентов
 export { Header, Footer, siteData, DoctorDashboard, AdminPanel };
-
-// Компонент модального окна для биографии
 export const BiographyModal = ({ leader, isOpen, onClose }) => {
   if (!isOpen || !leader) return null;
 
