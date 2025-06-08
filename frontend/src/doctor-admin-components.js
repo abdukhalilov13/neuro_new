@@ -602,6 +602,7 @@ export const AdminPanel = () => {
     email: '', 
     phone: '', 
     biography: '' 
+  });
   const [selectedLeaderBio, setSelectedLeaderBio] = useState(null);
 
   const [newService, setNewService] = useState({ name: '', category: '', price: '', description: '' });
