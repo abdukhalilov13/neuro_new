@@ -545,32 +545,37 @@ export const AdminPanel = () => {
     keywords: 'нейрохирургия, мозг, спинной мозг, операции, Узбекистан, Ташкент'
   });
   const [galleryImages, setGalleryImages] = useState([
-    { id: 1, url: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c', alt: 'Центр 1' },
-    { id: 2, url: 'https://images.unsplash.com/photo-1526930382372-67bf22c0fce2', alt: 'Центр 2' },
-    { id: 3, url: 'https://images.unsplash.com/photo-1512678080530-7760d81faba6', alt: 'Центр 3' },
-    { id: 4, url: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc', alt: 'Центр 4' }
+    { id: 1, url: 'https://neuro.uz/storage/uploads/page/large/30.06.2021/nnnn.jpg.1625052184.jpeg.1625058347.jpeg', alt: 'Здание центра' },
+    { id: 2, url: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c', alt: 'Операционная' },
+    { id: 3, url: 'https://images.unsplash.com/photo-1512678080530-7760d81faba6', alt: 'Медицинское оборудование' },
+    { id: 4, url: 'https://images.unsplash.com/photo-1526930382372-67bf22c0fce2', alt: 'Консультация врача' }
   ]);
-  
-  const { t } = useLanguage();
-  const { 
-    adminData, 
-    updateSiteSettings, 
-    updateSeoSettings, 
-    addService, 
-    updateService, 
-    deleteService 
-  } = useAdmin();
+
+  // Иконки для отделений
+  const departmentIcons = {
+    Brain, Activity, Shield, Heart, Star, Search, Award, Building
+  };
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && adminData.siteSettings) {
       setNewSiteSettings({
-        phones: adminData.siteSettings.phones.join(', '),
-        emails: adminData.siteSettings.emails.join(', '),
-        address: adminData.siteSettings.address,
-        workingHours: adminData.siteSettings.workingHours,
-        socialMedia: adminData.siteSettings.socialMedia
+        phones: Array.isArray(adminData.siteSettings.phones) ? adminData.siteSettings.phones.join(', ') : adminData.siteSettings.phones || '',
+        emails: Array.isArray(adminData.siteSettings.emails) ? adminData.siteSettings.emails.join(', ') : adminData.siteSettings.emails || '',
+        address: adminData.siteSettings.address || '',
+        workingHours: adminData.siteSettings.workingHours || {
+          weekdays: '8:00 - 18:00',
+          saturday: '9:00 - 15:00',
+          sunday: 'Выходной'
+        },
+        socialMedia: adminData.siteSettings.socialMedia || {
+          facebook: 'https://facebook.com/neuro.uz',
+          instagram: 'https://instagram.com/neuro.uz',
+          youtube: 'https://youtube.com/@neuro.uz'
+        }
       });
-      setNewSeoSettings(adminData.seoSettings);
+      if (adminData.seoSettings) {
+        setNewSeoSettings(adminData.seoSettings);
+      }
     }
   }, [isAuthenticated, adminData]);
 
