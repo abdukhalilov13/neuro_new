@@ -967,27 +967,6 @@ export const AdminPanel = () => {
     alert('SEO настройки успешно обновлены!');
   };
 
-  const handleDepartmentSubmit = (e) => {
-    e.preventDefault();
-    alert('Отделение успешно добавлено!');
-    setIsDepartmentModalOpen(false);
-    setNewDepartment({ name: '', description: '', icon: 'Brain', color: 'from-blue-500 to-blue-600' });
-  };
-
-  const handleDoctorSubmit = (e) => {
-    e.preventDefault();
-    alert('Врач успешно добавлен!');
-    setIsDoctorModalOpen(false);
-    setNewDoctor({ name: '', specialization: '', experience: '', email: '', phone: '', reception: '', image: '' });
-  };
-
-  const handleNewsSubmit = (e) => {
-    e.preventDefault();
-    alert('Новость успешно добавлена!');
-    setIsNewsModalOpen(false);
-    setNewNews({ title: '', excerpt: '', content: '', image: '' });
-  };
-
   const removeGalleryImage = (id) => {
     setGalleryImages(galleryImages.filter(img => img.id !== id));
     alert('Изображение удалено из галереи!');
