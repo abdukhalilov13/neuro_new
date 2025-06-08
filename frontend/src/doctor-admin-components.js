@@ -753,169 +753,28 @@ export const AdminPanel = () => {
     }
   };
 
-  // Функции для управления отделениями
-  const handleDepartmentSubmit = (e) => {
+  const handleSiteSettingsSubmit = (e) => {
     e.preventDefault();
-    if (editingDepartment) {
-      setDepartments(departments.map(dept => 
-        dept.id === editingDepartment.id ? { ...newDepartment, id: editingDepartment.id } : dept
-      ));
-      setEditingDepartment(null);
-    } else {
-      const newId = Math.max(...departments.map(d => d.id)) + 1;
-      setDepartments([...departments, { ...newDepartment, id: newId }]);
-    }
-    setNewDepartment({ name: '', description: '', icon: 'Brain', color: 'from-blue-500 to-blue-600' });
-    setIsDepartmentModalOpen(false);
-  };
-
-  const startEditDepartment = (department) => {
-    setEditingDepartment(department);
-    setNewDepartment({ 
-      name: department.name, 
-      description: department.description, 
-      icon: department.icon,
-      color: department.color 
+    updateSiteSettings({
+      ...adminData.siteSettings,
+      phones: newSiteSettings.phones.split(',').map(p => p.trim()),
+      emails: newSiteSettings.emails.split(',').map(e => e.trim()),
+      address: newSiteSettings.address,
+      workingHours: newSiteSettings.workingHours,
+      socialMedia: newSiteSettings.socialMedia
     });
-    setIsDepartmentModalOpen(true);
+    alert('Настройки сайта успешно обновлены!');
   };
 
-  const deleteDepartment = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить это отделение?')) {
-      setDepartments(departments.filter(dept => dept.id !== id));
-      // Также удаляем связанных врачей или переводим их в "без отделения"
-      setDoctors(doctors.map(doctor => 
-        doctor.departmentId === id ? { ...doctor, departmentId: null } : doctor
-      ));
-    }
-  };
-
-  // Функции для управления врачами
-  const handleDoctorSubmit = (e) => {
+  const handleSeoSettingsSubmit = (e) => {
     e.preventDefault();
-    if (editingDoctor) {
-      setDoctors(doctors.map(doctor => 
-        doctor.id === editingDoctor.id ? { ...newDoctor, id: editingDoctor.id } : doctor
-      ));
-      setEditingDoctor(null);
-    } else {
-      const newId = Math.max(...doctors.map(d => d.id)) + 1;
-      setDoctors([...doctors, { ...newDoctor, id: newId }]);
-    }
-    setNewDoctor({ name: '', specialization: '', experience: '', image: '', email: '', phone: '', reception: '', departmentId: '' });
-    setIsDoctorModalOpen(false);
+    updateSeoSettings(newSeoSettings);
+    alert('SEO настройки успешно обновлены!');
   };
 
-  const startEditDoctor = (doctor) => {
-    setEditingDoctor(doctor);
-    setNewDoctor({
-      name: doctor.name,
-      specialization: doctor.specialization,
-      experience: doctor.experience,
-      image: doctor.image,
-      email: doctor.email,
-      phone: doctor.phone,
-      reception: doctor.reception,
-      departmentId: doctor.departmentId || ''
-    });
-    setIsDoctorModalOpen(true);
-  };
-
-  const deleteDoctor = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить этого врача?')) {
-      setDoctors(doctors.filter(doctor => doctor.id !== id));
-    }
-  };
-
-  // Функции для управления новостями
-  const handleNewsSubmit = (e) => {
-    e.preventDefault();
-    if (editingNews) {
-      setNews(news.map(item => 
-        item.id === editingNews.id ? { ...newNews, id: editingNews.id, date: item.date } : item
-      ));
-      setEditingNews(null);
-    } else {
-      const newId = Math.max(...news.map(n => n.id)) + 1;
-      const today = new Date().toLocaleDateString('ru-RU', { 
-        day: 'numeric', 
-        month: 'long', 
-        year: 'numeric' 
-      });
-      setNews([...news, { ...newNews, id: newId, date: today }]);
-    }
-    setNewNews({ title: '', excerpt: '', content: '', image: '' });
-    setIsNewsModalOpen(false);
-  };
-
-  const startEditNews = (newsItem) => {
-    setEditingNews(newsItem);
-    setNewNews({
-      title: newsItem.title,
-      excerpt: newsItem.excerpt,
-      content: newsItem.content,
-      image: newsItem.image
-    });
-    setIsNewsModalOpen(true);
-  };
-
-  const deleteNews = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить эту новость?')) {
-      setNews(news.filter(item => item.id !== id));
-    }
-  };
-
-  // Функции для управления аккаунтами
-  const handleAccountSubmit = (e) => {
-    e.preventDefault();
-    if (editingAccount) {
-      setAccounts(accounts.map(account => 
-        account.id === editingAccount.id ? { 
-          ...newAccount, 
-          id: editingAccount.id, 
-          createdAt: editingAccount.createdAt,
-          status: editingAccount.status 
-        } : account
-      ));
-      setEditingAccount(null);
-    } else {
-      const newId = Math.max(...accounts.map(a => a.id)) + 1;
-      const today = new Date().toISOString().split('T')[0];
-      setAccounts([...accounts, { 
-        ...newAccount, 
-        id: newId, 
-        createdAt: today,
-        status: 'active'
-      }]);
-    }
-    setNewAccount({ name: '', email: '', role: 'doctor', password: '' });
-    setIsAccountModalOpen(false);
-  };
-
-  const startEditAccount = (account) => {
-    setEditingAccount(account);
-    setNewAccount({
-      name: account.name,
-      email: account.email,
-      role: account.role,
-      password: ''
-    });
-    setIsAccountModalOpen(true);
-  };
-
-  const deleteAccount = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить этот аккаунт?')) {
-      setAccounts(accounts.filter(account => account.id !== id));
-    }
-  };
-
-  const toggleAccountStatus = (id) => {
-    setAccounts(accounts.map(account => 
-      account.id === id ? { 
-        ...account, 
-        status: account.status === 'active' ? 'inactive' : 'active' 
-      } : account
-    ));
+  const removeGalleryImage = (id) => {
+    setGalleryImages(galleryImages.filter(img => img.id !== id));
+    alert('Изображение удалено из галереи!');
   };
 
   const handleServiceSubmit = (e) => {
