@@ -1163,15 +1163,6 @@ export const AdminPanel = () => {
                   <span>Руководство</span>
                 </button>
                 <button
-                  onClick={() => setActiveTab('leadership')}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
-                    activeTab === 'leadership' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <Award className="w-4 h-4" />
-                  <span>Руководство</span>
-                </button>
-                <button
                   onClick={() => setActiveTab('analytics')}
                   className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
                     activeTab === 'analytics' ? 'bg-purple-50 text-purple-600' : 'text-gray-700 hover:bg-gray-50'
