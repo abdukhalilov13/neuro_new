@@ -546,7 +546,7 @@ export const AdminPanel = () => {
     keywords: 'нейрохирургия, мозг, спинной мозг, операции, Узбекистан, Ташкент'
   });
   const [galleryImages, setGalleryImages] = useState([
-    { id: 1, url: 'https://neuro.uz/storage/uploads/page/large/30.06.2021/nnnn.jpg.1625052184.jpeg.1625058347.jpeg', alt: 'Здание центра' },
+    { id: 1, url: '/images/neuro-building.jpg', alt: 'Здание центра' },
     { id: 2, url: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c', alt: 'Операционная' },
     { id: 3, url: 'https://images.unsplash.com/photo-1512678080530-7760d81faba6', alt: 'Медицинское оборудование' },
     { id: 4, url: 'https://images.unsplash.com/photo-1526930382372-67bf22c0fce2', alt: 'Консультация врача' }
