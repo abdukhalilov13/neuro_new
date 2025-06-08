@@ -808,30 +808,6 @@ export const AdminPanel = () => {
     setIsServiceModalOpen(true);
   };
 
-  const handleSiteSettingsSubmit = (e) => {
-    e.preventDefault();
-    updateSiteSettings({
-      ...adminData.siteSettings,
-      phones: newSiteSettings.phones.split(',').map(p => p.trim()),
-      emails: newSiteSettings.emails.split(',').map(e => e.trim()),
-      address: newSiteSettings.address,
-      workingHours: newSiteSettings.workingHours,
-      socialMedia: newSiteSettings.socialMedia
-    });
-    alert('Настройки сайта успешно обновлены!');
-  };
-
-  const handleSeoSettingsSubmit = (e) => {
-    e.preventDefault();
-    updateSeoSettings(newSeoSettings);
-    alert('SEO настройки успешно обновлены!');
-  };
-
-  const removeGalleryImage = (id) => {
-    setGalleryImages(galleryImages.filter(img => img.id !== id));
-    alert('Изображение удалено из галереи!');
-  };
-
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white flex items-center justify-center">
