@@ -604,7 +604,7 @@ export const AdminPanel = () => {
     biography: '' 
   });
   const [selectedLeaderBio, setSelectedLeaderBio] = useState(null);
-  
+
   const [newService, setNewService] = useState({ name: '', category: '', price: '', description: '' });
   const [newDepartment, setNewDepartment] = useState({ name: '', description: '', icon: 'Brain', color: 'from-blue-500 to-blue-600' });
   const [newDoctor, setNewDoctor] = useState({ name: '', specialization: '', experience: '', image: '', email: '', phone: '', reception: '', departmentId: '' });
