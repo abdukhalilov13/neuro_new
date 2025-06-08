@@ -475,7 +475,7 @@ export const AboutPage = () => {
               viewport={{ once: true }}
             >
               <img
-                src="https://neuro.uz/storage/uploads/page/large/30.06.2021/nnnn.jpg.1625052184.jpeg.1625058347.jpeg"
+                src="/images/neuro-building.jpg"
                 alt="Здание центра"
                 className="rounded-2xl shadow-2xl"
               />
