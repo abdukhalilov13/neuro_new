@@ -544,6 +544,19 @@ export const BiographyModal = ({ leader, isOpen, onClose }) => {
 
 // О центре
 export const AboutPage = () => {
+  const [selectedLeader, setSelectedLeader] = useState(null);
+  const [isBioModalOpen, setIsBioModalOpen] = useState(false);
+
+  const openBioModal = (leader) => {
+    setSelectedLeader(leader);
+    setIsBioModalOpen(true);
+  };
+
+  const closeBioModal = () => {
+    setSelectedLeader(null);
+    setIsBioModalOpen(false);
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -631,8 +644,71 @@ export const AboutPage = () => {
               </div>
             </motion.div>
           </div>
+
+          {/* Раздел руководства */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-16"
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Руководство центра</h2>
+              <p className="text-xl text-gray-600">
+                Опытные специалисты, возглавляющие развитие нейрохирургии в республике
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {leadershipData.map((leader, index) => (
+                <motion.div
+                  key={leader.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 cursor-pointer"
+                  onClick={() => openBioModal(leader)}
+                >
+                  <div className="text-center">
+                    <img
+                      src={leader.image}
+                      alt={leader.name}
+                      className="w-24 h-24 rounded-full object-cover mx-auto mb-4"
+                    />
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors">
+                      {leader.name}
+                    </h3>
+                    <p className="text-blue-600 font-medium mb-3">{leader.position}</p>
+                    <div className="space-y-1 text-sm text-gray-600">
+                      <div className="flex items-center justify-center space-x-2">
+                        <Phone className="w-4 h-4" />
+                        <span>{leader.phone}</span>
+                      </div>
+                      <div className="flex items-center justify-center space-x-2">
+                        <Mail className="w-4 h-4" />
+                        <span>{leader.email}</span>
+                      </div>
+                    </div>
+                    <button className="mt-4 text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center justify-center mx-auto space-x-1">
+                      <span>Читать биографию</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
+
+      {/* Модальное окно биографии */}
+      <BiographyModal 
+        leader={selectedLeader}
+        isOpen={isBioModalOpen}
+        onClose={closeBioModal}
+      />
 
       <Footer />
     </div>
