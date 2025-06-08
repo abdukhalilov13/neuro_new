@@ -487,6 +487,7 @@ export const DoctorDashboard = () => {
 export const AdminPanel = () => {
   const { adminData, updateAdminData } = useAdmin();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
   const [isDepartmentModalOpen, setIsDepartmentModalOpen] = useState(false);
