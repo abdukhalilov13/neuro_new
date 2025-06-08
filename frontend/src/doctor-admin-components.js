@@ -37,7 +37,7 @@ import {
   Heart,
   Star
 } from 'lucide-react';
-import { useAdmin } from './contexts';
+import { useLanguage, useAdmin } from './contexts';
 import { siteData } from './components';
 
 // Mock data for doctor dashboard
