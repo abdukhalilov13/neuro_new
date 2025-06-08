@@ -113,6 +113,79 @@ export const BiographyModal = ({ leader, isOpen, onClose }) => {
   );
 };
 
+// Данные руководства
+export const leadershipData = [
+  {
+    id: 1,
+    name: 'Кариев Габрат Маратович',
+    position: 'Директор центра',
+    image: 'https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg',
+    email: 'director@neuro.uz',
+    phone: '+998 71 264-96-10',
+    biography: 'Габрат Маратович Кариев - выдающийся нейрохирург с более чем 30-летним опытом работы. Директор Республиканского Научного Центра Нейрохирургии с 2010 года. Доктор медицинских наук, профессор. Автор более 150 научных работ в области нейрохирургии. Член Всемирной Ассоциации нейрохирургов (WFNS). Под его руководством центр стал ведущим медицинским учреждением Центральной Азии в области нейрохирургии.'
+  },
+  {
+    id: 2,
+    name: 'Асадуллаев Улугбек Максудович',
+    position: 'Заместитель директора по научной работе',
+    image: 'https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg',
+    email: 'science@neuro.uz',
+    phone: '+998 71 264-96-15',
+    biography: 'Улугбек Максудович Асадуллаев - ведущий специалист в области сосудистой нейрохирургии. Кандидат медицинских наук, заместитель директора по научной работе. Стаж работы более 15 лет. Специализируется на микрохирургических операциях на сосудах головного мозга. Автор 85 научных публикаций, участник международных конференций по нейрохирургии.'
+  },
+  {
+    id: 3,
+    name: 'Кодашев Равшан Муслимович',
+    position: 'Заместитель директора по клинической работе',
+    image: 'https://images.unsplash.com/photo-1536064479547-7ee40b74b807',
+    email: 'clinical@neuro.uz',
+    phone: '+998 71 264-96-09',
+    biography: 'Равшан Муслимович Кодашев - опытный детский нейрохирург, заместитель директора по клинической работе. Кандидат медицинских наук с 20-летним стажем. Специализируется на лечении врожденных пороков развития нервной системы у детей. Провел более 1500 успешных операций на детском мозге.'
+  }
+];
+
+// Компонент модального окна для биографии
+export const BiographyModal = ({ leader, isOpen, onClose }) => {
+  if (!isOpen || !leader) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={onClose}>
+      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="relative">
+          <button onClick={onClose} className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 bg-white rounded-full shadow-lg z-10">
+            <X className="w-5 h-5" />
+          </button>
+          
+          <div className="p-8">
+            <div className="flex items-start space-x-6 mb-6">
+              <img src={leader.image} alt={leader.name} className="w-24 h-24 rounded-full object-cover" />
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">{leader.name}</h2>
+                <p className="text-lg text-blue-600 font-medium mb-3">{leader.position}</p>
+                <div className="flex flex-col space-y-1 text-sm text-gray-600">
+                  <div className="flex items-center space-x-2">
+                    <Phone className="w-4 h-4" />
+                    <span>{leader.phone}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Mail className="w-4 h-4" />
+                    <span>{leader.email}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Биография</h3>
+              <p className="text-gray-700 leading-relaxed whitespace-pre-line">{leader.biography}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Mock data for doctor dashboard
 const mockAppointments = [
   {
