@@ -561,6 +561,49 @@ export const AdminPanel = () => {
     biography: '' 
   });
   const [selectedLeaderBio, setSelectedLeaderBio] = useState(null);
+
+  // Руководство центра
+  const [leadership, setLeadership] = useState([
+    {
+      id: 1,
+      name: 'Кариев Габрат Маратович',
+      position: 'Директор центра',
+      image: 'https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg',
+      email: 'director@neuro.uz',
+      phone: '+998 71 264-96-10',
+      biography: 'Габрат Маратович Кариев - выдающийся нейрохирург с более чем 30-летним опытом работы. Директор Республиканского Научного Центра Нейрохирургии с 2010 года. Доктор медицинских наук, профессор. Автор более 150 научных работ в области нейрохирургии. Член Всемирной Ассоциации нейрохирургов (WFNS).'
+    },
+    {
+      id: 2,
+      name: 'Асадуллаев Улугбек Максудович',
+      position: 'Заместитель директора по научной работе',
+      image: 'https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg',
+      email: 'science@neuro.uz',
+      phone: '+998 71 264-96-15',
+      biography: 'Улугбек Максудович Асадуллаев - ведущий специалист в области сосудистой нейрохирургии. Кандидат медицинских наук, заместитель директора по научной работе. Стаж работы более 15 лет. Специализируется на микрохирургических операциях на сосудах головного мозга.'
+    },
+    {
+      id: 3,
+      name: 'Кодашев Равшан Муслимович',
+      position: 'Заместитель директора по клинической работе',
+      image: 'https://images.unsplash.com/photo-1536064479547-7ee40b74b807',
+      email: 'clinical@neuro.uz',
+      phone: '+998 71 264-96-09',
+      biography: 'Равшан Муслимович Кодашев - опытный детский нейрохирург, заместитель директора по клинической работе. Кандидат медицинских наук с 20-летним стажем. Специализируется на лечении врожденных пороков развития нервной системы у детей.'
+    }
+  ]);
+
+  const [isLeadershipModalOpen, setIsLeadershipModalOpen] = useState(false);
+  const [editingLeadership, setEditingLeadership] = useState(null);
+  const [newLeadership, setNewLeadership] = useState({ 
+    name: '', 
+    position: '', 
+    image: '', 
+    email: '', 
+    phone: '', 
+    biography: '' 
+  });
+  const [selectedLeaderBio, setSelectedLeaderBio] = useState(null);
   
   const [newService, setNewService] = useState({ name: '', category: '', price: '', description: '' });
   const [newDepartment, setNewDepartment] = useState({ name: '', description: '', icon: 'Brain', color: 'from-blue-500 to-blue-600' });
