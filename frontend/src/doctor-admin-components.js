@@ -476,57 +476,15 @@ export const AdminPanel = () => {
   const handleAccountSubmit = (e) => {
     e.preventDefault();
     if (editingAccount) {
-      setAccounts(accounts.map(account => 
-        account.id === editingAccount.id ? { 
-          ...newAccount, 
-          id: editingAccount.id, 
-          createdAt: editingAccount.createdAt,
-          status: editingAccount.status 
-        } : account
-      ));
+      updateAccount(editingAccount.id, { ...newAccount });
       alert('Аккаунт обновлен!');
       setEditingAccount(null);
     } else {
-      const newId = Math.max(...accounts.map(a => a.id)) + 1;
-      const today = new Date().toISOString().split('T')[0];
-      setAccounts([...accounts, { 
-        ...newAccount, 
-        id: newId, 
-        createdAt: today,
-        status: 'active'
-      }]);
+      addAccount(newAccount);
       alert('Новый аккаунт создан!');
     }
     setNewAccount({ name: '', email: '', role: 'doctor', password: '' });
     setIsAccountModalOpen(false);
-  };
-
-  const startEditAccount = (account) => {
-    setEditingAccount(account);
-    setNewAccount({
-      name: account.name,
-      email: account.email,
-      role: account.role,
-      password: ''
-    });
-    setIsAccountModalOpen(true);
-  };
-
-  const deleteAccount = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить этот аккаунт?')) {
-      setAccounts(accounts.filter(account => account.id !== id));
-      alert('Аккаунт удален!');
-    }
-  };
-
-  const toggleAccountStatus = (id) => {
-    setAccounts(accounts.map(account => 
-      account.id === id ? { 
-        ...account, 
-        status: account.status === 'active' ? 'inactive' : 'active' 
-      } : account
-    ));
-    alert('Статус аккаунта изменен!');
   };
 
   // Функции для руководства
