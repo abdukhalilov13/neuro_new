@@ -908,7 +908,10 @@ export const AdminPanel = () => {
         status: account.status === 'active' ? 'inactive' : 'active' 
       } : account
     ));
-  const handleLogin = (e) => {
+  });
+
+  // Функции для управления руководством
+  const handleLeadershipSubmit = (e) => {
     e.preventDefault();
     if (editingLeadership) {
       setLeadership(leadership.map(leader => 
@@ -921,6 +924,15 @@ export const AdminPanel = () => {
     }
     setNewLeadership({ name: '', position: '', image: '', phone: '', email: '', biography: '' });
     setIsLeadershipModalOpen(false);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (loginData.email === 'admin@neuro.uz' && loginData.password === 'admin123') {
+      setIsAuthenticated(true);
+    } else {
+      alert('Неверный email или пароль. Попробуйте: admin@neuro.uz / admin123');
+    }
   };
 
   const startEditLeadership = (leader) => {
