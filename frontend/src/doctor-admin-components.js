@@ -427,6 +427,79 @@ export const AdminPanel = () => {
     'from-red-500 to-red-600'
   ];
 
+  // Вспомогательные функции
+  const startEditDepartment = (department) => {
+    setEditingDepartment(department);
+    setNewDepartment({
+      name: department.name,
+      description: department.description,
+      icon: department.icon || 'Brain',
+      color: department.color || 'from-blue-500 to-blue-600'
+    });
+    setIsDepartmentModalOpen(true);
+  };
+
+  const startEditDoctor = (doctor) => {
+    setEditingDoctor(doctor);
+    setNewDoctor({
+      name: doctor.name,
+      specialization: doctor.specialization,
+      experience: doctor.experience,
+      image: doctor.image,
+      email: doctor.email,
+      phone: doctor.phone,
+      reception: doctor.reception,
+      departmentId: doctor.departmentId || ''
+    });
+    setIsDoctorModalOpen(true);
+  };
+
+  const startEditNews = (newsItem) => {
+    setEditingNews(newsItem);
+    setNewNews({
+      title: newsItem.title,
+      excerpt: newsItem.excerpt,
+      content: newsItem.content,
+      image: newsItem.image
+    });
+    setIsNewsModalOpen(true);
+  };
+
+  const startEditAccount = (account) => {
+    setEditingAccount(account);
+    setNewAccount({
+      name: account.name,
+      email: account.email,
+      role: account.role,
+      password: ''
+    });
+    setIsAccountModalOpen(true);
+  };
+
+  const startEditLeadership = (leader) => {
+    setEditingLeadership(leader);
+    setNewLeadership({
+      name: leader.name,
+      position: leader.position,
+      image: leader.image,
+      phone: leader.phone,
+      email: leader.email,
+      biography: leader.biography
+    });
+    setIsLeadershipModalOpen(true);
+  };
+
+  const startEditService = (service) => {
+    setEditingService(service);
+    setNewService({
+      name: service.name,
+      category: service.category,
+      price: service.price.toString(),
+      description: service.description
+    });
+    setIsServiceModalOpen(true);
+  };
+
   // Функции для отделений
   const handleDepartmentSubmit = (e) => {
     e.preventDefault();
