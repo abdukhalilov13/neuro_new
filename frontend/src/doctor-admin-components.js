@@ -726,7 +726,6 @@ export const AdminPanel = () => {
   ]);
 
   // Руководство центра
-  const [leadership, setLeadership] = useState([
     {
       id: 1,
       name: 'Кариев Габрат Маратович',
