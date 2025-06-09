@@ -778,6 +778,7 @@ export const AdminPanel = () => {
     alert('Изображение удалено из галереи!');
   };
 
+  // Функции управления услугами
   const handleServiceSubmit = (e) => {
     e.preventDefault();
     if (editingService) {
