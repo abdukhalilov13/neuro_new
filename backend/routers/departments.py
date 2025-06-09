@@ -1,8 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
-from ..models import Department, DepartmentCreate, DepartmentUpdate, MessageResponse, User
-from ..database import DatabaseManager
-from ..auth import require_admin, require_staff
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from models import Department, DepartmentCreate, DepartmentUpdate, MessageResponse, User
+from database import DatabaseManager
+from auth import require_admin, require_staff
 
 router = APIRouter(prefix="/departments", tags=["departments"])
 
