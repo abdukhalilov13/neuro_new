@@ -16,8 +16,22 @@ export const LanguageProvider = ({ children }) => {
       services: 'Услуги',
       news: 'Новости',
       contact: 'Контакты',
+      contacts: 'Контакты',
       appointment: 'Запись на прием',
-      gallery: 'Галерея'
+      gallery: 'Галерея',
+      centerOfNeurosurgery: 'Центр Нейрохирургии',
+      navigation: 'Навигация',
+      workingHours: 'Режим работы',
+      mondayFriday: 'Пн-Пт',
+      saturday: 'Суббота',
+      sunday: 'Воскресенье',
+      emergencyHelp: 'Экстренная помощь',
+      centerName: 'Республиканский Научный Центр Нейрохирургии',
+      allRightsReserved: 'Все права защищены',
+      footerDescription: 'Ведущий центр нейрохирургии в Центральной Азии с более чем 25-летним опытом.',
+      consultationBooking: 'Записаться на консультацию',
+      weekdaysReception: 'Пн-Пт 9:00-17:00',
+      tuesdaySaturdayReception: 'Вт-Сб 9:00-17:00'
     },
     uz: {
       home: 'Bosh sahifa',
@@ -27,15 +41,73 @@ export const LanguageProvider = ({ children }) => {
       services: 'Xizmatlar',
       news: 'Yangiliklar',
       contact: 'Aloqa',
+      contacts: 'Aloqa',
       appointment: 'Qabulga yozilish',
-      gallery: 'Galereya'
+      gallery: 'Galereya',
+      centerOfNeurosurgery: 'Neyroxirurgiya Markazi',
+      navigation: 'Navigatsiya',
+      workingHours: 'Ish vaqti',
+      mondayFriday: 'Du-Ju',
+      saturday: 'Shanba',
+      sunday: 'Yakshanba',
+      emergencyHelp: 'Shoshilinch yordam',
+      centerName: 'Respublika Neyroxirurgiya Ilmiy Markazi',
+      allRightsReserved: 'Barcha huquqlar himoyalangan',
+      footerDescription: 'Markaziy Osiyodagi yetakchi neyroxirurgiya markazi, 25 yildan ortiq tajriba.',
+      consultationBooking: 'Konsultatsiyaga yozilish',
+      weekdaysReception: 'Du-Ju 9:00-17:00',
+      tuesdaySaturdayReception: 'Se-Sh 9:00-17:00'
+    },
+    en: {
+      home: 'Home',
+      about: 'About',
+      departments: 'Departments',
+      doctors: 'Doctors',
+      services: 'Services',
+      news: 'News',
+      contact: 'Contact',
+      contacts: 'Contacts',
+      appointment: 'Appointment',
+      gallery: 'Gallery',
+      centerOfNeurosurgery: 'Center of Neurosurgery',
+      navigation: 'Navigation',
+      workingHours: 'Working Hours',
+      mondayFriday: 'Mon-Fri',
+      saturday: 'Saturday',
+      sunday: 'Sunday',
+      emergencyHelp: 'Emergency Help',
+      centerName: 'Republican Scientific Center of Neurosurgery',
+      allRightsReserved: 'All rights reserved',
+      footerDescription: 'Leading neurosurgery center in Central Asia with over 25 years of experience.',
+      consultationBooking: 'Book consultation',
+      weekdaysReception: 'Mon-Fri 9:00-17:00',
+      tuesdaySaturdayReception: 'Tue-Sat 9:00-17:00'
     }
+  };
+
+  const availableLanguages = ['ru', 'uz', 'en'];
+  const languageNames = {
+    ru: 'Русский',
+    uz: 'O\'zbek',
+    en: 'English'
   };
 
   const t = (key) => translations[language][key] || key;
 
+  const changeLanguage = (newLanguage) => {
+    setLanguage(newLanguage);
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ 
+      language, 
+      currentLanguage: language,
+      setLanguage, 
+      changeLanguage,
+      availableLanguages,
+      languageNames,
+      t 
+    }}>
       {children}
     </LanguageContext.Provider>
   );
