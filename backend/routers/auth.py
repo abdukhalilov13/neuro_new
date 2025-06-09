@@ -2,9 +2,13 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import HTTPBearer
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from datetime import timedelta
-from ..models import UserLogin, Token, User, UserCreate, MessageResponse
-from ..auth import authenticate_user, create_access_token, get_password_hash, ACCESS_TOKEN_EXPIRE_MINUTES
-from ..database import DatabaseManager
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from models import UserLogin, Token, User, UserCreate, MessageResponse
+from auth import authenticate_user, create_access_token, get_password_hash, ACCESS_TOKEN_EXPIRE_MINUTES
+from database import DatabaseManager
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
 
