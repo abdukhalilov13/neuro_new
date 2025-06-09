@@ -343,50 +343,25 @@ export const AdminPanel = () => {
   const [editingLeadership, setEditingLeadership] = useState(null);
   const [editingService, setEditingService] = useState(null);
   
-  // Данные состояния
-  const [departments, setDepartments] = useState(siteData.departments);
-  const [doctors, setDoctors] = useState(siteData.doctors.map(doctor => ({
-    ...doctor,
-    departmentId: doctor.id <= 3 ? doctor.id : null
-  })));
-  const [news, setNews] = useState(siteData.news);
-  const [accounts, setAccounts] = useState([
-    { id: 1, name: 'Админ', email: 'admin@neuro.uz', role: 'admin', status: 'active', createdAt: '2025-01-01' },
-    { id: 2, name: 'Доктор Кариев', email: 'kariev@neuro.uz', role: 'doctor', status: 'active', createdAt: '2025-01-15' },
-    { id: 3, name: 'Доктор Асадуллаев', email: 'asadullaev@neuro.uz', role: 'doctor', status: 'inactive', createdAt: '2025-02-01' }
-  ]);
-  const [leadership, setLeadership] = useState([
-    {
-      id: 1,
-      name: 'Кариев Габрат Маратович',
-      position: 'Директор центра',
-      image: 'https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg',
-      phone: '+998 71 264-96-10',
-      email: 'director@neuro.uz',
-      biography: 'Заслуженный врач Республики Узбекистан, доктор медицинских наук'
-    },
-    {
-      id: 2,
-      name: 'Асадуллаев Улугбек Максудович',
-      position: 'Заместитель директора по научной работе',
-      image: 'https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg',
-      phone: '+998 71 264-96-15',
-      email: 'asadullaev@neuro.uz',
-      biography: 'Кандидат медицинских наук, старший научный сотрудник'
-    }
-  ]);
-  const [services, setServices] = useState([
-    { id: 1, name: 'МРТ головного мозга', category: 'Диагностика', price: 500000, description: 'Магнитно-резонансная томография головного мозга' },
-    { id: 2, name: 'КТ позвоночника', category: 'Диагностика', price: 400000, description: 'Компьютерная томография позвоночника' },
-    { id: 3, name: 'Удаление опухоли мозга', category: 'Хирургия', price: 5000000, description: 'Хирургическое удаление новообразований головного мозга' },
-    { id: 4, name: 'Консультация нейрохирурга', category: 'Консультации', price: 150000, description: 'Первичная консультация специалиста' }
-  ]);
-  const [galleryImages, setGalleryImages] = useState([
-    { id: 1, url: '/images/neuro-building.jpg', alt: 'Здание центра', category: 'building' },
-    { id: 2, url: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c', alt: 'Операционная', category: 'equipment' },
-    { id: 3, url: 'https://images.unsplash.com/photo-1512678080530-7760d81faba6', alt: 'Медицинское оборудование', category: 'equipment' },
-    { id: 4, url: 'https://images.unsplash.com/photo-1526930382372-67bf22c0fce2', alt: 'Консультация врача', category: 'doctors' }
-  ]);
+  // Данные состояния - ИСПОЛЬЗУЕМ ИЗ КОНТЕКСТА
+  const { adminData, 
+    addService, updateService, deleteService,
+    addDepartment, updateDepartment, deleteDepartment,
+    addDoctor, updateDoctor, deleteDoctor,
+    addNews, updateNews, deleteNews,
+    addAccount, updateAccount, deleteAccount, toggleAccountStatus,
+    addLeadership, updateLeadership, deleteLeadership,
+    addGalleryImage, updateGalleryImage, deleteGalleryImage
+  } = useAdmin();
+
+  // Получаем данные из контекста
+  const departments = adminData.departments || siteData.departments;
+  const doctors = adminData.doctors || siteData.doctors;
+  const news = adminData.news || siteData.news;
+  const services = adminData.services || [];
+  const accounts = adminData.accounts || [];
+  const leadership = adminData.leadership || [];
+  const galleryImages = adminData.galleryImages || [];
   
   // Формы для новых записей
   const [newDepartment, setNewDepartment] = useState({ 
