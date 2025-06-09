@@ -703,7 +703,49 @@ export const AdminPanel = () => {
     { id: 3, name: 'Доктор Асадуллаев', email: 'asadullaev@neuro.uz', role: 'doctor', status: 'inactive', createdAt: '2025-02-01' }
   ]);
 
+  // Руководство центра
+  const [leadership, setLeadership] = useState([
+    {
+      id: 1,
+      name: 'Кариев Габрат Маратович',
+      position: 'Директор центра',
+      image: 'https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg',
+      phone: '+998 71 264-96-10',
+      email: 'director@neuro.uz',
+      biography: 'Заслуженный врач Республики Узбекистан, доктор медицинских наук'
+    },
+    {
+      id: 2,
+      name: 'Асадуллаев Улугбек Максудович',
+      position: 'Заместитель директора по научной работе',
+      image: 'https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg',
+      phone: '+998 71 264-96-15',
+      email: 'asadullaev@neuro.uz',
+      biography: 'Кандидат медицинских наук, старший научный сотрудник'
+    }
+  ]);
 
+  // Руководство центра
+  const [leadership, setLeadership] = useState([
+    {
+      id: 1,
+      name: 'Кариев Габрат Маратович',
+      position: 'Директор центра',
+      image: 'https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg',
+      phone: '+998 71 264-96-10',
+      email: 'director@neuro.uz',
+      biography: 'Заслуженный врач Республики Узбекистан, доктор медицинских наук'
+    },
+    {
+      id: 2,
+      name: 'Асадуллаев Улугбек Максудович',
+      position: 'Заместитель директора по научной работе',
+      image: 'https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg',
+      phone: '+998 71 264-96-15',
+      email: 'asadullaev@neuro.uz',
+      biography: 'Кандидат медицинских наук, старший научный сотрудник'
+    }
+  ]);
 
   const [newService, setNewService] = useState({ name: '', category: '', price: '', description: '' });
   const [newDepartment, setNewDepartment] = useState({ name: '', description: '', icon: 'Brain', color: 'from-blue-500 to-blue-600' });
@@ -930,6 +972,41 @@ export const AdminPanel = () => {
         status: account.status === 'active' ? 'inactive' : 'active' 
       } : account
     ));
+  };
+
+  // Функции для управления руководством
+  const handleLeadershipSubmit = (e) => {
+    e.preventDefault();
+    if (editingLeadership) {
+      setLeadership(leadership.map(leader => 
+        leader.id === editingLeadership.id ? { ...newLeadership, id: editingLeadership.id } : leader
+      ));
+      setEditingLeadership(null);
+    } else {
+      const newId = Math.max(...leadership.map(l => l.id)) + 1;
+      setLeadership([...leadership, { ...newLeadership, id: newId }]);
+    }
+    setNewLeadership({ name: '', position: '', image: '', phone: '', email: '', biography: '' });
+    setIsLeadershipModalOpen(false);
+  };
+
+  const startEditLeadership = (leader) => {
+    setEditingLeadership(leader);
+    setNewLeadership({
+      name: leader.name,
+      position: leader.position,
+      image: leader.image,
+      phone: leader.phone,
+      email: leader.email,
+      biography: leader.biography
+    });
+    setIsLeadershipModalOpen(true);
+  };
+
+  const deleteLeadership = (id) => {
+    if (window.confirm('Вы уверены, что хотите удалить этого руководителя?')) {
+      setLeadership(leadership.filter(leader => leader.id !== id));
+    }
   };
 
   // Функции для управления руководством
