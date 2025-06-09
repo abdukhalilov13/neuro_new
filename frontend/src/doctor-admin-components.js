@@ -1280,26 +1280,32 @@ export const AdminPanel = () => {
                 </div>
 
                 <div className="space-y-4">
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className="p-4 border rounded-lg">
+                  {news.map(newsItem => (
+                    <div key={newsItem.id} className="p-4 border rounded-lg">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
                           <img
-                            src={`https://images.unsplash.com/photo-15047114349${i}9`}
-                            alt={`Новость ${i}`}
+                            src={newsItem.image}
+                            alt={newsItem.title}
                             className="w-16 h-16 rounded object-cover"
                           />
                           <div>
-                            <h4 className="font-medium text-gray-900">Новость {i}</h4>
-                            <p className="text-sm text-gray-600">Краткое описание новости</p>
-                            <p className="text-sm text-blue-600">Опубликовано</p>
+                            <h4 className="font-medium text-gray-900">{newsItem.title}</h4>
+                            <p className="text-sm text-gray-600 mt-1">{newsItem.excerpt}</p>
+                            <p className="text-xs text-blue-600 mt-1">{newsItem.date}</p>
                           </div>
                         </div>
                         <div className="flex space-x-2">
-                          <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
+                          <button 
+                            onClick={() => startEditNews(newsItem)}
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
+                          >
                             <Edit className="w-4 h-4" />
                           </button>
-                          <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                          <button 
+                            onClick={() => deleteNews(newsItem.id)}
+                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                          >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
