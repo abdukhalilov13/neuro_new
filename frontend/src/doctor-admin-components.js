@@ -446,40 +446,15 @@ export const AdminPanel = () => {
   const handleDoctorSubmit = (e) => {
     e.preventDefault();
     if (editingDoctor) {
-      setDoctors(doctors.map(doctor => 
-        doctor.id === editingDoctor.id ? { ...newDoctor, id: editingDoctor.id } : doctor
-      ));
+      updateDoctor(editingDoctor.id, { ...newDoctor });
       alert('Информация о враче обновлена!');
       setEditingDoctor(null);
     } else {
-      const newId = Math.max(...doctors.map(d => d.id)) + 1;
-      setDoctors([...doctors, { ...newDoctor, id: newId }]);
+      addDoctor(newDoctor);
       alert('Новый врач добавлен!');
     }
     setNewDoctor({ name: '', specialization: '', experience: '', image: '', email: '', phone: '', reception: '', departmentId: '' });
     setIsDoctorModalOpen(false);
-  };
-
-  const startEditDoctor = (doctor) => {
-    setEditingDoctor(doctor);
-    setNewDoctor({
-      name: doctor.name,
-      specialization: doctor.specialization,
-      experience: doctor.experience,
-      image: doctor.image,
-      email: doctor.email,
-      phone: doctor.phone,
-      reception: doctor.reception,
-      departmentId: doctor.departmentId || ''
-    });
-    setIsDoctorModalOpen(true);
-  };
-
-  const deleteDoctor = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить этого врача?')) {
-      setDoctors(doctors.filter(doctor => doctor.id !== id));
-      alert('Врач удален!');
-    }
   };
 
   // Функции для новостей
