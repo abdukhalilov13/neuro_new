@@ -295,69 +295,132 @@ export const DoctorDashboard = () => {
             {activeTab === 'dashboard' && (
               <div className="space-y-6">
                 {/* Статистика */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <div className="bg-white rounded-lg shadow p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Записей сегодня</h3>
-                        <p className="text-3xl font-bold text-blue-600">{filteredAppointments.length}</p>
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <BookOpen className="h-8 w-8 text-blue-600" />
                       </div>
-                      <Calendar className="w-8 h-8 text-blue-500" />
+                      <div className="ml-5 w-0 flex-1">
+                        <dl>
+                          <dt className="text-sm font-medium text-gray-500 truncate">
+                            Всего услуг
+                          </dt>
+                          <dd className="text-lg font-medium text-gray-900">
+                            {adminData.services.length}
+                          </dd>
+                        </dl>
+                      </div>
                     </div>
                   </div>
+
                   <div className="bg-white rounded-lg shadow p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Всего записей</h3>
-                        <p className="text-3xl font-bold text-green-600">{appointments.length}</p>
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <Calendar className="h-8 w-8 text-green-600" />
                       </div>
-                      <Users className="w-8 h-8 text-green-500" />
+                      <div className="ml-5 w-0 flex-1">
+                        <dl>
+                          <dt className="text-sm font-medium text-gray-500 truncate">
+                            Записей сегодня
+                          </dt>
+                          <dd className="text-lg font-medium text-gray-900">
+                            {mockAppointments.filter(apt => apt.date === new Date().toISOString().split('T')[0]).length}
+                          </dd>
+                        </dl>
+                      </div>
                     </div>
                   </div>
+
                   <div className="bg-white rounded-lg shadow p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Подтвержденных</h3>
-                        <p className="text-3xl font-bold text-purple-600">
-                          {appointments.filter(a => a.status === 'confirmed').length}
-                        </p>
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <Users className="h-8 w-8 text-purple-600" />
                       </div>
-                      <Activity className="w-8 h-8 text-purple-500" />
+                      <div className="ml-5 w-0 flex-1">
+                        <dl>
+                          <dt className="text-sm font-medium text-gray-500 truncate">
+                            Активных врачей
+                          </dt>
+                          <dd className="text-lg font-medium text-gray-900">
+                            {doctors.length}
+                          </dd>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-lg shadow p-6">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <BarChart3 className="h-8 w-8 text-yellow-600" />
+                      </div>
+                      <div className="ml-5 w-0 flex-1">
+                        <dl>
+                          <dt className="text-sm font-medium text-gray-500 truncate">
+                            Отделений
+                          </dt>
+                          <dd className="text-lg font-medium text-gray-900">
+                            {departments.length}
+                          </dd>
+                        </dl>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Ближайшие записи */}
-                <div className="bg-white rounded-lg shadow p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Ближайшие записи</h3>
-                  <div className="space-y-3">
-                    {filteredAppointments.slice(0, 3).map((appointment) => (
-                      <div key={appointment.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-4 mb-1">
-                            <span className="font-medium text-gray-900">{appointment.patient.name}</span>
-                            <span className={`px-2 py-1 rounded text-xs font-medium ${
-                              appointment.status === 'confirmed' 
-                                ? 'bg-green-100 text-green-800' 
-                                : 'bg-yellow-100 text-yellow-800'
-                            }`}>
-                              {appointment.status === 'confirmed' ? 'Подтверждено' : 'Ожидает'}
-                            </span>
-                          </div>
-                          <div className="text-sm text-gray-600">
-                            {appointment.time} - {appointment.patient.complaint}
-                          </div>
+                {/* Последние действия */}
+                <div className="bg-white rounded-lg shadow">
+                  <div className="p-6 border-b">
+                    <h3 className="text-lg font-medium text-gray-900">Последние действия</h3>
+                  </div>
+                  <div className="p-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                          <Plus className="w-4 h-4 text-green-600" />
                         </div>
-                        <div className="flex space-x-2">
-                          <button 
-                            onClick={() => handleAppointmentAction(appointment.id, 'view')}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm"
-                          >
-                            Просмотр
-                          </button>
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">
+                            Добавлена новость: "{news[0]?.title}"
+                          </p>
+                          <p className="text-xs text-gray-500">{news[0]?.date}</p>
                         </div>
                       </div>
-                    ))}
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                          <Edit className="w-4 h-4 text-blue-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">
+                            Обновлен врач: {doctors[0]?.name}
+                          </p>
+                          <p className="text-xs text-gray-500">Сегодня</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                          <Building className="w-4 h-4 text-purple-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">
+                            Изменено отделение: {departments[0]?.name}
+                          </p>
+                          <p className="text-xs text-gray-500">Вчера</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                          <User className="w-4 h-4 text-yellow-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">
+                            Создан аккаунт: {accounts[accounts.length - 1]?.name}
+                          </p>
+                          <p className="text-xs text-gray-500">{accounts[accounts.length - 1]?.createdAt}</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
