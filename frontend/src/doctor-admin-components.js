@@ -908,7 +908,7 @@ export const AdminPanel = () => {
         status: account.status === 'active' ? 'inactive' : 'active' 
       } : account
     ));
-  });
+  };
 
   // Функции для управления руководством
   const handleLeadershipSubmit = (e) => {
