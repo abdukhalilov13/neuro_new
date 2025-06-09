@@ -491,38 +491,15 @@ export const AdminPanel = () => {
   const handleLeadershipSubmit = (e) => {
     e.preventDefault();
     if (editingLeadership) {
-      setLeadership(leadership.map(leader => 
-        leader.id === editingLeadership.id ? { ...newLeadership, id: editingLeadership.id } : leader
-      ));
+      updateLeadership(editingLeadership.id, { ...newLeadership });
       alert('Информация о руководителе обновлена!');
       setEditingLeadership(null);
     } else {
-      const newId = Math.max(...leadership.map(l => l.id)) + 1;
-      setLeadership([...leadership, { ...newLeadership, id: newId }]);
+      addLeadership(newLeadership);
       alert('Новый руководитель добавлен!');
     }
     setNewLeadership({ name: '', position: '', image: '', phone: '', email: '', biography: '' });
     setIsLeadershipModalOpen(false);
-  };
-
-  const startEditLeadership = (leader) => {
-    setEditingLeadership(leader);
-    setNewLeadership({
-      name: leader.name,
-      position: leader.position,
-      image: leader.image,
-      phone: leader.phone,
-      email: leader.email,
-      biography: leader.biography
-    });
-    setIsLeadershipModalOpen(true);
-  };
-
-  const deleteLeadership = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить этого руководителя?')) {
-      setLeadership(leadership.filter(leader => leader.id !== id));
-      alert('Руководитель удален!');
-    }
   };
 
   // Функции для услуг
