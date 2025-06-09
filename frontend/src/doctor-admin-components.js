@@ -35,7 +35,8 @@ import {
   Brain,
   Award,
   Heart,
-  Star
+  Star,
+  RefreshCw
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
 import { siteData } from './components';
