@@ -395,43 +395,7 @@ export const useAdmin = () => {
   return context;
 };
     
-    // Footer
-    workingHours: 'Режим работы',
-    navigation: 'Навигация',
-    emergencyHelp: 'Экстренная помощь 24/7',
-    allRightsReserved: 'Все права защищены',
-    
-    // Services
-    ourServices: 'Наши услуги',
-    consultationBooking: 'Записаться на консультацию',
-    
-    // Common
-    phone: 'Телефон',
-    email: 'Email',
-    experience: 'Опыт',
-    specialization: 'Специализация',
-    reception: 'Прием',
-    price: 'Цена',
-    from: 'от',
-    sum: 'сум',
-    
-    // Additional translations
-    centerOfNeurosurgery: 'Центр нейрохирургии',
-    footerDescription: 'Республиканский Научный Центр Нейрохирургии - ведущее медицинское учреждение Узбекистана, специализирующееся на лечении заболеваний нервной системы.',
-    mondayFriday: 'Пн-Пт',
-    saturday: 'Суббота',
-    sunday: 'Воскресенье',
-    centerName: 'Республиканский Научный Центр Нейрохирургии',
-    ourDepartments: 'Наши отделения',
-    departmentsSubtitle: 'Специализированные подразделения центра',
-    latestNews: 'Последние новости',
-    newsSubtitle: 'События и достижения центра',
-    centerInNumbers: 'Центр в цифрах',
-    numbersSubtitle: 'Факты и достижения нашего центра',
-    totalBeds: 'Общая вместимость коек',
-    plannedPlaces: 'Плановых мест',
-    childrenPlaces: 'Детских мест',
-    patientsPerYear: 'Пациентов в год'
+
   },
   
   en: {
