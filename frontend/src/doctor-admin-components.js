@@ -431,39 +431,15 @@ export const AdminPanel = () => {
   const handleDepartmentSubmit = (e) => {
     e.preventDefault();
     if (editingDepartment) {
-      setDepartments(departments.map(dept => 
-        dept.id === editingDepartment.id ? { ...newDepartment, id: editingDepartment.id } : dept
-      ));
+      updateDepartment(editingDepartment.id, { ...newDepartment });
       alert('Отделение успешно обновлено!');
       setEditingDepartment(null);
     } else {
-      const newId = Math.max(...departments.map(d => d.id)) + 1;
-      setDepartments([...departments, { ...newDepartment, id: newId }]);
+      addDepartment(newDepartment);
       alert('Новое отделение добавлено!');
     }
     setNewDepartment({ name: '', description: '', icon: 'Brain', color: 'from-blue-500 to-blue-600' });
     setIsDepartmentModalOpen(false);
-  };
-
-  const startEditDepartment = (department) => {
-    setEditingDepartment(department);
-    setNewDepartment({
-      name: department.name,
-      description: department.description,
-      icon: department.icon || 'Brain',
-      color: department.color || 'from-blue-500 to-blue-600'
-    });
-    setIsDepartmentModalOpen(true);
-  };
-
-  const deleteDepartment = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить это отделение?')) {
-      setDepartments(departments.filter(dept => dept.id !== id));
-      setDoctors(doctors.map(doctor => 
-        doctor.departmentId === id ? { ...doctor, departmentId: null } : doctor
-      ));
-      alert('Отделение удалено!');
-    }
   };
 
   // Функции для врачей
