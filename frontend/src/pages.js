@@ -25,6 +25,9 @@ import { siteData } from './components';
 
 // Отделения
 export const DepartmentsPage = () => {
+  const { adminData } = useAdmin();
+  const departments = adminData?.departments || siteData.departments;
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -39,12 +42,12 @@ export const DepartmentsPage = () => {
           >
             <h1 className="text-5xl font-bold text-gray-900 mb-6">Отделения центра</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Семь специализированных отделений с передовыми технологиями и опытными специалистами
+              {departments.length} специализированных отделений с передовыми технологиями и опытными специалистами
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {siteData.departments.map((dept, index) => (
+            {departments.map((dept, index) => (
               <motion.div
                 key={dept.id}
                 initial={{ opacity: 0, y: 50 }}
