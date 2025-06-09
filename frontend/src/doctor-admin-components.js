@@ -506,44 +506,21 @@ export const AdminPanel = () => {
   const handleServiceSubmit = (e) => {
     e.preventDefault();
     if (editingService) {
-      setServices(services.map(service => 
-        service.id === editingService.id ? { 
-          ...newService, 
-          id: editingService.id,
-          price: parseInt(newService.price)
-        } : service
-      ));
+      updateService(editingService.id, { 
+        ...newService, 
+        price: parseInt(newService.price)
+      });
       alert('Услуга обновлена!');
       setEditingService(null);
     } else {
-      const newId = Math.max(...services.map(s => s.id)) + 1;
-      setServices([...services, { 
-        ...newService, 
-        id: newId,
+      addService({
+        ...newService,
         price: parseInt(newService.price)
-      }]);
+      });
       alert('Новая услуга добавлена!');
     }
     setNewService({ name: '', category: '', price: '', description: '' });
     setIsServiceModalOpen(false);
-  };
-
-  const startEditService = (service) => {
-    setEditingService(service);
-    setNewService({
-      name: service.name,
-      category: service.category,
-      price: service.price.toString(),
-      description: service.description
-    });
-    setIsServiceModalOpen(true);
-  };
-
-  const deleteService = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить эту услугу?')) {
-      setServices(services.filter(service => service.id !== id));
-      alert('Услуга удалена!');
-    }
   };
 
   // Функции для галереи
