@@ -167,8 +167,12 @@ const siteData = {
 
 
 
-// Главная страница
+// Главная страница - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const HomePage = () => {
+  const { adminData } = useAdmin();
+  const departments = adminData?.departments || siteData.departments;
+  const news = adminData?.news || siteData.news;
+  
   return (
     <div className="min-h-screen">
       <Header />
@@ -219,7 +223,7 @@ export const HomePage = () => {
             >
               <div className="relative">
                 <img 
-                  src={siteData.hero.buildingImage}
+                  src={adminData.galleryImages.find(img => img.category === 'building')?.url || siteData.hero.buildingImage}
                   alt="Здание центра нейрохирургии"
                   className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
                 />
@@ -269,7 +273,7 @@ export const HomePage = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-600">Связаться с нами</p>
-                <p className="font-semibold text-gray-900">{siteData.hero.phone}</p>
+                <p className="font-semibold text-gray-900">{adminData.siteSettings.phones[0]}</p>
               </div>
             </div>
 
@@ -291,7 +295,7 @@ export const HomePage = () => {
               </div>
               <div>
                 <p className="text-sm text-red-100">Экстренная помощь 24/7</p>
-                <p className="font-semibold">{siteData.hero.emergency}</p>
+                <p className="font-semibold">{adminData.siteSettings.phones[2]}</p>
               </div>
             </div>
           </div>
@@ -313,27 +317,66 @@ export const HomePage = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {siteData.statistics.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-4xl font-bold text-gray-900 mb-2">{stat.number}</h3>
-                <p className="text-gray-600">{stat.label}</p>
-              </motion.div>
-            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Building className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-4xl font-bold text-gray-900 mb-2">157</h3>
+              <p className="text-gray-600">Общих койко-мест</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-4xl font-bold text-gray-900 mb-2">59</h3>
+              <p className="text-gray-600">Плановых мест</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Heart className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-4xl font-bold text-gray-900 mb-2">28</h3>
+              <p className="text-gray-600">Детских мест</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-4xl font-bold text-gray-900 mb-2">5000+</h3>
+              <p className="text-gray-600">Пациентов в год</p>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Departments Preview */}
+      {/* Departments Preview - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
@@ -344,11 +387,11 @@ export const HomePage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Наши отделения</h2>
-            <p className="text-xl text-gray-600">Специализированные подразделения центра</p>
+            <p className="text-xl text-gray-600">Специализированные подразделения центра ({departments.length} отделений)</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {siteData.departments.slice(0, 6).map((dept, index) => (
+            {departments.slice(0, 6).map((dept, index) => (
               <motion.div
                 key={dept.id}
                 initial={{ opacity: 0, y: 50 }}
@@ -377,13 +420,13 @@ export const HomePage = () => {
               to="/departments"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors"
             >
-              Все отделения
+              Все отделения ({departments.length})
             </Link>
           </div>
         </div>
       </section>
 
-      {/* News Preview */}
+      {/* News Preview - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
@@ -394,13 +437,13 @@ export const HomePage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Последние новости</h2>
-            <p className="text-xl text-gray-600">События и достижения центра</p>
+            <p className="text-xl text-gray-600">События и достижения центра ({news.length} новостей)</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {siteData.news.map((news, index) => (
+            {news.slice(0, 3).map((newsItem, index) => (
               <motion.article
-                key={news.id}
+                key={newsItem.id}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -408,14 +451,14 @@ export const HomePage = () => {
                 className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
               >
                 <img
-                  src={news.image}
-                  alt={news.title}
+                  src={newsItem.image}
+                  alt={newsItem.title}
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <p className="text-sm text-blue-600 mb-2">{news.date}</p>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{news.title}</h3>
-                  <p className="text-gray-600 mb-4">{news.excerpt}</p>
+                  <p className="text-sm text-blue-600 mb-2">{newsItem.date}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{newsItem.title}</h3>
+                  <p className="text-gray-600 mb-4">{newsItem.excerpt}</p>
                   <Link
                     to="/news"
                     className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center"
@@ -432,7 +475,7 @@ export const HomePage = () => {
               to="/news"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors"
             >
-              Все новости
+              Все новости ({news.length})
             </Link>
           </div>
         </div>
