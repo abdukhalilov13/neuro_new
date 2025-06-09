@@ -1463,20 +1463,20 @@ export const AdminPanel = () => {
                 <div className="space-y-4">
                   {news.map(newsItem => (
                     <div key={newsItem.id} className="p-4 border rounded-lg">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start space-x-4 flex-1">
                           <img
                             src={newsItem.image}
                             alt={newsItem.title}
-                            className="w-16 h-16 rounded object-cover"
+                            className="w-20 h-20 rounded-lg object-cover"
                           />
-                          <div>
-                            <h4 className="font-medium text-gray-900">{newsItem.title}</h4>
-                            <p className="text-sm text-gray-600 mt-1">{newsItem.excerpt}</p>
-                            <p className="text-xs text-blue-600 mt-1">{newsItem.date}</p>
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900 mb-1">{newsItem.title}</h4>
+                            <p className="text-sm text-gray-600 mb-2">{newsItem.excerpt}</p>
+                            <p className="text-xs text-blue-600">{newsItem.date}</p>
                           </div>
                         </div>
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-2 ml-4">
                           <button 
                             onClick={() => startEditNews(newsItem)}
                             className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
