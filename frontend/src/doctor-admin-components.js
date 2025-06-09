@@ -461,41 +461,15 @@ export const AdminPanel = () => {
   const handleNewsSubmit = (e) => {
     e.preventDefault();
     if (editingNews) {
-      setNews(news.map(item => 
-        item.id === editingNews.id ? { ...newNews, id: editingNews.id, date: item.date } : item
-      ));
+      updateNews(editingNews.id, { ...newNews });
       alert('Новость обновлена!');
       setEditingNews(null);
     } else {
-      const newId = Math.max(...news.map(n => n.id)) + 1;
-      const today = new Date().toLocaleDateString('ru-RU', { 
-        day: 'numeric', 
-        month: 'long', 
-        year: 'numeric' 
-      });
-      setNews([...news, { ...newNews, id: newId, date: today }]);
+      addNews(newNews);
       alert('Новость добавлена!');
     }
     setNewNews({ title: '', excerpt: '', content: '', image: '' });
     setIsNewsModalOpen(false);
-  };
-
-  const startEditNews = (newsItem) => {
-    setEditingNews(newsItem);
-    setNewNews({
-      title: newsItem.title,
-      excerpt: newsItem.excerpt,
-      content: newsItem.content,
-      image: newsItem.image
-    });
-    setIsNewsModalOpen(true);
-  };
-
-  const deleteNews = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить эту новость?')) {
-      setNews(news.filter(item => item.id !== id));
-      alert('Новость удалена!');
-    }
   };
 
   // Функции для аккаунтов
