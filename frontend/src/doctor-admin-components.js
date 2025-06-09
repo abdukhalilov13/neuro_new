@@ -726,13 +726,26 @@ export const AdminPanel = () => {
     }
   });
   const [newSeoSettings, setNewSeoSettings] = useState({
-        emails: Array.isArray(adminData.siteSettings.emails) ? adminData.siteSettings.emails.join(', ') : adminData.siteSettings.emails || '',
-        address: adminData.siteSettings.address || '',
-        workingHours: adminData.siteSettings.workingHours || {
-          weekdays: '8:00 - 18:00',
-          saturday: '9:00 - 15:00',
-          sunday: 'Выходной'
-        },
+    title: 'Республиканский Научный Центр Нейрохирургии',
+    description: 'Ведущий центр нейрохирургии в Центральной Азии. Более 25 лет опыта в лечении заболеваний нервной системы.',
+    keywords: 'нейрохирургия, мозг, спинной мозг, операции, Узбекистан, Ташкент'
+  });
+  const [galleryImages, setGalleryImages] = useState([
+    { id: 1, url: '/images/neuro-building.jpg', alt: 'Здание центра' },
+    { id: 2, url: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c', alt: 'Операционная' },
+    { id: 3, url: 'https://images.unsplash.com/photo-1512678080530-7760d81faba6', alt: 'Медицинское оборудование' },
+    { id: 4, url: 'https://images.unsplash.com/photo-1526930382372-67bf22c0fce2', alt: 'Консультация врача' }
+  ]);
+
+  // Иконки для отделений
+  const departmentIcons = {
+    Brain, Activity, Shield, Heart, Star, Search, Award, Building
+  };
+
+  useEffect(() => {
+    if (isAuthenticated && adminData.siteSettings) {
+      setNewSiteSettings({
+        phones: Array.isArray(adminData.siteSettings.phones) ? adminData.siteSettings.phones.join(', ') : adminData.siteSettings.phones || '',
         socialMedia: adminData.siteSettings.socialMedia || {
           facebook: 'https://facebook.com/neuro.uz',
           instagram: 'https://instagram.com/neuro.uz',
