@@ -752,6 +752,7 @@ export const AdminPanel = () => {
   const [newDoctor, setNewDoctor] = useState({ name: '', specialization: '', experience: '', image: '', email: '', phone: '', reception: '', departmentId: '' });
   const [newNews, setNewNews] = useState({ title: '', excerpt: '', content: '', image: '' });
   const [newAccount, setNewAccount] = useState({ name: '', email: '', role: 'doctor', password: '' });
+  const [newLeadership, setNewLeadership] = useState({ name: '', position: '', image: '', phone: '', email: '', biography: '' });
   
   const [newSiteSettings, setNewSiteSettings] = useState({
     phones: '+998 71 264-96-10, +998 71 264-96-09',
