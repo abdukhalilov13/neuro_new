@@ -524,30 +524,12 @@ export const AdminPanel = () => {
   };
 
   // Функции для галереи
-  const addGalleryImage = () => {
+  const handleGalleryImageAdd = () => {
     if (newGalleryImage.url && newGalleryImage.alt) {
-      const newId = Math.max(...galleryImages.map(img => img.id)) + 1;
-      setGalleryImages([...galleryImages, {
-        ...newGalleryImage,
-        id: newId
-      }]);
+      addGalleryImage(newGalleryImage);
       setNewGalleryImage({ url: '', alt: '', category: 'general' });
       alert('Изображение добавлено в галерею!');
     }
-  };
-
-  const deleteGalleryImage = (id) => {
-    if (window.confirm('Вы уверены, что хотите удалить это изображение?')) {
-      setGalleryImages(galleryImages.filter(img => img.id !== id));
-      alert('Изображение удалено!');
-    }
-  };
-
-  const updateGalleryImage = (id, field, value) => {
-    setGalleryImages(galleryImages.map(img => 
-      img.id === id ? { ...img, [field]: value } : img
-    ));
-    alert('Изображение обновлено!');
   };
 
   const handleLogin = (e) => {
