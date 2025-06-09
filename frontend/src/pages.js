@@ -23,7 +23,7 @@ import { useLanguage, useAdmin } from './contexts';
 import { Header, Footer, ServiceCard } from './enhanced-components';
 import { siteData } from './components';
 
-// Отделения
+// Отделения - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const DepartmentsPage = () => {
   const { adminData } = useAdmin();
   const departments = adminData?.departments || siteData.departments;
@@ -85,8 +85,11 @@ export const DepartmentsPage = () => {
   );
 };
 
-// Врачи
+// Врачи - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const DoctorsPage = () => {
+  const { adminData } = useAdmin();
+  const doctors = adminData?.doctors || siteData.doctors;
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -101,12 +104,12 @@ export const DoctorsPage = () => {
           >
             <h1 className="text-5xl font-bold text-gray-900 mb-6">Наши врачи</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Команда высококвалифицированных специалистов с многолетним опытом
+              Команда высококвалифицированных специалистов с многолетним опытом ({doctors.length} врачей)
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {siteData.doctors.map((doctor, index) => (
+            {doctors.map((doctor, index) => (
               <motion.div
                 key={doctor.id}
                 initial={{ opacity: 0, y: 50 }}
@@ -123,7 +126,7 @@ export const DoctorsPage = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{doctor.name}</h3>
                   <p className="text-blue-600 font-medium mb-3">{doctor.specialization}</p>
-                  <p className="text-gray-600 mb-4">{doctor.experience}</p>
+                  <p className="text-gray-600 mb-4">{doctor.experience} опыта</p>
                   
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center space-x-2 text-sm">
@@ -154,7 +157,7 @@ export const DoctorsPage = () => {
   );
 };
 
-// Услуги
+// Услуги - ИСПОЛЬЗУЕМ ВСЕ ДАННЫЕ ИЗ АДМИНКИ
 export const ServicesPage = () => {
   const { adminData } = useAdmin();
   const { t } = useLanguage();
@@ -182,7 +185,7 @@ export const ServicesPage = () => {
           >
             <h1 className="text-5xl font-bold text-gray-900 mb-6">Наши услуги</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Полный спектр медицинских услуг в области нейрохирургии с прозрачным ценообразованием
+              Полный спектр медицинских услуг в области нейрохирургии с прозрачным ценообразованием ({adminData.services.length} услуг)
             </p>
           </motion.div>
 
@@ -196,7 +199,12 @@ export const ServicesPage = () => {
                 transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{category}</h2>
+                <div className="flex items-center justify-between mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900">{category}</h2>
+                  <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                    {services.length} услуг
+                  </span>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {services.map((service, index) => (
                     <ServiceCard
@@ -245,9 +253,11 @@ export const ServicesPage = () => {
   );
 };
 
-// Новости
+// Новости - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const NewsPage = () => {
   const [expandedNews, setExpandedNews] = useState({});
+  const { adminData } = useAdmin();
+  const news = adminData?.news || siteData.news;
 
   const toggleNewsExpanded = (newsId) => {
     setExpandedNews(prev => ({
@@ -270,16 +280,16 @@ export const NewsPage = () => {
           >
             <h1 className="text-5xl font-bold text-gray-900 mb-6">Новости и события</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Последние новости, достижения и события нашего центра
+              Последние новости, достижения и события нашего центра ({news.length} новостей)
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Основные новости */}
             <div className="lg:col-span-2 space-y-8">
-              {siteData.news.map((news, index) => (
+              {news.map((newsItem, index) => (
                 <motion.article
-                  key={news.id}
+                  key={newsItem.id}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -289,20 +299,20 @@ export const NewsPage = () => {
                   <div className="md:flex">
                     <div className="md:w-1/3">
                       <img
-                        src={news.image}
-                        alt={news.title}
+                        src={newsItem.image}
+                        alt={newsItem.title}
                         className="w-full h-48 md:h-full object-cover"
                       />
                     </div>
                     <div className="md:w-2/3 p-6">
-                      <p className="text-sm text-blue-600 mb-2">{news.date}</p>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-3">{news.title}</h2>
-                      <p className="text-gray-600 mb-4">{news.excerpt}</p>
+                      <p className="text-sm text-blue-600 mb-2">{newsItem.date}</p>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-3">{newsItem.title}</h2>
+                      <p className="text-gray-600 mb-4">{newsItem.excerpt}</p>
                       
-                      {expandedNews[news.id] && (
+                      {expandedNews[newsItem.id] && (
                         <div className="mb-4">
                           <p className="text-gray-700 mb-4">
-                            {news.content} Здесь располагается полный текст новости с подробной информацией о событии. 
+                            {newsItem.content} Здесь располагается полный текст новости с подробной информацией о событии. 
                             В статье рассматриваются все аспекты происходящего, приводятся комментарии экспертов и 
                             дополнительные факты, которые помогают читателю полностью понять суть события.
                           </p>
@@ -318,11 +328,11 @@ export const NewsPage = () => {
                       )}
                       
                       <button 
-                        onClick={() => toggleNewsExpanded(news.id)}
+                        onClick={() => toggleNewsExpanded(newsItem.id)}
                         className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center"
                       >
-                        {expandedNews[news.id] ? 'Свернуть' : 'Читать полностью'}
-                        <ChevronRight className={`w-4 h-4 ml-1 transition-transform ${expandedNews[news.id] ? 'rotate-90' : ''}`} />
+                        {expandedNews[newsItem.id] ? 'Свернуть' : 'Читать полностью'}
+                        <ChevronRight className={`w-4 h-4 ml-1 transition-transform ${expandedNews[newsItem.id] ? 'rotate-90' : ''}`} />
                       </button>
                     </div>
                   </div>
@@ -394,6 +404,7 @@ export const ContactPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const { adminData } = useAdmin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -449,8 +460,7 @@ export const ContactPage = () => {
                     <div className="text-left">
                       <h3 className="font-semibold text-gray-900 mb-1 text-left">Адрес</h3>
                       <p className="text-gray-600 text-left">
-                        ул. Хумоюн, 40, Мирзо-Улугбекский район,<br />
-                        г. Ташкент, 100142, Республика Узбекистан
+                        {adminData.siteSettings.address}
                       </p>
                     </div>
                   </div>
@@ -461,11 +471,16 @@ export const ContactPage = () => {
                     </div>
                     <div className="text-left">
                       <h3 className="font-semibold text-gray-900 mb-1 text-left">Телефоны</h3>
-                      <p className="text-gray-600 text-left">
-                        Приемная: +998 71 264-96-10<br />
-                        Регистратура: +998 71 264-96-09<br />
-                        Экстренная помощь: +998 78 113-33-78
-                      </p>
+                      <div className="text-gray-600 text-left space-y-1">
+                        {adminData.siteSettings.phones.map((phone, index) => (
+                          <p key={index}>
+                            {index === 0 && 'Приемная: '}
+                            {index === 1 && 'Регистратура: '}
+                            {index === 2 && 'Экстренная помощь: '}
+                            {phone}
+                          </p>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
@@ -475,10 +490,11 @@ export const ContactPage = () => {
                     </div>
                     <div className="text-left">
                       <h3 className="font-semibold text-gray-900 mb-1 text-left">Email</h3>
-                      <p className="text-gray-600 text-left">
-                        admin@neuro.uz<br />
-                        info@neuro.uz
-                      </p>
+                      <div className="text-gray-600 text-left space-y-1">
+                        {adminData.siteSettings.emails.map((email, index) => (
+                          <p key={index}>{email}</p>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
@@ -488,12 +504,12 @@ export const ContactPage = () => {
                     </div>
                     <div className="text-left">
                       <h3 className="font-semibold text-gray-900 mb-1 text-left">Режим работы</h3>
-                      <p className="text-gray-600 text-left">
-                        Понедельник - Пятница: 8:00 - 18:00<br />
-                        Суббота: 9:00 - 15:00<br />
-                        Воскресенье: Выходной<br />
-                        <span className="text-red-600 font-medium">Экстренная помощь: 24/7</span>
-                      </p>
+                      <div className="text-gray-600 text-left space-y-1">
+                        <p>Понедельник - Пятница: {adminData.siteSettings.workingHours.weekdays}</p>
+                        <p>Суббота: {adminData.siteSettings.workingHours.saturday}</p>
+                        <p>Воскресенье: {adminData.siteSettings.workingHours.sunday}</p>
+                        <p className="text-red-600 font-medium">Экстренная помощь: 24/7</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -670,7 +686,7 @@ export const ContactPage = () => {
   );
 };
 
-// Запись на прием
+// Запись на прием - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const AppointmentPage = () => {
   const [step, setStep] = useState(1);
   const [appointmentData, setAppointmentData] = useState({
@@ -690,6 +706,8 @@ export const AppointmentPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
+  const { adminData } = useAdmin();
+  const doctors = adminData?.doctors || siteData.doctors;
 
   const timeSlots = [
     '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
@@ -815,10 +833,10 @@ export const AppointmentPage = () => {
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Врач
+                      Врач ({doctors.length} доступно)
                     </label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {siteData.doctors.map((doctor) => (
+                      {doctors.map((doctor) => (
                         <button
                           key={doctor.id}
                           onClick={() => setAppointmentData({...appointmentData, doctor: doctor.name})}
