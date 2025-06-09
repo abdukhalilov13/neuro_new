@@ -1699,33 +1699,87 @@ export const AdminPanel = () => {
 
             {activeTab === 'gallery' && (
               <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Управление галереей</h2>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900">Управление галереей</h2>
+                  <button 
+                    onClick={() => {
+                      const url = prompt('Введите URL изображения:');
+                      const alt = prompt('Введите описание изображения:');
+                      if (url && alt) {
+                        const newId = Math.max(...galleryImages.map(img => img.id)) + 1;
+                        setGalleryImages([...galleryImages, { id: newId, url, alt }]);
+                        alert('Изображение добавлено в галерею!');
+                      }
+                    }}
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Добавить изображение</span>
+                  </button>
+                </div>
                 
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center mb-6">
                   <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                   <p className="text-gray-600 mb-2">Перетащите изображения сюда или</p>
-                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg">
+                  <button 
+                    onClick={() => {
+                      const url = prompt('Введите URL изображения:');
+                      const alt = prompt('Введите описание изображения:');
+                      if (url && alt) {
+                        const newId = Math.max(...galleryImages.map(img => img.id)) + 1;
+                        setGalleryImages([...galleryImages, { id: newId, url, alt }]);
+                        alert('Изображение добавлено в галерею!');
+                      }
+                    }}
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg"
+                  >
                     Выберите файлы
                   </button>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {galleryImages.map(image => (
-                    <div key={image.id} className="relative">
+                    <div key={image.id} className="relative group">
                       <img
                         src={image.url}
                         alt={image.alt}
                         className="w-full h-32 object-cover rounded-lg"
                       />
-                      <button 
-                        onClick={() => removeGalleryImage(image.id)}
-                        className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
+                      <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                        <div className="flex space-x-2">
+                          <button 
+                            onClick={() => {
+                              const newAlt = prompt('Измените описание:', image.alt);
+                              if (newAlt !== null) {
+                                setGalleryImages(galleryImages.map(img => 
+                                  img.id === image.id ? {...img, alt: newAlt} : img
+                                ));
+                                alert('Описание обновлено!');
+                              }
+                            }}
+                            className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button 
+                            onClick={() => removeGalleryImage(image.id)}
+                            className="p-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 mt-2 text-center">{image.alt}</p>
                     </div>
                   ))}
                 </div>
+
+                {galleryImages.length === 0 && (
+                  <div className="text-center py-8">
+                    <ImageIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                    <p className="text-gray-500">Галерея пуста. Добавьте первое изображение!</p>
+                  </div>
+                )}
               </div>
             )}
 
