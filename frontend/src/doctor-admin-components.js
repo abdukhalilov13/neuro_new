@@ -1669,6 +1669,463 @@ export const AdminPanel = () => {
             </motion.div>
           </motion.div>
         )}
+
+        {/* Модальное окно отделений */}
+        {isDepartmentModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 w-full max-w-md"
+            >
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">
+                {editingDepartment ? 'Редактировать отделение' : 'Добавить отделение'}
+              </h3>
+              <form onSubmit={handleDepartmentSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Название</label>
+                  <input
+                    type="text"
+                    required
+                    value={newDepartment.name}
+                    onChange={(e) => setNewDepartment({...newDepartment, name: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Описание</label>
+                  <textarea
+                    required
+                    rows={3}
+                    value={newDepartment.description}
+                    onChange={(e) => setNewDepartment({...newDepartment, description: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div className="flex space-x-4 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+                  >
+                    {editingDepartment ? 'Обновить' : 'Создать'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsDepartmentModalOpen(false);
+                      setEditingDepartment(null);
+                      setNewDepartment({ name: '', description: '', icon: 'Brain', color: 'from-blue-500 to-blue-600' });
+                    }}
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                  >
+                    Отмена
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* Модальное окно врачей */}
+        {isDoctorModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto"
+            >
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">
+                {editingDoctor ? 'Редактировать врача' : 'Добавить врача'}
+              </h3>
+              <form onSubmit={handleDoctorSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Имя</label>
+                  <input
+                    type="text"
+                    required
+                    value={newDoctor.name}
+                    onChange={(e) => setNewDoctor({...newDoctor, name: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Специализация</label>
+                  <input
+                    type="text"
+                    required
+                    value={newDoctor.specialization}
+                    onChange={(e) => setNewDoctor({...newDoctor, specialization: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Отделение</label>
+                  <select
+                    value={newDoctor.departmentId}
+                    onChange={(e) => setNewDoctor({...newDoctor, departmentId: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="">Выберите отделение</option>
+                    {departments.map((dept) => (
+                      <option key={dept.id} value={dept.id}>{dept.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Опыт</label>
+                  <input
+                    type="text"
+                    required
+                    value={newDoctor.experience}
+                    onChange={(e) => setNewDoctor({...newDoctor, experience: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input
+                    type="email"
+                    required
+                    value={newDoctor.email}
+                    onChange={(e) => setNewDoctor({...newDoctor, email: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Телефон</label>
+                  <input
+                    type="tel"
+                    required
+                    value={newDoctor.phone}
+                    onChange={(e) => setNewDoctor({...newDoctor, phone: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Время приема</label>
+                  <input
+                    type="text"
+                    required
+                    value={newDoctor.reception}
+                    onChange={(e) => setNewDoctor({...newDoctor, reception: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    placeholder="Пн-Пт 9:00-17:00"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">URL фото</label>
+                  <input
+                    type="url"
+                    required
+                    value={newDoctor.image}
+                    onChange={(e) => setNewDoctor({...newDoctor, image: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div className="flex space-x-4 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+                  >
+                    {editingDoctor ? 'Обновить' : 'Создать'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsDoctorModalOpen(false);
+                      setEditingDoctor(null);
+                      setNewDoctor({ name: '', specialization: '', experience: '', image: '', email: '', phone: '', reception: '', departmentId: '' });
+                    }}
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                  >
+                    Отмена
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* Модальное окно новостей */}
+        {isNewsModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+            >
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">
+                {editingNews ? 'Редактировать новость' : 'Добавить новость'}
+              </h3>
+              <form onSubmit={handleNewsSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Заголовок</label>
+                  <input
+                    type="text"
+                    required
+                    value={newNews.title}
+                    onChange={(e) => setNewNews({...newNews, title: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Краткое описание</label>
+                  <textarea
+                    required
+                    rows={2}
+                    value={newNews.excerpt}
+                    onChange={(e) => setNewNews({...newNews, excerpt: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Полный текст</label>
+                  <textarea
+                    required
+                    rows={5}
+                    value={newNews.content}
+                    onChange={(e) => setNewNews({...newNews, content: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">URL изображения</label>
+                  <input
+                    type="url"
+                    required
+                    value={newNews.image}
+                    onChange={(e) => setNewNews({...newNews, image: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div className="flex space-x-4 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+                  >
+                    {editingNews ? 'Обновить' : 'Создать'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsNewsModalOpen(false);
+                      setEditingNews(null);
+                      setNewNews({ title: '', excerpt: '', content: '', image: '' });
+                    }}
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                  >
+                    Отмена
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* Модальное окно аккаунтов */}
+        {isAccountModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 w-full max-w-md"
+            >
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">
+                {editingAccount ? 'Редактировать аккаунт' : 'Создать аккаунт'}
+              </h3>
+              <form onSubmit={handleAccountSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Имя</label>
+                  <input
+                    type="text"
+                    required
+                    value={newAccount.name}
+                    onChange={(e) => setNewAccount({...newAccount, name: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input
+                    type="email"
+                    required
+                    value={newAccount.email}
+                    onChange={(e) => setNewAccount({...newAccount, email: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Роль</label>
+                  <select
+                    value={newAccount.role}
+                    onChange={(e) => setNewAccount({...newAccount, role: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="doctor">Врач</option>
+                    <option value="admin">Администратор</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {editingAccount ? 'Новый пароль (оставьте пустым, чтобы не менять)' : 'Пароль'}
+                  </label>
+                  <input
+                    type="password"
+                    required={!editingAccount}
+                    value={newAccount.password}
+                    onChange={(e) => setNewAccount({...newAccount, password: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div className="flex space-x-4 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+                  >
+                    {editingAccount ? 'Обновить' : 'Создать'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsAccountModalOpen(false);
+                      setEditingAccount(null);
+                      setNewAccount({ name: '', email: '', role: 'doctor', password: '' });
+                    }}
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                  >
+                    Отмена
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* Модальное окно руководства */}
+        {isLeadershipModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+            >
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">
+                {editingLeadership ? 'Редактировать руководителя' : 'Добавить руководителя'}
+              </h3>
+              <form onSubmit={handleLeadershipSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Имя</label>
+                  <input
+                    type="text"
+                    required
+                    value={newLeadership.name}
+                    onChange={(e) => setNewLeadership({...newLeadership, name: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Должность</label>
+                  <input
+                    type="text"
+                    required
+                    value={newLeadership.position}
+                    onChange={(e) => setNewLeadership({...newLeadership, position: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input
+                    type="email"
+                    required
+                    value={newLeadership.email}
+                    onChange={(e) => setNewLeadership({...newLeadership, email: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Телефон</label>
+                  <input
+                    type="tel"
+                    required
+                    value={newLeadership.phone}
+                    onChange={(e) => setNewLeadership({...newLeadership, phone: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">URL фото</label>
+                  <input
+                    type="url"
+                    required
+                    value={newLeadership.image}
+                    onChange={(e) => setNewLeadership({...newLeadership, image: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Биография</label>
+                  <textarea
+                    required
+                    rows={5}
+                    value={newLeadership.biography}
+                    onChange={(e) => setNewLeadership({...newLeadership, biography: e.target.value})}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+                <div className="flex space-x-4 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+                  >
+                    {editingLeadership ? 'Обновить' : 'Создать'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsLeadershipModalOpen(false);
+                      setEditingLeadership(null);
+                      setNewLeadership({ name: '', position: '', image: '', email: '', phone: '', biography: '' });
+                    }}
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                  >
+                    Отмена
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );
