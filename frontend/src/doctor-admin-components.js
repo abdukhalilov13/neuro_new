@@ -1736,28 +1736,60 @@ export const AdminPanel = () => {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="p-4 bg-blue-50 rounded-lg">
-                      <h3 className="font-semibold text-blue-900 mb-2">Посещения за месяц</h3>
-                      <p className="text-3xl font-bold text-blue-600">24,567</p>
-                      <p className="text-sm text-blue-700">+12% к прошлому месяцу</p>
+                      <h3 className="font-semibold text-blue-900 mb-2">Записи на прием</h3>
+                      <p className="text-3xl font-bold text-blue-600">{mockAppointments.length}</p>
+                      <p className="text-sm text-blue-700">Всего записей в системе</p>
                     </div>
                     
                     <div className="p-4 bg-green-50 rounded-lg">
-                      <h3 className="font-semibold text-green-900 mb-2">Записей на прием</h3>
-                      <p className="text-3xl font-bold text-green-600">342</p>
-                      <p className="text-sm text-green-700">+8% к прошлому месяцу</p>
+                      <h3 className="font-semibold text-green-900 mb-2">Подтвержденные</h3>
+                      <p className="text-3xl font-bold text-green-600">
+                        {mockAppointments.filter(apt => apt.status === 'confirmed').length}
+                      </p>
+                      <p className="text-sm text-green-700">Из общего количества</p>
                     </div>
                     
                     <div className="p-4 bg-purple-50 rounded-lg">
-                      <h3 className="font-semibold text-purple-900 mb-2">Популярные услуги</h3>
-                      <p className="text-lg font-bold text-purple-600">МРТ головного мозга</p>
-                      <p className="text-sm text-purple-700">156 запросов</p>
+                      <h3 className="font-semibold text-purple-900 mb-2">Активные врачи</h3>
+                      <p className="text-3xl font-bold text-purple-600">{doctors.length}</p>
+                      <p className="text-sm text-purple-700">Врачей в штате</p>
                     </div>
                     
                     <div className="p-4 bg-orange-50 rounded-lg">
-                      <h3 className="font-semibold text-orange-900 mb-2">Время на сайте</h3>
-                      <p className="text-3xl font-bold text-orange-600">4:32</p>
-                      <p className="text-sm text-orange-700">среднее время сессии</p>
+                      <h3 className="font-semibold text-orange-900 mb-2">Отделения</h3>
+                      <p className="text-3xl font-bold text-orange-600">{departments.length}</p>
+                      <p className="text-sm text-orange-700">Действующих отделений</p>
                     </div>
+
+                    <div className="p-4 bg-indigo-50 rounded-lg">
+                      <h3 className="font-semibold text-indigo-900 mb-2">Новости</h3>
+                      <p className="text-3xl font-bold text-indigo-600">{news.length}</p>
+                      <p className="text-sm text-indigo-700">Опубликованных новостей</p>
+                    </div>
+
+                    <div className="p-4 bg-pink-50 rounded-lg">
+                      <h3 className="font-semibold text-pink-900 mb-2">Аккаунты</h3>
+                      <p className="text-3xl font-bold text-pink-600">
+                        {accounts.filter(acc => acc.status === 'active').length}
+                      </p>
+                      <p className="text-sm text-pink-700">Активных пользователей</p>
+                    </div>
+
+                    <div className="p-4 bg-teal-50 rounded-lg">
+                      <h3 className="font-semibold text-teal-900 mb-2">Руководство</h3>
+                      <p className="text-3xl font-bold text-teal-600">{leadership.length}</p>
+                      <p className="text-sm text-teal-700">Членов руководства</p>
+                    </div>
+
+                    <div className="p-4 bg-yellow-50 rounded-lg">
+                      <h3 className="font-semibold text-yellow-900 mb-2">Галерея</h3>
+                      <p className="text-3xl font-bold text-yellow-600">{galleryImages.length}</p>
+                      <p className="text-sm text-yellow-700">Изображений в галерее</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
                   </div>
                 </div>
               </div>
