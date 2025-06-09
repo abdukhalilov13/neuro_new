@@ -322,7 +322,6 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 
 // Полноценная админ-панель
 export const AdminPanel = () => {
-  const { adminData } = useAdmin();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [activeTab, setActiveTab] = useState('dashboard');
