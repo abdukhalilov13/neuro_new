@@ -495,11 +495,13 @@ export const AdminPanel = () => {
   const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false);
   const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
+  const [isLeadershipModalOpen, setIsLeadershipModalOpen] = useState(false);
   const [editingService, setEditingService] = useState(null);
   const [editingDepartment, setEditingDepartment] = useState(null);
   const [editingDoctor, setEditingDoctor] = useState(null);
   const [editingNews, setEditingNews] = useState(null);
   const [editingAccount, setEditingAccount] = useState(null);
+  const [editingLeadership, setEditingLeadership] = useState(null);
   
   // Данные отделений
   const [departments, setDepartments] = useState(siteData.departments);
