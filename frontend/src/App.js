@@ -40,6 +40,7 @@ function App() {
               <Route path="/test-accounts" element={<TestAccountsPage />} />
               <Route path="/vacancies" element={<VacanciesPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="*" element={<HomePage />} />
             </Routes>
           </BrowserRouter>
         </div>
