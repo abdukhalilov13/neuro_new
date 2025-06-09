@@ -703,6 +703,28 @@ export const AdminPanel = () => {
     { id: 3, name: 'Доктор Асадуллаев', email: 'asadullaev@neuro.uz', role: 'doctor', status: 'inactive', createdAt: '2025-02-01' }
   ]);
 
+  // Руководство центра
+  const [leadership, setLeadership] = useState([
+    {
+      id: 1,
+      name: 'Кариев Габрат Маратович',
+      position: 'Директор центра',
+      image: 'https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg',
+      phone: '+998 71 264-96-10',
+      email: 'director@neuro.uz',
+      biography: 'Заслуженный врач Республики Узбекистан, доктор медицинских наук'
+    },
+    {
+      id: 2,
+      name: 'Асадуллаев Улугбек Максудович',
+      position: 'Заместитель директора по научной работе',
+      image: 'https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg',
+      phone: '+998 71 264-96-15',
+      email: 'asadullaev@neuro.uz',
+      biography: 'Кандидат медицинских наук, старший научный сотрудник'
+    }
+  ]);
+
   const [newService, setNewService] = useState({ name: '', category: '', price: '', description: '' });
   const [newDepartment, setNewDepartment] = useState({ name: '', description: '', icon: 'Brain', color: 'from-blue-500 to-blue-600' });
   const [newDoctor, setNewDoctor] = useState({ name: '', specialization: '', experience: '', image: '', email: '', phone: '', reception: '', departmentId: '' });
