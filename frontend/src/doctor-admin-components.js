@@ -795,6 +795,11 @@ export const AdminPanel = () => {
     'general', 'building', 'equipment', 'surgery', 'staff', 'events'
   ]);
   
+  // Состояния для загрузки файлов
+  const [uploadType, setUploadType] = useState('url');
+  const [filePreview, setFilePreview] = useState(null);
+  const [uploadingFile, setUploadingFile] = useState(false);
+  
   // Формы для новых записей
   const [newDepartment, setNewDepartment] = useState({ 
     name: '', 
