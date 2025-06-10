@@ -29,6 +29,7 @@ import {
   LogOut,
   Building,
   UserCheck,
+  Crown,
   BookOpen,
   ImageIcon,
   Shield,
