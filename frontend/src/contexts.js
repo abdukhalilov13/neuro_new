@@ -131,6 +131,7 @@ export const AdminProvider = ({ children }) => {
   const [news, setNews] = useState([]);
   const [services, setServices] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   
   // Fetch data from API on component mount
   useEffect(() => {
