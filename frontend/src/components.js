@@ -206,13 +206,13 @@ export const HomePage = () => {
                   to="/appointment"
                   className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 text-center"
                 >
-                  Записаться на прием
+                  {t('bookAppointment')}
                 </Link>
                 <Link
                   to="/about"
                   className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-xl font-semibold transition-all text-center"
                 >
-                  О центре
+                  {t('aboutCenter')}
                 </Link>
               </div>
             </motion.div>
