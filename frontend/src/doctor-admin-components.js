@@ -243,7 +243,6 @@ export const DoctorDashboard = () => {
             {[
               { id: 'dashboard', label: 'Панель управления', icon: BarChart3 },
               { id: 'appointments', label: 'Записи на прием', icon: Calendar },
-              { id: 'patients', label: 'Пациенты', icon: Users },
               { id: 'schedule', label: 'Расписание', icon: Clock }
             ].map((tab) => (
               <button
