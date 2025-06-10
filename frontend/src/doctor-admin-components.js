@@ -349,6 +349,5 @@ const DoctorDashboard = () => {
   );
 };
 
-export { DoctorDashboard, AdminPanel };
 export { DoctorDashboard };
 export default DoctorDashboard;
