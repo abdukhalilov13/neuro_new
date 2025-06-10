@@ -2612,34 +2612,21 @@ export const AdminPanel = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
               />
           </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Опыт работы ({languageNames[currentAdminLanguage]})
+            </label>
+            <textarea
+              rows="3"
+              required
+              value={newDoctor[`experience_${currentAdminLanguage}`] || ''}
+              onChange={(e) => setNewDoctor({...newDoctor, [`experience_${currentAdminLanguage}`]: e.target.value})}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
           
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Опыт работы</label>
-              <input
-                type="text"
-                required
-                value={newDoctor.experience}
-                onChange={(e) => setNewDoctor({...newDoctor, experience: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                placeholder="15+ лет"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Отделение</label>
-              <select
-                value={newDoctor.departmentId}
-                onChange={(e) => setNewDoctor({...newDoctor, departmentId: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-              >
-                <option value="">Не привязан к отделению</option>
-                {departments.map(dept => (
-                  <option key={dept.id} value={dept.id}>{dept.name}</option>
-                ))}
-              </select>
-            </div>
-          </div>
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Фотография врача</label>
