@@ -381,19 +381,21 @@ export const AdminProvider = ({ children }) => {
   };
 
   const adminData = {
-    departments,
-    doctors,
-    news,
-    services,
+    departments: departments || [],
+    doctors: doctors || [],
+    news: news || [],
+    services: services || [],
     accounts,
     leadership,
-    galleryImages,
+    galleryImages: galleryImages || [],
     siteSettings,
-    seoSettings
+    seoSettings,
+    isLoading
   };
 
   const value = {
     adminData,
+    isLoading,
     // Функции для услуг
     addService,
     updateService,
