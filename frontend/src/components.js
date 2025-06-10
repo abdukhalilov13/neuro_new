@@ -559,10 +559,9 @@ export const AboutPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">О центре</h1>
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">{t('aboutPageTitle')}</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Республиканский Научный Центр Нейрохирургии - ведущее медицинское учреждение 
-              Центральной Азии в области нейрохирургии
+              {t('aboutPageSubtitle')}
             </p>
           </motion.div>
 
