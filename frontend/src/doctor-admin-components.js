@@ -910,7 +910,7 @@ export const AdminPanel = () => {
   });
   const [newGalleryImage, setNewGalleryImage] = useState({ 
     url: '', 
-    alt: '', 
+    alt_ru: '', alt_uz: '', alt_en: '',
     category: 'general' 
   });
 
