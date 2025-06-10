@@ -17,6 +17,7 @@ export const LanguageProvider = ({ children }) => {
 
   const translations = {
     ru: {
+      // Navigation
       home: 'Главная',
       about: 'О центре',
       departments: 'Отделения',
@@ -29,6 +30,8 @@ export const LanguageProvider = ({ children }) => {
       gallery: 'Галерея',
       centerOfNeurosurgery: 'Центр Нейрохирургии',
       navigation: 'Навигация',
+      
+      // Working hours and contact
       workingHours: 'Режим работы',
       mondayFriday: 'Пн-Пт',
       saturday: 'Суббота',
@@ -39,9 +42,104 @@ export const LanguageProvider = ({ children }) => {
       footerDescription: 'Ведущий центр нейрохирургии в Центральной Азии с более чем 25-летним опытом.',
       consultationBooking: 'Записаться на консультацию',
       weekdaysReception: 'Пн-Пт 9:00-17:00',
-      tuesdaySaturdayReception: 'Вт-Сб 9:00-17:00'
+      tuesdaySaturdayReception: 'Вт-Сб 9:00-17:00',
+      
+      // Homepage
+      leadingCenter: 'Ведущий центр нейрохирургии в Центральной Азии',
+      yearsExperience: 'Более 25 лет опыта в лечении сложнейших заболеваний нервной системы',
+      bookAppointment: 'Записаться на прием',
+      aboutCenter: 'О центре',
+      contactUs: 'Связаться с нами',
+      address: 'Адрес',
+      emergency24: 'Экстренная помощь 24/7',
+      
+      // Statistics
+      centerInNumbers: 'Центр в цифрах',
+      factsAchievements: 'Факты и достижения нашего центра',
+      totalBeds: 'Общих койко-мест',
+      plannedPlaces: 'Плановых мест',
+      childrenPlaces: 'Детских мест',
+      patientsPerYear: 'Пациентов в год',
+      
+      // Departments
+      ourDepartments: 'Наши отделения',
+      specializedDivisions: 'Специализированные подразделения центра',
+      learnMore: 'Подробнее',
+      allDepartments: 'Все отделения',
+      
+      // News
+      latestNews: 'Последние новости',
+      centerEvents: 'События и достижения центра',
+      readMore: 'Читать далее',
+      allNews: 'Все новости',
+      
+      // About page
+      aboutPageTitle: 'О центре',
+      aboutPageSubtitle: 'Республиканский Научный Центр Нейрохирургии - ведущее медицинское учреждение Центральной Азии в области нейрохирургии',
+      historyMission: 'История и миссия',
+      associationTasks: 'Задачи Ассоциации:',
+      yearFounded: 'Год основания',
+      centerLeadership: 'Руководство центра',
+      experiencedSpecialists: 'Опытные специалисты, возглавляющие развитие нейрохирургии в республике',
+      readBiography: 'Читать биографию',
+      biography: 'Биография',
+      
+      // Services
+      ourServices: 'Наши услуги',
+      medicalServices: 'Медицинские услуги центра',
+      consultations: 'Консультации',
+      diagnostics: 'Диагностика',
+      surgery: 'Хирургия',
+      price: 'Цена',
+      currency: 'сум',
+      
+      // Doctors
+      ourDoctors: 'Наши врачи',
+      experiencedSpecialistsSubtitle: 'Опытные специалисты с многолетним стажем',
+      experience: 'Опыт',
+      years: 'лет',
+      reception: 'Прием',
+      
+      // Common
+      phone: 'Телефон',
+      email: 'Email',
+      save: 'Сохранить',
+      cancel: 'Отмена',
+      edit: 'Редактировать',
+      delete: 'Удалить',
+      add: 'Добавить',
+      search: 'Поиск',
+      filter: 'Фильтр',
+      close: 'Закрыть',
+      loading: 'Загрузка...',
+      
+      // Admin panel
+      adminPanel: 'Админ-панель',
+      login: 'Войти',
+      logout: 'Выйти',
+      dashboard: 'Панель управления',
+      statistics: 'Статистика',
+      events: 'События',
+      settings: 'Настройки',
+      
+      // Events
+      upcomingEvents: 'Ближайшие события',
+      addEvent: 'Добавить событие',
+      editEvent: 'Редактировать событие',
+      eventTitle: 'Название события',
+      eventDate: 'Дата',
+      eventTime: 'Время',
+      eventLocation: 'Место проведения',
+      eventType: 'Тип события',
+      eventDescription: 'Описание',
+      conference: 'Конференция',
+      openDay: 'День открытых дверей',
+      masterclass: 'Мастер-класс',
+      seminar: 'Семинар',
+      update: 'Обновить'
     },
     uz: {
+      // Navigation
       home: 'Bosh sahifa',
       about: 'Markaz haqida',
       departments: 'Bo\'limlar',
@@ -54,6 +152,8 @@ export const LanguageProvider = ({ children }) => {
       gallery: 'Galereya',
       centerOfNeurosurgery: 'Neyroxirurgiya Markazi',
       navigation: 'Navigatsiya',
+      
+      // Working hours and contact
       workingHours: 'Ish vaqti',
       mondayFriday: 'Du-Ju',
       saturday: 'Shanba',
@@ -64,9 +164,104 @@ export const LanguageProvider = ({ children }) => {
       footerDescription: 'Markaziy Osiyodagi yetakchi neyroxirurgiya markazi, 25 yildan ortiq tajriba.',
       consultationBooking: 'Konsultatsiyaga yozilish',
       weekdaysReception: 'Du-Ju 9:00-17:00',
-      tuesdaySaturdayReception: 'Se-Sh 9:00-17:00'
+      tuesdaySaturdayReception: 'Se-Sh 9:00-17:00',
+      
+      // Homepage
+      leadingCenter: 'Markaziy Osiyodagi yetakchi neyroxirurgiya markazi',
+      yearsExperience: '25 yildan ortiq nerv sistemasi kasalliklarini davolash tajribasi',
+      bookAppointment: 'Qabulga yozilish',
+      aboutCenter: 'Markaz haqida',
+      contactUs: 'Bog\'lanish',
+      address: 'Manzil',
+      emergency24: 'Shoshilinch yordam 24/7',
+      
+      // Statistics
+      centerInNumbers: 'Markaz raqamlarda',
+      factsAchievements: 'Markazimizning faktlari va yutuqlari',
+      totalBeds: 'Jami yotoq o\'rinlari',
+      plannedPlaces: 'Rejalashtirilgan o\'rinlar',
+      childrenPlaces: 'Bolalar o\'rinlari',
+      patientsPerYear: 'Yiliga bemorlar',
+      
+      // Departments
+      ourDepartments: 'Bizning bo\'limlar',
+      specializedDivisions: 'Markazning ixtisoslashgan bo\'limlari',
+      learnMore: 'Batafsil',
+      allDepartments: 'Barcha bo\'limlar',
+      
+      // News
+      latestNews: 'So\'nggi yangiliklar',
+      centerEvents: 'Markaz voqealari va yutuqlari',
+      readMore: 'Davomini o\'qish',
+      allNews: 'Barcha yangiliklar',
+      
+      // About page
+      aboutPageTitle: 'Markaz haqida',
+      aboutPageSubtitle: 'Respublika Neyroxirurgiya Ilmiy Markazi - Markaziy Osiyodagi neyroxirurgiya sohasidagi yetakchi tibbiyot muassasasi',
+      historyMission: 'Tarix va missiya',
+      associationTasks: 'Assotsiatsiya vazifalari:',
+      yearFounded: 'Tashkil etilgan yil',
+      centerLeadership: 'Markaz rahbariyati',
+      experiencedSpecialists: 'Respublikada neyroxirurgiyani rivojlantirishga rahbarlik qilayotgan tajribali mutaxassislar',
+      readBiography: 'Tarjimai holni o\'qish',
+      biography: 'Tarjimai hol',
+      
+      // Services
+      ourServices: 'Bizning xizmatlar',
+      medicalServices: 'Markaz tibbiy xizmatlari',
+      consultations: 'Konsultatsiyalar',
+      diagnostics: 'Diagnostika',
+      surgery: 'Jarrohlik',
+      price: 'Narx',
+      currency: 'so\'m',
+      
+      // Doctors
+      ourDoctors: 'Bizning shifokorlar',
+      experiencedSpecialistsSubtitle: 'Ko\'p yillik tajribaga ega mutaxassislar',
+      experience: 'Tajriba',
+      years: 'yil',
+      reception: 'Qabul',
+      
+      // Common
+      phone: 'Telefon',
+      email: 'Email',
+      save: 'Saqlash',
+      cancel: 'Bekor qilish',
+      edit: 'Tahrirlash',
+      delete: 'O\'chirish',
+      add: 'Qo\'shish',
+      search: 'Qidiruv',
+      filter: 'Filtr',
+      close: 'Yopish',
+      loading: 'Yuklanmoqda...',
+      
+      // Admin panel
+      adminPanel: 'Admin-panel',
+      login: 'Kirish',
+      logout: 'Chiqish',
+      dashboard: 'Boshqaruv paneli',
+      statistics: 'Statistika',
+      events: 'Tadbirlar',
+      settings: 'Sozlamalar',
+      
+      // Events
+      upcomingEvents: 'Yaqinlashayotgan tadbirlar',
+      addEvent: 'Tadbir qo\'shish',
+      editEvent: 'Tadbirni tahrirlash',
+      eventTitle: 'Tadbir nomi',
+      eventDate: 'Sana',
+      eventTime: 'Vaqt',
+      eventLocation: 'O\'tkaziladigan joy',
+      eventType: 'Tadbir turi',
+      eventDescription: 'Tavsif',
+      conference: 'Konferentsiya',
+      openDay: 'Ochiq eshiklar kuni',
+      masterclass: 'Masterкlass',
+      seminar: 'Seminar',
+      update: 'Yangilash'
     },
     en: {
+      // Navigation
       home: 'Home',
       about: 'About',
       departments: 'Departments',
@@ -79,6 +274,8 @@ export const LanguageProvider = ({ children }) => {
       gallery: 'Gallery',
       centerOfNeurosurgery: 'Center of Neurosurgery',
       navigation: 'Navigation',
+      
+      // Working hours and contact
       workingHours: 'Working Hours',
       mondayFriday: 'Mon-Fri',
       saturday: 'Saturday',
@@ -89,7 +286,101 @@ export const LanguageProvider = ({ children }) => {
       footerDescription: 'Leading neurosurgery center in Central Asia with over 25 years of experience.',
       consultationBooking: 'Book consultation',
       weekdaysReception: 'Mon-Fri 9:00-17:00',
-      tuesdaySaturdayReception: 'Tue-Sat 9:00-17:00'
+      tuesdaySaturdayReception: 'Tue-Sat 9:00-17:00',
+      
+      // Homepage
+      leadingCenter: 'Leading neurosurgery center in Central Asia',
+      yearsExperience: 'Over 25 years of experience in treating complex nervous system diseases',
+      bookAppointment: 'Book appointment',
+      aboutCenter: 'About center',
+      contactUs: 'Contact us',
+      address: 'Address',
+      emergency24: 'Emergency help 24/7',
+      
+      // Statistics
+      centerInNumbers: 'Center in numbers',
+      factsAchievements: 'Facts and achievements of our center',
+      totalBeds: 'Total beds',
+      plannedPlaces: 'Planned places',
+      childrenPlaces: 'Children places',
+      patientsPerYear: 'Patients per year',
+      
+      // Departments
+      ourDepartments: 'Our departments',
+      specializedDivisions: 'Specialized divisions of the center',
+      learnMore: 'Learn more',
+      allDepartments: 'All departments',
+      
+      // News
+      latestNews: 'Latest news',
+      centerEvents: 'Center events and achievements',
+      readMore: 'Read more',
+      allNews: 'All news',
+      
+      // About page
+      aboutPageTitle: 'About center',
+      aboutPageSubtitle: 'Republican Scientific Center of Neurosurgery - leading medical institution in Central Asia in the field of neurosurgery',
+      historyMission: 'History and mission',
+      associationTasks: 'Association tasks:',
+      yearFounded: 'Year founded',
+      centerLeadership: 'Center leadership',
+      experiencedSpecialists: 'Experienced specialists leading the development of neurosurgery in the republic',
+      readBiography: 'Read biography',
+      biography: 'Biography',
+      
+      // Services
+      ourServices: 'Our services',
+      medicalServices: 'Medical services of the center',
+      consultations: 'Consultations',
+      diagnostics: 'Diagnostics',
+      surgery: 'Surgery',
+      price: 'Price',
+      currency: 'UZS',
+      
+      // Doctors
+      ourDoctors: 'Our doctors',
+      experiencedSpecialistsSubtitle: 'Experienced specialists with many years of experience',
+      experience: 'Experience',
+      years: 'years',
+      reception: 'Reception',
+      
+      // Common
+      phone: 'Phone',
+      email: 'Email',
+      save: 'Save',
+      cancel: 'Cancel',
+      edit: 'Edit',
+      delete: 'Delete',
+      add: 'Add',
+      search: 'Search',
+      filter: 'Filter',
+      close: 'Close',
+      loading: 'Loading...',
+      
+      // Admin panel
+      adminPanel: 'Admin panel',
+      login: 'Login',
+      logout: 'Logout',
+      dashboard: 'Dashboard',
+      statistics: 'Statistics',
+      events: 'Events',
+      settings: 'Settings',
+      
+      // Events
+      upcomingEvents: 'Upcoming events',
+      addEvent: 'Add event',
+      editEvent: 'Edit event',
+      eventTitle: 'Event title',
+      eventDate: 'Date',
+      eventTime: 'Time',
+      eventLocation: 'Location',
+      eventType: 'Event type',
+      eventDescription: 'Description',
+      conference: 'Conference',
+      openDay: 'Open day',
+      masterclass: 'Masterclass',
+      seminar: 'Seminar',
+      update: 'Update'
     }
   };
 
