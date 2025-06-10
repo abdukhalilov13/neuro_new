@@ -712,14 +712,26 @@ export const AdminPanel = () => {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [activeTab, setActiveTab] = useState('dashboard');
   
-  // Настройки сайта
-  const [seoSettings, setSeoSettings] = useState(adminData.seoSettings || {
+  // Данные состояния - ИСПОЛЬЗУЕМ ИЗ КОНТЕКСТА
+  const { adminData, 
+    addService, updateService, deleteService,
+    addDepartment, updateDepartment, deleteDepartment,
+    addDoctor, updateDoctor, deleteDoctor,
+    addNews, updateNews, deleteNews,
+    addAccount, updateAccount, deleteAccount, toggleAccountStatus,
+    addLeadership, updateLeadership, deleteLeadership,
+    addGalleryImage, updateGalleryImage, deleteGalleryImage,
+    updateSiteSettings, updateSeoSettings
+  } = useAdmin();
+  
+  // Настройки сайта - ИНИЦИАЛИЗИРУЕМ ПОСЛЕ ПОЛУЧЕНИЯ ДАННЫХ
+  const [seoSettings, setSeoSettings] = useState(adminData?.seoSettings || {
     title: 'Республиканский Научный Центр Нейрохирургии',
     description: 'Ведущий центр нейрохирургии в Центральной Азии. Более 25 лет опыта в лечении заболеваний нервной системы.',
     keywords: 'нейрохирургия, мозг, спинной мозг, операции, Узбекистан, Ташкент'
   });
   
-  const [siteSettings, setSiteSettings] = useState(adminData.siteSettings || {
+  const [siteSettings, setSiteSettings] = useState(adminData?.siteSettings || {
     address: 'ул. Хумоюн, 40, Мирзо-Улугбекский район, г. Ташкент, 100142, Республика Узбекистан',
     phones: ['+998 71 264-96-10', '+998 71 264-96-09', '+998 78 113-33-78'],
     emails: ['admin@neuro.uz', 'info@neuro.uz'],
