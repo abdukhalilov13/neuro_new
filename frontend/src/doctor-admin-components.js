@@ -3362,6 +3362,118 @@ export const AdminPanel = () => {
           </div>
         </form>
       </Modal>
+
+      {/* Events Modal */}
+      <Modal
+        isOpen={isEventModalOpen}
+        onClose={() => setIsEventModalOpen(false)}
+        title={editingEvent?.id ? 'Редактировать событие' : 'Добавить событие'}
+      >
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          if (editingEvent?.id) {
+            setEvents(events.map(ev => ev.id === editingEvent.id ? editingEvent : ev));
+          } else {
+            setEvents([...events, { ...editingEvent, id: Date.now() }]);
+          }
+          setIsEventModalOpen(false);
+        }}>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Название события</label>
+              <input
+                type="text"
+                required
+                value={editingEvent?.title || ''}
+                onChange={(e) => setEditingEvent({...editingEvent, title: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                placeholder="Например: Международная конференция"
+              />
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Дата</label>
+                <input
+                  type="date"
+                  required
+                  value={editingEvent?.date || ''}
+                  onChange={(e) => setEditingEvent({...editingEvent, date: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Время</label>
+                <input
+                  type="time"
+                  required
+                  value={editingEvent?.time || ''}
+                  onChange={(e) => setEditingEvent({...editingEvent, time: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Место проведения</label>
+              <input
+                type="text"
+                required
+                value={editingEvent?.location || ''}
+                onChange={(e) => setEditingEvent({...editingEvent, location: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                placeholder="Например: Главный зал центра"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Тип события</label>
+              <select
+                required
+                value={editingEvent?.type || 'conference'}
+                onChange={(e) => setEditingEvent({...editingEvent, type: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+              >
+                <option value="conference">Конференция</option>
+                <option value="open-day">День открытых дверей</option>
+                <option value="masterclass">Мастер-класс</option>
+                <option value="seminar">Семинар</option>
+                <option value="workshop">Воркшоп</option>
+                <option value="other">Другое</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Описание</label>
+              <textarea
+                rows="3"
+                required
+                value={editingEvent?.description || ''}
+                onChange={(e) => setEditingEvent({...editingEvent, description: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                placeholder="Краткое описание события..."
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-3 mt-6 pt-6 border-t border-gray-200">
+            <button
+              type="button"
+              onClick={() => setIsEventModalOpen(false)}
+              className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            >
+              Отмена
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
+            >
+              {editingEvent?.id ? 'Обновить' : 'Добавить'}
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };
