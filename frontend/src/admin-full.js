@@ -54,11 +54,6 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 };
 
 // Admin Panel
-// Export both DoctorDashboard and AdminPanel for compatibility  
-export const DoctorDashboard = () => {
-  return <div>Doctor Dashboard - Please use /doctor-dashboard route</div>;
-};
-
 export const AdminPanel = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loginData, setLoginData] = useState({ email: '', password: '' });
