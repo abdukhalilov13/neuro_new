@@ -3,22 +3,27 @@ import requests
 import sys
 from datetime import datetime
 import uuid
+import os
+import json
 
 class NeuroUzAPITester:
-    def __init__(self, base_url="https://e4935fc8-1c5d-4af5-b8e1-d221750b0ddc.preview.emergentagent.com/api"):
+    def __init__(self, base_url=None):
+        # Read the backend URL from the frontend .env file
+        if base_url is None:
+            try:
+                with open('/app/frontend/.env', 'r') as f:
+                    for line in f:
+                        if line.startswith('REACT_APP_BACKEND_URL='):
+                            base_url = line.strip().split('=')[1].strip('"\'') + '/api'
+                            break
+            except Exception as e:
+                print(f"Error reading .env file: {str(e)}")
+                base_url = "https://e4935fc8-1c5d-4af5-b8e1-d221750b0ddc.preview.emergentagent.com/api"
+        
         self.base_url = base_url
+        print(f"Using API base URL: {self.base_url}")
         self.tests_run = 0
         self.tests_passed = 0
-        self.auth_token = None
-        self.created_ids = {
-            "services": [],
-            "departments": [],
-            "doctors": [],
-            "news": [],
-            "accounts": [],
-            "leadership": [],
-            "gallery": []
-        }
 
     def run_test(self, name, method, endpoint, expected_status, data=None, auth=False):
         """Run a single API test"""
