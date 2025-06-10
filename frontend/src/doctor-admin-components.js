@@ -712,6 +712,29 @@ export const AdminPanel = () => {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [activeTab, setActiveTab] = useState('dashboard');
   
+  // Настройки сайта
+  const [seoSettings, setSeoSettings] = useState({
+    title: '',
+    description: '',
+    keywords: ''
+  });
+  
+  const [siteSettings, setSiteSettings] = useState({
+    address: '',
+    phones: ['', '', ''],
+    emails: ['', ''],
+    workingHours: {
+      weekdays: '',
+      saturday: '',
+      sunday: ''
+    },
+    socialMedia: {
+      facebook: '',
+      instagram: '',
+      youtube: ''
+    }
+  });
+  
   // Модальные окна
   const [isDepartmentModalOpen, setIsDepartmentModalOpen] = useState(false);
   const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false);
