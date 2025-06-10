@@ -349,7 +349,7 @@ export const HomePage = () => {
                 <Calendar className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-4xl font-bold text-gray-900 mb-2">59</h3>
-              <p className="text-gray-600">Плановых мест</p>
+              <p className="text-gray-600">{t('plannedPlaces')}</p>
             </motion.div>
 
             <motion.div
