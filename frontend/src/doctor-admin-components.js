@@ -800,6 +800,21 @@ export const AdminPanel = () => {
   const [filePreview, setFilePreview] = useState(null);
   const [uploadingFile, setUploadingFile] = useState(false);
   
+  // Состояния для загрузки файлов врачей  
+  const [doctorUploadType, setDoctorUploadType] = useState('url');
+  const [doctorFilePreview, setDoctorFilePreview] = useState(null);
+  const [uploadingDoctorFile, setUploadingDoctorFile] = useState(false);
+  
+  // Состояния для загрузки файлов новостей
+  const [newsUploadType, setNewsUploadType] = useState('url');
+  const [newsFilePreview, setNewsFilePreview] = useState(null);
+  const [uploadingNewsFile, setUploadingNewsFile] = useState(false);
+  
+  // Состояния для загрузки файлов руководства
+  const [leadershipUploadType, setLeadershipUploadType] = useState('url');
+  const [leadershipFilePreview, setLeadershipFilePreview] = useState(null);
+  const [uploadingLeadershipFile, setUploadingLeadershipFile] = useState(false);
+  
   // Формы для новых записей
   const [newDepartment, setNewDepartment] = useState({ 
     name: '', 
