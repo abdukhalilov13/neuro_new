@@ -2498,12 +2498,17 @@ export const AdminPanel = () => {
               onChange={(e) => setNewGalleryImage({...newGalleryImage, category: e.target.value})}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
             >
-              <option value="general">Общее</option>
-              <option value="building">Здание</option>
-              <option value="equipment">Оборудование</option>
-              <option value="doctors">Врачи</option>
-              <option value="operations">Операции</option>
-              <option value="patients">Пациенты</option>
+              {galleryCategories.map(category => (
+                <option key={category} value={category}>
+                  {category === 'general' ? 'Общее' : 
+                   category === 'building' ? 'Здание' : 
+                   category === 'equipment' ? 'Оборудование' : 
+                   category === 'surgery' ? 'Хирургия' : 
+                   category === 'staff' ? 'Персонал' : 
+                   category === 'events' ? 'События' : 
+                   category}
+                </option>
+              ))}
             </select>
           </div>
           
