@@ -3567,3 +3567,6 @@ export const AdminPanel = () => {
     </div>
   );
 };
+
+export { AdminPanel };
+export default AdminPanel;
