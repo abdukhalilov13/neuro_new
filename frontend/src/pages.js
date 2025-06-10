@@ -496,7 +496,7 @@ export const ContactPage = () => {
               className="space-y-8"
             >
               <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 text-left">Контактная информация</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Контактная информация</h2>
                 
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
