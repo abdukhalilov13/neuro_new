@@ -2419,14 +2419,70 @@ export const AdminPanel = () => {
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">URL фотографии</label>
-            <input
-              type="url"
-              required
-              value={newDoctor.image}
-              onChange={(e) => setNewDoctor({...newDoctor, image: e.target.value})}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
+            <label className="block text-sm font-medium text-gray-700 mb-2">Фотография врача</label>
+            <div className="space-y-3">
+              {/* Выбор способа загрузки */}
+              <div className="flex space-x-4">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="doctorUploadType"
+                    value="url"
+                    checked={doctorUploadType === 'url'}
+                    onChange={(e) => setDoctorUploadType(e.target.value)}
+                    className="mr-2"
+                  />
+                  По URL
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="doctorUploadType"
+                    value="file"
+                    checked={doctorUploadType === 'file'}
+                    onChange={(e) => setDoctorUploadType(e.target.value)}
+                    className="mr-2"
+                  />
+                  Загрузить файл
+                </label>
+              </div>
+
+              {/* URL загрузка */}
+              {doctorUploadType === 'url' && (
+                <input
+                  type="url"
+                  required
+                  value={newDoctor.image}
+                  onChange={(e) => setNewDoctor({...newDoctor, image: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  placeholder="https://example.com/doctor-photo.jpg"
+                />
+              )}
+
+              {/* Файловая загрузка */}
+              {doctorUploadType === 'file' && (
+                <div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleDoctorFileUpload(e)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                  {doctorFilePreview && (
+                    <div className="mt-3">
+                      <img
+                        src={doctorFilePreview}
+                        alt="Предпросмотр"
+                        className="w-32 h-32 object-cover rounded-lg border"
+                      />
+                    </div>
+                  )}
+                  <p className="text-sm text-gray-500 mt-1">
+                    Максимальный размер: 5MB. Поддерживаемые форматы: JPG, PNG, GIF, WebP
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
           
           <div className="grid grid-cols-2 gap-4">
