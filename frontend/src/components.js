@@ -169,7 +169,7 @@ const siteData = {
 
 // Главная страница - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const HomePage = () => {
-  const { adminData } = useAdmin();
+  const { adminData, isLoading } = useAdmin();
   const departments = adminData?.departments || siteData.departments;
   const news = adminData?.news || siteData.news;
   
