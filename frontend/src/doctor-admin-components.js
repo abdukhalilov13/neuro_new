@@ -2642,7 +2642,7 @@ export const AdminPanel = () => {
               type="submit"
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
             >
-              {editingLeadership.id ? 'Обновить' : 'Добавить'}
+              {editingLeadership?.id ? 'Обновить' : 'Добавить'}
             </button>
           </div>
         </form>
