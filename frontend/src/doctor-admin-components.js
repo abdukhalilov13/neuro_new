@@ -1256,11 +1256,8 @@ export const AdminPanel = () => {
           <div className="flex space-x-8 overflow-x-auto">
             {[
               { id: 'dashboard', label: 'Панель управления', icon: BarChart3 },
-              { id: 'services', label: 'Услуги', icon: DollarSign },
-              { id: 'departments', label: 'Отделения', icon: Building },
-              { id: 'doctors', label: 'Врачи', icon: Users },
-              { id: 'news', label: 'Новости', icon: FileText },
-              { id: 'gallery', label: 'Галерея', icon: ImageIcon },
+              { id: 'services', label: 'Услуги', icon: Stethoscope },
+              { id: 'statistics', label: 'Статистика', icon: BarChart3 },
               { id: 'accounts', label: 'Аккаунты', icon: UserCheck },
               { id: 'leadership', label: 'Руководство', icon: Crown },
               { id: 'settings', label: 'Настройки', icon: Settings }
