@@ -393,8 +393,8 @@ export const HomePage = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Наши отделения</h2>
-            <p className="text-xl text-gray-600">Специализированные подразделения центра</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('ourDepartments')}</h2>
+            <p className="text-xl text-gray-600">{t('specializedDivisions')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
