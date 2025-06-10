@@ -826,7 +826,14 @@ export const AdminPanel = () => {
   const [editingStatistic, setEditingStatistic] = useState(null);
   const [isStatisticModalOpen, setIsStatisticModalOpen] = useState(false);
   
-  // Состояния для управления событиями
+  // Состояния для управления языками в админке
+  const [currentAdminLanguage, setCurrentAdminLanguage] = useState('ru');
+  const languages = ['ru', 'uz', 'en'];
+  const languageNames = {
+    ru: 'Русский',
+    uz: 'O\'zbek',
+    en: 'English'
+  };
   const [events, setEvents] = useState([
     { 
       id: 1, 
