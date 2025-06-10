@@ -3159,6 +3159,84 @@ export const AdminPanel = () => {
           </div>
         </form>
       </Modal>
+
+      {/* Statistics Modal */}
+      <Modal
+        isOpen={isStatisticModalOpen}
+        onClose={() => setIsStatisticModalOpen(false)}
+        title={editingStatistic?.id ? 'Редактировать показатель' : 'Добавить показатель'}
+      >
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          if (editingStatistic?.id) {
+            setStatistics(statistics.map(s => s.id === editingStatistic.id ? editingStatistic : s));
+          } else {
+            setStatistics([...statistics, { ...editingStatistic, id: Date.now() }]);
+          }
+          setIsStatisticModalOpen(false);
+        }}>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Название показателя</label>
+              <input
+                type="text"
+                required
+                value={editingStatistic?.title || ''}
+                onChange={(e) => setEditingStatistic({...editingStatistic, title: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="Например: Пациентов в год"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Значение</label>
+              <input
+                type="text"
+                required
+                value={editingStatistic?.value || ''}
+                onChange={(e) => setEditingStatistic({...editingStatistic, value: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="Например: 5000+"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Цвет</label>
+              <select
+                required
+                value={editingStatistic?.color || 'bg-blue-600'}
+                onChange={(e) => setEditingStatistic({...editingStatistic, color: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="bg-blue-600">Синий</option>
+                <option value="bg-green-600">Зеленый</option>
+                <option value="bg-red-600">Красный</option>
+                <option value="bg-purple-600">Фиолетовый</option>
+                <option value="bg-yellow-600">Желтый</option>
+                <option value="bg-indigo-600">Индиго</option>
+                <option value="bg-pink-600">Розовый</option>
+                <option value="bg-gray-600">Серый</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-3 mt-6 pt-6 border-t border-gray-200">
+            <button
+              type="button"
+              onClick={() => setIsStatisticModalOpen(false)}
+              className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            >
+              Отмена
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+            >
+              {editingStatistic?.id ? 'Обновить' : 'Добавить'}
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };
