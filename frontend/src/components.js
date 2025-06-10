@@ -363,7 +363,7 @@ export const HomePage = () => {
                 <Heart className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-4xl font-bold text-gray-900 mb-2">28</h3>
-              <p className="text-gray-600">Детских мест</p>
+              <p className="text-gray-600">{t('childrenPlaces')}</p>
             </motion.div>
 
             <motion.div
