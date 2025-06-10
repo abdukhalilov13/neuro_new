@@ -418,7 +418,7 @@ export const HomePage = () => {
                   to="/departments"
                   className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center"
                 >
-                  Подробнее <ChevronRight className="w-4 h-4 ml-1" />
+                  {t('learnMore')} <ChevronRight className="w-4 h-4 ml-1" />
                 </Link>
               </motion.div>
             ))}
@@ -429,7 +429,7 @@ export const HomePage = () => {
               to="/departments"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors"
             >
-              Все отделения
+              {t('allDepartments')}
             </Link>
           </div>
         </div>
