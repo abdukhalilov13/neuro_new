@@ -179,8 +179,8 @@ export const HomePage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 py-20">
+      <section className="relative min-h-[85vh] flex items-center bg-gradient-to-br from-blue-50 to-white pt-20">
+        <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Левая колонка с текстом */}
             <motion.div
