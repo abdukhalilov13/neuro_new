@@ -734,6 +734,42 @@ export const AdminPanel = () => {
       youtube: ''
     }
   });
+
+  // Функции обновления настроек
+  const updateSeoSettings = (settings) => {
+    setSeoSettings(settings);
+    // TODO: Добавить API запрос для сохранения настроек
+    alert('SEO настройки сохранены!');
+  };
+
+  const updateSiteSettings = (settings) => {
+    setSiteSettings(settings);
+    // TODO: Добавить API запрос для сохранения настроек
+    alert('Настройки сайта сохранены!');
+  };
+  
+  // Настройки сайта
+  const [seoSettings, setSeoSettings] = useState({
+    title: '',
+    description: '',
+    keywords: ''
+  });
+  
+  const [siteSettings, setSiteSettings] = useState({
+    address: '',
+    phones: ['', '', ''],
+    emails: ['', ''],
+    workingHours: {
+      weekdays: '',
+      saturday: '',
+      sunday: ''
+    },
+    socialMedia: {
+      facebook: '',
+      instagram: '',
+      youtube: ''
+    }
+  });
   
   // Модальные окна
   const [isDepartmentModalOpen, setIsDepartmentModalOpen] = useState(false);
