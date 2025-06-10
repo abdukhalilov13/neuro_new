@@ -1069,8 +1069,8 @@ export const AdminPanel = () => {
 
   // Функции для галереи
   
-  // Функция для обработки загрузки файла
-  const handleFileUpload = (e) => {
+  // Универсальная функция для обработки загрузки файла
+  const handleFileUploadGeneric = (e, setFilePreview, setUploading, updateState, fileKey) => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -1086,7 +1086,7 @@ export const AdminPanel = () => {
       return;
     }
 
-    setUploadingFile(true);
+    setUploading(true);
 
     // Создаем preview
     const reader = new FileReader();
@@ -1095,20 +1095,38 @@ export const AdminPanel = () => {
       setFilePreview(result);
       
       // Симулируем загрузку на сервер 
-      // В реальном приложении здесь должен быть API запрос для загрузки файла
       setTimeout(() => {
-        // Генерируем временный URL (в реальности это будет URL с сервера)
         const fileName = file.name.replace(/\s+/g, '_');
         const timestamp = Date.now();
         const mockServerUrl = `https://neuro.uz/uploads/${timestamp}_${fileName}`;
         
-        setNewGalleryImage({...newGalleryImage, url: mockServerUrl});
-        setUploadingFile(false);
+        updateState(prev => ({...prev, [fileKey]: mockServerUrl}));
+        setUploading(false);
         alert('Файл успешно загружен! (симуляция)');
       }, 2000);
     };
     
     reader.readAsDataURL(file);
+  };
+
+  // Функция для обработки загрузки файла галереи
+  const handleFileUpload = (e) => {
+    handleFileUploadGeneric(e, setFilePreview, setUploadingFile, setNewGalleryImage, 'url');
+  };
+
+  // Функция для обработки загрузки файла врача
+  const handleDoctorFileUpload = (e) => {
+    handleFileUploadGeneric(e, setDoctorFilePreview, setUploadingDoctorFile, setNewDoctor, 'image');
+  };
+
+  // Функция для обработки загрузки файла новости  
+  const handleNewsFileUpload = (e) => {
+    handleFileUploadGeneric(e, setNewsFilePreview, setUploadingNewsFile, setNewNews, 'image');
+  };
+
+  // Функция для обработки загрузки файла руководства
+  const handleLeadershipFileUpload = (e) => {
+    handleFileUploadGeneric(e, setLeadershipFilePreview, setUploadingLeadershipFile, setEditingLeadership, 'image');
   };
 
   const handleGallerySubmit = (e) => {
