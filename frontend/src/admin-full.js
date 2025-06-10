@@ -3091,5 +3091,4 @@ export const AdminPanel = () => {
   );
 };
 
-export { AdminPanel };
 export default AdminPanel;
