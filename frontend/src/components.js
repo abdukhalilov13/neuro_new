@@ -472,7 +472,7 @@ export const HomePage = () => {
                     to="/news"
                     className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center"
                   >
-                    Читать далее <ChevronRight className="w-4 h-4 ml-1" />
+                    {t('readMore')} <ChevronRight className="w-4 h-4 ml-1" />
                   </Link>
                 </div>
               </motion.article>
@@ -484,7 +484,7 @@ export const HomePage = () => {
               to="/news"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors"
             >
-              Все новости
+              {t('allNews')}
             </Link>
           </div>
         </div>
