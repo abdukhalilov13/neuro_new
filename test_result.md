@@ -165,11 +165,14 @@ frontend:
       - working: false
         agent: "main"
         comment: "Language context exists with basic translations for ru, uz, en but is incomplete. Only has basic navigation and footer translations. Needs comprehensive translations for all UI elements"
+      - working: false
+        agent: "testing"
+        comment: "Tested language switching functionality. The language switcher in the header works and shows options for Russian, Uzbek, and English. Switching to English changes some UI elements but not all content is translated."
 
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 1
+  test_sequence: 2
   run_ui: false
 
 test_plan:
@@ -185,3 +188,5 @@ agent_communication:
     message: "Fixed critical compilation errors by correcting import/export statements. Frontend now compiles successfully. Event management code appears complete but needs testing. Multi-language support needs expansion of translations."
   - agent: "testing"
     message: "Completed testing of all backend API endpoints. All endpoints are working correctly and returning the expected data structure. The backend is fully functional with proper responses for all required endpoints."
+  - agent: "testing"
+    message: "Tested the frontend functionality. The homepage loads correctly with proper navigation and content. Admin panel and doctor dashboard are accessible via header links and login works with the provided credentials. Event management functionality in the admin panel works correctly. Language switching works but not all content is translated. The test-accounts page is not accessible directly - it redirects to the homepage."
