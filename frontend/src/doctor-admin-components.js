@@ -2470,6 +2470,172 @@ export const AdminPanel = () => {
           </div>
         </form>
       </Modal>
+
+      {/* Leadership Modal */}
+      <Modal
+        isOpen={isLeadershipModalOpen}
+        onClose={() => setIsLeadershipModalOpen(false)}
+        title={editingLeadership.id ? 'Редактировать руководителя' : 'Добавить руководителя'}
+      >
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          if (editingLeadership.id) {
+            updateLeadership(editingLeadership.id, editingLeadership);
+          } else {
+            addLeadership({
+              ...editingLeadership,
+              id: Date.now()
+            });
+          }
+          setIsLeadershipModalOpen(false);
+        }}>
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  ФИО
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={editingLeadership.name}
+                  onChange={(e) => setEditingLeadership({...editingLeadership, name: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Должность
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={editingLeadership.position}
+                  onChange={(e) => setEditingLeadership({...editingLeadership, position: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                URL фотографии
+              </label>
+              <input
+                type="url"
+                value={editingLeadership.image}
+                onChange={(e) => setEditingLeadership({...editingLeadership, image: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="https://example.com/photo.jpg"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Телефон
+                </label>
+                <input
+                  type="tel"
+                  value={editingLeadership.phone}
+                  onChange={(e) => setEditingLeadership({...editingLeadership, phone: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={editingLeadership.email}
+                  onChange={(e) => setEditingLeadership({...editingLeadership, email: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Биография
+              </label>
+              <textarea
+                rows="4"
+                value={editingLeadership.bio}
+                onChange={(e) => setEditingLeadership({...editingLeadership, bio: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="Краткая биография руководителя..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Образование (через запятую)
+              </label>
+              <textarea
+                rows="2"
+                value={editingLeadership.education?.join(', ') || ''}
+                onChange={(e) => setEditingLeadership({
+                  ...editingLeadership, 
+                  education: e.target.value.split(',').map(item => item.trim()).filter(item => item)
+                })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="Университет 1, Университет 2..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Опыт работы (через запятую)
+              </label>
+              <textarea
+                rows="2"
+                value={editingLeadership.experience?.join(', ') || ''}
+                onChange={(e) => setEditingLeadership({
+                  ...editingLeadership, 
+                  experience: e.target.value.split(',').map(item => item.trim()).filter(item => item)
+                })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="Должность 1, Должность 2..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Достижения (через запятую)
+              </label>
+              <textarea
+                rows="2"
+                value={editingLeadership.achievements?.join(', ') || ''}
+                onChange={(e) => setEditingLeadership({
+                  ...editingLeadership, 
+                  achievements: e.target.value.split(',').map(item => item.trim()).filter(item => item)
+                })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                placeholder="Награда 1, Награда 2..."
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-3 mt-6 pt-6 border-t border-gray-200">
+            <button
+              type="button"
+              onClick={() => setIsLeadershipModalOpen(false)}
+              className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            >
+              Отмена
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            >
+              {editingLeadership.id ? 'Обновить' : 'Добавить'}
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };
