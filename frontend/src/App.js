@@ -14,7 +14,8 @@ import {
   ContactPage,
   AppointmentPage
 } from "./pages";
-import { DoctorDashboard, AdminPanel } from "./admin-full";
+import { DoctorDashboard } from "./doctor-admin-components";
+import { AdminPanel } from "./admin-full";
 import { TestAccountsPage } from "./TestAccounts";
 import { VacanciesPage, GalleryPage } from "./AdditionalPages";
 import { NewsDetailPage } from "./NewsDetail";
