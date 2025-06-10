@@ -279,7 +279,7 @@ export const HomePage = () => {
                 <Phone className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Связаться с нами</p>
+                <p className="text-sm text-gray-600">{t('contactUs')}</p>
                 <p className="font-semibold text-gray-900">{adminData?.siteSettings?.phones?.[0] || siteData.hero.phone}</p>
               </div>
             </div>
@@ -290,7 +290,7 @@ export const HomePage = () => {
                 <MapPin className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Адрес</p>
+                <p className="text-sm text-gray-600">{t('address')}</p>
                 <p className="font-semibold text-gray-900">ул. Хумоюн, 40</p>
               </div>
             </div>
