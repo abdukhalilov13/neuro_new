@@ -2629,13 +2629,23 @@ export const AdminPanel = () => {
           <div className="flex space-x-3 pt-4">
             <button
               type="submit"
-              className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg"
+              disabled={uploadingFile}
+              className={`flex-1 py-2 px-4 rounded-lg text-white font-medium transition-colors ${
+                uploadingFile 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-purple-600 hover:bg-purple-700'
+              }`}
             >
-              {editingGalleryImage ? 'Обновить' : 'Добавить'}
+              {uploadingFile ? 'Загрузка...' : (editingGalleryImage ? 'Обновить' : 'Добавить')}
             </button>
             <button
               type="button"
-              onClick={() => setIsGalleryModalOpen(false)}
+              onClick={() => {
+                setIsGalleryModalOpen(false);
+                setUploadType('url');
+                setFilePreview(null);
+                setNewGalleryImage({ url: '', alt: '', category: 'general' });
+              }}
               className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg"
             >
               Отмена
