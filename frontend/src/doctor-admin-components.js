@@ -2566,27 +2566,52 @@ export const AdminPanel = () => {
         onClose={() => setIsDoctorModalOpen(false)}
         title={editingDoctor ? 'Редактировать информацию о враче' : 'Добавить нового врача'}
       >
-        <form onSubmit={handleDoctorSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">ФИО</label>
-            <input
-              type="text"
-              required
-              value={newDoctor.name}
-              onChange={(e) => setNewDoctor({...newDoctor, name: e.target.value})}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
+        <form onSubmit={handleDoctorSubmit} className="space-y-6">
+          {/* Языковые вкладки */}
+          <div className="border-b border-gray-200">
+            <nav className="-mb-px flex space-x-8">
+              {languages.map((lang) => (
+                <button
+                  key={lang}
+                  type="button"
+                  onClick={() => setCurrentAdminLanguage(lang)}
+                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                    currentAdminLanguage === lang
+                      ? 'border-blue-500 text-blue-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`}
+                >
+                  {languageNames[lang]}
+                </button>
+              ))}
+            </nav>
           </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Специализация</label>
-            <input
-              type="text"
-              required
-              value={newDoctor.specialization}
-              onChange={(e) => setNewDoctor({...newDoctor, specialization: e.target.value})}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                ФИО ({languageNames[currentAdminLanguage]})
+              </label>
+              <input
+                type="text"
+                required
+                value={newDoctor[`name_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewDoctor({...newDoctor, [`name_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Специализация ({languageNames[currentAdminLanguage]})
+              </label>
+              <input
+                type="text"
+                required
+                value={newDoctor[`specialization_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewDoctor({...newDoctor, [`specialization_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
           </div>
           
           <div className="grid grid-cols-2 gap-4">
