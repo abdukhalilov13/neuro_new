@@ -1152,6 +1152,7 @@ export const AdminPanel = () => {
               { id: 'news', label: 'Новости', icon: FileText },
               { id: 'gallery', label: 'Галерея', icon: ImageIcon },
               { id: 'accounts', label: 'Аккаунты', icon: UserCheck },
+              { id: 'leadership', label: 'Руководство', icon: Crown },
               { id: 'settings', label: 'Настройки', icon: Settings }
             ].map((tab) => (
               <button
