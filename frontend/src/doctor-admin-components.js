@@ -761,7 +761,8 @@ export const AdminPanel = () => {
     addNews, updateNews, deleteNews,
     addAccount, updateAccount, deleteAccount, toggleAccountStatus,
     addLeadership, updateLeadership, deleteLeadership,
-    addGalleryImage, updateGalleryImage, deleteGalleryImage
+    addGalleryImage, updateGalleryImage, deleteGalleryImage,
+    updateSiteSettings, updateSeoSettings
   } = useAdmin();
 
   // Получаем данные из контекста
