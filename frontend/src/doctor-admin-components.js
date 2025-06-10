@@ -868,15 +868,15 @@ export const AdminPanel = () => {
   
   // Формы для новых записей
   const [newDepartment, setNewDepartment] = useState({ 
-    name: '', 
-    description: '', 
+    name_ru: '', name_uz: '', name_en: '',
+    description_ru: '', description_uz: '', description_en: '',
     icon: 'Brain', 
     color: 'from-blue-500 to-blue-600' 
   });
   const [newDoctor, setNewDoctor] = useState({ 
-    name: '', 
-    specialization: '', 
-    experience: '', 
+    name_ru: '', name_uz: '', name_en: '',
+    specialization_ru: '', specialization_uz: '', specialization_en: '',
+    experience_ru: '', experience_uz: '', experience_en: '',
     image: '', 
     email: '', 
     phone: '', 
@@ -884,9 +884,9 @@ export const AdminPanel = () => {
     departmentId: '' 
   });
   const [newNews, setNewNews] = useState({ 
-    title: '', 
-    excerpt: '', 
-    content: '', 
+    title_ru: '', title_uz: '', title_en: '',
+    excerpt_ru: '', excerpt_uz: '', excerpt_en: '',
+    content_ru: '', content_uz: '', content_en: '',
     image: '' 
   });
   const [newAccount, setNewAccount] = useState({ 
