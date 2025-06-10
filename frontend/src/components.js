@@ -295,7 +295,7 @@ export const HomePage = () => {
               </div>
               <div>
                 <p className="text-sm text-red-100">Экстренная помощь 24/7</p>
-                <p className="font-semibold">{adminData.siteSettings.phones[2]}</p>
+                <p className="font-semibold">{adminData?.siteSettings?.phones?.[2] || siteData.hero.emergency}</p>
               </div>
             </div>
           </div>
