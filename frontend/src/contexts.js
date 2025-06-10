@@ -4,7 +4,13 @@ import { apiService } from './api';
 // Language Context
 const LanguageContext = createContext();
 
-// useLanguage hook is defined below
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+};
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState('ru');
@@ -115,65 +121,48 @@ export const LanguageProvider = ({ children }) => {
   );
 };
 
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
-};
-
 // Административный контекст (ПОЛНОСТЬЮ ОБНОВЛЕННЫЙ)
 const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-  // Инициализируем с данными из siteData и дополнительными данными
-  const [departments, setDepartments] = useState(siteData.departments);
-  const [doctors, setDoctors] = useState(siteData.doctors.map(doctor => ({
-    ...doctor,
-    departmentId: doctor.id <= 3 ? doctor.id : null
-  })));
-  const [news, setNews] = useState(siteData.news);
+  // Initialize with empty arrays, will be populated from API
+  const [departments, setDepartments] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const [news, setNews] = useState([]);
+  const [services, setServices] = useState([]);
+  const [galleryImages, setGalleryImages] = useState([]);
   
-  // Расширенные данные услуг
-  const [services, setServices] = useState([
-    { id: 1, name: 'МРТ головного мозга', category: 'Диагностика', price: 500000, description: 'Магнитно-резонансная томография головного мозга с контрастом' },
-    { id: 2, name: 'КТ позвоночника', category: 'Диагностика', price: 400000, description: 'Компьютерная томография позвоночника всех отделов' },
-    { id: 3, name: 'Удаление опухоли мозга', category: 'Хирургия', price: 5000000, description: 'Хирургическое удаление новообразований головного мозга' },
-    { id: 4, name: 'Консультация нейрохирурга', category: 'Консультации', price: 150000, description: 'Первичная консультация специалиста нейрохирурга' },
-    { id: 5, name: 'ЭЭГ (электроэнцефалография)', category: 'Диагностика', price: 200000, description: 'Исследование биоэлектрической активности мозга' },
-    { id: 6, name: 'Люмбальная пункция', category: 'Диагностика', price: 300000, description: 'Забор спинномозговой жидкости для анализа' },
-    { id: 7, name: 'Операция на позвоночнике', category: 'Хирургия', price: 3000000, description: 'Хирургическое вмешательство на позвоночнике различной сложности' },
-    { id: 8, name: 'Консультация детского нейрохирурга', category: 'Консультации', price: 180000, description: 'Специализированная консультация для детей до 18 лет' },
-    { id: 9, name: 'УЗИ сосудов головы и шеи', category: 'Диагностика', price: 250000, description: 'Ультразвуковое исследование сосудов головного мозга' },
-    { id: 10, name: 'Ангиография церебральных сосудов', category: 'Диагностика', price: 800000, description: 'Контрастное исследование сосудов головного мозга' },
-    { id: 11, name: 'Стереотаксическая биопсия', category: 'Хирургия', price: 2500000, description: 'Точечная биопсия опухолей мозга под контролем навигации' },
-    { id: 12, name: 'Эндоскопическая операция', category: 'Хирургия', price: 4000000, description: 'Малоинвазивные операции с использованием эндоскопа' },
-    { id: 13, name: 'Консультация по эпилепсии', category: 'Консультации', price: 200000, description: 'Специализированная консультация эпилептолога' },
-    { id: 14, name: 'Реабилитация после инсульта', category: 'Реабилитация', price: 350000, description: 'Комплексная программа восстановления после инсульта' },
-    { id: 15, name: 'Физиотерапия', category: 'Реабилитация', price: 100000, description: 'Физиотерапевтические процедуры для восстановления' },
-    { id: 16, name: 'Логопедия', category: 'Реабилитация', price: 120000, description: 'Восстановление речевых функций' },
-    { id: 17, name: 'ЛФК (лечебная физкультура)', category: 'Реабилитация', price: 80000, description: 'Лечебная физическая культура под контролем специалиста' },
-    { id: 18, name: 'Массаж', category: 'Реабилитация', price: 60000, description: 'Лечебный массаж для восстановления функций' },
-    { id: 19, name: 'Психологическая помощь', category: 'Консультации', price: 100000, description: 'Психологическая поддержка пациентов и родственников' },
-    { id: 20, name: 'Нейропсихологическое тестирование', category: 'Диагностика', price: 180000, description: 'Оценка когнитивных функций пациента' },
-    { id: 21, name: 'Операция при гидроцефалии', category: 'Хирургия', price: 3500000, description: 'Шунтирующие операции при водянке головного мозга' },
-    { id: 22, name: 'Лечение аневризм', category: 'Хирургия', price: 6000000, description: 'Хирургическое лечение аневризм сосудов мозга' },
-    { id: 23, name: 'Тромбэктомия', category: 'Хирургия', price: 4500000, description: 'Удаление тромбов из сосудов головного мозга' },
-    { id: 24, name: 'Краниопластика', category: 'Хирургия', price: 2000000, description: 'Пластическое восстановление костей черепа' },
-    { id: 25, name: 'Повторная консультация', category: 'Консультации', price: 100000, description: 'Повторный прием у лечащего врача' },
-    { id: 26, name: 'Консилиум врачей', category: 'Консультации', price: 300000, description: 'Коллегиальное обсуждение сложных случаев' },
-    { id: 27, name: 'Операция при болезни Паркинсона', category: 'Хирургия', price: 7000000, description: 'Глубокая стимуляция мозга при болезни Паркинсона' },
-    { id: 28, name: 'Лечение тремора', category: 'Хирургия', price: 5500000, description: 'Хирургическое лечение эссенциального тремора' },
-    { id: 29, name: 'Вентрикулоскопия', category: 'Хирургия', price: 2800000, description: 'Эндоскопическое исследование желудочков мозга' },
-    { id: 30, name: 'Микрохирургия позвоночника', category: 'Хирургия', price: 4200000, description: 'Микрохирургические операции на позвоночнике' },
-    { id: 31, name: 'Спинальная анестезия', category: 'Анестезия', price: 200000, description: 'Проведение спинальной анестезии' },
-    { id: 32, name: 'Общая анестезия', category: 'Анестезия', price: 300000, description: 'Проведение общего наркоза' },
-    { id: 33, name: 'Местная анестезия', category: 'Анестезия', price: 50000, description: 'Местное обезболивание' },
-    { id: 34, name: 'Интенсивная терапия', category: 'Реанимация', price: 500000, description: 'Интенсивная терапия в реанимации (сутки)' },
-    { id: 35, name: 'ИВЛ', category: 'Реанимация', price: 400000, description: 'Искусственная вентиляция легких (сутки)' },
-    { id: 36, name: 'Мониторинг в реанимации', category: 'Реанимация', price: 200000, description: 'Комплексный мониторинг жизненных функций' }
-  ]);
+  // Fetch data from API on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch departments
+        const departmentsData = await apiService.getDepartments();
+        setDepartments(departmentsData);
+        
+        // Fetch doctors
+        const doctorsData = await apiService.getDoctors();
+        setDoctors(doctorsData);
+        
+        // Fetch services
+        const servicesData = await apiService.getServices();
+        setServices(servicesData);
+        
+        // Fetch news
+        const newsData = await apiService.getNews();
+        setNews(newsData);
+        
+        // Fetch gallery
+        const galleryData = await apiService.getGallery();
+        setGalleryImages(galleryData);
+        
+      } catch (error) {
+        console.error("Error fetching data from API:", error);
+      }
+    };
+    
+    fetchData();
+  }, []);
   
   const [accounts, setAccounts] = useState([
     { id: 1, name: 'Админ', email: 'admin@neuro.uz', role: 'admin', status: 'active', createdAt: '2025-01-01' },
@@ -211,19 +200,6 @@ export const AdminProvider = ({ children }) => {
       biography: 'Доктор медицинских наук, профессор. 20 лет опыта в детской нейрохирургии.'
     }
   ]);
-  
-  const [galleryImages, setGalleryImages] = useState([
-    { id: 1, url: '/images/neuro-building.jpg', alt: 'Здание центра нейрохирургии', category: 'building' },
-    { id: 2, url: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c', alt: 'Современная операционная', category: 'equipment' },
-    { id: 3, url: 'https://images.unsplash.com/photo-1512678080530-7760d81faba6', alt: 'МРТ оборудование', category: 'equipment' },
-    { id: 4, url: 'https://images.unsplash.com/photo-1526930382372-67bf22c0fce2', alt: 'Консультация врача с пациентом', category: 'doctors' },
-    { id: 5, url: 'https://images.unsplash.com/photo-1551190822-a9333d879b1f', alt: 'Коридор больницы', category: 'building' },
-    { id: 6, url: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56', alt: 'Реабилитационный зал', category: 'equipment' },
-    { id: 7, url: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54', alt: 'Палата для пациентов', category: 'building' },
-    { id: 8, url: 'https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd', alt: 'Команда врачей', category: 'doctors' },
-    { id: 9, url: 'https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6', alt: 'Нейрохирургическое оборудование', category: 'equipment' },
-    { id: 10, url: 'https://images.unsplash.com/photo-1559757175-0eb30cd8c063', alt: 'Конференц-зал', category: 'building' }
-  ]);
 
   // Настройки сайта
   const [siteSettings, setSiteSettings] = useState({
@@ -259,8 +235,8 @@ export const AdminProvider = ({ children }) => {
 
   // Функции для управления услугами
   const addService = (service) => {
-    const newId = Math.max(...services.map(s => s.id)) + 1;
-    setServices([...services, { ...service, id: newId }]);
+    const newId = services.length > 0 ? Math.max(...services.map(s => parseInt(s.id))) + 1 : 1;
+    setServices([...services, { ...service, id: newId.toString() }]);
   };
 
   const updateService = (id, updatedService) => {
@@ -275,8 +251,8 @@ export const AdminProvider = ({ children }) => {
 
   // Функции для управления отделениями
   const addDepartment = (department) => {
-    const newId = Math.max(...departments.map(d => d.id)) + 1;
-    setDepartments([...departments, { ...department, id: newId }]);
+    const newId = departments.length > 0 ? Math.max(...departments.map(d => parseInt(d.id))) + 1 : 1;
+    setDepartments([...departments, { ...department, id: newId.toString() }]);
   };
 
   const updateDepartment = (id, updatedDepartment) => {
@@ -295,8 +271,8 @@ export const AdminProvider = ({ children }) => {
 
   // Функции для управления врачами
   const addDoctor = (doctor) => {
-    const newId = Math.max(...doctors.map(d => d.id)) + 1;
-    setDoctors([...doctors, { ...doctor, id: newId }]);
+    const newId = doctors.length > 0 ? Math.max(...doctors.map(d => parseInt(d.id))) + 1 : 1;
+    setDoctors([...doctors, { ...doctor, id: newId.toString() }]);
   };
 
   const updateDoctor = (id, updatedDoctor) => {
@@ -311,13 +287,13 @@ export const AdminProvider = ({ children }) => {
 
   // Функции для управления новостями
   const addNews = (newsItem) => {
-    const newId = Math.max(...news.map(n => n.id)) + 1;
+    const newId = news.length > 0 ? Math.max(...news.map(n => parseInt(n.id))) + 1 : 1;
     const today = new Date().toLocaleDateString('ru-RU', { 
       day: 'numeric', 
       month: 'long', 
       year: 'numeric' 
     });
-    setNews([...news, { ...newsItem, id: newId, date: today }]);
+    setNews([...news, { ...newsItem, id: newId.toString(), date: today }]);
   };
 
   const updateNews = (id, updatedNews) => {
@@ -332,7 +308,7 @@ export const AdminProvider = ({ children }) => {
 
   // Функции для управления аккаунтами
   const addAccount = (account) => {
-    const newId = Math.max(...accounts.map(a => a.id)) + 1;
+    const newId = accounts.length > 0 ? Math.max(...accounts.map(a => a.id)) + 1 : 1;
     const today = new Date().toISOString().split('T')[0];
     setAccounts([...accounts, { 
       ...account, 
@@ -368,7 +344,7 @@ export const AdminProvider = ({ children }) => {
 
   // Функции для управления руководством
   const addLeadership = (leader) => {
-    const newId = Math.max(...leadership.map(l => l.id)) + 1;
+    const newId = leadership.length > 0 ? Math.max(...leadership.map(l => l.id)) + 1 : 1;
     setLeadership([...leadership, { ...leader, id: newId }]);
   };
 
@@ -384,8 +360,8 @@ export const AdminProvider = ({ children }) => {
 
   // Функции для управления галереей
   const addGalleryImage = (image) => {
-    const newId = Math.max(...galleryImages.map(img => img.id)) + 1;
-    setGalleryImages([...galleryImages, { ...image, id: newId }]);
+    const newId = galleryImages.length > 0 ? Math.max(...galleryImages.map(img => parseInt(img.id))) + 1 : 1;
+    setGalleryImages([...galleryImages, { ...image, id: newId.toString() }]);
   };
 
   const updateGalleryImage = (id, updatedImage) => {
