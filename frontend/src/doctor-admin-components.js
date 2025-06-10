@@ -1269,6 +1269,7 @@ export const AdminPanel = () => {
               { id: 'dashboard', label: 'Панель управления', icon: BarChart3 },
               { id: 'services', label: 'Услуги', icon: Stethoscope },
               { id: 'statistics', label: 'Статистика', icon: BarChart3 },
+              { id: 'events', label: 'События', icon: Calendar },
               { id: 'accounts', label: 'Аккаунты', icon: UserCheck },
               { id: 'leadership', label: 'Руководство', icon: Crown },
               { id: 'settings', label: 'Настройки', icon: Settings }
