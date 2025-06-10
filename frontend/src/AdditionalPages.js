@@ -326,7 +326,7 @@ export const VacanciesPage = () => {
                   <span>•</span>
                   <span>{selectedVacancy.type}</span>
                   <span>•</span>
-                  <span className="text-green-600 font-semibold">{selectedVacancy.salary} uzs</span>
+                  <span className="text-green-600 font-semibold">{selectedVacancy.salary} UZS</span>
                 </div>
               </div>
               <button
