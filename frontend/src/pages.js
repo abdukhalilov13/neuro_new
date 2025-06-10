@@ -162,8 +162,11 @@ export const ServicesPage = () => {
   const { adminData } = useAdmin();
   const { t } = useLanguage();
 
+  // Проверяем что данные загружены
+  const services = adminData?.services || [];
+
   // Группируем услуги по категориям
-  const servicesByCategory = adminData.services.reduce((acc, service) => {
+  const servicesByCategory = services.reduce((acc, service) => {
     if (!acc[service.category]) {
       acc[service.category] = [];
     }
@@ -185,66 +188,93 @@ export const ServicesPage = () => {
           >
             <h1 className="text-5xl font-bold text-gray-900 mb-6">Наши услуги</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Полный спектр медицинских услуг в области нейрохирургии с прозрачным ценообразованием ({adminData.services.length} услуг)
+              Полный спектр медицинских услуг в области нейрохирургии с прозрачным ценообразованием ({services.length} услуг)
             </p>
           </motion.div>
 
-          {/* Услуги по категориям */}
-          <div className="space-y-16">
-            {Object.entries(servicesByCategory).map(([category, services], categoryIndex) => (
+          {/* Если услуги загружаются */}
+          {services.length === 0 ? (
+            <div className="text-center py-16">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">Загрузка услуг...</p>
+            </div>
+          ) : (
+            <>
+              {/* Услуги по категориям */}
+              <div className="space-y-16">
+                {Object.entries(servicesByCategory).map(([category, categoryServices], categoryIndex) => (
+                  <motion.div
+                    key={category}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex items-center justify-between mb-8">
+                      <h2 className="text-3xl font-bold text-gray-900">{category}</h2>
+                      <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                        {categoryServices.length} услуг
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {categoryServices.map((service, index) => (
+                        <motion.div
+                          key={service.id}
+                          initial={{ opacity: 0, y: 50 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: index * 0.1 }}
+                          viewport={{ once: true }}
+                          className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
+                        >
+                          <h3 className="text-xl font-bold text-gray-900 mb-3">{service.name}</h3>
+                          <p className="text-gray-600 mb-4">{service.description}</p>
+                          <div className="flex justify-between items-center">
+                            <span className="text-2xl font-bold text-blue-600">
+                              {service.price.toLocaleString()} UZS
+                            </span>
+                            <Link
+                              to="/appointment"
+                              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                            >
+                              Записаться
+                            </Link>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Контактная информация */}
               <motion.div
-                key={category}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+                transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
+                className="mt-16 text-center"
               >
-                <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900">{category}</h2>
-                  <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                    {services.length} услуг
-                  </span>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {services.map((service, index) => (
-                    <ServiceCard
-                      key={service.id}
-                      service={service}
-                      isAdmin={false}
-                    />
-                  ))}
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Нужна консультация по услугам?</h3>
+                <p className="text-gray-600 mb-6">
+                  Наши специалисты ответят на все ваши вопросы и помогут выбрать оптимальное лечение
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    to="/appointment"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                  >
+                    Записаться на консультацию
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                  >
+                    Связаться с нами
+                  </Link>
                 </div>
               </motion.div>
-            ))}
-          </div>
-
-          {/* Контактная информация */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mt-16 text-center"
-          >
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Нужна консультация по услугам?</h3>
-            <p className="text-gray-600 mb-6">
-              Наши специалисты ответят на все ваши вопросы и помогут выбрать оптимальное лечение
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/appointment"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
-              >
-                Записаться на консультацию
-              </Link>
-              <Link
-                to="/contact"
-                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors"
-              >
-                Связаться с нами
-              </Link>
-            </div>
-          </motion.div>
+            </>
+          )}
         </div>
       </section>
 
