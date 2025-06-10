@@ -765,26 +765,14 @@ export const AdminPanel = () => {
   const [editingService, setEditingService] = useState(null);
   const [editingGalleryImage, setEditingGalleryImage] = useState(null);
   
-  // Данные состояния - ИСПОЛЬЗУЕМ ИЗ КОНТЕКСТА
-  const { adminData, 
-    addService, updateService, deleteService,
-    addDepartment, updateDepartment, deleteDepartment,
-    addDoctor, updateDoctor, deleteDoctor,
-    addNews, updateNews, deleteNews,
-    addAccount, updateAccount, deleteAccount, toggleAccountStatus,
-    addLeadership, updateLeadership, deleteLeadership,
-    addGalleryImage, updateGalleryImage, deleteGalleryImage,
-    updateSiteSettings, updateSeoSettings
-  } = useAdmin();
-
   // Получаем данные из контекста
-  const departments = adminData.departments || siteData.departments;
-  const doctors = adminData.doctors || siteData.doctors;
-  const news = adminData.news || siteData.news;
-  const services = adminData.services || [];
-  const accounts = adminData.accounts || [];
-  const leadership = adminData.leadership || [];
-  const galleryImages = adminData.galleryImages || [];
+  const departments = adminData?.departments || siteData.departments;
+  const doctors = adminData?.doctors || siteData.doctors;
+  const news = adminData?.news || siteData.news;
+  const services = adminData?.services || [];
+  const accounts = adminData?.accounts || [];
+  const leadership = adminData?.leadership || [];
+  const galleryImages = adminData?.galleryImages || [];
   
   // Формы для новых записей
   const [newDepartment, setNewDepartment] = useState({ 
