@@ -116,6 +116,9 @@ backend:
       - working: true
         agent: "main"
         comment: "Backend server is running successfully with all basic endpoints for departments, doctors, services, news, appointments, and gallery"
+      - working: true
+        agent: "testing"
+        comment: "Tested all API endpoints (/, /health, /departments, /doctors, /services, /news, /appointments, /gallery). All endpoints are working correctly and returning the expected data structure."
 
 frontend:
   - task: "Fix compilation errors"
@@ -174,3 +177,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Fixed critical compilation errors by correcting import/export statements. Frontend now compiles successfully. Event management code appears complete but needs testing. Multi-language support needs expansion of translations."
+  - agent: "testing"
+    message: "Completed testing of all backend API endpoints. All endpoints are working correctly and returning the expected data structure. The backend is fully functional with proper responses for all required endpoints."
