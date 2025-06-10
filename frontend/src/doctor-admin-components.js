@@ -1846,6 +1846,96 @@ export const AdminPanel = () => {
           </div>
         )}
 
+        {activeTab === 'events' && (
+          <div className="bg-white rounded-lg shadow">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-gray-900">Ближайшие события ({events.length})</h2>
+                <button
+                  onClick={() => {
+                    setEditingEvent({ 
+                      id: null, 
+                      title: '', 
+                      date: '', 
+                      time: '',
+                      location: '',
+                      description: '',
+                      type: 'conference'
+                    });
+                    setIsEventModalOpen(true);
+                  }}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Добавить событие</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <div className="space-y-6">
+                {events.map((event) => (
+                  <div key={event.id} className="bg-gray-50 rounded-lg p-6 border-l-4 border-indigo-500">
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-3 mb-2">
+                          <Calendar className="w-5 h-5 text-indigo-600" />
+                          <h3 className="text-lg font-bold text-gray-900">{event.title}</h3>
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            event.type === 'conference' ? 'bg-blue-100 text-blue-800' :
+                            event.type === 'open-day' ? 'bg-green-100 text-green-800' :
+                            'bg-purple-100 text-purple-800'
+                          }`}>
+                            {event.type === 'conference' ? 'Конференция' :
+                             event.type === 'open-day' ? 'День открытых дверей' :
+                             'Мастер-класс'}
+                          </span>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
+                          <div className="flex items-center space-x-2 text-gray-600">
+                            <Clock className="w-4 h-4" />
+                            <span>{event.date} в {event.time}</span>
+                          </div>
+                          <div className="flex items-center space-x-2 text-gray-600">
+                            <MapPin className="w-4 h-4" />
+                            <span>{event.location}</span>
+                          </div>
+                        </div>
+                        
+                        <p className="text-gray-700">{event.description}</p>
+                      </div>
+                      
+                      <div className="flex space-x-2 ml-4">
+                        <button
+                          onClick={() => {
+                            setEditingEvent(event);
+                            setIsEventModalOpen(true);
+                          }}
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center space-x-1 transition-colors"
+                        >
+                          <Edit className="w-4 h-4" />
+                          <span>Изменить</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            if (confirm('Удалить это событие?')) {
+                              setEvents(events.filter(e => e.id !== event.id));
+                            }
+                          }}
+                          className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg flex items-center justify-center transition-colors"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {activeTab === 'accounts' && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
