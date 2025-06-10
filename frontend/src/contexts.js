@@ -140,28 +140,54 @@ export const AdminProvider = ({ children }) => {
         setIsLoading(true);
         
         // Fetch departments
-        const departmentsData = await apiService.getDepartments();
-        setDepartments(departmentsData);
+        try {
+          const departmentsData = await apiService.getDepartments();
+          setDepartments(departmentsData);
+        } catch (error) {
+          console.warn("Could not fetch departments from API, using fallback data");
+          // Используем fallback данные из components.js
+          setDepartments([]);
+        }
         
         // Fetch doctors
-        const doctorsData = await apiService.getDoctors();
-        setDoctors(doctorsData);
+        try {
+          const doctorsData = await apiService.getDoctors();
+          setDoctors(doctorsData);
+        } catch (error) {
+          console.warn("Could not fetch doctors from API, using fallback data");
+          setDoctors([]);
+        }
         
         // Fetch services
-        const servicesData = await apiService.getServices();
-        setServices(servicesData);
+        try {
+          const servicesData = await apiService.getServices();
+          setServices(servicesData);
+        } catch (error) {
+          console.warn("Could not fetch services from API, using fallback data");
+          setServices([]);
+        }
         
         // Fetch news
-        const newsData = await apiService.getNews();
-        setNews(newsData);
+        try {
+          const newsData = await apiService.getNews();
+          setNews(newsData);
+        } catch (error) {
+          console.warn("Could not fetch news from API, using fallback data");
+          setNews([]);
+        }
         
         // Fetch gallery
-        const galleryData = await apiService.getGallery();
-        setGalleryImages(galleryData);
+        try {
+          const galleryData = await apiService.getGallery();
+          setGalleryImages(galleryData);
+        } catch (error) {
+          console.warn("Could not fetch gallery from API, using fallback data");
+          setGalleryImages([]);
+        }
         
       } catch (error) {
-        console.error("Error fetching data from API:", error);
-        // В случае ошибки, оставляем пустые массивы
+        console.error("Error in fetchData:", error);
+        // В случае общей ошибки, оставляем пустые массивы
       } finally {
         setIsLoading(false);
       }
