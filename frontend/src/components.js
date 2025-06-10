@@ -227,6 +227,10 @@ export const HomePage = () => {
                   src={adminData?.galleryImages?.find(img => img.category === 'building')?.url || siteData.hero.buildingImage}
                   alt="Здание центра нейрохирургии"
                   className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
+                  onError={(e) => {
+                    e.target.src = siteData.hero.buildingImage;
+                  }}
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent rounded-2xl"></div>
               </div>
