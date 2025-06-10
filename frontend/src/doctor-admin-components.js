@@ -1053,8 +1053,57 @@ export const AdminPanel = () => {
   };
 
   // Функции для галереи
+  
+  // Функция для обработки загрузки файла
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Проверка размера файла (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Файл слишком большой. Максимальный размер: 5MB');
+      return;
+    }
+
+    // Проверка типа файла
+    if (!file.type.startsWith('image/')) {
+      alert('Пожалуйста, выберите файл изображения');
+      return;
+    }
+
+    setUploadingFile(true);
+
+    // Создаем preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target.result;
+      setFilePreview(result);
+      
+      // Симулируем загрузку на сервер 
+      // В реальном приложении здесь должен быть API запрос для загрузки файла
+      setTimeout(() => {
+        // Генерируем временный URL (в реальности это будет URL с сервера)
+        const fileName = file.name.replace(/\s+/g, '_');
+        const timestamp = Date.now();
+        const mockServerUrl = `https://neuro.uz/uploads/${timestamp}_${fileName}`;
+        
+        setNewGalleryImage({...newGalleryImage, url: mockServerUrl});
+        setUploadingFile(false);
+        alert('Файл успешно загружен! (симуляция)');
+      }, 2000);
+    };
+    
+    reader.readAsDataURL(file);
+  };
+
   const handleGallerySubmit = (e) => {
     e.preventDefault();
+    
+    if (uploadingFile) {
+      alert('Дождитесь завершения загрузки файла');
+      return;
+    }
+    
     if (editingGalleryImage) {
       updateGalleryImage(editingGalleryImage.id, { ...newGalleryImage });
       alert('Изображение обновлено!');
@@ -1063,7 +1112,11 @@ export const AdminPanel = () => {
       addGalleryImage(newGalleryImage);
       alert('Новое изображение добавлено в галерею!');
     }
+    
+    // Сброс состояний
     setNewGalleryImage({ url: '', alt: '', category: 'general' });
+    setUploadType('url');
+    setFilePreview(null);
     setIsGalleryModalOpen(false);
   };
 
