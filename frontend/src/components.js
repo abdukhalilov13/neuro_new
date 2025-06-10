@@ -226,7 +226,7 @@ export const HomePage = () => {
                 <img 
                   src={adminData?.galleryImages?.find(img => img.category === 'building')?.url || siteData.hero.buildingImage}
                   alt="Здание центра нейрохирургии"
-                  className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
+                  className="w-full h-80 lg:h-[420px] object-cover rounded-2xl shadow-2xl"
                   onError={(e) => {
                     e.target.src = siteData.hero.buildingImage;
                   }}
