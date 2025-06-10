@@ -1602,11 +1602,276 @@ export const AdminPanel = () => {
         )}
 
         {activeTab === 'settings' && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Настройки сайта</h2>
-            <p className="text-gray-600">
-              Здесь можно настроить SEO, контактную информацию, социальные сети и другие параметры сайта.
-            </p>
+          <div className="space-y-6">
+            {/* SEO Настройки */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">SEO Настройки</h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Заголовок сайта
+                  </label>
+                  <input
+                    type="text"
+                    value={seoSettings.title}
+                    onChange={(e) => setSeoSettings({...seoSettings, title: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Описание сайта
+                  </label>
+                  <textarea
+                    rows="3"
+                    value={seoSettings.description}
+                    onChange={(e) => setSeoSettings({...seoSettings, description: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Ключевые слова
+                  </label>
+                  <input
+                    type="text"
+                    value={seoSettings.keywords}
+                    onChange={(e) => setSeoSettings({...seoSettings, keywords: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="через запятую"
+                  />
+                </div>
+                
+                <button
+                  onClick={() => updateSeoSettings(seoSettings)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  Сохранить SEO настройки
+                </button>
+              </div>
+            </div>
+
+            {/* Контактная информация */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Контактная информация</h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Адрес
+                  </label>
+                  <textarea
+                    rows="2"
+                    value={siteSettings.address}
+                    onChange={(e) => setSiteSettings({...siteSettings, address: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Приемная
+                    </label>
+                    <input
+                      type="text"
+                      value={siteSettings.phones[0]}
+                      onChange={(e) => setSiteSettings({
+                        ...siteSettings, 
+                        phones: [e.target.value, siteSettings.phones[1], siteSettings.phones[2]]
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Регистратура
+                    </label>
+                    <input
+                      type="text"
+                      value={siteSettings.phones[1]}
+                      onChange={(e) => setSiteSettings({
+                        ...siteSettings, 
+                        phones: [siteSettings.phones[0], e.target.value, siteSettings.phones[2]]
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Экстренная помощь
+                    </label>
+                    <input
+                      type="text"
+                      value={siteSettings.phones[2]}
+                      onChange={(e) => setSiteSettings({
+                        ...siteSettings, 
+                        phones: [siteSettings.phones[0], siteSettings.phones[1], e.target.value]
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Основной Email
+                    </label>
+                    <input
+                      type="email"
+                      value={siteSettings.emails[0]}
+                      onChange={(e) => setSiteSettings({
+                        ...siteSettings, 
+                        emails: [e.target.value, siteSettings.emails[1]]
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Дополнительный Email
+                    </label>
+                    <input
+                      type="email"
+                      value={siteSettings.emails[1]}
+                      onChange={(e) => setSiteSettings({
+                        ...siteSettings, 
+                        emails: [siteSettings.emails[0], e.target.value]
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                </div>
+                
+                <button
+                  onClick={() => updateSiteSettings(siteSettings)}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  Сохранить контактную информацию
+                </button>
+              </div>
+            </div>
+
+            {/* Режим работы */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Режим работы</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Будние дни
+                  </label>
+                  <input
+                    type="text"
+                    value={siteSettings.workingHours.weekdays}
+                    onChange={(e) => setSiteSettings({
+                      ...siteSettings, 
+                      workingHours: {...siteSettings.workingHours, weekdays: e.target.value}
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Суббота
+                  </label>
+                  <input
+                    type="text"
+                    value={siteSettings.workingHours.saturday}
+                    onChange={(e) => setSiteSettings({
+                      ...siteSettings, 
+                      workingHours: {...siteSettings.workingHours, saturday: e.target.value}
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Воскресенье
+                  </label>
+                  <input
+                    type="text"
+                    value={siteSettings.workingHours.sunday}
+                    onChange={(e) => setSiteSettings({
+                      ...siteSettings, 
+                      workingHours: {...siteSettings.workingHours, sunday: e.target.value}
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+              
+              <button
+                onClick={() => updateSiteSettings(siteSettings)}
+                className="mt-4 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
+              >
+                Сохранить режим работы
+              </button>
+            </div>
+
+            {/* Социальные сети */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Социальные сети</h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Facebook
+                  </label>
+                  <input
+                    type="url"
+                    value={siteSettings.socialMedia.facebook}
+                    onChange={(e) => setSiteSettings({
+                      ...siteSettings, 
+                      socialMedia: {...siteSettings.socialMedia, facebook: e.target.value}
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Instagram
+                  </label>
+                  <input
+                    type="url"
+                    value={siteSettings.socialMedia.instagram}
+                    onChange={(e) => setSiteSettings({
+                      ...siteSettings, 
+                      socialMedia: {...siteSettings.socialMedia, instagram: e.target.value}
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    YouTube
+                  </label>
+                  <input
+                    type="url"
+                    value={siteSettings.socialMedia.youtube}
+                    onChange={(e) => setSiteSettings({
+                      ...siteSettings, 
+                      socialMedia: {...siteSettings.socialMedia, youtube: e.target.value}
+                    })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                
+                <button
+                  onClick={() => updateSiteSettings(siteSettings)}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  Сохранить социальные сети
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
