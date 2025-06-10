@@ -763,7 +763,18 @@ export const AdminPanel = () => {
   const [editingDoctor, setEditingDoctor] = useState(null);
   const [editingNews, setEditingNews] = useState(null);
   const [editingAccount, setEditingAccount] = useState(null);
-  const [editingLeadership, setEditingLeadership] = useState(null);
+  const [editingLeadership, setEditingLeadership] = useState({
+    id: null,
+    name: '',
+    position: '',
+    image: '',
+    phone: '',
+    email: '',
+    bio: '',
+    education: [],
+    experience: [],
+    achievements: []
+  });
   const [editingService, setEditingService] = useState(null);
   const [editingGalleryImage, setEditingGalleryImage] = useState(null);
   
