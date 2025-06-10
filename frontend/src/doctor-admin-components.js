@@ -713,61 +713,25 @@ export const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   
   // Настройки сайта
-  const [seoSettings, setSeoSettings] = useState({
-    title: '',
-    description: '',
-    keywords: ''
+  const [seoSettings, setSeoSettings] = useState(adminData.seoSettings || {
+    title: 'Республиканский Научный Центр Нейрохирургии',
+    description: 'Ведущий центр нейрохирургии в Центральной Азии. Более 25 лет опыта в лечении заболеваний нервной системы.',
+    keywords: 'нейрохирургия, мозг, спинной мозг, операции, Узбекистан, Ташкент'
   });
   
-  const [siteSettings, setSiteSettings] = useState({
-    address: '',
-    phones: ['', '', ''],
-    emails: ['', ''],
+  const [siteSettings, setSiteSettings] = useState(adminData.siteSettings || {
+    address: 'ул. Хумоюн, 40, Мирзо-Улугбекский район, г. Ташкент, 100142, Республика Узбекистан',
+    phones: ['+998 71 264-96-10', '+998 71 264-96-09', '+998 78 113-33-78'],
+    emails: ['admin@neuro.uz', 'info@neuro.uz'],
     workingHours: {
-      weekdays: '',
-      saturday: '',
-      sunday: ''
+      weekdays: '8:00 - 18:00',
+      saturday: '9:00 - 15:00',
+      sunday: 'Выходной'
     },
     socialMedia: {
-      facebook: '',
-      instagram: '',
-      youtube: ''
-    }
-  });
-
-  // Функции обновления настроек
-  const updateSeoSettings = (settings) => {
-    setSeoSettings(settings);
-    // TODO: Добавить API запрос для сохранения настроек
-    alert('SEO настройки сохранены!');
-  };
-
-  const updateSiteSettings = (settings) => {
-    setSiteSettings(settings);
-    // TODO: Добавить API запрос для сохранения настроек
-    alert('Настройки сайта сохранены!');
-  };
-  
-  // Настройки сайта
-  const [seoSettings, setSeoSettings] = useState({
-    title: '',
-    description: '',
-    keywords: ''
-  });
-  
-  const [siteSettings, setSiteSettings] = useState({
-    address: '',
-    phones: ['', '', ''],
-    emails: ['', ''],
-    workingHours: {
-      weekdays: '',
-      saturday: '',
-      sunday: ''
-    },
-    socialMedia: {
-      facebook: '',
-      instagram: '',
-      youtube: ''
+      facebook: 'https://facebook.com/neuro.uz',
+      instagram: 'https://instagram.com/neuro.uz',
+      youtube: 'https://youtube.com/@neuro.uz'
     }
   });
   
