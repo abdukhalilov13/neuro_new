@@ -1755,6 +1755,62 @@ export const AdminPanel = () => {
           </div>
         )}
 
+        {activeTab === 'statistics' && (
+          <div className="bg-white rounded-lg shadow">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-gray-900">Статистика центра ({statistics.length})</h2>
+                <button
+                  onClick={() => {
+                    setEditingStatistic({ id: null, title: '', value: '', icon: 'Users', color: 'bg-blue-600' });
+                    setIsStatisticModalOpen(true);
+                  }}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Добавить показатель</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {statistics.map((stat) => (
+                  <div key={stat.id} className="bg-gray-50 rounded-lg p-6 text-center">
+                    <div className={`w-16 h-16 ${stat.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                      <span className="text-2xl text-white font-bold">{stat.value}</span>
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-3">{stat.title}</h3>
+                    
+                    <div className="flex space-x-2 justify-center">
+                      <button
+                        onClick={() => {
+                          setEditingStatistic(stat);
+                          setIsStatisticModalOpen(true);
+                        }}
+                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center justify-center space-x-1 transition-colors"
+                      >
+                        <Edit className="w-4 h-4" />
+                        <span>Изменить</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (confirm('Удалить этот показатель?')) {
+                            setStatistics(statistics.filter(s => s.id !== stat.id));
+                          }
+                        }}
+                        className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg flex items-center justify-center transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {activeTab === 'accounts' && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
