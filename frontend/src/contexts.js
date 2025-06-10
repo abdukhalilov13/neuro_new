@@ -154,6 +154,10 @@ export const LanguageProvider = ({ children }) => {
       contacts: 'Aloqa',
       appointment: 'Qabulga yozilish',
       gallery: 'Galereya',
+      vacancies: 'Bo\'sh o\'rinlar',
+      testAccounts: 'Test akkauntlari',
+      doctorDashboard: 'Shifokor kabineti',
+      adminPanel: 'Admin-panel',
       centerOfNeurosurgery: 'Neyroxirurgiya Markazi',
       navigation: 'Navigatsiya',
       
