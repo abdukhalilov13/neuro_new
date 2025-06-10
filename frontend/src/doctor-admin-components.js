@@ -1628,6 +1628,91 @@ export const AdminPanel = () => {
           </div>
         )}
 
+        {activeTab === 'leadership' && (
+          <div className="bg-white rounded-lg shadow">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-gray-900">Руководство ({leadership.length})</h2>
+                <button
+                  onClick={() => {
+                    setEditingLeadership({
+                      id: null,
+                      name: '',
+                      position: '',
+                      image: '',
+                      phone: '',
+                      email: '',
+                      bio: '',
+                      education: [],
+                      experience: [],
+                      achievements: []
+                    });
+                    setIsLeadershipModalOpen(true);
+                  }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Добавить руководителя</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {leadership.map((leader) => (
+                  <div key={leader.id} className="bg-gray-50 rounded-lg p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img
+                        src={leader.image || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face'}
+                        alt={leader.name}
+                        className="w-16 h-16 rounded-full object-cover"
+                      />
+                      <div className="flex-1">
+                        <h3 className="font-bold text-gray-900">{leader.name}</h3>
+                        <p className="text-sm text-gray-600">{leader.position}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2 text-sm text-gray-600 mb-4">
+                      {leader.phone && (
+                        <div className="flex items-center space-x-2">
+                          <Phone className="w-4 h-4" />
+                          <span>{leader.phone}</span>
+                        </div>
+                      )}
+                      {leader.email && (
+                        <div className="flex items-center space-x-2">
+                          <Mail className="w-4 h-4" />
+                          <span>{leader.email}</span>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => {
+                          setEditingLeadership(leader);
+                          setIsLeadershipModalOpen(true);
+                        }}
+                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg flex items-center justify-center space-x-1 transition-colors"
+                      >
+                        <Edit className="w-4 h-4" />
+                        <span>Редактировать</span>
+                      </button>
+                      <button
+                        onClick={() => deleteLeadership(leader.id)}
+                        className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg flex items-center justify-center transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {activeTab === 'settings' && (
           <div className="space-y-6">
             {/* SEO Настройки */}
