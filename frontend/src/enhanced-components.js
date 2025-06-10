@@ -356,11 +356,11 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-3 mb-4">
               <img 
-                src="https://neuro.uz/themes/site/img/logo.png"
+                src="https://neuro.uz/themes/site/img/logo-white.png"
                 alt="NEURO.UZ Logo"
-                className="w-10 h-10"
+                className="w-10 h-10 filter brightness-0 invert"
               />
-              <h3 className="text-xl font-bold">NEURO.UZ</h3>
+              <h3 className="text-xl font-bold text-white">NEURO.UZ</h3>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed mb-4 text-left">
               {t('footerDescription')}
