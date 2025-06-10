@@ -105,7 +105,7 @@ const mockAppointments = [
 ];
 
 // ПОЛНОЦЕННЫЙ кабинет врача
-export const DoctorDashboard = () => {
+const DoctorDashboard = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [loginData, setLoginData] = useState({ email: '', password: '' });
