@@ -1467,6 +1467,8 @@ export const AdminPanel = () => {
                 onClick={() => {
                   setEditingDoctor(null);
                   setNewDoctor({ name: '', specialization: '', experience: '', image: '', email: '', phone: '', reception: '', departmentId: '' });
+                  setDoctorUploadType('url');
+                  setDoctorFilePreview(null);
                   setIsDoctorModalOpen(true);
                 }}
                 className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
