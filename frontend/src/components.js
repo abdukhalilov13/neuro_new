@@ -335,7 +335,7 @@ export const HomePage = () => {
                 <Building className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-4xl font-bold text-gray-900 mb-2">157</h3>
-              <p className="text-gray-600">Общих койко-мест</p>
+              <p className="text-gray-600">{t('totalBeds')}</p>
             </motion.div>
 
             <motion.div
