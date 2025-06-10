@@ -405,10 +405,12 @@ export const HomePage = () => {
                 viewport={{ once: true }}
                 className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2"
               >
-                <div className={`w-16 h-16 bg-gradient-to-br ${dept.color} rounded-2xl flex items-center justify-center mb-4`}>
-                  {React.createElement(dept.icon, { className: "w-8 h-8 text-white" })}
+                <div className="flex items-center mb-4">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${dept.color} rounded-2xl flex items-center justify-center mr-4 flex-shrink-0`}>
+                    {React.createElement(dept.icon, { className: "w-8 h-8 text-white" })}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">{dept.name}</h3>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{dept.name}</h3>
                 <p className="text-gray-600 mb-4">{dept.description}</p>
                 <Link
                   to="/departments"
