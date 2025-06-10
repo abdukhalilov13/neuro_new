@@ -220,8 +220,7 @@ export const VacanciesPage = () => {
                     </div>
                     <div className="text-right">
                       <div className="flex items-center space-x-1 text-green-600 font-semibold">
-                        <DollarSign className="w-4 h-4" />
-                        <span>{vacancy.salary} uzs</span>
+                        <span>{vacancy.salary} UZS</span>
                       </div>
                     </div>
                   </div>
