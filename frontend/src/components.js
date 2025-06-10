@@ -223,7 +223,7 @@ export const HomePage = () => {
             >
               <div className="relative">
                 <img 
-                  src={adminData.galleryImages.find(img => img.category === 'building')?.url || siteData.hero.buildingImage}
+                  src={adminData?.galleryImages?.find(img => img.category === 'building')?.url || siteData.hero.buildingImage}
                   alt="Здание центра нейрохирургии"
                   className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
                 />
