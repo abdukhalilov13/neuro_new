@@ -297,11 +297,11 @@ export const VacanciesPage = () => {
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center space-x-2">
                     <Mail className="w-4 h-4" />
-                    <span>hr@neuro.uz</span>
+                    <span>admin@neuro.uz</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Users className="w-4 h-4" />
-                    <span>Отдел кадров: +998 71 264-96-12</span>
+                    <span>Отдел кадров: +998 71 264 96 22</span>
                   </div>
                 </div>
               </motion.div>
