@@ -377,7 +377,7 @@ export const HomePage = () => {
                 <Users className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-4xl font-bold text-gray-900 mb-2">5000+</h3>
-              <p className="text-gray-600">Пациентов в год</p>
+              <p className="text-gray-600">{t('patientsPerYear')}</p>
             </motion.div>
           </div>
         </div>
