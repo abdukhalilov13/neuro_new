@@ -159,13 +159,29 @@ export const DoctorsPage = () => {
 
 // Услуги - ИСПОЛЬЗУЕМ ВСЕ ДАННЫЕ ИЗ АДМИНКИ
 export const ServicesPage = () => {
-  const { adminData } = useAdmin();
+  const { adminData, isLoading } = useAdmin();
   const { t } = useLanguage();
 
-  // Проверяем что данные загружены
+  // Проверяем что данные загружены и безопасно обращаемся к services
   const services = adminData?.services || [];
 
-  // Группируем услуги по категориям
+  // Показываем загрузку, если данные еще загружаются
+  if (isLoading) {
+    return (
+      <div className="min-h-screen">
+        <Header />
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Загрузка услуг...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Группируем услуги по категориям только если есть данные
   const servicesByCategory = services.reduce((acc, service) => {
     if (!acc[service.category]) {
       acc[service.category] = [];
