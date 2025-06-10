@@ -2469,14 +2469,70 @@ export const AdminPanel = () => {
       >
         <form onSubmit={handleGallerySubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">URL изображения</label>
-            <input
-              type="url"
-              required
-              value={newGalleryImage.url}
-              onChange={(e) => setNewGalleryImage({...newGalleryImage, url: e.target.value})}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
+            <label className="block text-sm font-medium text-gray-700 mb-2">Изображение</label>
+            <div className="space-y-3">
+              {/* Выбор способа загрузки */}
+              <div className="flex space-x-4">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="uploadType"
+                    value="url"
+                    checked={uploadType === 'url'}
+                    onChange={(e) => setUploadType(e.target.value)}
+                    className="mr-2"
+                  />
+                  По URL
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="uploadType"
+                    value="file"
+                    checked={uploadType === 'file'}
+                    onChange={(e) => setUploadType(e.target.value)}
+                    className="mr-2"
+                  />
+                  Загрузить файл
+                </label>
+              </div>
+
+              {/* URL загрузка */}
+              {uploadType === 'url' && (
+                <input
+                  type="url"
+                  required
+                  value={newGalleryImage.url}
+                  onChange={(e) => setNewGalleryImage({...newGalleryImage, url: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  placeholder="https://example.com/image.jpg"
+                />
+              )}
+
+              {/* Файловая загрузка */}
+              {uploadType === 'file' && (
+                <div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFileUpload(e)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                  {filePreview && (
+                    <div className="mt-3">
+                      <img
+                        src={filePreview}
+                        alt="Предпросмотр"
+                        className="w-32 h-32 object-cover rounded-lg border"
+                      />
+                    </div>
+                  )}
+                  <p className="text-sm text-gray-500 mt-1">
+                    Максимальный размер: 5MB. Поддерживаемые форматы: JPG, PNG, GIF, WebP
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
           
           <div>
