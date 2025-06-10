@@ -2922,16 +2922,69 @@ export const AdminPanel = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                URL фотографии
-              </label>
-              <input
-                type="url"
-                value={editingLeadership.image}
-                onChange={(e) => setEditingLeadership({...editingLeadership, image: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                placeholder="https://example.com/photo.jpg"
-              />
+              <label className="block text-sm font-medium text-gray-700 mb-2">Фотография руководителя</label>
+              <div className="space-y-3">
+                {/* Выбор способа загрузки */}
+                <div className="flex space-x-4">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="leadershipUploadType"
+                      value="url"
+                      checked={leadershipUploadType === 'url'}
+                      onChange={(e) => setLeadershipUploadType(e.target.value)}
+                      className="mr-2"
+                    />
+                    По URL
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="leadershipUploadType"
+                      value="file"
+                      checked={leadershipUploadType === 'file'}
+                      onChange={(e) => setLeadershipUploadType(e.target.value)}
+                      className="mr-2"
+                    />
+                    Загрузить файл
+                  </label>
+                </div>
+
+                {/* URL загрузка */}
+                {leadershipUploadType === 'url' && (
+                  <input
+                    type="url"
+                    value={editingLeadership.image}
+                    onChange={(e) => setEditingLeadership({...editingLeadership, image: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="https://example.com/leader-photo.jpg"
+                  />
+                )}
+
+                {/* Файловая загрузка */}
+                {leadershipUploadType === 'file' && (
+                  <div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleLeadershipFileUpload(e)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                    {leadershipFilePreview && (
+                      <div className="mt-3">
+                        <img
+                          src={leadershipFilePreview}
+                          alt="Предпросмотр"
+                          className="w-32 h-32 object-cover rounded-lg border"
+                        />
+                      </div>
+                    )}
+                    <p className="text-sm text-gray-500 mt-1">
+                      Максимальный размер: 5MB. Поддерживаемые форматы: JPG, PNG, GIF, WebP
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
