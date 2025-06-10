@@ -904,10 +904,9 @@ export const AdminPanel = () => {
     biography: '' 
   });
   const [newService, setNewService] = useState({ 
-    name: '', 
-    category: '', 
-    price: '', 
-    description: '' 
+    name_ru: '', name_uz: '', name_en: '',
+    description_ru: '', description_uz: '', description_en: '',
+    price: '', category: 'consultation'
   });
   const [newGalleryImage, setNewGalleryImage] = useState({ 
     url: '', 
