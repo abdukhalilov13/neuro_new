@@ -40,7 +40,7 @@ import { DoctorDashboard, AdminPanel } from './doctor-admin-components';
 const siteData = {
   hero: {
     doctorImage: "https://images.unsplash.com/photo-1638202993928-7267aad84c31",
-    buildingImage: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=600&fit=crop",
+    buildingImage: "https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
     phone: "+998 71 264-96-10",
     emergency: "+998 78 113-33-78"
   },
