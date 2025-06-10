@@ -25,16 +25,14 @@ class NeuroUzAPITester:
         self.tests_run = 0
         self.tests_passed = 0
 
-    def run_test(self, name, method, endpoint, expected_status, data=None, auth=False):
+    def run_test(self, name, method, endpoint, expected_status, data=None):
         """Run a single API test"""
         url = f"{self.base_url}/{endpoint}"
         headers = {'Content-Type': 'application/json'}
         
-        if auth and self.auth_token:
-            headers['Authorization'] = f'Bearer {self.auth_token}'
-        
         self.tests_run += 1
         print(f"\n🔍 Testing {name}...")
+        print(f"URL: {url}")
         
         try:
             if method == 'GET':
@@ -52,14 +50,17 @@ class NeuroUzAPITester:
                 print(f"✅ Passed - Status: {response.status_code}")
                 if response.text:
                     try:
-                        return success, response.json()
+                        json_response = response.json()
+                        print(f"Response structure: {json.dumps(json_response, indent=2)[:500]}...")
+                        return success, json_response
                     except:
+                        print(f"Response: {response.text[:500]}...")
                         return success, response.text
                 return success, {}
             else:
                 print(f"❌ Failed - Expected {expected_status}, got {response.status_code}")
                 if response.text:
-                    print(f"Response: {response.text}")
+                    print(f"Response: {response.text[:500]}...")
                 return success, {}
 
         except Exception as e:
