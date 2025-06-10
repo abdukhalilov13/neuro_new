@@ -466,17 +466,38 @@ export const DoctorDashboard = () => {
           </div>
         )}
 
-        {activeTab === 'patients' && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">База пациентов</h2>
-            <p className="text-gray-600">Здесь будет отображаться полная база данных пациентов с историей болезни.</p>
-          </div>
-        )}
-
         {activeTab === 'schedule' && (
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-bold text-gray-900 mb-4">Расписание работы</h2>
-            <p className="text-gray-600">Здесь можно настроить персональное расписание приема пациентов.</p>
+            <p className="text-gray-600 mb-6">Просмотр вашего рабочего расписания. Редактирование доступно только через админ-панель.</p>
+            
+            {/* Календарь расписания */}
+            <div className="grid grid-cols-7 gap-2 mb-4">
+              {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((day) => (
+                <div key={day} className="text-center font-semibold text-gray-700 p-2">
+                  {day}
+                </div>
+              ))}
+            </div>
+            
+            {/* Рабочие часы */}
+            <div className="bg-gray-50 rounded-lg p-4">
+              <h3 className="font-semibold text-gray-900 mb-3">Рабочие часы</h3>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span>Понедельник - Пятница:</span>
+                  <span className="font-medium">9:00 - 17:00</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Суббота:</span>
+                  <span className="font-medium">9:00 - 15:00</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Воскресенье:</span>
+                  <span className="font-medium text-red-600">Выходной</span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
