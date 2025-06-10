@@ -137,6 +137,8 @@ export const AdminProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
+        
         // Fetch departments
         const departmentsData = await apiService.getDepartments();
         setDepartments(departmentsData);
@@ -159,6 +161,9 @@ export const AdminProvider = ({ children }) => {
         
       } catch (error) {
         console.error("Error fetching data from API:", error);
+        // В случае ошибки, оставляем пустые массивы
+      } finally {
+        setIsLoading(false);
       }
     };
     
