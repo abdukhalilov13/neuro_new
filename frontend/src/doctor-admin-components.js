@@ -2486,11 +2486,11 @@ export const AdminPanel = () => {
       <Modal
         isOpen={isLeadershipModalOpen}
         onClose={() => setIsLeadershipModalOpen(false)}
-        title={editingLeadership.id ? 'Редактировать руководителя' : 'Добавить руководителя'}
+        title={editingLeadership?.id ? 'Редактировать руководителя' : 'Добавить руководителя'}
       >
         <form onSubmit={(e) => {
           e.preventDefault();
-          if (editingLeadership.id) {
+          if (editingLeadership?.id) {
             updateLeadership(editingLeadership.id, editingLeadership);
           } else {
             addLeadership({
