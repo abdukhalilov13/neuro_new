@@ -787,6 +787,14 @@ export const AdminPanel = () => {
   const leadership = adminData?.leadership || [];
   const galleryImages = adminData?.galleryImages || [];
   
+  // Состояния для управления галереей
+  const [showCategoryManager, setShowCategoryManager] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [newCategoryName, setNewCategoryName] = useState('');
+  const [galleryCategories, setGalleryCategories] = useState([
+    'general', 'building', 'equipment', 'surgery', 'staff', 'events'
+  ]);
+  
   // Формы для новых записей
   const [newDepartment, setNewDepartment] = useState({ 
     name: '', 
