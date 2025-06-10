@@ -28,6 +28,10 @@ export const LanguageProvider = ({ children }) => {
       contacts: 'Контакты',
       appointment: 'Запись на прием',
       gallery: 'Галерея',
+      vacancies: 'Вакансии',
+      testAccounts: 'Тестовые аккаунты',
+      doctorDashboard: 'Кабинет врача',
+      adminPanel: 'Админ-панель',
       centerOfNeurosurgery: 'Центр Нейрохирургии',
       navigation: 'Навигация',
       
