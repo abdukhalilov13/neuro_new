@@ -319,8 +319,8 @@ export const HomePage = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Центр в цифрах</h2>
-            <p className="text-xl text-gray-600">Факты и достижения нашего центра</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('centerInNumbers')}</h2>
+            <p className="text-xl text-gray-600">{t('factsAchievements')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
