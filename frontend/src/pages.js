@@ -58,7 +58,7 @@ export const DepartmentsPage = () => {
               >
                 <div className="flex items-start space-x-6">
                   <div className={`w-16 h-16 bg-gradient-to-br ${dept.color} rounded-2xl flex items-center justify-center flex-shrink-0`}>
-                    <dept.icon className="w-8 h-8 text-white" />
+                    {React.createElement(dept.icon, { className: "w-8 h-8 text-white" })}
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">{dept.name}</h3>
