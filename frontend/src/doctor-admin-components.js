@@ -766,7 +766,8 @@ export const AdminPanel = () => {
   const [editingGalleryImage, setEditingGalleryImage] = useState(null);
   
   // Получаем данные из контекста
-  const departments = adminData?.departments || siteData.departments;
+  // const departments = adminData?.departments || siteData.departments;
+  const departments = siteData.departments;
   const doctors = adminData?.doctors || siteData.doctors;
   const news = adminData?.news || siteData.news;
   const services = adminData?.services || [];
