@@ -181,25 +181,25 @@ export const HomePage = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 to-white">
         <div className="max-w-7xl mx-auto px-4 py-20">
-          <div className="text-center">
-            {/* Центральный текст */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Левая колонка с текстом */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="max-w-4xl mx-auto"
+              className="text-left"
             >
-              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight mb-6 text-gray-900">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-gray-900">
                 Республиканский Научный Центр Нейрохирургии при Министерстве Здравоохранения Республики Узбекистан
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl mb-4 text-blue-600 font-semibold">
+              <p className="text-lg sm:text-xl lg:text-2xl mb-4 text-blue-600">
                 Ведущий центр нейрохирургии в Центральной Азии
               </p>
-              <p className="text-base sm:text-lg mb-8 text-gray-600 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg mb-8 text-gray-600">
                 Более 25 лет опыта в лечении сложнейших заболеваний нервной системы
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   to="/appointment"
                   className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 text-center"
@@ -212,6 +212,48 @@ export const HomePage = () => {
                 >
                   О центре
                 </Link>
+              </div>
+            </motion.div>
+
+            {/* Правая колонка с фото */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="relative">
+                <img 
+                  src={adminData?.galleryImages?.find(img => img.category === 'building')?.url || siteData.hero.buildingImage}
+                  alt="Здание центра нейрохирургии"
+                  className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent rounded-2xl"></div>
+              </div>
+              
+              {/* Статистические карточки */}
+              <div className="absolute -bottom-8 -left-8 bg-white rounded-xl p-4 shadow-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-gray-900">5000+</p>
+                    <p className="text-sm text-gray-600">Пациентов в год</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute -top-8 -right-8 bg-white rounded-xl p-4 shadow-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <Award className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-gray-900">25+</p>
+                    <p className="text-sm text-gray-600">Лет опыта</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
