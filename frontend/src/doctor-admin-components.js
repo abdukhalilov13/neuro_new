@@ -826,6 +826,39 @@ export const AdminPanel = () => {
   const [editingStatistic, setEditingStatistic] = useState(null);
   const [isStatisticModalOpen, setIsStatisticModalOpen] = useState(false);
   
+  // Состояния для управления событиями
+  const [events, setEvents] = useState([
+    { 
+      id: 1, 
+      title: 'Международная конференция по нейрохирургии', 
+      date: '2024-07-15', 
+      time: '09:00',
+      location: 'Главный зал центра',
+      description: 'Обсуждение современных методов лечения',
+      type: 'conference'
+    },
+    { 
+      id: 2, 
+      title: 'День открытых дверей', 
+      date: '2024-07-20', 
+      time: '10:00',
+      location: 'Все отделения',
+      description: 'Экскурсии и консультации для посетителей',
+      type: 'open-day'
+    },
+    { 
+      id: 3, 
+      title: 'Мастер-класс по микрохирургии', 
+      date: '2024-07-25', 
+      time: '14:00',
+      location: 'Операционная №1',
+      description: 'Демонстрация современных методик',
+      type: 'masterclass'
+    }
+  ]);
+  const [editingEvent, setEditingEvent] = useState(null);
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  
   // Формы для новых записей
   const [newDepartment, setNewDepartment] = useState({ 
     name: '', 
