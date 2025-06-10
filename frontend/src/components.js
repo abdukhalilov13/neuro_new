@@ -30,8 +30,7 @@ import {
   CreditCard,
   Smartphone,
   Check,
-  ArrowRight,
-  Award
+  ArrowRight
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
 import { Header, Footer, ServiceCard } from './enhanced-components';
