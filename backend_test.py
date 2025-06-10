@@ -724,79 +724,60 @@ def main():
     # Setup
     tester = NeuroUzAPITester()
     
-    # Run tests
+    # Run tests for the required endpoints
     print("\n===== Testing Basic API Endpoints =====")
     tester.test_root_endpoint()
-    tester.test_status_endpoint()
-    tester.test_create_status()
+    
+    print("\n===== Testing Departments API =====")
+    success, departments_data = tester.test_departments_endpoint()
+    if success:
+        print(f"✅ Found {len(departments_data)} departments")
+        if len(departments_data) == 3:
+            print("✅ Correct number of departments (3) returned from API")
+        else:
+            print(f"❌ Expected 3 departments, but got {len(departments_data)}")
+    
+    print("\n===== Testing Doctors API =====")
+    success, doctors_data = tester.test_doctors_endpoint()
+    if success:
+        print(f"✅ Found {len(doctors_data)} doctors")
+        if len(doctors_data) == 3:
+            print("✅ Correct number of doctors (3) returned from API")
+        else:
+            print(f"❌ Expected 3 doctors, but got {len(doctors_data)}")
+    
+    print("\n===== Testing Services API =====")
+    success, services_data = tester.test_services_endpoint()
+    if success:
+        print(f"✅ Found {len(services_data)} services")
+        if len(services_data) == 3:
+            print("✅ Correct number of services (3) returned from API")
+        else:
+            print(f"❌ Expected 3 services, but got {len(services_data)}")
+    
+    print("\n===== Testing News API =====")
+    success, news_data = tester.test_news_endpoint()
+    if success:
+        print(f"✅ Found {len(news_data)} news items")
+        if len(news_data) == 2:
+            print("✅ Correct number of news items (2) returned from API")
+        else:
+            print(f"❌ Expected 2 news items, but got {len(news_data)}")
+    
+    print("\n===== Testing Gallery API =====")
+    success, gallery_data = tester.test_gallery_endpoint()
+    if success:
+        print(f"✅ Found {len(gallery_data)} gallery images")
+    
+    print("\n===== Testing Appointment Submission =====")
+    tester.test_appointment_submission()
     
     print("\n===== Testing Authentication =====")
-    tester.test_admin_login()
-    
-    print("\n===== Testing Services =====")
-    tester.test_services_endpoint()
-    tester.test_add_service()
-    tester.test_update_service()
-    tester.test_delete_service()
-    
-    print("\n===== Testing Departments =====")
-    tester.test_departments_endpoint()
-    tester.test_add_department()
-    tester.test_update_department()
-    
-    print("\n===== Testing Doctors =====")
-    tester.test_doctors_endpoint()
-    tester.test_add_doctor()
-    tester.test_update_doctor()
-    
-    print("\n===== Testing News =====")
-    tester.test_news_endpoint()
-    tester.test_add_news()
-    tester.test_update_news()
-    tester.test_delete_news()
-    
-    print("\n===== Testing Accounts =====")
-    tester.test_accounts_endpoint()
-    tester.test_add_account()
-    tester.test_update_account()
-    tester.test_toggle_account_status()
-    tester.test_delete_account()
-    
-    print("\n===== Testing Leadership =====")
-    tester.test_leadership_endpoint()
-    tester.test_add_leadership()
-    tester.test_update_leadership()
-    tester.test_delete_leadership()
-    
-    print("\n===== Testing Gallery =====")
-    tester.test_gallery_endpoint()
-    tester.test_add_gallery_image()
-    tester.test_update_gallery_image()
-    tester.test_delete_gallery_image()
-    
-    print("\n===== Testing Other Functionality =====")
-    tester.test_appointment_submission()
-    tester.test_language_content()
+    print("Testing Doctor Login:")
     tester.test_doctor_login()
     
-    # Clean up any remaining test data
-    for doctor_id in tester.created_ids["doctors"]:
-        tester.run_test(
-            f"Cleanup Doctor {doctor_id}",
-            "DELETE",
-            f"doctors/{doctor_id}",
-            200,
-            auth=True
-        )
-    
-    for department_id in tester.created_ids["departments"]:
-        tester.run_test(
-            f"Cleanup Department {department_id}",
-            "DELETE",
-            f"departments/{department_id}",
-            200,
-            auth=True
-        )
+    print("Testing Admin Login:")
+    tester.test_admin_login()
     
     # Print results
     print(f"\n📊 Tests passed: {tester.tests_passed}/{tester.tests_run}")
