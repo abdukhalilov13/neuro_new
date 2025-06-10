@@ -1530,6 +1530,8 @@ export const AdminPanel = () => {
                 onClick={() => {
                   setEditingNews(null);
                   setNewNews({ title: '', excerpt: '', content: '', image: '' });
+                  setNewsUploadType('url');
+                  setNewsFilePreview(null);
                   setIsNewsModalOpen(true);
                 }}
                 className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
