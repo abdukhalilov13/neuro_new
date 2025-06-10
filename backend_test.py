@@ -5,7 +5,7 @@ from datetime import datetime
 import uuid
 
 class NeuroUzAPITester:
-    def __init__(self, base_url="https://3e8e490c-7e85-4fd5-adcb-28cf6a45bcf5.preview.emergentagent.com/api"):
+    def __init__(self, base_url="https://e4935fc8-1c5d-4af5-b8e1-d221750b0ddc.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.tests_run = 0
         self.tests_passed = 0
