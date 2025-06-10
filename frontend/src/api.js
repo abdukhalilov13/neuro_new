@@ -2,7 +2,8 @@ const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001
 
 class ApiService {
   constructor() {
-    this.baseURL = API_BASE_URL;
+    // Ensure the baseURL ends with /api
+    this.baseURL = API_BASE_URL.endsWith('/api') ? API_BASE_URL : `${API_BASE_URL}/api`;
   }
 
   async request(endpoint, options = {}) {
