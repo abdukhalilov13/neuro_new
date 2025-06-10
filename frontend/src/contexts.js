@@ -280,6 +280,10 @@ export const LanguageProvider = ({ children }) => {
       contacts: 'Contacts',
       appointment: 'Appointment',
       gallery: 'Gallery',
+      vacancies: 'Vacancies',
+      testAccounts: 'Test Accounts',
+      doctorDashboard: 'Doctor Dashboard',
+      adminPanel: 'Admin Panel',
       centerOfNeurosurgery: 'Center of Neurosurgery',
       navigation: 'Navigation',
       
