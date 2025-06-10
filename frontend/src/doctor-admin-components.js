@@ -91,7 +91,7 @@ const DashboardStats = ({ stats }) => (
 );
 
 // Doctor Dashboard
-export const DoctorDashboard = () => {
+const DoctorDashboard = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [activeTab, setActiveTab] = useState('dashboard');
