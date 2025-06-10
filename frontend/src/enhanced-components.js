@@ -258,13 +258,13 @@ const Header = () => {
                 {t('appointment')}
               </Link>
               <Link to="/test-accounts" className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-sm transition-colors">
-                Тестовые аккаунты
+                {t('testAccounts')}
               </Link>
               <Link to="/doctor-dashboard" className="hover:text-blue-200 transition-colors text-sm">
-                Кабинет врача
+                {t('doctorDashboard')}
               </Link>
               <Link to="/admin" className="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-sm transition-colors">
-                Админ-панель
+                {t('adminPanel')}
               </Link>
             </div>
           </div>
