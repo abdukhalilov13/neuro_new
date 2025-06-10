@@ -2697,7 +2697,7 @@ export const AdminPanel = () => {
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
               <input
                 type="email"
                 required
@@ -2706,6 +2706,43 @@ export const AdminPanel = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
               />
             </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Телефон</label>
+              <input
+                type="tel"
+                required
+                value={newDoctor.phone}
+                onChange={(e) => setNewDoctor({...newDoctor, phone: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Отделение</label>
+              <select
+                value={newDoctor.departmentId}
+                onChange={(e) => setNewDoctor({...newDoctor, departmentId: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              >
+                <option value="">Не привязан к отделению</option>
+                {departments.map(dept => (
+                  <option key={dept.id} value={dept.id}>{dept.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">График приема</label>
+              <input
+                type="text"
+                value={newDoctor.reception}
+                onChange={(e) => setNewDoctor({...newDoctor, reception: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                placeholder="Пн-Пт 9:00-17:00"
+              />
+            </div>
+          </div>
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Телефон</label>
