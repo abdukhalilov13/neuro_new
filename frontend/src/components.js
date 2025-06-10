@@ -502,6 +502,7 @@ export { Header, Footer, siteData, DoctorDashboard, AdminPanel };
 
 // О центре
 export const AboutPage = () => {
+  const { t } = useLanguage(); // Добавляем поддержку переводов
   const [selectedLeader, setSelectedLeader] = useState(null);
   const [isBioModalOpen, setIsBioModalOpen] = useState(false);
 
