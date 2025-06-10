@@ -268,7 +268,7 @@ export const HomePage = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 hidden lg:block"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 hidden lg:block"
         >
           <div className="flex flex-wrap justify-center gap-4">
             {/* Телефон */}
