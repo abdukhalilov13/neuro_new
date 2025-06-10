@@ -273,7 +273,7 @@ export const HomePage = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-600">Связаться с нами</p>
-                <p className="font-semibold text-gray-900">{adminData.siteSettings.phones[0]}</p>
+                <p className="font-semibold text-gray-900">{adminData?.siteSettings?.phones?.[0] || siteData.hero.phone}</p>
               </div>
             </div>
 
