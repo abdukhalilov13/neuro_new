@@ -42,7 +42,8 @@ import {
   FileText,
   Check,
   Upload,
-  Camera
+  Camera,
+  Stethoscope
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
 import { siteData } from './components';
