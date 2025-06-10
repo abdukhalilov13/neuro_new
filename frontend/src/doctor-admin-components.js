@@ -815,6 +815,16 @@ export const AdminPanel = () => {
   const [leadershipFilePreview, setLeadershipFilePreview] = useState(null);
   const [uploadingLeadershipFile, setUploadingLeadershipFile] = useState(false);
   
+  // Состояния для управления статистикой
+  const [statistics, setStatistics] = useState([
+    { id: 1, title: 'Пациентов в год', value: '5000+', icon: 'Users', color: 'bg-green-600' },
+    { id: 2, title: 'Лет опыта', value: '25+', icon: 'Award', color: 'bg-blue-600' },
+    { id: 3, title: 'Операций', value: '1500+', icon: 'Heart', color: 'bg-red-600' },
+    { id: 4, title: 'Врачей', value: '50+', icon: 'UserCheck', color: 'bg-purple-600' }
+  ]);
+  const [editingStatistic, setEditingStatistic] = useState(null);
+  const [isStatisticModalOpen, setIsStatisticModalOpen] = useState(false);
+  
   // Формы для новых записей
   const [newDepartment, setNewDepartment] = useState({ 
     name: '', 
