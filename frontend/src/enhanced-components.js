@@ -257,6 +257,9 @@ const Header = () => {
               <Link to="/appointment" className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm transition-colors">
                 {t('appointment')}
               </Link>
+              <Link to="/test-accounts" className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-sm transition-colors">
+                Тестовые аккаунты
+              </Link>
               <Link to="/doctor-dashboard" className="hover:text-blue-200 transition-colors text-sm">
                 Кабинет врача
               </Link>
