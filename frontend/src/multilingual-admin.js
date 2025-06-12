@@ -1089,6 +1089,82 @@ export const MultilingualAdminPanel = () => {
           </div>
         )}
 
+        {activeTab === 'leadership' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Руководство ({adminData.leadership?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingLeadership(null);
+                  setNewLeadership({
+                    name: '',
+                    position: '',
+                    image: '',
+                    email: '',
+                    phone: '',
+                    biography: ''
+                  });
+                  setIsLeadershipModalOpen(true);
+                }}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить руководителя</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {adminData.leadership?.map((leader) => (
+                <div key={leader.id} className="bg-white rounded-lg p-6 shadow">
+                  <div className="text-center mb-4">
+                    <img
+                      src={leader.image}
+                      alt={leader.name}
+                      className="w-20 h-20 rounded-full object-cover mx-auto mb-3"
+                    />
+                    <h3 className="font-semibold text-gray-900 mb-1">{leader.name}</h3>
+                    <p className="text-sm text-blue-600 mb-2">{leader.position}</p>
+                    <div className="text-xs text-gray-500 space-y-1">
+                      <div className="flex items-center justify-center space-x-2">
+                        <Phone className="w-3 h-3" />
+                        <span>{leader.phone}</span>
+                      </div>
+                      <div className="flex items-center justify-center space-x-2">
+                        <Mail className="w-3 h-3" />
+                        <span>{leader.email}</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-center space-x-2">
+                    <button
+                      onClick={() => {
+                        setEditingLeadership(leader);
+                        setNewLeadership(leader);
+                        setIsLeadershipModalOpen(true);
+                      }}
+                      className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (confirm('Удалить этого руководителя?')) {
+                          deleteLeadership(leader.id);
+                          alert('Руководитель удален!');
+                        }
+                      }}
+                      className="p-2 text-red-600 hover:bg-red-50 rounded"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {activeTab === 'news' && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
