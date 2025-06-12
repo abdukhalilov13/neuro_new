@@ -141,6 +141,7 @@ export const MultilingualAdminPanel = () => {
   const [editingEvent, setEditingEvent] = useState(null);
   const [editingAccount, setEditingAccount] = useState(null);
   const [editingLeader, setEditingLeader] = useState(null);
+  const [editingCategory, setEditingCategory] = useState(null);
   
   // Новые записи
   const [newDepartment, setNewDepartment] = useState({
