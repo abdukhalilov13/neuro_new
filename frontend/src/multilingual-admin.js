@@ -557,6 +557,38 @@ export const MultilingualAdminPanel = () => {
     setIsLeadershipModalOpen(true);
   };
 
+  // Функции управления руководством
+  const handleLeadershipSubmit = (e) => {
+    e.preventDefault();
+    if (editingLeadership) {
+      updateLeadership(editingLeadership.id, newLeadership);
+      alert('Руководитель обновлен!');
+    } else {
+      addLeadership(newLeadership);
+      alert('Руководитель добавлен!');
+    }
+    setIsLeadershipModalOpen(false);
+    resetLeadershipForm();
+  };
+
+  const resetLeadershipForm = () => {
+    setNewLeadership({
+      name: '',
+      position: '',
+      image: '',
+      email: '',
+      phone: '',
+      biography: ''
+    });
+    setEditingLeadership(null);
+  };
+
+  const startEditLeadership = (leader) => {
+    setEditingLeadership(leader);
+    setNewLeadership(leader);
+    setIsLeadershipModalOpen(true);
+  };
+
   // Функции управления событиями
   const handleEventSubmit = (e) => {
     e.preventDefault();
