@@ -282,7 +282,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Test accounts page accessibility"
+    - "Unified admin panel with website synchronization"
   stuck_tasks:
   test_all: false
   test_priority: "high_first"
