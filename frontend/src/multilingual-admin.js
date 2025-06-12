@@ -746,13 +746,10 @@ export const MultilingualAdminPanel = () => {
               { id: 'appointments', label: 'Записи на сегодня', icon: Calendar },
               { id: 'departments', label: 'Отделения', icon: Building },
               { id: 'doctors', label: 'Врачи', icon: Stethoscope },
+              { id: 'leadership', label: 'Руководство', icon: Crown },
               { id: 'news', label: 'Новости', icon: FileText },
               { id: 'vacancies', label: 'Вакансии', icon: Briefcase },
-              { id: 'gallery', label: 'Галерея', icon: ImageIcon },
-              { id: 'events', label: 'События', icon: Star },
-              { id: 'accounts', label: 'Аккаунты', icon: Users },
-              { id: 'leadership', label: 'Руководство', icon: Crown },
-              { id: 'settings', label: 'Настройки', icon: Settings }
+              { id: 'gallery', label: 'Галерея', icon: ImageIcon }
             ].map((tab) => (
               <button
                 key={tab.id}
