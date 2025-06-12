@@ -219,6 +219,42 @@ frontend:
       - working: true
         agent: "testing"
         comment: "Retested the leadership section on the About page. Verified that all requested changes have been implemented successfully: 1) Photos are now significantly larger (w-48 h-48, 192x192px), 2) Photos have rectangular shape with rounded corners (rounded-2xl), 3) Photos have shadow (shadow-lg) and border (ring-4 ring-blue-100), 4) Cards are taller (min-h-[500px]), 5) Cards have more padding (p-10), 6) Responsive design works correctly (1 column on mobile, 2 columns on tablet, 3 columns on desktop), 7) Modal functionality works properly - clicking on a card opens the biography modal which can be closed. The leadership cards now have a more professional and visually appealing design with the photos being the dominant element."
+        
+  - task: "Image upload functionality"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/enhanced-admin-sections.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Tested the image upload functionality in the admin panel. Successfully verified that file upload buttons are present in all relevant sections: 1) In the Doctors section, the 'Фото врача' field has a 'Выбрать файл' button for uploading images, 2) In the News section, the 'Изображение новости' field has a file upload button, 3) In the Events section, the 'Изображение события' field has a file upload button, 4) In the Leadership section, the 'Фото руководителя' field has a file upload button. The image upload component is properly implemented with preview functionality."
+        
+  - task: "Gallery categories management"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/enhanced-admin-sections.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Tested the gallery categories management functionality. Verified that the Gallery section has a 'Категории галереи' block at the top showing 4 categories (Здание, Оборудование, Персонал, События). Each category displays translation status indicators (RU: ✓, UZ: ✓/✗, EN: ✓/✗). The 'Добавить категорию' button opens a modal window with language switching functionality. Edit and delete buttons are present for each category. The language switching in the modal works correctly, showing the appropriate field labels based on the selected language."
+        
+  - task: "Enhanced settings section"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/enhanced-admin-sections.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Tested the enhanced settings section in the admin panel. Verified that the settings are divided into 3 columns as required: 1) Контактная информация (with phone numbers, email addresses, and physical address), 2) Социальные сети (with fields for Facebook, Instagram, YouTube, and official website), 3) SEO настройки (with fields for site title, description, and keywords). The '+ Добавить' buttons for adding phones and emails are present and functional. Social media sections have appropriate icons for each platform."
 
 metadata:
   created_by: "main_agent"
