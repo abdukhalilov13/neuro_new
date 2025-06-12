@@ -664,7 +664,7 @@ export const AboutPage = () => {
                     <img
                       src={leader.image}
                       alt={leader.name}
-                      className="w-32 h-32 rounded-full object-cover mx-auto mb-6 ring-4 ring-blue-100"
+                      className="w-48 h-48 rounded-2xl object-cover mx-auto mb-6 ring-4 ring-blue-100 shadow-lg"
                     />
                     <h3 className="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
                       {leader.name}
