@@ -216,6 +216,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "Tested the leadership section on the About page. Verified that the leadership cards have been enlarged as requested - images are now 32x32 (larger than previous 24x24), cards have more padding (p-8), and the 'Читать биографию' button is now styled as a proper button with blue background and white text. The modal functionality works correctly - clicking on a leadership card opens the biography modal, and it can be closed properly. No console errors related to this functionality."
+      - working: true
+        agent: "testing"
+        comment: "Retested the leadership section on the About page. Verified that all requested changes have been implemented successfully: 1) Photos are now significantly larger (w-48 h-48, 192x192px), 2) Photos have rectangular shape with rounded corners (rounded-2xl), 3) Photos have shadow (shadow-lg) and border (ring-4 ring-blue-100), 4) Cards are taller (min-h-[500px]), 5) Cards have more padding (p-10), 6) Responsive design works correctly (1 column on mobile, 2 columns on tablet, 3 columns on desktop), 7) Modal functionality works properly - clicking on a card opens the biography modal which can be closed. The leadership cards now have a more professional and visually appealing design with the photos being the dominant element."
 
 metadata:
   created_by: "main_agent"
