@@ -186,6 +186,18 @@ frontend:
       - working: true
         agent: "main"
         comment: "Added 'Тестовые аккаунты' link to the header top bar between 'Запись на прием' and 'Кабинет врача' with green styling. Now users can easily access test login credentials."
+        
+  - task: "Multilingual admin panel functionality"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/multilingual-admin.js,/app/frontend/src/admin-sections.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "Attempted to test the multilingual admin panel functionality. The 'Админ-панель' link is visible in the header, but when clicking on it or navigating directly to /admin, the page redirects to the homepage instead of showing the login form. This suggests there might be an issue with the admin panel routing or authentication flow. The console shows some React component errors related to incorrect casing for components like Activity, Brain, and Heart, but these appear to be minor styling issues rather than critical functionality problems."
 
 metadata:
   created_by: "main_agent"
