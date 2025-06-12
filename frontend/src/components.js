@@ -657,7 +657,7 @@ export const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 cursor-pointer"
+                  className="bg-white rounded-2xl p-10 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 cursor-pointer min-h-[500px]"
                   onClick={() => openBioModal(leader)}
                 >
                   <div className="text-center">
