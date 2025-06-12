@@ -1290,11 +1290,14 @@ export const MultilingualAdminPanel = () => {
                 Записи на сегодня ({new Date().toLocaleDateString('ru-RU')})
               </h2>
               <div className="flex space-x-3">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                <button 
+                  onClick={() => exportToExcel(todayAppointments)}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                >
                   <Download className="w-4 h-4" />
-                  <span>Экспорт</span>
+                  <span>Экспорт в Excel</span>
                 </button>
-                <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
                   <RefreshCw className="w-4 h-4" />
                   <span>Обновить</span>
                 </button>
@@ -1321,7 +1324,7 @@ export const MultilingualAdminPanel = () => {
                       Статус
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Действия
+                      Телефон
                     </th>
                   </tr>
                 </thead>
@@ -1333,7 +1336,6 @@ export const MultilingualAdminPanel = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">{appointment.patient_name}</div>
-                        <div className="text-sm text-gray-500">{appointment.phone}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {appointment.doctor_name}
@@ -1350,23 +1352,20 @@ export const MultilingualAdminPanel = () => {
                           {appointment.status === 'confirmed' ? 'Подтверждено' : 'Ожидает'}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex space-x-2">
-                          <button className="text-blue-600 hover:text-blue-900">
-                            <Eye className="w-4 h-4" />
-                          </button>
-                          <button className="text-green-600 hover:text-green-900">
-                            <CheckCircle className="w-4 h-4" />
-                          </button>
-                          <button className="text-red-600 hover:text-red-900">
-                            <XCircle className="w-4 h-4" />
-                          </button>
-                        </div>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {appointment.phone}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+            </div>
+            
+            <div className="bg-blue-50 rounded-lg p-4">
+              <p className="text-sm text-blue-700">
+                <strong>Примечание:</strong> Управление записями (подтверждение, отмена) доступно только в кабинете врача. 
+                Здесь отображается информация для просмотра и экспорта.
+              </p>
             </div>
           </div>
         )}
