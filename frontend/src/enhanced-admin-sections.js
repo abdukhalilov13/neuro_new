@@ -27,6 +27,8 @@ import {
 
 // Компонент для загрузки изображений
 const ImageUpload = ({ value, onChange, label, className = "" }) => {
+  const inputId = React.useMemo(() => `file-upload-${Math.random().toString(36).substr(2, 9)}`, []);
+  
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -47,10 +49,10 @@ const ImageUpload = ({ value, onChange, label, className = "" }) => {
           accept="image/*"
           onChange={handleFileChange}
           className="hidden"
-          id={`file-upload-${Math.random()}`}
+          id={inputId}
         />
         <label
-          htmlFor={`file-upload-${Math.random()}`}
+          htmlFor={inputId}
           className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
         >
           <Upload className="w-4 h-4" />
@@ -60,6 +62,7 @@ const ImageUpload = ({ value, onChange, label, className = "" }) => {
           <div className="flex items-center space-x-2">
             <img src={value} alt="Preview" className="w-16 h-16 object-cover rounded-lg" />
             <button
+              type="button"
               onClick={() => onChange('')}
               className="text-red-600 hover:text-red-800"
             >
