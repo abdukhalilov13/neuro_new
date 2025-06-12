@@ -35,7 +35,7 @@ import {
 import { useLanguage, useAdmin } from './contexts';
 import { Header, Footer, ServiceCard } from './enhanced-components';
 import { DoctorDashboard } from './doctor-admin-components';
-import { AdminPanel } from './admin-full';
+import { UnifiedAdminPanel } from './unified-admin';
 
 // Обновленные данные для сайта
 const siteData = {
