@@ -501,6 +501,7 @@ export const VacanciesPage = () => {
 
 // Галерея
 export const GalleryPage = () => {
+  const { adminData } = useAdmin(); // Получаем данные из админ-панели
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -513,7 +514,8 @@ export const GalleryPage = () => {
     { id: 'patients', name: 'Пациенты' }
   ];
 
-  const images = [
+  // Используем данные из админ-панели или fallback данные
+  const images = adminData?.galleryImages || [
     { id: 1, url: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56', category: 'operations', title: 'Операционная №1', description: 'Современная нейрохирургическая операционная' },
     { id: 2, url: 'https://images.unsplash.com/photo-1516549655169-df83a0774514', category: 'equipment', title: 'МРТ аппарат', description: 'Высокопольный МРТ сканер 3 Тесла' },
     { id: 3, url: 'https://images.unsplash.com/photo-1476889155166-39ae3886a3ef', category: 'building', title: 'Главный корпус', description: 'Фасад центра нейрохирургии' },
