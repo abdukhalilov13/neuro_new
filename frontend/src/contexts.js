@@ -665,38 +665,45 @@ export const AdminProvider = ({ children }) => {
   // Функции для управления врачами
   const addDoctor = (doctor) => {
     const newId = doctors.length > 0 ? Math.max(...doctors.map(d => parseInt(d.id))) + 1 : 1;
-    setDoctors([...doctors, { ...doctor, id: newId.toString() }]);
+    const newDoctors = [...doctors, { ...doctor, id: newId.toString() }];
+    setDoctors(newDoctors);
   };
 
   const updateDoctor = (id, updatedDoctor) => {
-    setDoctors(doctors.map(doctor => 
+    const newDoctors = doctors.map(doctor => 
       doctor.id === id ? { ...updatedDoctor, id } : doctor
-    ));
+    );
+    setDoctors(newDoctors);
   };
 
   const deleteDoctor = (id) => {
-    setDoctors(doctors.filter(doctor => doctor.id !== id));
+    const newDoctors = doctors.filter(doctor => doctor.id !== id);
+    setDoctors(newDoctors);
   };
 
   // Функции для управления новостями
   const addNews = (newsItem) => {
     const newId = news.length > 0 ? Math.max(...news.map(n => parseInt(n.id))) + 1 : 1;
-    const today = new Date().toLocaleDateString('ru-RU', { 
-      day: 'numeric', 
-      month: 'long', 
-      year: 'numeric' 
-    });
-    setNews([...news, { ...newsItem, id: newId.toString(), date: today }]);
+    const newNewsItem = {
+      ...newsItem,
+      id: newId.toString(),
+      date: new Date().toLocaleDateString('ru-RU'),
+      is_published: newsItem.is_published !== false
+    };
+    const newNews = [...news, newNewsItem];
+    setNews(newNews);
   };
 
   const updateNews = (id, updatedNews) => {
-    setNews(news.map(item => 
-      item.id === id ? { ...updatedNews, id, date: item.date } : item
-    ));
+    const newNewsArray = news.map(item => 
+      item.id === id ? { ...updatedNews, id } : item
+    );
+    setNews(newNewsArray);
   };
 
   const deleteNews = (id) => {
-    setNews(news.filter(item => item.id !== id));
+    const newNews = news.filter(item => item.id !== id);
+    setNews(newNews);
   };
 
   // Функции для управления аккаунтами
