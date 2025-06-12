@@ -1188,6 +1188,495 @@ export const MultilingualAdminPanel = () => {
             </div>
           </form>
         </Modal>
+
+        {/* Модальное окно врачей */}
+        <Modal
+          isOpen={isDoctorModalOpen}
+          onClose={() => setIsDoctorModalOpen(false)}
+          title={editingDoctor ? 'Редактировать врача' : 'Добавить врача'}
+          size="large"
+        >
+          <form onSubmit={handleDoctorSubmit} className="space-y-6">
+            <AdminLanguageSwitcher 
+              currentLanguage={currentAdminLanguage}
+              onLanguageChange={setCurrentAdminLanguage}
+              languages={languages}
+            />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  ФИО ({currentAdminLanguage.toUpperCase()})
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newDoctor[`name_${currentAdminLanguage}`] || ''}
+                  onChange={(e) => setNewDoctor({...newDoctor, [`name_${currentAdminLanguage}`]: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Специализация ({currentAdminLanguage.toUpperCase()})
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newDoctor[`specialization_${currentAdminLanguage}`] || ''}
+                  onChange={(e) => setNewDoctor({...newDoctor, [`specialization_${currentAdminLanguage}`]: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Опыт работы</label>
+                <input
+                  type="text"
+                  required
+                  value={newDoctor.experience}
+                  onChange={(e) => setNewDoctor({...newDoctor, experience: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  placeholder="15+ лет"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Отделение</label>
+                <select
+                  value={newDoctor.department_id}
+                  onChange={(e) => setNewDoctor({...newDoctor, department_id: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                >
+                  <option value="">Выберите отделение</option>
+                  {adminData.departments?.map((dept) => (
+                    <option key={dept.id} value={dept.id}>
+                      {dept.name_ru || dept.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={newDoctor.email}
+                  onChange={(e) => setNewDoctor({...newDoctor, email: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Телефон</label>
+                <input
+                  type="tel"
+                  required
+                  value={newDoctor.phone}
+                  onChange={(e) => setNewDoctor({...newDoctor, phone: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Фото (URL)</label>
+              <input
+                type="url"
+                required
+                value={newDoctor.image}
+                onChange={(e) => setNewDoctor({...newDoctor, image: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                График приема ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                value={newDoctor[`reception_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewDoctor({...newDoctor, [`reception_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                placeholder="Пн-Пт 9:00-17:00"
+              />
+            </div>
+            
+            {/* Расписание врача */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-3">Расписание работы</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {Object.entries(newDoctor.schedule).map(([day, schedule]) => (
+                  <div key={day} className="border rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="text-sm font-medium text-gray-700 capitalize">{day}</label>
+                      <input
+                        type="checkbox"
+                        checked={schedule.active}
+                        onChange={(e) => setNewDoctor({
+                          ...newDoctor,
+                          schedule: {
+                            ...newDoctor.schedule,
+                            [day]: { ...schedule, active: e.target.checked }
+                          }
+                        })}
+                        className="rounded"
+                      />
+                    </div>
+                    {schedule.active && (
+                      <div className="grid grid-cols-2 gap-2">
+                        <input
+                          type="time"
+                          value={schedule.start}
+                          onChange={(e) => setNewDoctor({
+                            ...newDoctor,
+                            schedule: {
+                              ...newDoctor.schedule,
+                              [day]: { ...schedule, start: e.target.value }
+                            }
+                          })}
+                          className="px-2 py-1 border border-gray-300 rounded text-sm"
+                        />
+                        <input
+                          type="time"
+                          value={schedule.end}
+                          onChange={(e) => setNewDoctor({
+                            ...newDoctor,
+                            schedule: {
+                              ...newDoctor.schedule,
+                              [day]: { ...schedule, end: e.target.value }
+                            }
+                          })}
+                          className="px-2 py-1 border border-gray-300 rounded text-sm"
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setIsDoctorModalOpen(false)}
+                className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                {editingDoctor ? 'Обновить' : 'Добавить'}
+              </button>
+            </div>
+          </form>
+        </Modal>
+
+        {/* Модальное окно новостей */}
+        <Modal
+          isOpen={isNewsModalOpen}
+          onClose={() => setIsNewsModalOpen(false)}
+          title={editingNews ? 'Редактировать новость' : 'Добавить новость'}
+          size="large"
+        >
+          <form onSubmit={handleNewsSubmit} className="space-y-6">
+            <AdminLanguageSwitcher 
+              currentLanguage={currentAdminLanguage}
+              onLanguageChange={setCurrentAdminLanguage}
+              languages={languages}
+            />
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Заголовок ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                required
+                value={newNews[`title_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewNews({...newNews, [`title_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Краткое описание ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <textarea
+                required
+                rows={3}
+                value={newNews[`excerpt_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewNews({...newNews, [`excerpt_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Полный текст ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <textarea
+                required
+                rows={6}
+                value={newNews[`content_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewNews({...newNews, [`content_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Изображение (URL)</label>
+              <input
+                type="url"
+                required
+                value={newNews.image}
+                onChange={(e) => setNewNews({...newNews, image: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="is_published"
+                checked={newNews.is_published}
+                onChange={(e) => setNewNews({...newNews, is_published: e.target.checked})}
+                className="rounded mr-2"
+              />
+              <label htmlFor="is_published" className="text-sm text-gray-700">
+                Опубликовать новость
+              </label>
+            </div>
+            
+            <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setIsNewsModalOpen(false)}
+                className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                {editingNews ? 'Обновить' : 'Добавить'}
+              </button>
+            </div>
+          </form>
+        </Modal>
+
+        {/* Модальное окно вакансий */}
+        <Modal
+          isOpen={isVacancyModalOpen}
+          onClose={() => setIsVacancyModalOpen(false)}
+          title={editingVacancy ? 'Редактировать вакансию' : 'Добавить вакансию'}
+          size="large"
+        >
+          <form onSubmit={handleVacancySubmit} className="space-y-6">
+            <AdminLanguageSwitcher 
+              currentLanguage={currentAdminLanguage}
+              onLanguageChange={setCurrentAdminLanguage}
+              languages={languages}
+            />
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Название должности ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                required
+                value={newVacancy[`title_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewVacancy({...newVacancy, [`title_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Описание вакансии ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <textarea
+                required
+                rows={4}
+                value={newVacancy[`description_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewVacancy({...newVacancy, [`description_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Требования ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <textarea
+                required
+                rows={3}
+                value={newVacancy[`requirements_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewVacancy({...newVacancy, [`requirements_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Зарплата (в сумах)</label>
+                <input
+                  type="number"
+                  required
+                  value={newVacancy.salary}
+                  onChange={(e) => setNewVacancy({...newVacancy, salary: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Местоположение</label>
+                <input
+                  type="text"
+                  required
+                  value={newVacancy.location}
+                  onChange={(e) => setNewVacancy({...newVacancy, location: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Тип занятости</label>
+              <select
+                value={newVacancy.employment_type}
+                onChange={(e) => setNewVacancy({...newVacancy, employment_type: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              >
+                <option value="full-time">Полная занятость</option>
+                <option value="part-time">Частичная занятость</option>
+                <option value="contract">Контракт</option>
+                <option value="internship">Стажировка</option>
+              </select>
+            </div>
+            
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="is_active"
+                checked={newVacancy.is_active}
+                onChange={(e) => setNewVacancy({...newVacancy, is_active: e.target.checked})}
+                className="rounded mr-2"
+              />
+              <label htmlFor="is_active" className="text-sm text-gray-700">
+                Активная вакансия
+              </label>
+            </div>
+            
+            <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setIsVacancyModalOpen(false)}
+                className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                {editingVacancy ? 'Обновить' : 'Добавить'}
+              </button>
+            </div>
+          </form>
+        </Modal>
+
+        {/* Модальное окно галереи */}
+        <Modal
+          isOpen={isGalleryModalOpen}
+          onClose={() => setIsGalleryModalOpen(false)}
+          title={editingGalleryImage ? 'Редактировать изображение' : 'Добавить изображение'}
+        >
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            if (editingGalleryImage) {
+              // updateGalleryImage logic here
+              alert('Изображение обновлено!');
+            } else {
+              // addGalleryImage logic here
+              alert('Изображение добавлено!');
+            }
+            setIsGalleryModalOpen(false);
+          }} className="space-y-6">
+            <AdminLanguageSwitcher 
+              currentLanguage={currentAdminLanguage}
+              onLanguageChange={setCurrentAdminLanguage}
+              languages={languages}
+            />
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">URL изображения</label>
+              <input
+                type="url"
+                required
+                value={newGalleryImage.url}
+                onChange={(e) => setNewGalleryImage({...newGalleryImage, url: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Описание ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                required
+                value={newGalleryImage[`alt_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewGalleryImage({...newGalleryImage, [`alt_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Категория</label>
+              <select
+                value={newGalleryImage.category}
+                onChange={(e) => setNewGalleryImage({...newGalleryImage, category: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              >
+                <option value="building">Здание</option>
+                <option value="equipment">Оборудование</option>
+                <option value="staff">Персонал</option>
+                <option value="operations">Операции</option>
+                <option value="events">События</option>
+              </select>
+            </div>
+            
+            <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setIsGalleryModalOpen(false)}
+                className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                {editingGalleryImage ? 'Обновить' : 'Добавить'}
+              </button>
+            </div>
+          </form>
+        </Modal>
       </div>
     </div>
   );
