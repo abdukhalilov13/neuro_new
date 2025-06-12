@@ -464,6 +464,105 @@ export const MultilingualAdminPanel = () => {
     setVacancies(prev => prev.filter(v => v.id !== id));
   };
 
+  // Функции управления событиями
+  const handleEventSubmit = (e) => {
+    e.preventDefault();
+    if (editingEvent) {
+      setEvents(prev => prev.map(event => event.id === editingEvent.id ? {...newEvent, id: editingEvent.id} : event));
+      alert('Событие обновлено!');
+    } else {
+      const newId = events.length > 0 ? Math.max(...events.map(e => parseInt(e.id))) + 1 : 1;
+      setEvents(prev => [...prev, {...newEvent, id: newId.toString()}]);
+      alert('Событие добавлено!');
+    }
+    setIsEventModalOpen(false);
+    resetEventForm();
+  };
+
+  const resetEventForm = () => {
+    setNewEvent({
+      title_ru: '', title_uz: '', title_en: '',
+      description_ru: '', description_uz: '', description_en: '',
+      date: '',
+      time: '',
+      location_ru: '', location_uz: '', location_en: '',
+      type: 'conference'
+    });
+    setEditingEvent(null);
+  };
+
+  const startEditEvent = (event) => {
+    setEditingEvent(event);
+    setNewEvent(event);
+    setIsEventModalOpen(true);
+  };
+
+  const deleteEvent = (id) => {
+    setEvents(prev => prev.filter(e => e.id !== id));
+  };
+
+  // Функции управления аккаунтами
+  const handleAccountSubmit = (e) => {
+    e.preventDefault();
+    if (editingAccount) {
+      updateAccount(editingAccount.id, newAccount);
+      alert('Аккаунт обновлен!');
+    } else {
+      addAccount(newAccount);
+      alert('Аккаунт добавлен!');
+    }
+    setIsAccountModalOpen(false);
+    resetAccountForm();
+  };
+
+  const resetAccountForm = () => {
+    setNewAccount({
+      name: '',
+      email: '',
+      role: 'doctor',
+      password: ''
+    });
+    setEditingAccount(null);
+  };
+
+  const startEditAccount = (account) => {
+    setEditingAccount(account);
+    setNewAccount({...account, password: ''}); // Don't show password for security
+    setIsAccountModalOpen(true);
+  };
+
+  // Функции управления руководством
+  const handleLeadershipSubmit = (e) => {
+    e.preventDefault();
+    if (editingLeader) {
+      updateLeadership(editingLeader.id, newLeader);
+      alert('Руководитель обновлен!');
+    } else {
+      addLeadership(newLeader);
+      alert('Руководитель добавлен!');
+    }
+    setIsLeadershipModalOpen(false);
+    resetLeadershipForm();
+  };
+
+  const resetLeadershipForm = () => {
+    setNewLeader({
+      name_ru: '', name_uz: '', name_en: '',
+      position_ru: '', position_uz: '', position_en: '',
+      biography_ru: '', biography_uz: '', biography_en: '',
+      image: '',
+      phone: '',
+      email: ''
+    });
+    setEditingLeader(null);
+  };
+
+  const startEditLeader = (leader) => {
+    setEditingLeader(leader);
+    setNewLeader(leader);
+    setIsLeadershipModalOpen(true);
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white flex items-center justify-center">
