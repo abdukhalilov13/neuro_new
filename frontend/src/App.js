@@ -39,7 +39,6 @@ function App() {
               <Route path="/appointment" element={<AppointmentPage />} />
               <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
               <Route path="/admin" element={<AdminPanel />} />
-              <Route path="/admin-multilingual" element={<MultilingualAdminPanel />} />
               <Route path="/admin-multilingual-fixed" element={<MultilingualAdminPanelFixed />} />
               <Route path="/test-accounts" element={<TestAccountsPage />} />
               <Route path="/vacancies" element={<VacanciesPage />} />
