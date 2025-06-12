@@ -208,7 +208,9 @@ metadata:
 test_plan:
   current_focus:
     - "Test accounts page accessibility"
-  stuck_tasks: []
+    - "Multilingual admin panel functionality"
+  stuck_tasks:
+    - "Multilingual admin panel functionality"
   test_all: false
   test_priority: "high_first"
 
