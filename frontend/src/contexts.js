@@ -434,6 +434,18 @@ export const AdminProvider = ({ children }) => {
   const [news, setNews] = useState([]);
   const [services, setServices] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
+  const [accounts, setAccounts] = useState([]);
+  const [leadership, setLeadership] = useState([]);
+  const [siteSettings, setSiteSettings] = useState({
+    phones: ['+998 71 150-78-80', '+998 71 150-78-81'],
+    emails: ['info@neuro.uz', 'admin@neuro.uz'],
+    address: 'г. Ташкент, ул. Хумоюн, 40'
+  });
+  const [seoSettings, setSeoSettings] = useState({
+    title: 'Республиканский Научный Центр Нейрохирургии',
+    description: 'Ведущий центр нейрохирургии в Центральной Азии',
+    keywords: 'нейрохирургия, центр, лечение, мозг, операции'
+  });
   const [isLoading, setIsLoading] = useState(true);
   
   // Fetch data from API on component mount
