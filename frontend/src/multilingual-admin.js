@@ -187,6 +187,34 @@ export const MultilingualAdminPanel = () => {
     category: 'building'
   });
 
+  // Новые состояния для событий
+  const [newEvent, setNewEvent] = useState({
+    title_ru: '', title_uz: '', title_en: '',
+    description_ru: '', description_uz: '', description_en: '',
+    date: '',
+    time: '',
+    location_ru: '', location_uz: '', location_en: '',
+    type: 'conference'
+  });
+
+  // Новые состояния для аккаунтов
+  const [newAccount, setNewAccount] = useState({
+    name: '',
+    email: '',
+    role: 'doctor',
+    password: ''
+  });
+
+  // Новые состояния для руководства
+  const [newLeader, setNewLeader] = useState({
+    name_ru: '', name_uz: '', name_en: '',
+    position_ru: '', position_uz: '', position_en: '',
+    biography_ru: '', biography_uz: '', biography_en: '',
+    image: '',
+    phone: '',
+    email: ''
+  });
+
   // Используем данные из контекста
   const { adminData, 
     addDepartment, updateDepartment, deleteDepartment,
