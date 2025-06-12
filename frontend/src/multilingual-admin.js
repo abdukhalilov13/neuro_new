@@ -120,6 +120,10 @@ export const MultilingualAdminPanel = () => {
   const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
   const [isVacancyModalOpen, setIsVacancyModalOpen] = useState(false);
   const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
+  const [isLeadershipModalOpen, setIsLeadershipModalOpen] = useState(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   
   // Данные для редактирования
   const [editingDepartment, setEditingDepartment] = useState(null);
@@ -127,6 +131,9 @@ export const MultilingualAdminPanel = () => {
   const [editingNews, setEditingNews] = useState(null);
   const [editingVacancy, setEditingVacancy] = useState(null);
   const [editingGalleryImage, setEditingGalleryImage] = useState(null);
+  const [editingEvent, setEditingEvent] = useState(null);
+  const [editingAccount, setEditingAccount] = useState(null);
+  const [editingLeader, setEditingLeader] = useState(null);
   
   // Новые записи
   const [newDepartment, setNewDepartment] = useState({
