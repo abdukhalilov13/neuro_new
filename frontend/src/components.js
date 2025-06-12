@@ -503,12 +503,12 @@ export { Header, Footer, siteData, DoctorDashboard, AdminPanel };
 // О центре
 export const AboutPage = () => {
   const { t } = useLanguage(); // Добавляем поддержку переводов
-  const { adminData } = useAdmin(); // Получаем данные из админки
+  const { adminData } = useAdmin(); // Получаем данные из админ-панели
   const [selectedLeader, setSelectedLeader] = useState(null);
   const [isBioModalOpen, setIsBioModalOpen] = useState(false);
 
-  // Данные руководства из админки или fallback
-  const leadershipData = [
+  // Используем данные о руководстве из админ-панели или fallback данные
+  const leadershipData = adminData?.leadership || [
     {
       id: 1,
       name: 'Кариев Габрат Маратович',
