@@ -186,6 +186,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "Added 'Тестовые аккаунты' link to the header top bar between 'Запись на прием' and 'Кабинет врача' with green styling. Now users can easily access test login credentials."
+      - working: true
+        agent: "testing"
+        comment: "Verified that the 'Тестовые аккаунты' link has been removed from the header as requested. The header now only contains 'Кабинет врача' and 'Админ-панель' links in the top bar. The test accounts page is still accessible via direct URL but no longer has a dedicated navigation link."
         
   - task: "Multilingual admin panel functionality"
     implemented: true
@@ -201,6 +204,18 @@ frontend:
       - working: true
         agent: "testing"
         comment: "Retested the multilingual admin panel functionality. The admin panel is now working correctly. Direct access to /admin shows the login form, and login with admin@neuro.uz/admin123 credentials works properly. All navigation tabs are visible and functional. The multilingual functionality works in all modals with language switchers (RU/UZ/EN) present and working correctly. CRUD operations for departments, doctors, and events work as expected. There are some minor JavaScript errors related to incorrect casing for components (Activity, Brain, Heart) and a more significant error in the Settings tab (updateSiteSettings is not defined), but these don't affect the core functionality of the admin panel."
+        
+  - task: "Leadership section UI improvements"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Tested the leadership section on the About page. Verified that the leadership cards have been enlarged as requested - images are now 32x32 (larger than previous 24x24), cards have more padding (p-8), and the 'Читать биографию' button is now styled as a proper button with blue background and white text. The modal functionality works correctly - clicking on a leadership card opens the biography modal, and it can be closed properly. No console errors related to this functionality."
 
 metadata:
   created_by: "main_agent"
