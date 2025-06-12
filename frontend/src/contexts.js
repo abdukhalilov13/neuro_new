@@ -565,40 +565,6 @@ export const AdminProvider = ({ children }) => {
     setSeoSettings(newSettings);
   };
 
-  // Управление аккаунтами
-  const addAccount = (account) => {
-    const newId = accounts.length > 0 ? Math.max(...accounts.map(a => a.id)) + 1 : 1;
-    setAccounts(prev => [...prev, { ...account, id: newId, status: 'active', createdAt: new Date().toISOString().split('T')[0] }]);
-  };
-
-  const updateAccount = (id, updatedAccount) => {
-    setAccounts(prev => prev.map(acc => acc.id === id ? { ...acc, ...updatedAccount } : acc));
-  };
-
-  const deleteAccount = (id) => {
-    setAccounts(prev => prev.filter(acc => acc.id !== id));
-  };
-
-  const toggleAccountStatus = (id) => {
-    setAccounts(prev => prev.map(acc => 
-      acc.id === id ? { ...acc, status: acc.status === 'active' ? 'inactive' : 'active' } : acc
-    ));
-  };
-
-  // Управление руководством
-  const addLeadership = (leader) => {
-    const newId = leadership.length > 0 ? Math.max(...leadership.map(l => l.id)) + 1 : 1;
-    setLeadership(prev => [...prev, { ...leader, id: newId }]);
-  };
-
-  const updateLeadership = (id, updatedLeader) => {
-    setLeadership(prev => prev.map(leader => leader.id === id ? { ...leader, ...updatedLeader } : leader));
-  };
-
-  const deleteLeadership = (id) => {
-    setLeadership(prev => prev.filter(leader => leader.id !== id));
-  };
-
   // Функции для управления услугами
   const addService = (service) => {
     const newId = services.length > 0 ? Math.max(...services.map(s => parseInt(s.id))) + 1 : 1;
