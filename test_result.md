@@ -262,6 +262,18 @@ frontend:
         agent: "testing"
         comment: "Tested the enhanced settings section in the admin panel. Verified that the settings are divided into 3 columns as required: 1) Контактная информация (with phone numbers, email addresses, and physical address), 2) Социальные сети (with fields for Facebook, Instagram, YouTube, and official website), 3) SEO настройки (with fields for site title, description, and keywords). The '+ Добавить' buttons for adding phones and emails are present and functional. Social media sections have appropriate icons for each platform."
 
+  - task: "Unified admin panel with website synchronization"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/unified-admin.js,/app/frontend/src/components.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Tested the unified admin panel with website synchronization. The 'Единая Админка' button is visible in the header and clicking it successfully navigates to the admin login page with the new design 'Единая Админ-панель'. Login with admin@neuro.uz/admin123 credentials works properly. After login, the admin panel dashboard is displayed with statistics showing the number of departments, doctors, leadership, and news. All navigation tabs (Панель управления, Записи на сегодня, Отделения, Врачи, Услуги, Руководство, Новости, Галерея, События) are visible and functional. The Leadership section shows existing leaders and has a working 'Добавить руководителя' button that opens a modal form. The synchronization with the website works correctly - when viewing the About page, the leadership section displays the same leaders as in the admin panel. There are some minor React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart, but these don't affect the core functionality of the admin panel or the synchronization with the website."
+
 metadata:
   created_by: "main_agent"
   version: "1.0"
