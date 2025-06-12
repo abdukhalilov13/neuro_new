@@ -905,7 +905,7 @@ export const MultilingualAdminPanel = () => {
         )}
 
         {activeTab === 'settings' && (
-          <SettingsSection
+          <EnhancedSettingsSection
             adminData={adminData}
             updateSiteSettings={updateSiteSettings}
             updateSeoSettings={updateSeoSettings}
