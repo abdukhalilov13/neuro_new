@@ -115,6 +115,34 @@ const AdminLanguageSwitcher = ({ currentLanguage, onLanguageChange, languages })
 
 // Многоязычная админ-панель
 export const MultilingualAdminPanel = () => {
+  // Функция экспорта в Excel
+  const exportToExcel = (data) => {
+    const headers = ['Время', 'Пациент', 'Врач', 'Услуга', 'Статус', 'Телефон'];
+    const csvContent = [
+      headers.join(','),
+      ...data.map(appointment => [
+        appointment.time,
+        `"${appointment.patient_name}"`,
+        `"${appointment.doctor_name}"`,
+        `"${appointment.service}"`,
+        appointment.status === 'confirmed' ? 'Подтверждено' : 'Ожидает',
+        appointment.phone
+      ].join(','))
+    ].join('\n');
+    
+    const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `записи_${new Date().toISOString().split('T')[0]}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [loginData, setLoginData] = useState({ email: '', password: '' });
