@@ -17,6 +17,7 @@ import {
 import { DoctorDashboard } from "./doctor-admin-components";
 import { AdminPanel } from "./admin-full";
 import MultilingualAdminPanel from "./multilingual-admin";
+import { MultilingualAdminPanelFixed } from "./multilingual-admin-fixed";
 import { TestAccountsPage } from "./TestAccounts";
 import { VacanciesPage, GalleryPage } from "./AdditionalPages";
 import { NewsDetailPage } from "./NewsDetail";
