@@ -266,9 +266,6 @@ const Header = () => {
               <Link to="/admin" className="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-sm transition-colors">
                 {t('adminPanel')}
               </Link>
-              <Link to="/admin-multilingual" className="bg-indigo-600 hover:bg-indigo-700 px-3 py-1 rounded text-sm transition-colors">
-                Многоязычная админка
-              </Link>
             </div>
           </div>
         </div>
