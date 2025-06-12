@@ -538,6 +538,9 @@ export const AboutPage = () => {
     }
   ];
 
+  console.log('Leadership data from admin:', adminData?.leadership);
+  console.log('Using leadership data:', leadershipData);
+
   const openBioModal = (leader) => {
     setSelectedLeader(leader);
     setIsBioModalOpen(true);
