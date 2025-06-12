@@ -2027,10 +2027,15 @@ export const MultilingualAdminPanel = () => {
             </div>
             
             <div>
-              <ImageUpload
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Место проведения ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                required
                 value={newEvent[`location_${currentAdminLanguage}`] || ''}
-                onChange={(value) => setNewEvent({...newEvent, [`location_${currentAdminLanguage}`]: value})}
-                label={`Место проведения (${currentAdminLanguage.toUpperCase()})`}
+                onChange={(e) => setNewEvent({...newEvent, [`location_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
               />
             </div>
             
