@@ -625,20 +625,6 @@ export const MultilingualAdminPanel = () => {
     setIsAccountModalOpen(true);
   };
 
-  // Функции управления руководством
-  const handleLeadershipSubmit = (e) => {
-    e.preventDefault();
-    if (editingLeader) {
-      updateLeadership(editingLeader.id, newLeader);
-      alert('Руководитель обновлен!');
-    } else {
-      addLeadership(newLeader);
-      alert('Руководитель добавлен!');
-    }
-    setIsLeadershipModalOpen(false);
-    resetLeadershipForm();
-  };
-
   const resetLeadershipForm = () => {
     setNewLeader({
       name_ru: '', name_uz: '', name_en: '',
