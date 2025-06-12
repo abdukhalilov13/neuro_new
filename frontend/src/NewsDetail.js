@@ -4,10 +4,15 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, User } from 'lucide-react';
 import { Header, Footer } from './enhanced-components';
 import { siteData } from './components';
+import { useAdmin } from './contexts';
 
 export const NewsDetailPage = () => {
   const { id } = useParams();
-  const news = siteData.news.find(n => n.id === parseInt(id));
+  const { adminData } = useAdmin(); // Получаем данные из админ-панели
+  
+  // Используем данные из админ-панели или fallback данные
+  const allNews = adminData?.news || siteData.news;
+  const news = allNews.find(n => n.id === parseInt(id));
 
   if (!news) {
     return (
