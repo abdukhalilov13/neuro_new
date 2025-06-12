@@ -2188,4 +2188,5 @@ export const MultilingualAdminPanel = () => {
   );
 };
 
+export { MultilingualAdminPanel };
 export default MultilingualAdminPanel;
