@@ -224,6 +224,20 @@ export const MultilingualAdminPanel = () => {
     email: ''
   });
 
+  // Состояния для категорий галереи
+  const [galleryCategories, setGalleryCategories] = useState([
+    { id: 1, name_ru: 'Здание', name_uz: 'Bino', name_en: 'Building', description_ru: 'Фотографии здания центра', description_uz: 'Markaz binosi rasmlari', description_en: 'Center building photos', slug: 'building' },
+    { id: 2, name_ru: 'Оборудование', name_uz: 'Jihozlar', name_en: 'Equipment', description_ru: 'Медицинское оборудование', description_uz: 'Tibbiy jihozlar', description_en: 'Medical equipment', slug: 'equipment' },
+    { id: 3, name_ru: 'Персонал', name_uz: 'Xodimlar', name_en: 'Staff', description_ru: 'Фотографии сотрудников', description_uz: 'Xodimlar rasmlari', description_en: 'Staff photos', slug: 'staff' },
+    { id: 4, name_ru: 'События', name_uz: 'Tadbirlar', name_en: 'Events', description_ru: 'Мероприятия и события', description_uz: 'Tadbirlar va voqealar', description_en: 'Events and activities', slug: 'events' }
+  ]);
+
+  const [newCategory, setNewCategory] = useState({
+    name_ru: '', name_uz: '', name_en: '',
+    description_ru: '', description_uz: '', description_en: '',
+    slug: ''
+  });
+
   // Используем данные из контекста
   const { adminData, 
     addDepartment, updateDepartment, deleteDepartment,
