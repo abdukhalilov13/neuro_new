@@ -525,7 +525,7 @@ export const MultilingualAdminPanel = () => {
     setVacancies(prev => prev.filter(v => v.id !== id));
   };
 
-  // Функции управления руководством
+  // Функции управления событиями
   const handleLeadershipSubmit = (e) => {
     e.preventDefault();
     if (editingLeadership) {
