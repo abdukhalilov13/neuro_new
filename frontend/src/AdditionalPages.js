@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, Clock, DollarSign, Users, Building, Mail, Send, CheckCircle } from 'lucide-react';
 import { Header, Footer } from './enhanced-components';
+import { useAdmin, useLanguage } from './contexts';
 
 // Вакансии
 export const VacanciesPage = () => {
+  const { adminData } = useAdmin(); // Получаем данные из админ-панели
+  const { t } = useLanguage(); // Добавляем поддержку переводов
   const [selectedVacancy, setSelectedVacancy] = useState(null);
   const [applicationForm, setApplicationForm] = useState({
     name: '',
@@ -18,7 +21,8 @@ export const VacanciesPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  const vacancies = [
+  // Используем данные из админ-панели или fallback данные
+  const vacancies = adminData?.vacancies || [
     {
       id: 1,
       title: 'Врач-нейрохирург',
