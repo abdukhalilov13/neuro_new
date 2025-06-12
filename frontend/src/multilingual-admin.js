@@ -886,7 +886,7 @@ export const MultilingualAdminPanel = () => {
                   <div className="flex justify-between items-start">
                     <div className="flex items-start space-x-4 flex-1">
                       <div className={`w-12 h-12 bg-gradient-to-br ${dept.color} rounded-lg flex items-center justify-center`}>
-                        <Brain className="w-6 h-6 text-white" />
+                        <Building className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900 mb-2">
