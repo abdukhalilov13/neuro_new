@@ -503,10 +503,11 @@ export { Header, Footer, siteData, DoctorDashboard, AdminPanel };
 // О центре
 export const AboutPage = () => {
   const { t } = useLanguage(); // Добавляем поддержку переводов
+  const { adminData } = useAdmin(); // Получаем данные из админки
   const [selectedLeader, setSelectedLeader] = useState(null);
   const [isBioModalOpen, setIsBioModalOpen] = useState(false);
 
-  // Данные руководства
+  // Данные руководства из админки или fallback
   const leadershipData = [
     {
       id: 1,
