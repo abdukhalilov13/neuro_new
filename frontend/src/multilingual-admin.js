@@ -1562,13 +1562,10 @@ export const MultilingualAdminPanel = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Фото (URL)</label>
-              <input
-                type="url"
-                required
+              <ImageUpload
                 value={newDoctor.image}
-                onChange={(e) => setNewDoctor({...newDoctor, image: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                onChange={(value) => setNewDoctor({...newDoctor, image: value})}
+                label="Фото врача"
               />
             </div>
             
