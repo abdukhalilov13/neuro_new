@@ -1204,6 +1204,14 @@ export const MultilingualAdminPanel = () => {
 
         {activeTab === 'gallery' && (
           <div className="space-y-6">
+            <GalleryCategoriesSection
+              categories={galleryCategories}
+              setCategories={setGalleryCategories}
+              setIsCategoryModalOpen={setIsCategoryModalOpen}
+              setEditingCategory={setEditingCategory}
+              setNewCategory={setNewCategory}
+            />
+            
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-gray-900">Галерея ({adminData.galleryImages?.length || 0})</h2>
               <button
@@ -1235,7 +1243,9 @@ export const MultilingualAdminPanel = () => {
                     <p className="text-sm font-medium text-gray-900 mb-2">
                       {image.alt_ru || image.alt}
                     </p>
-                    <p className="text-xs text-gray-500 mb-3">Категория: {image.category}</p>
+                    <p className="text-xs text-gray-500 mb-3">
+                      Категория: {galleryCategories.find(cat => cat.slug === image.category)?.name_ru || image.category}
+                    </p>
                     
                     <div className="text-xs text-gray-500 mb-3">
                       <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">RU: ✓</span>
