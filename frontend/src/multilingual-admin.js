@@ -271,6 +271,7 @@ export const MultilingualAdminPanel = () => {
     addDepartment, updateDepartment, deleteDepartment,
     addDoctor, updateDoctor, deleteDoctor,
     addNews, updateNews, deleteNews,
+    addLeadership, updateLeadership, deleteLeadership,
     addAccount, updateAccount, deleteAccount, toggleAccountStatus,
     addLeadership, updateLeadership, deleteLeadership,
     updateSiteSettings, updateSeoSettings
