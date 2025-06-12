@@ -192,11 +192,11 @@ frontend:
         
   - task: "Multilingual admin panel functionality"
     implemented: true
-    working: false
-    file: "/app/frontend/src/multilingual-admin.js,/app/frontend/src/admin-sections.js,/app/frontend/src/multilingual-admin-fixed.js"
+    working: true
+    file: "/app/frontend/src/multilingual-admin.js,/app/frontend/src/admin-sections.js,/app/frontend/src/multilingual-admin-fixed.js,/app/frontend/src/unified-admin.js"
     stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "testing"
@@ -207,6 +207,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "Tested the fixed multilingual admin panel. When trying to access the /admin-multilingual-fixed URL directly, we're being redirected to the homepage. The 'Многоязычная админка' button is visible in the header, but unable to successfully click it or navigate to the admin panel. There are still React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart. The admin panel appears to have routing or authentication flow issues that prevent access."
+      - working: true
+        agent: "testing"
+        comment: "Tested the unified admin panel functionality. The 'Единая Админка' button is visible in the header and clicking it successfully navigates to the admin login page. Login with admin@neuro.uz/admin123 credentials works properly. After login, the admin panel dashboard is displayed with statistics showing the number of departments, doctors, leadership, and news. The navigation tabs (Панель управления, Записи на сегодня, Отделения, Врачи, Услуги, Руководство, Новости, Галерея, События) are visible and functional. The Leadership section shows existing leaders and has a working 'Добавить руководителя' button that opens a modal form. There are still some minor React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart, but these don't affect the core functionality of the admin panel."
         
   - task: "Leadership section UI improvements"
     implemented: true
