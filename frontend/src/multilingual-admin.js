@@ -1894,6 +1894,295 @@ export const MultilingualAdminPanel = () => {
             </div>
           </form>
         </Modal>
+        
+        {/* Модальное окно событий */}
+        <Modal
+          isOpen={isEventModalOpen}
+          onClose={() => setIsEventModalOpen(false)}
+          title={editingEvent ? 'Редактировать событие' : 'Добавить событие'}
+          size="large"
+        >
+          <form onSubmit={handleEventSubmit} className="space-y-6">
+            <AdminLanguageSwitcher 
+              currentLanguage={currentAdminLanguage}
+              onLanguageChange={setCurrentAdminLanguage}
+              languages={languages}
+            />
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Название события ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                required
+                value={newEvent[`title_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewEvent({...newEvent, [`title_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Описание ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <textarea
+                required
+                rows={4}
+                value={newEvent[`description_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewEvent({...newEvent, [`description_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Дата</label>
+                <input
+                  type="date"
+                  required
+                  value={newEvent.date}
+                  onChange={(e) => setNewEvent({...newEvent, date: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Время</label>
+                <input
+                  type="time"
+                  required
+                  value={newEvent.time}
+                  onChange={(e) => setNewEvent({...newEvent, time: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Тип события</label>
+                <select
+                  value={newEvent.type}
+                  onChange={(e) => setNewEvent({...newEvent, type: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                >
+                  <option value="conference">Конференция</option>
+                  <option value="open-day">День открытых дверей</option>
+                  <option value="masterclass">Мастер-класс</option>
+                  <option value="seminar">Семинар</option>
+                </select>
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Место проведения ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                required
+                value={newEvent[`location_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewEvent({...newEvent, [`location_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setIsEventModalOpen(false)}
+                className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                {editingEvent ? 'Обновить' : 'Добавить'}
+              </button>
+            </div>
+          </form>
+        </Modal>
+
+        {/* Модальное окно аккаунтов */}
+        <Modal
+          isOpen={isAccountModalOpen}
+          onClose={() => setIsAccountModalOpen(false)}
+          title={editingAccount ? 'Редактировать аккаунт' : 'Добавить аккаунт'}
+        >
+          <form onSubmit={handleAccountSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Имя пользователя</label>
+              <input
+                type="text"
+                required
+                value={newAccount.name}
+                onChange={(e) => setNewAccount({...newAccount, name: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+              <input
+                type="email"
+                required
+                value={newAccount.email}
+                onChange={(e) => setNewAccount({...newAccount, email: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Роль</label>
+              <select
+                value={newAccount.role}
+                onChange={(e) => setNewAccount({...newAccount, role: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              >
+                <option value="doctor">Врач</option>
+                <option value="admin">Администратор</option>
+              </select>
+            </div>
+            
+            {!editingAccount && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Пароль</label>
+                <input
+                  type="password"
+                  required
+                  value={newAccount.password}
+                  onChange={(e) => setNewAccount({...newAccount, password: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  placeholder="Минимум 6 символов"
+                  minLength={6}
+                />
+              </div>
+            )}
+            
+            <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setIsAccountModalOpen(false)}
+                className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                {editingAccount ? 'Обновить' : 'Добавить'}
+              </button>
+            </div>
+          </form>
+        </Modal>
+
+        {/* Модальное окно руководства */}
+        <Modal
+          isOpen={isLeadershipModalOpen}
+          onClose={() => setIsLeadershipModalOpen(false)}
+          title={editingLeader ? 'Редактировать руководителя' : 'Добавить руководителя'}
+          size="large"
+        >
+          <form onSubmit={handleLeadershipSubmit} className="space-y-6">
+            <AdminLanguageSwitcher 
+              currentLanguage={currentAdminLanguage}
+              onLanguageChange={setCurrentAdminLanguage}
+              languages={languages}
+            />
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                ФИО ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                required
+                value={newLeader[`name_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewLeader({...newLeader, [`name_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Должность ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                required
+                value={newLeader[`position_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewLeader({...newLeader, [`position_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Биография ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <textarea
+                required
+                rows={4}
+                value={newLeader[`biography_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewLeader({...newLeader, [`biography_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Телефон</label>
+                <input
+                  type="tel"
+                  required
+                  value={newLeader.phone}
+                  onChange={(e) => setNewLeader({...newLeader, phone: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={newLeader.email}
+                  onChange={(e) => setNewLeader({...newLeader, email: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Фото (URL)</label>
+              <input
+                type="url"
+                required
+                value={newLeader.image}
+                onChange={(e) => setNewLeader({...newLeader, image: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setIsLeadershipModalOpen(false)}
+                className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                {editingLeader ? 'Обновить' : 'Добавить'}
+              </button>
+            </div>
+          </form>
+        </Modal>
       </div>
     </div>
   );
