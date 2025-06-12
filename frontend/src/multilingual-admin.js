@@ -130,6 +130,7 @@ export const MultilingualAdminPanel = () => {
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
   const [isLeadershipModalOpen, setIsLeadershipModalOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   
   // Данные для редактирования
   const [editingDepartment, setEditingDepartment] = useState(null);
