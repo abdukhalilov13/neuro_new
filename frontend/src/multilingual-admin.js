@@ -821,6 +821,48 @@ export const MultilingualAdminPanel = () => {
           </div>
         )}
 
+        {activeTab === 'events' && (
+          <EventsSection
+            events={events}
+            setEditingEvent={setEditingEvent}
+            resetEventForm={resetEventForm}
+            setIsEventModalOpen={setIsEventModalOpen}
+            startEditEvent={startEditEvent}
+            deleteEvent={deleteEvent}
+          />
+        )}
+
+        {activeTab === 'accounts' && (
+          <AccountsSection
+            accounts={adminData.accounts || []}
+            setEditingAccount={setEditingAccount}
+            resetAccountForm={resetAccountForm}
+            setIsAccountModalOpen={setIsAccountModalOpen}
+            startEditAccount={startEditAccount}
+            deleteAccount={deleteAccount}
+            toggleAccountStatus={toggleAccountStatus}
+          />
+        )}
+
+        {activeTab === 'leadership' && (
+          <LeadershipSection
+            leadership={adminData.leadership || []}
+            setEditingLeader={setEditingLeader}
+            resetLeadershipForm={resetLeadershipForm}
+            setIsLeadershipModalOpen={setIsLeadershipModalOpen}
+            startEditLeader={startEditLeader}
+            deleteLeadership={deleteLeadership}
+          />
+        )}
+
+        {activeTab === 'settings' && (
+          <SettingsSection
+            adminData={adminData}
+            updateSiteSettings={updateSiteSettings}
+            updateSeoSettings={updateSeoSettings}
+          />
+        )}
+
         {activeTab === 'departments' && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
