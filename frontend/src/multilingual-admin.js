@@ -225,6 +225,40 @@ export const MultilingualAdminPanel = () => {
   const { t } = useLanguage();
   const languages = ['ru', 'uz', 'en'];
   
+  // Мок данные для событий
+  const [events, setEvents] = useState([
+    {
+      id: '1',
+      title_ru: 'Международная конференция по нейрохирургии',
+      title_uz: 'Neyroxirurgiya bo\'yicha xalqaro konferensiya',
+      title_en: 'International Conference on Neurosurgery',
+      description_ru: 'Ежегодная конференция ведущих нейрохирургов мира',
+      description_uz: 'Dunyo yetakchi neyroxirurglarining yillik konferensiyasi',
+      description_en: 'Annual conference of leading neurosurgeons worldwide',
+      date: '2025-07-15',
+      time: '09:00',
+      location_ru: 'Главный конференц-зал',
+      location_uz: 'Asosiy konferents zali',
+      location_en: 'Main conference hall',
+      type: 'conference'
+    },
+    {
+      id: '2',
+      title_ru: 'День открытых дверей',
+      title_uz: 'Ochiq eshiklar kuni',
+      title_en: 'Open House Day',
+      description_ru: 'Знакомство с центром и нашими специалистами',
+      description_uz: 'Markaz va mutaxassislarimiz bilan tanishish',
+      description_en: 'Get to know our center and specialists',
+      date: '2025-06-20',
+      time: '10:00',
+      location_ru: 'Фойе центра',
+      location_uz: 'Markaz foyesi',
+      location_en: 'Center lobby',
+      type: 'open-day'
+    }
+  ]);
+
   // Мок данные для вакансий
   const [vacancies, setVacancies] = useState([
     {
