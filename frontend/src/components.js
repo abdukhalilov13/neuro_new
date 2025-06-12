@@ -496,7 +496,7 @@ export const HomePage = () => {
 };
 
 // Экспорт всех компонентов
-export { Header, Footer, siteData, DoctorDashboard, AdminPanel };
+export { Header, Footer, siteData, DoctorDashboard, UnifiedAdminPanel };
 
 
 
