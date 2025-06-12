@@ -625,18 +625,6 @@ export const MultilingualAdminPanel = () => {
     setIsAccountModalOpen(true);
   };
 
-  const resetLeadershipForm = () => {
-    setNewLeader({
-      name_ru: '', name_uz: '', name_en: '',
-      position_ru: '', position_uz: '', position_en: '',
-      biography_ru: '', biography_uz: '', biography_en: '',
-      image: '',
-      phone: '',
-      email: ''
-    });
-    setEditingLeader(null);
-  };
-
   const startEditLeader = (leader) => {
     setEditingLeader(leader);
     setNewLeader(leader);
