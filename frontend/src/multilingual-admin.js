@@ -202,7 +202,8 @@ export const MultilingualAdminPanel = () => {
     date: '',
     time: '',
     location_ru: '', location_uz: '', location_en: '',
-    type: 'conference'
+    type: 'conference',
+    image: ''
   });
 
   // Новые состояния для аккаунтов
