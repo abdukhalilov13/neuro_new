@@ -649,7 +649,7 @@ export const AboutPage = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {leadershipData.map((leader, index) => (
                 <motion.div
                   key={leader.id}
@@ -657,20 +657,20 @@ export const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 cursor-pointer"
+                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 cursor-pointer"
                   onClick={() => openBioModal(leader)}
                 >
                   <div className="text-center">
                     <img
                       src={leader.image}
                       alt={leader.name}
-                      className="w-24 h-24 rounded-full object-cover mx-auto mb-4"
+                      className="w-32 h-32 rounded-full object-cover mx-auto mb-6 ring-4 ring-blue-100"
                     />
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
                       {leader.name}
                     </h3>
-                    <p className="text-blue-600 font-medium mb-3">{leader.position}</p>
-                    <div className="space-y-1 text-sm text-gray-600">
+                    <p className="text-blue-600 font-medium mb-4 text-lg">{leader.position}</p>
+                    <div className="space-y-2 text-sm text-gray-600">
                       <div className="flex items-center justify-center space-x-2">
                         <Phone className="w-4 h-4" />
                         <span>{leader.phone}</span>
@@ -680,7 +680,7 @@ export const AboutPage = () => {
                         <span>{leader.email}</span>
                       </div>
                     </div>
-                    <button className="mt-4 text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center justify-center mx-auto space-x-1">
+                    <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium text-sm flex items-center justify-center mx-auto space-x-2 transition-colors">
                       <span>Читать биографию</span>
                       <ChevronRight className="w-4 h-4" />
                     </button>
