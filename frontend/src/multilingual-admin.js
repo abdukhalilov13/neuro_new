@@ -646,6 +646,367 @@ export const MultilingualAdminPanel = () => {
           </div>
         )}
 
+        {activeTab === 'departments' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Отделения ({adminData.departments?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingDepartment(null);
+                  resetDepartmentForm();
+                  setIsDepartmentModalOpen(true);
+                }}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить отделение</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {adminData.departments?.map((dept) => (
+                <div key={dept.id} className="bg-white rounded-lg p-6 shadow">
+                  <div className="flex justify-between items-start">
+                    <div className="flex items-start space-x-4 flex-1">
+                      <div className={`w-12 h-12 bg-gradient-to-br ${dept.color} rounded-lg flex items-center justify-center`}>
+                        <Brain className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-gray-900 mb-2">
+                          {dept.name_ru || dept.name}
+                        </h3>
+                        <p className="text-sm text-gray-600 mb-2">
+                          {dept.description_ru || dept.description}
+                        </p>
+                        <div className="text-xs text-gray-500">
+                          <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">RU: ✓</span>
+                          <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">UZ: {dept.name_uz ? '✓' : '✗'}</span>
+                          <span className="inline-block px-2 py-1 bg-gray-100 rounded">EN: {dept.name_en ? '✓' : '✗'}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2 ml-4">
+                      <button
+                        onClick={() => startEditDepartment(dept)}
+                        className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (confirm('Удалить это отделение?')) {
+                            deleteDepartment(dept.id);
+                            alert('Отделение удалено!');
+                          }
+                        }}
+                        className="p-2 text-red-600 hover:bg-red-50 rounded"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'doctors' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Врачи ({adminData.doctors?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingDoctor(null);
+                  resetDoctorForm();
+                  setIsDoctorModalOpen(true);
+                }}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить врача</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {adminData.doctors?.map((doctor) => (
+                <div key={doctor.id} className="bg-white rounded-lg overflow-hidden shadow">
+                  <img
+                    src={doctor.image}
+                    alt={doctor.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="font-semibold text-gray-900 mb-1">
+                      {doctor.name_ru || doctor.name}
+                    </h3>
+                    <p className="text-sm text-blue-600 mb-2">
+                      {doctor.specialization_ru || doctor.specialization}
+                    </p>
+                    <p className="text-xs text-gray-600 mb-3">{doctor.experience}</p>
+                    
+                    {/* Расписание врача */}
+                    <div className="mb-3">
+                      <h4 className="text-sm font-medium text-gray-700 mb-2">Расписание:</h4>
+                      <div className="grid grid-cols-2 gap-1 text-xs">
+                        {doctor.schedule ? Object.entries(doctor.schedule).map(([day, schedule]) => (
+                          <div key={day} className={`px-2 py-1 rounded ${schedule.active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-500'}`}>
+                            {day}: {schedule.active ? `${schedule.start}-${schedule.end}` : 'Выходной'}
+                          </div>
+                        )) : (
+                          <div className="text-gray-500">Не указано</div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="text-xs text-gray-500 mb-3">
+                      <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">RU: ✓</span>
+                      <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">UZ: {doctor.name_uz ? '✓' : '✗'}</span>
+                      <span className="inline-block px-2 py-1 bg-gray-100 rounded">EN: {doctor.name_en ? '✓' : '✗'}</span>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <div className="text-xs text-gray-500">
+                        <p>{doctor.phone}</p>
+                        <p>{doctor.email}</p>
+                      </div>
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => startEditDoctor(doctor)}
+                          className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            if (confirm('Удалить этого врача?')) {
+                              deleteDoctor(doctor.id);
+                              alert('Врач удален!');
+                            }
+                          }}
+                          className="p-2 text-red-600 hover:bg-red-50 rounded"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'news' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Новости ({adminData.news?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingNews(null);
+                  resetNewsForm();
+                  setIsNewsModalOpen(true);
+                }}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить новость</span>
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              {adminData.news?.map((newsItem) => (
+                <div key={newsItem.id} className="bg-white rounded-lg p-6 shadow">
+                  <div className="flex items-start space-x-4">
+                    <img
+                      src={newsItem.image}
+                      alt={newsItem.title}
+                      className="w-24 h-24 object-cover rounded-lg"
+                    />
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 mb-2">
+                        {newsItem.title_ru || newsItem.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-2">
+                        {newsItem.excerpt_ru || newsItem.excerpt}
+                      </p>
+                      <p className="text-xs text-gray-500 mb-3">{newsItem.date}</p>
+                      
+                      <div className="text-xs text-gray-500 mb-3">
+                        <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">RU: ✓</span>
+                        <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">UZ: {newsItem.title_uz ? '✓' : '✗'}</span>
+                        <span className="inline-block px-2 py-1 bg-gray-100 rounded">EN: {newsItem.title_en ? '✓' : '✗'}</span>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => startEditNews(newsItem)}
+                        className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (confirm('Удалить эту новость?')) {
+                            deleteNews(newsItem.id);
+                            alert('Новость удалена!');
+                          }
+                        }}
+                        className="p-2 text-red-600 hover:bg-red-50 rounded"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'vacancies' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Вакансии ({vacancies.length})</h2>
+              <button
+                onClick={() => {
+                  setEditingVacancy(null);
+                  resetVacancyForm();
+                  setIsVacancyModalOpen(true);
+                }}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить вакансию</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {vacancies.map((vacancy) => (
+                <div key={vacancy.id} className="bg-white rounded-lg p-6 shadow">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 mb-2">{vacancy.title_ru}</h3>
+                      <p className="text-sm text-gray-600 mb-3">{vacancy.description_ru}</p>
+                      
+                      <div className="space-y-2 text-sm">
+                        <div><strong>Требования:</strong> {vacancy.requirements_ru}</div>
+                        <div><strong>Зарплата:</strong> {parseInt(vacancy.salary).toLocaleString()} сум</div>
+                        <div><strong>Местоположение:</strong> {vacancy.location}</div>
+                        <div><strong>Тип занятости:</strong> {vacancy.employment_type === 'full-time' ? 'Полная занятость' : 'Частичная занятость'}</div>
+                      </div>
+                      
+                      <div className="text-xs text-gray-500 mt-3">
+                        <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">RU: ✓</span>
+                        <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">UZ: {vacancy.title_uz ? '✓' : '✗'}</span>
+                        <span className="inline-block px-2 py-1 bg-gray-100 rounded">EN: {vacancy.title_en ? '✓' : '✗'}</span>
+                      </div>
+                      
+                      <div className="mt-3">
+                        <span className={`inline-block px-2 py-1 text-xs rounded-full ${
+                          vacancy.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                        }`}>
+                          {vacancy.is_active ? 'Активна' : 'Неактивна'}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2 ml-4">
+                      <button
+                        onClick={() => startEditVacancy(vacancy)}
+                        className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (confirm('Удалить эту вакансию?')) {
+                            deleteVacancy(vacancy.id);
+                            alert('Вакансия удалена!');
+                          }
+                        }}
+                        className="p-2 text-red-600 hover:bg-red-50 rounded"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'gallery' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Галерея ({adminData.galleryImages?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingGalleryImage(null);
+                  setNewGalleryImage({
+                    url: '',
+                    alt_ru: '', alt_uz: '', alt_en: '',
+                    category: 'building'
+                  });
+                  setIsGalleryModalOpen(true);
+                }}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить изображение</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {adminData.galleryImages?.map((image) => (
+                <div key={image.id} className="bg-white rounded-lg overflow-hidden shadow">
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4">
+                    <p className="text-sm font-medium text-gray-900 mb-2">
+                      {image.alt_ru || image.alt}
+                    </p>
+                    <p className="text-xs text-gray-500 mb-3">Категория: {image.category}</p>
+                    
+                    <div className="text-xs text-gray-500 mb-3">
+                      <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">RU: ✓</span>
+                      <span className="inline-block px-2 py-1 bg-gray-100 rounded mr-2">UZ: {image.alt_uz ? '✓' : '✗'}</span>
+                      <span className="inline-block px-2 py-1 bg-gray-100 rounded">EN: {image.alt_en ? '✓' : '✗'}</span>
+                    </div>
+                    
+                    <div className="flex justify-end space-x-2">
+                      <button
+                        onClick={() => {
+                          setEditingGalleryImage(image);
+                          setNewGalleryImage(image);
+                          setIsGalleryModalOpen(true);
+                        }}
+                        className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (confirm('Удалить это изображение?')) {
+                            // deleteGalleryImage(image.id);
+                            alert('Изображение удалено!');
+                          }
+                        }}
+                        className="p-2 text-red-600 hover:bg-red-50 rounded"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {activeTab === 'appointments' && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
