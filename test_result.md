@@ -192,11 +192,11 @@ frontend:
         
   - task: "Multilingual admin panel functionality"
     implemented: true
-    working: true
-    file: "/app/frontend/src/multilingual-admin.js,/app/frontend/src/admin-sections.js"
-    stuck_count: 0
+    working: false
+    file: "/app/frontend/src/multilingual-admin.js,/app/frontend/src/admin-sections.js,/app/frontend/src/multilingual-admin-fixed.js"
+    stuck_count: 1
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: false
         agent: "testing"
@@ -204,6 +204,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "Retested the multilingual admin panel functionality. The admin panel is now working correctly. Direct access to /admin shows the login form, and login with admin@neuro.uz/admin123 credentials works properly. All navigation tabs are visible and functional. The multilingual functionality works in all modals with language switchers (RU/UZ/EN) present and working correctly. CRUD operations for departments, doctors, and events work as expected. There are some minor JavaScript errors related to incorrect casing for components (Activity, Brain, Heart) and a more significant error in the Settings tab (updateSiteSettings is not defined), but these don't affect the core functionality of the admin panel."
+      - working: false
+        agent: "testing"
+        comment: "Tested the fixed multilingual admin panel. When trying to access the /admin-multilingual-fixed URL directly, we're being redirected to the homepage. The 'Многоязычная админка' button is visible in the header, but unable to successfully click it or navigate to the admin panel. There are still React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart. The admin panel appears to have routing or authentication flow issues that prevent access."
         
   - task: "Leadership section UI improvements"
     implemented: true
