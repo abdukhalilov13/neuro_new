@@ -50,6 +50,7 @@ import {
   Briefcase
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
+import { EventsSection, AccountsSection, LeadershipSection, SettingsSection } from './admin-sections';
 
 // Компонент модального окна
 const Modal = ({ isOpen, onClose, title, children, size = 'default' }) => {
