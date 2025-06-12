@@ -587,6 +587,31 @@ export const MultilingualAdminPanel = () => {
     setIsLeadershipModalOpen(true);
   };
 
+  // Функции управления категориями галереи
+  const handleCategorySubmit = (e) => {
+    e.preventDefault();
+    if (editingCategory) {
+      setGalleryCategories(prev => prev.map(cat => cat.id === editingCategory.id ? {...newCategory, id: editingCategory.id} : cat));
+      alert('Категория обновлена!');
+    } else {
+      const newId = galleryCategories.length > 0 ? Math.max(...galleryCategories.map(c => c.id)) + 1 : 1;
+      const slug = newCategory.name_ru.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      setGalleryCategories(prev => [...prev, {...newCategory, id: newId, slug}]);
+      alert('Категория добавлена!');
+    }
+    setIsCategoryModalOpen(false);
+    setEditingCategory(null);
+  };
+
+  const resetCategoryForm = () => {
+    setNewCategory({
+      name_ru: '', name_uz: '', name_en: '',
+      description_ru: '', description_uz: '', description_en: '',
+      slug: ''
+    });
+    setEditingCategory(null);
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white flex items-center justify-center">
