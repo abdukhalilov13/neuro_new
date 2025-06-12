@@ -2238,6 +2238,64 @@ export const MultilingualAdminPanel = () => {
             </div>
           </form>
         </Modal>
+
+        {/* Модальное окно категорий галереи */}
+        <Modal
+          isOpen={isCategoryModalOpen}
+          onClose={() => setIsCategoryModalOpen(false)}
+          title={editingCategory ? 'Редактировать категорию' : 'Добавить категорию'}
+          size="large"
+        >
+          <form onSubmit={handleCategorySubmit} className="space-y-6">
+            <AdminLanguageSwitcher 
+              currentLanguage={currentAdminLanguage}
+              onLanguageChange={setCurrentAdminLanguage}
+              languages={languages}
+            />
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Название категории ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                required
+                value={newCategory[`name_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewCategory({...newCategory, [`name_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Описание ({currentAdminLanguage.toUpperCase()})
+              </label>
+              <textarea
+                required
+                rows={3}
+                value={newCategory[`description_${currentAdminLanguage}`] || ''}
+                onChange={(e) => setNewCategory({...newCategory, [`description_${currentAdminLanguage}`]: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            
+            <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setIsCategoryModalOpen(false)}
+                className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                {editingCategory ? 'Обновить' : 'Добавить'}
+              </button>
+            </div>
+          </form>
+        </Modal>
       </div>
     </div>
   );
