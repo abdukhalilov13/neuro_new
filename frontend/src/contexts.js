@@ -499,65 +499,7 @@ export const AdminProvider = ({ children }) => {
     fetchData();
   }, []);
   
-  const [accounts, setAccounts] = useState([
-    { id: 1, name: 'Админ', email: 'admin@neuro.uz', role: 'admin', status: 'active', createdAt: '2025-01-01' },
-    { id: 2, name: 'Доктор Кариев', email: 'kariev@neuro.uz', role: 'doctor', status: 'active', createdAt: '2025-01-15' },
-    { id: 3, name: 'Доктор Асадуллаев', email: 'asadullaev@neuro.uz', role: 'doctor', status: 'active', createdAt: '2025-02-01' },
-    { id: 4, name: 'Доктор Кодашев', email: 'kodashev@neuro.uz', role: 'doctor', status: 'active', createdAt: '2025-02-10' }
-  ]);
-  
-  const [leadership, setLeadership] = useState([
-    {
-      id: 1,
-      name: 'Кариев Габрат Маратович',
-      position: 'Директор центра',
-      image: 'https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg',
-      phone: '+998 71 264-96-10',
-      email: 'director@neuro.uz',
-      biography: 'Заслуженный врач Республики Узбекистан, доктор медицинских наук. Более 30 лет опыта в нейрохирургии.'
-    },
-    {
-      id: 2,
-      name: 'Асадуллаев Улугбек Максудович',
-      position: 'Заместитель директора по научной работе',
-      image: 'https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg',
-      phone: '+998 71 264-96-15',
-      email: 'asadullaev@neuro.uz',
-      biography: 'Кандидат медицинских наук, старший научный сотрудник. Специалист по сосудистой нейрохирургии.'
-    },
-    {
-      id: 3,
-      name: 'Кодашев Равшан Муслимович',
-      position: 'Заведующий отделением детской нейрохирургии',
-      image: 'https://images.unsplash.com/photo-1536064479547-7ee40b74b807',
-      phone: '+998 71 264-96-09',
-      email: 'kodashev@neuro.uz',
-      biography: 'Доктор медицинских наук, профессор. 20 лет опыта в детской нейрохирургии.'
-    }
-  ]);
 
-  // Настройки сайта
-  const [siteSettings, setSiteSettings] = useState({
-    phones: ['+998 71 264-96-10', '+998 71 264-96-09', '+998 78 113-33-78'],
-    emails: ['admin@neuro.uz', 'info@neuro.uz'],
-    address: 'ул. Хумоюн, 40, Мирзо-Улугбекский район, г. Ташкент, 100142, Республика Узбекистан',
-    workingHours: {
-      weekdays: '8:00 - 18:00',
-      saturday: '9:00 - 15:00',
-      sunday: 'Выходной'
-    },
-    socialMedia: {
-      facebook: 'https://facebook.com/neuro.uz',
-      instagram: 'https://instagram.com/neuro.uz',
-      youtube: 'https://youtube.com/@neuro.uz'
-    }
-  });
-
-  const [seoSettings, setSeoSettings] = useState({
-    title: 'Республиканский Научный Центр Нейрохирургии',
-    description: 'Ведущий центр нейрохирургии в Центральной Азии. Более 25 лет опыта в лечении заболеваний нервной системы.',
-    keywords: 'нейрохирургия, мозг, спинной мозг, операции, Узбекистан, Ташкент'
-  });
 
   // Функции для управления данными
   const updateSiteSettings = (newSettings) => {
