@@ -222,7 +222,8 @@ export const MultilingualAdminPanel = () => {
     addDoctor, updateDoctor, deleteDoctor,
     addNews, updateNews, deleteNews,
     addAccount, updateAccount, deleteAccount, toggleAccountStatus,
-    addLeadership, updateLeadership, deleteLeadership
+    addLeadership, updateLeadership, deleteLeadership,
+    updateSiteSettings, updateSeoSettings
   } = useAdmin();
   
   const { t } = useLanguage();
