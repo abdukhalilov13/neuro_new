@@ -226,6 +226,15 @@ export const MultilingualAdminPanel = () => {
     biography: ''
   });
   
+  const [newLeadership, setNewLeadership] = useState({
+    name: '',
+    position: '',
+    image: '',
+    email: '',
+    phone: '',
+    biography: ''
+  });
+  
   const [newGalleryImage, setNewGalleryImage] = useState({
     url: '',
     alt_ru: '', alt_uz: '', alt_en: '',
