@@ -641,21 +641,25 @@ export const AdminProvider = ({ children }) => {
   // Функции для управления отделениями
   const addDepartment = (department) => {
     const newId = departments.length > 0 ? Math.max(...departments.map(d => parseInt(d.id))) + 1 : 1;
-    setDepartments([...departments, { ...department, id: newId.toString() }]);
+    const newDepartments = [...departments, { ...department, id: newId.toString() }];
+    setDepartments(newDepartments);
   };
 
   const updateDepartment = (id, updatedDepartment) => {
-    setDepartments(departments.map(dept => 
+    const newDepartments = departments.map(dept => 
       dept.id === id ? { ...updatedDepartment, id } : dept
-    ));
+    );
+    setDepartments(newDepartments);
   };
 
   const deleteDepartment = (id) => {
-    setDepartments(departments.filter(dept => dept.id !== id));
+    const newDepartments = departments.filter(dept => dept.id !== id);
+    setDepartments(newDepartments);
     // Отвязываем врачей от удаленного отделения
-    setDoctors(doctors.map(doctor => 
+    const newDoctors = doctors.map(doctor => 
       doctor.departmentId === id ? { ...doctor, departmentId: null } : doctor
-    ));
+    );
+    setDoctors(newDoctors);
   };
 
   // Функции для управления врачами
