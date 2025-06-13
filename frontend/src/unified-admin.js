@@ -536,6 +536,46 @@ export const UnifiedAdminPanel = () => {
     setIsGalleryModalOpen(true);
   };
 
+  // Функции управления событиями
+  const handleEventSubmit = (e) => {
+    e.preventDefault();
+    if (editingEvent) {
+      const updatedEvents = events.map(event => 
+        event.id === editingEvent.id ? { ...newEvent, id: editingEvent.id } : event
+      );
+      setEvents(updatedEvents);
+      alert('Событие обновлено!');
+    } else {
+      const newId = events.length > 0 ? Math.max(...events.map(e => e.id)) + 1 : 1;
+      setEvents([...events, { ...newEvent, id: newId }]);
+      alert('Событие добавлено!');
+    }
+    setIsEventModalOpen(false);
+    resetEventForm();
+  };
+
+  const resetEventForm = () => {
+    setNewEvent({
+      title_ru: '', title_uz: '', title_en: '',
+      description_ru: '', description_uz: '', description_en: '',
+      date: '',
+      time: '',
+      location: '',
+      type: 'conference'
+    });
+    setEditingEvent(null);
+  };
+
+  const startEditEvent = (event) => {
+    setEditingEvent(event);
+    setNewEvent(event);
+    setIsEventModalOpen(true);
+  };
+
+  const deleteEvent = (id) => {
+    setEvents(events.filter(event => event.id !== id));
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white flex items-center justify-center">
