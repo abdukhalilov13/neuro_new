@@ -953,6 +953,529 @@ export const UnifiedAdminPanel = () => {
           </div>
         )}
 
+        {/* СЕКЦИЯ ОТДЕЛЕНИЙ */}
+        {activeTab === 'departments' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Отделения ({adminData.departments?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingDepartment(null);
+                  resetDepartmentForm();
+                  setIsDepartmentModalOpen(true);
+                }}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить отделение</span>
+              </button>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <div>
+                  <h3 className="font-medium text-green-900">Синхронизация с сайтом</h3>
+                  <p className="text-sm text-green-700">
+                    Отделения автоматически отображаются на главной странице и в разделе "Отделения".
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {adminData.departments?.map((department) => (
+                <div key={department.id} className="bg-white rounded-lg p-6 shadow">
+                  <div className="text-center mb-4">
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${department.color || 'from-blue-500 to-blue-600'} flex items-center justify-center mx-auto mb-3`}>
+                      <Brain className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="font-semibold text-gray-900 mb-2">
+                      {department.name_ru || department.name}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-2">
+                      {department.description_ru || department.description}
+                    </p>
+                  </div>
+                  
+                  <div className="flex justify-center space-x-2">
+                    <button
+                      onClick={() => startEditDepartment(department)}
+                      className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (confirm('Удалить это отделение?')) {
+                          deleteDepartment(department.id);
+                          alert('Отделение удалено! Изменения применены на сайте.');
+                        }
+                      }}
+                      className="p-2 text-red-600 hover:bg-red-50 rounded"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* СЕКЦИЯ ВРАЧЕЙ */}
+        {activeTab === 'doctors' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Врачи ({adminData.doctors?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingDoctor(null);
+                  resetDoctorForm();
+                  setIsDoctorModalOpen(true);
+                }}
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить врача</span>
+              </button>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <div>
+                  <h3 className="font-medium text-green-900">Синхронизация с сайтом</h3>
+                  <p className="text-sm text-green-700">
+                    Врачи автоматически отображаются на главной странице и в разделе "Врачи".
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {adminData.doctors?.map((doctor) => (
+                <div key={doctor.id} className="bg-white rounded-lg p-6 shadow">
+                  <div className="text-center mb-4">
+                    <img
+                      src={doctor.image}
+                      alt={doctor.name_ru || doctor.name}
+                      className="w-20 h-20 rounded-full object-cover mx-auto mb-3"
+                    />
+                    <h3 className="font-semibold text-gray-900 mb-1">
+                      {doctor.name_ru || doctor.name}
+                    </h3>
+                    <p className="text-sm text-blue-600 mb-2">
+                      {doctor.specialization_ru || doctor.specialization}
+                    </p>
+                    <div className="text-xs text-gray-500 space-y-1">
+                      <div className="flex items-center justify-center space-x-2">
+                        <Phone className="w-3 h-3" />
+                        <span>{doctor.phone}</span>
+                      </div>
+                      <div className="flex items-center justify-center space-x-2">
+                        <Mail className="w-3 h-3" />
+                        <span>{doctor.email}</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-center space-x-2">
+                    <button
+                      onClick={() => startEditDoctor(doctor)}
+                      className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (confirm('Удалить этого врача?')) {
+                          deleteDoctor(doctor.id);
+                          alert('Врач удален! Изменения применены на сайте.');
+                        }
+                      }}
+                      className="p-2 text-red-600 hover:bg-red-50 rounded"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* СЕКЦИЯ УСЛУГ */}
+        {activeTab === 'services' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Услуги ({adminData.services?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingService(null);
+                  resetServiceForm();
+                  setIsServiceModalOpen(true);
+                }}
+                className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить услугу</span>
+              </button>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <div>
+                  <h3 className="font-medium text-green-900">Синхронизация с сайтом</h3>
+                  <p className="text-sm text-green-700">
+                    Услуги автоматически отображаются в разделе "Услуги".
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Название
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Категория
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Цена
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Действия
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {adminData.services?.map((service) => (
+                    <tr key={service.id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">
+                          {service.title_ru || service.name}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {service.description_ru || service.description}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {service.category}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {service.price ? `${service.price.toLocaleString()} сум` : 'По запросу'}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => startEditService(service)}
+                            className="text-blue-600 hover:text-blue-900"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              if (confirm('Удалить эту услугу?')) {
+                                deleteService(service.id);
+                                alert('Услуга удалена! Изменения применены на сайте.');
+                              }
+                            }}
+                            className="text-red-600 hover:text-red-900"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* СЕКЦИЯ НОВОСТЕЙ */}
+        {activeTab === 'news' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Новости ({adminData.news?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingNews(null);
+                  resetNewsForm();
+                  setIsNewsModalOpen(true);
+                }}
+                className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить новость</span>
+              </button>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <div>
+                  <h3 className="font-medium text-green-900">Синхронизация с сайтом</h3>
+                  <p className="text-sm text-green-700">
+                    Новости автоматически отображаются на главной странице и в разделе "Новости".
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {adminData.news?.map((newsItem) => (
+                <div key={newsItem.id} className="bg-white rounded-lg shadow overflow-hidden">
+                  <img
+                    src={newsItem.image}
+                    alt={newsItem.title_ru || newsItem.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="font-semibold text-gray-900 mb-2">
+                      {newsItem.title_ru || newsItem.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-3">
+                      {newsItem.excerpt_ru || newsItem.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-500">{newsItem.date}</span>
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => startEditNews(newsItem)}
+                          className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            if (confirm('Удалить эту новость?')) {
+                              deleteNews(newsItem.id);
+                              alert('Новость удалена! Изменения применены на сайте.');
+                            }
+                          }}
+                          className="p-1 text-red-600 hover:bg-red-50 rounded"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* СЕКЦИЯ ГАЛЕРЕИ */}
+        {activeTab === 'gallery' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Галерея ({adminData.galleryImages?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingGalleryImage(null);
+                  resetGalleryForm();
+                  setIsGalleryModalOpen(true);
+                }}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить изображение</span>
+              </button>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <div>
+                  <h3 className="font-medium text-green-900">Синхронизация с сайтом</h3>
+                  <p className="text-sm text-green-700">
+                    Изображения автоматически отображаются в разделе "Галерея" с фильтрацией по категориям.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Фильтр по категориям */}
+            <div className="bg-white rounded-lg p-4 shadow mb-6">
+              <h3 className="font-medium text-gray-900 mb-3">Фильтр по категориям:</h3>
+              <div className="flex flex-wrap gap-2">
+                {['Все', 'building', 'equipment', 'staff', 'surgery'].map((category) => (
+                  <button
+                    key={category}
+                    className="px-3 py-1 rounded-full text-sm bg-gray-100 hover:bg-gray-200 text-gray-700"
+                  >
+                    {category === 'Все' ? 'Все' : 
+                     category === 'building' ? 'Здание' :
+                     category === 'equipment' ? 'Оборудование' :
+                     category === 'staff' ? 'Персонал' :
+                     category === 'surgery' ? 'Операции' : category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {adminData.galleryImages?.map((image) => (
+                <div key={image.id} className="bg-white rounded-lg shadow overflow-hidden">
+                  <img
+                    src={image.url}
+                    alt={image.alt_ru || image.alt}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                        {image.category === 'building' ? 'Здание' :
+                         image.category === 'equipment' ? 'Оборудование' :
+                         image.category === 'staff' ? 'Персонал' :
+                         image.category === 'surgery' ? 'Операции' : image.category}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600 mb-3">
+                      {image.alt_ru || image.alt}
+                    </p>
+                    <div className="flex justify-center space-x-2">
+                      <button
+                        onClick={() => startEditGalleryImage(image)}
+                        className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (confirm('Удалить это изображение?')) {
+                            deleteGalleryImage(image.id);
+                            alert('Изображение удалено! Изменения применены на сайте.');
+                          }
+                        }}
+                        className="p-1 text-red-600 hover:bg-red-50 rounded"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* СЕКЦИЯ СОБЫТИЙ */}
+        {activeTab === 'events' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">События ({events.length})</h2>
+              <button
+                onClick={() => {
+                  setEditingEvent(null);
+                  resetEventForm();
+                  setIsEventModalOpen(true);
+                }}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить событие</span>
+              </button>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <div>
+                  <h3 className="font-medium text-green-900">Многоязычная поддержка</h3>
+                  <p className="text-sm text-green-700">
+                    События поддерживают русский, узбекский и английский языки.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Название
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Дата и время
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Место
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Тип
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Действия
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {events.map((event) => (
+                    <tr key={event.id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">
+                          {event.title_ru}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {event.description_ru.length > 50 
+                            ? `${event.description_ru.substring(0, 50)}...` 
+                            : event.description_ru}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <div>{event.date}</div>
+                        <div className="text-gray-500">{event.time}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {event.location}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">
+                          {event.type === 'conference' ? 'Конференция' :
+                           event.type === 'openDay' ? 'Открытый день' :
+                           event.type === 'masterclass' ? 'Мастер-класс' :
+                           event.type === 'seminar' ? 'Семинар' : event.type}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => startEditEvent(event)}
+                            className="text-blue-600 hover:text-blue-900"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              if (confirm('Удалить это событие?')) {
+                                deleteEvent(event.id);
+                                alert('Событие удалено!');
+                              }
+                            }}
+                            className="text-red-600 hover:text-red-900"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
         {/* Руководство */}
         {activeTab === 'leadership' && (
           <div className="space-y-6">
