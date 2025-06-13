@@ -149,15 +149,18 @@
         
   - task: "CRUD operations for all entities"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
         comment: "Added POST/PUT/DELETE endpoints for all entities, needs testing"
+      - working: true
+        agent: "testing"
+        comment: "Tested all CRUD operations for departments, doctors, services, news, gallery, leadership, and events. All endpoints are working correctly. POST endpoints successfully create new entries with multilingual data, PUT endpoints update existing entries, and DELETE endpoints remove entries. All responses have the correct structure with appropriate status codes."
 
 ## frontend:
   - task: "Admin panel login and authentication"
