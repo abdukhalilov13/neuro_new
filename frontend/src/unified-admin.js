@@ -257,6 +257,36 @@ export const UnifiedAdminPanel = () => {
     type: 'conference'
   });
 
+  // События (добавляем новое состояние)
+  const [events, setEvents] = useState([
+    {
+      id: 1,
+      title_ru: 'Международная конференция по нейрохирургии',
+      title_uz: 'Neyroxirurgiya bo\'yicha xalqaro konferensiya',
+      title_en: 'International Neurosurgery Conference',
+      description_ru: 'Ведущие специалисты обсудят новые методы лечения',
+      description_uz: 'Etakchi mutaxassislar yangi davolash usullarini muhokama qilishadi',
+      description_en: 'Leading specialists will discuss new treatment methods',
+      date: '2025-07-15',
+      time: '09:00',
+      location: 'Главный конференц-зал',
+      type: 'conference'
+    },
+    {
+      id: 2,
+      title_ru: 'День открытых дверей',
+      title_uz: 'Ochiq eshiklar kuni',
+      title_en: 'Open Day',
+      description_ru: 'Экскурсии по центру и консультации',
+      description_uz: 'Markaz bo\'ylab ekskursiya va konsultatsiyalar',
+      description_en: 'Center tours and consultations',
+      date: '2025-07-20',
+      time: '10:00',
+      location: 'Главный холл',
+      type: 'openDay'
+    }
+  ]);
+
   // Используем данные из контекста - ВСЕ функции синхронизированы!
   const { adminData, 
     addDepartment, updateDepartment, deleteDepartment,
