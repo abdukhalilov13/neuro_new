@@ -196,6 +196,137 @@ async def get_gallery():
         }
     ]
 
+@api_router.get("/events")
+async def get_events():
+    return [
+        {
+            "id": "1",
+            "title": "Международная конференция по нейрохирургии",
+            "description": "Ведущие специалисты обсудят новые методы лечения",
+            "date": "2025-07-15",
+            "time": "09:00",
+            "location": "Главный конференц-зал",
+            "type": "conference"
+        },
+        {
+            "id": "2",
+            "title": "День открытых дверей",
+            "description": "Экскурсии по центру и консультации",
+            "date": "2025-07-20",
+            "time": "10:00",
+            "location": "Главный холл",
+            "type": "openDay"
+        }
+    ]
+
+@api_router.get("/leadership")
+async def get_leadership():
+    return [
+        {
+            "id": "1",
+            "name": "Кариев Габрат Маратович",
+            "position": "Директор центра",
+            "image": "https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg",
+            "phone": "+998 71 264-96-10",
+            "email": "director@neuro.uz",
+            "biography": "Заслуженный врач Республики Узбекистан, доктор медицинских наук. Более 30 лет опыта в нейрохирургии."
+        },
+        {
+            "id": "2",
+            "name": "Асадуллаев Улугбек Максудович",
+            "position": "Заместитель директора по научной работе",
+            "image": "https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg",
+            "phone": "+998 71 264-96-15",
+            "email": "asadullaev@neuro.uz",
+            "biography": "Кандидат медицинских наук, старший научный сотрудник. Специалист по сосудистой нейрохирургии."
+        }
+    ]
+
+# POST endpoints for admin
+@api_router.post("/departments")
+async def create_department(department_data: dict):
+    return {"id": "new_id", "message": "Department created successfully", **department_data}
+
+@api_router.put("/departments/{department_id}")
+async def update_department(department_id: str, department_data: dict):
+    return {"id": department_id, "message": "Department updated successfully", **department_data}
+
+@api_router.delete("/departments/{department_id}")
+async def delete_department(department_id: str):
+    return {"message": "Department deleted successfully"}
+
+@api_router.post("/doctors")
+async def create_doctor(doctor_data: dict):
+    return {"id": "new_id", "message": "Doctor created successfully", **doctor_data}
+
+@api_router.put("/doctors/{doctor_id}")
+async def update_doctor(doctor_id: str, doctor_data: dict):
+    return {"id": doctor_id, "message": "Doctor updated successfully", **doctor_data}
+
+@api_router.delete("/doctors/{doctor_id}")
+async def delete_doctor(doctor_id: str):
+    return {"message": "Doctor deleted successfully"}
+
+@api_router.post("/services")
+async def create_service(service_data: dict):
+    return {"id": "new_id", "message": "Service created successfully", **service_data}
+
+@api_router.put("/services/{service_id}")
+async def update_service(service_id: str, service_data: dict):
+    return {"id": service_id, "message": "Service updated successfully", **service_data}
+
+@api_router.delete("/services/{service_id}")
+async def delete_service(service_id: str):
+    return {"message": "Service deleted successfully"}
+
+@api_router.post("/news")
+async def create_news(news_data: dict):
+    return {"id": "new_id", "message": "News created successfully", **news_data}
+
+@api_router.put("/news/{news_id}")
+async def update_news(news_id: str, news_data: dict):
+    return {"id": news_id, "message": "News updated successfully", **news_data}
+
+@api_router.delete("/news/{news_id}")
+async def delete_news(news_id: str):
+    return {"message": "News deleted successfully"}
+
+@api_router.post("/gallery")
+async def create_gallery_image(image_data: dict):
+    return {"id": "new_id", "message": "Image created successfully", **image_data}
+
+@api_router.put("/gallery/{image_id}")
+async def update_gallery_image(image_id: str, image_data: dict):
+    return {"id": image_id, "message": "Image updated successfully", **image_data}
+
+@api_router.delete("/gallery/{image_id}")
+async def delete_gallery_image(image_id: str):
+    return {"message": "Image deleted successfully"}
+
+@api_router.post("/leadership")
+async def create_leadership(leadership_data: dict):
+    return {"id": "new_id", "message": "Leadership created successfully", **leadership_data}
+
+@api_router.put("/leadership/{leadership_id}")
+async def update_leadership(leadership_id: str, leadership_data: dict):
+    return {"id": leadership_id, "message": "Leadership updated successfully", **leadership_data}
+
+@api_router.delete("/leadership/{leadership_id}")
+async def delete_leadership(leadership_id: str):
+    return {"message": "Leadership deleted successfully"}
+
+@api_router.post("/events")
+async def create_event(event_data: dict):
+    return {"id": "new_id", "message": "Event created successfully", **event_data}
+
+@api_router.put("/events/{event_id}")
+async def update_event(event_id: str, event_data: dict):
+    return {"id": event_id, "message": "Event updated successfully", **event_data}
+
+@api_router.delete("/events/{event_id}")
+async def delete_event(event_id: str):
+    return {"message": "Event deleted successfully"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
