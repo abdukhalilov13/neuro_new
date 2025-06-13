@@ -109,6 +109,61 @@ const AdminLanguageSwitcher = ({ currentLanguage, onLanguageChange, languages })
   );
 };
 
+// Компонент загрузки файлов
+const FileUploader = ({ onFileSelect, currentFile, accept = "image/*", label = "Выберите файл" }) => {
+  const [preview, setPreview] = useState(currentFile || '');
+  const [isUploading, setIsUploading] = useState(false);
+  
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    setIsUploading(true);
+    
+    try {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result;
+        setPreview(base64String);
+        onFileSelect(base64String);
+        setIsUploading(false);
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Ошибка загрузки файла:', error);
+      setIsUploading(false);
+    }
+  };
+  
+  return (
+    <div className="space-y-3">
+      <label className="block text-sm font-medium text-gray-700">{label}</label>
+      <div className="flex items-center space-x-4">
+        <input
+          type="file"
+          accept={accept}
+          onChange={handleFileChange}
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+        />
+        {isUploading && (
+          <div className="text-blue-600">
+            <RefreshCw className="w-4 h-4 animate-spin" />
+          </div>
+        )}
+      </div>
+      {preview && (
+        <div className="mt-3">
+          <img 
+            src={preview} 
+            alt="Превью" 
+            className="w-32 h-32 object-cover rounded-lg border"
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
 // ЕДИНАЯ АДМИН-ПАНЕЛЬ (объединены все функции)
 export const UnifiedAdminPanel = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
