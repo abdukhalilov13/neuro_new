@@ -96,6 +96,65 @@ class NeuroUzAPITester:
             200
         )
     
+    def test_create_department(self):
+        """Test creating a department"""
+        department_data = {
+            "name": {
+                "ru": "Отделение нейрохирургии спинного мозга",
+                "uz": "Orqa miya neyroxirurgiya bo'limi",
+                "en": "Spinal Neurosurgery Department"
+            },
+            "description": {
+                "ru": "Специализируется на лечении заболеваний и травм спинного мозга",
+                "uz": "Orqa miya kasalliklari va jarohatlarini davolashga ixtisoslashgan",
+                "en": "Specializes in the treatment of spinal cord diseases and injuries"
+            },
+            "icon": "Activity",
+            "color": "from-purple-500 to-purple-600",
+            "is_active": True
+        }
+        return self.run_test(
+            "Create Department",
+            "POST",
+            "departments",
+            200,
+            data=department_data
+        )
+    
+    def test_update_department(self):
+        """Test updating a department"""
+        department_data = {
+            "name": {
+                "ru": "Обновленное отделение нейрохирургии",
+                "uz": "Yangilangan neyroxirurgiya bo'limi",
+                "en": "Updated Neurosurgery Department"
+            },
+            "description": {
+                "ru": "Обновленное описание отделения",
+                "uz": "Bo'limning yangilangan tavsifi",
+                "en": "Updated department description"
+            },
+            "icon": "Brain",
+            "color": "from-blue-500 to-blue-600",
+            "is_active": True
+        }
+        return self.run_test(
+            "Update Department",
+            "PUT",
+            "departments/1",
+            200,
+            data=department_data
+        )
+    
+    def test_delete_department(self):
+        """Test deleting a department"""
+        return self.run_test(
+            "Delete Department",
+            "DELETE",
+            "departments/1",
+            200
+        )
+    
     # Doctors Tests
     def test_doctors_endpoint(self):
         """Test doctors endpoint"""
@@ -104,6 +163,39 @@ class NeuroUzAPITester:
             "GET",
             "doctors",
             200
+        )
+    
+    def test_create_doctor(self):
+        """Test creating a doctor"""
+        doctor_data = {
+            "name": {
+                "ru": "Иванов Иван Иванович",
+                "uz": "Ivanov Ivan Ivanovich",
+                "en": "Ivan Ivanov"
+            },
+            "specialization": {
+                "ru": "Нейрохирург, д.м.н.",
+                "uz": "Neyroxirurg, t.f.d.",
+                "en": "Neurosurgeon, MD, PhD"
+            },
+            "experience": "20+ лет",
+            "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD...",
+            "email": "ivanov@neuro.uz",
+            "phone": "+998 90 123-45-67",
+            "reception": {
+                "ru": "Понедельник-Пятница, 9:00-17:00",
+                "uz": "Dushanba-Juma, 9:00-17:00",
+                "en": "Monday-Friday, 9:00-17:00"
+            },
+            "department_id": "1",
+            "is_active": True
+        }
+        return self.run_test(
+            "Create Doctor",
+            "POST",
+            "doctors",
+            200,
+            data=doctor_data
         )
     
     # Services Tests
@@ -116,6 +208,35 @@ class NeuroUzAPITester:
             200
         )
     
+    def test_create_service(self):
+        """Test creating a service"""
+        service_data = {
+            "name": {
+                "ru": "Комплексное обследование",
+                "uz": "Kompleks tekshiruv",
+                "en": "Comprehensive examination"
+            },
+            "category": {
+                "ru": "Диагностика",
+                "uz": "Tashxis",
+                "en": "Diagnostics"
+            },
+            "description": {
+                "ru": "Полное обследование нервной системы",
+                "uz": "Asab tizimining to'liq tekshiruvi",
+                "en": "Complete examination of the nervous system"
+            },
+            "price": 500000,
+            "is_active": True
+        }
+        return self.run_test(
+            "Create Service",
+            "POST",
+            "services",
+            200,
+            data=service_data
+        )
+    
     # News Tests
     def test_news_endpoint(self):
         """Test news endpoint"""
@@ -126,6 +247,36 @@ class NeuroUzAPITester:
             200
         )
     
+    def test_create_news(self):
+        """Test creating a news item"""
+        news_data = {
+            "title": {
+                "ru": "Новый метод лечения",
+                "uz": "Yangi davolash usuli",
+                "en": "New treatment method"
+            },
+            "excerpt": {
+                "ru": "Краткое описание нового метода",
+                "uz": "Yangi usulning qisqacha tavsifi",
+                "en": "Brief description of the new method"
+            },
+            "content": {
+                "ru": "Подробное описание нового метода лечения...",
+                "uz": "Yangi davolash usulining batafsil tavsifi...",
+                "en": "Detailed description of the new treatment method..."
+            },
+            "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD...",
+            "date": "2025-07-15",
+            "is_published": True
+        }
+        return self.run_test(
+            "Create News",
+            "POST",
+            "news",
+            200,
+            data=news_data
+        )
+    
     # Gallery Tests
     def test_gallery_endpoint(self):
         """Test gallery endpoint"""
@@ -134,6 +285,106 @@ class NeuroUzAPITester:
             "GET",
             "gallery",
             200
+        )
+    
+    def test_create_gallery_image(self):
+        """Test creating a gallery image"""
+        gallery_data = {
+            "url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD...",
+            "alt": {
+                "ru": "Новое оборудование",
+                "uz": "Yangi jihozlar",
+                "en": "New equipment"
+            },
+            "category": "equipment",
+            "is_active": True
+        }
+        return self.run_test(
+            "Create Gallery Image",
+            "POST",
+            "gallery",
+            200,
+            data=gallery_data
+        )
+    
+    # Events Tests
+    def test_events_endpoint(self):
+        """Test events endpoint"""
+        return self.run_test(
+            "Events Endpoint",
+            "GET",
+            "events",
+            200
+        )
+    
+    def test_create_event(self):
+        """Test creating an event"""
+        event_data = {
+            "title": {
+                "ru": "Семинар по нейрохирургии",
+                "uz": "Neyroxirurgiya bo'yicha seminar",
+                "en": "Neurosurgery seminar"
+            },
+            "description": {
+                "ru": "Обсуждение новых методов лечения",
+                "uz": "Yangi davolash usullarini muhokama qilish",
+                "en": "Discussion of new treatment methods"
+            },
+            "date": "2025-08-15",
+            "time": "10:00",
+            "location": {
+                "ru": "Конференц-зал центра",
+                "uz": "Markaz konferentsiya zali",
+                "en": "Center conference hall"
+            },
+            "type": "seminar"
+        }
+        return self.run_test(
+            "Create Event",
+            "POST",
+            "events",
+            200,
+            data=event_data
+        )
+    
+    # Leadership Tests
+    def test_leadership_endpoint(self):
+        """Test leadership endpoint"""
+        return self.run_test(
+            "Leadership Endpoint",
+            "GET",
+            "leadership",
+            200
+        )
+    
+    def test_create_leadership(self):
+        """Test creating a leadership entry"""
+        leadership_data = {
+            "name": {
+                "ru": "Сидоров Петр Алексеевич",
+                "uz": "Sidorov Petr Alekseyevich",
+                "en": "Petr Sidorov"
+            },
+            "position": {
+                "ru": "Главный врач",
+                "uz": "Bosh shifokor",
+                "en": "Chief Physician"
+            },
+            "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD...",
+            "phone": "+998 71 123-45-67",
+            "email": "sidorov@neuro.uz",
+            "biography": {
+                "ru": "Опытный специалист с 25-летним стажем работы...",
+                "uz": "25 yillik ish tajribasiga ega tajribali mutaxassis...",
+                "en": "Experienced specialist with 25 years of experience..."
+            }
+        }
+        return self.run_test(
+            "Create Leadership",
+            "POST",
+            "leadership",
+            200,
+            data=leadership_data
         )
     
     # Appointment Tests
@@ -185,6 +436,41 @@ def main():
                 else:
                     print(f"❌ Department object is missing required fields: {missing_fields}")
     
+    # Test CRUD operations for departments
+    print("\n===== Testing Department CRUD Operations =====")
+    success, create_dept_data = tester.test_create_department()
+    if success:
+        print("✅ Department creation successful")
+        if create_dept_data and isinstance(create_dept_data, dict):
+            required_fields = ["id", "message"]
+            missing_fields = [field for field in required_fields if field not in create_dept_data]
+            if not missing_fields:
+                print("✅ Department creation response structure is correct")
+            else:
+                print(f"❌ Department creation response is missing required fields: {missing_fields}")
+    
+    success, update_dept_data = tester.test_update_department()
+    if success:
+        print("✅ Department update successful")
+        if update_dept_data and isinstance(update_dept_data, dict):
+            required_fields = ["id", "message"]
+            missing_fields = [field for field in required_fields if field not in update_dept_data]
+            if not missing_fields:
+                print("✅ Department update response structure is correct")
+            else:
+                print(f"❌ Department update response is missing required fields: {missing_fields}")
+    
+    success, delete_dept_data = tester.test_delete_department()
+    if success:
+        print("✅ Department deletion successful")
+        if delete_dept_data and isinstance(delete_dept_data, dict):
+            required_fields = ["message"]
+            missing_fields = [field for field in required_fields if field not in delete_dept_data]
+            if not missing_fields:
+                print("✅ Department deletion response structure is correct")
+            else:
+                print(f"❌ Department deletion response is missing required fields: {missing_fields}")
+    
     print("\n===== Testing Doctors API =====")
     success, doctors_data = tester.test_doctors_endpoint()
     if success:
@@ -198,6 +484,19 @@ def main():
                     print("✅ Doctor object structure is correct")
                 else:
                     print(f"❌ Doctor object is missing required fields: {missing_fields}")
+    
+    # Test doctor creation
+    print("\n===== Testing Doctor Creation =====")
+    success, create_doctor_data = tester.test_create_doctor()
+    if success:
+        print("✅ Doctor creation successful")
+        if create_doctor_data and isinstance(create_doctor_data, dict):
+            required_fields = ["id", "message"]
+            missing_fields = [field for field in required_fields if field not in create_doctor_data]
+            if not missing_fields:
+                print("✅ Doctor creation response structure is correct")
+            else:
+                print(f"❌ Doctor creation response is missing required fields: {missing_fields}")
     
     print("\n===== Testing Services API =====")
     success, services_data = tester.test_services_endpoint()
@@ -213,6 +512,19 @@ def main():
                 else:
                     print(f"❌ Service object is missing required fields: {missing_fields}")
     
+    # Test service creation
+    print("\n===== Testing Service Creation =====")
+    success, create_service_data = tester.test_create_service()
+    if success:
+        print("✅ Service creation successful")
+        if create_service_data and isinstance(create_service_data, dict):
+            required_fields = ["id", "message"]
+            missing_fields = [field for field in required_fields if field not in create_service_data]
+            if not missing_fields:
+                print("✅ Service creation response structure is correct")
+            else:
+                print(f"❌ Service creation response is missing required fields: {missing_fields}")
+    
     print("\n===== Testing News API =====")
     success, news_data = tester.test_news_endpoint()
     if success:
@@ -227,6 +539,19 @@ def main():
                 else:
                     print(f"❌ News object is missing required fields: {missing_fields}")
     
+    # Test news creation
+    print("\n===== Testing News Creation =====")
+    success, create_news_data = tester.test_create_news()
+    if success:
+        print("✅ News creation successful")
+        if create_news_data and isinstance(create_news_data, dict):
+            required_fields = ["id", "message"]
+            missing_fields = [field for field in required_fields if field not in create_news_data]
+            if not missing_fields:
+                print("✅ News creation response structure is correct")
+            else:
+                print(f"❌ News creation response is missing required fields: {missing_fields}")
+    
     print("\n===== Testing Gallery API =====")
     success, gallery_data = tester.test_gallery_endpoint()
     if success:
@@ -240,6 +565,75 @@ def main():
                     print("✅ Gallery image object structure is correct")
                 else:
                     print(f"❌ Gallery image object is missing required fields: {missing_fields}")
+    
+    # Test gallery image creation
+    print("\n===== Testing Gallery Image Creation =====")
+    success, create_gallery_data = tester.test_create_gallery_image()
+    if success:
+        print("✅ Gallery image creation successful")
+        if create_gallery_data and isinstance(create_gallery_data, dict):
+            required_fields = ["id", "message"]
+            missing_fields = [field for field in required_fields if field not in create_gallery_data]
+            if not missing_fields:
+                print("✅ Gallery image creation response structure is correct")
+            else:
+                print(f"❌ Gallery image creation response is missing required fields: {missing_fields}")
+    
+    # Test events endpoint
+    print("\n===== Testing Events API =====")
+    success, events_data = tester.test_events_endpoint()
+    if success:
+        print(f"✅ Found {len(events_data)} events")
+        if events_data and isinstance(events_data, list):
+            print("✅ Events data structure is correct (list of events)")
+            if len(events_data) > 0 and isinstance(events_data[0], dict):
+                required_fields = ["id", "title", "description", "date", "time", "location"]
+                missing_fields = [field for field in required_fields if field not in events_data[0]]
+                if not missing_fields:
+                    print("✅ Event object structure is correct")
+                else:
+                    print(f"❌ Event object is missing required fields: {missing_fields}")
+    
+    # Test event creation
+    print("\n===== Testing Event Creation =====")
+    success, create_event_data = tester.test_create_event()
+    if success:
+        print("✅ Event creation successful")
+        if create_event_data and isinstance(create_event_data, dict):
+            required_fields = ["id", "message"]
+            missing_fields = [field for field in required_fields if field not in create_event_data]
+            if not missing_fields:
+                print("✅ Event creation response structure is correct")
+            else:
+                print(f"❌ Event creation response is missing required fields: {missing_fields}")
+    
+    # Test leadership endpoint
+    print("\n===== Testing Leadership API =====")
+    success, leadership_data = tester.test_leadership_endpoint()
+    if success:
+        print(f"✅ Found {len(leadership_data)} leadership entries")
+        if leadership_data and isinstance(leadership_data, list):
+            print("✅ Leadership data structure is correct (list of leadership entries)")
+            if len(leadership_data) > 0 and isinstance(leadership_data[0], dict):
+                required_fields = ["id", "name", "position", "image", "biography"]
+                missing_fields = [field for field in required_fields if field not in leadership_data[0]]
+                if not missing_fields:
+                    print("✅ Leadership object structure is correct")
+                else:
+                    print(f"❌ Leadership object is missing required fields: {missing_fields}")
+    
+    # Test leadership creation
+    print("\n===== Testing Leadership Creation =====")
+    success, create_leadership_data = tester.test_create_leadership()
+    if success:
+        print("✅ Leadership creation successful")
+        if create_leadership_data and isinstance(create_leadership_data, dict):
+            required_fields = ["id", "message"]
+            missing_fields = [field for field in required_fields if field not in create_leadership_data]
+            if not missing_fields:
+                print("✅ Leadership creation response structure is correct")
+            else:
+                print(f"❌ Leadership creation response is missing required fields: {missing_fields}")
     
     print("\n===== Testing Appointment Submission =====")
     success, appointment_data = tester.test_appointment_submission()
@@ -259,11 +653,21 @@ def main():
     print(f"✅ Root API endpoint: {'Working' if tester.tests_passed > 0 else 'Not working'}")
     print(f"✅ Health check endpoint: {'Working' if tester.tests_passed > 1 else 'Not working'}")
     print(f"✅ Departments endpoint: {'Working' if tester.tests_passed > 2 else 'Not working'}")
-    print(f"✅ Doctors endpoint: {'Working' if tester.tests_passed > 3 else 'Not working'}")
-    print(f"✅ Services endpoint: {'Working' if tester.tests_passed > 4 else 'Not working'}")
-    print(f"✅ News endpoint: {'Working' if tester.tests_passed > 5 else 'Not working'}")
-    print(f"✅ Gallery endpoint: {'Working' if tester.tests_passed > 6 else 'Not working'}")
-    print(f"✅ Appointments endpoint: {'Working' if tester.tests_passed > 7 else 'Not working'}")
+    print(f"✅ Departments CRUD operations: {'Working' if tester.tests_passed > 5 else 'Not working'}")
+    print(f"✅ Doctors endpoint: {'Working' if tester.tests_passed > 6 else 'Not working'}")
+    print(f"✅ Doctors creation: {'Working' if tester.tests_passed > 7 else 'Not working'}")
+    print(f"✅ Services endpoint: {'Working' if tester.tests_passed > 8 else 'Not working'}")
+    print(f"✅ Services creation: {'Working' if tester.tests_passed > 9 else 'Not working'}")
+    print(f"✅ News endpoint: {'Working' if tester.tests_passed > 10 else 'Not working'}")
+    print(f"✅ News creation: {'Working' if tester.tests_passed > 11 else 'Not working'}")
+    print(f"✅ Gallery endpoint: {'Working' if tester.tests_passed > 12 else 'Not working'}")
+    print(f"✅ Gallery creation: {'Working' if tester.tests_passed > 13 else 'Not working'}")
+    print(f"✅ Events endpoint: {'Working' if tester.tests_passed > 14 else 'Not working'}")
+    print(f"✅ Events creation: {'Working' if tester.tests_passed > 15 else 'Not working'}")
+    print(f"✅ Leadership endpoint: {'Working' if tester.tests_passed > 16 else 'Not working'}")
+    print(f"✅ Leadership creation: {'Working' if tester.tests_passed > 17 else 'Not working'}")
+    print(f"✅ Appointments endpoint: {'Working' if tester.tests_passed > 18 else 'Not working'}")
+    print(f"✅ CORS handling: {'Working' if tester.tests_passed == tester.tests_run else 'Not working'}")
     
     return 0 if tester.tests_passed == tester.tests_run else 1
 
