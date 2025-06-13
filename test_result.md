@@ -134,15 +134,18 @@
         
   - task: "Leadership API endpoints"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
         comment: "Added leadership API endpoints, needs testing"
+      - working: true
+        agent: "testing"
+        comment: "Tested GET /api/leadership and POST /api/leadership endpoints. Both endpoints are working correctly. GET returns a list of leadership entries with proper structure, and POST successfully creates a new leadership entry with multilingual data."
         
   - task: "CRUD operations for all entities"
     implemented: true
