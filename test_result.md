@@ -430,6 +430,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "Tested the unified admin panel functionality. The 'Единая Админка' button is visible in the header and clicking it successfully navigates to the admin login page. Login with admin@neuro.uz/admin123 credentials works properly. After login, the admin panel dashboard is displayed with statistics showing the number of departments, doctors, leadership, and news. The navigation tabs (Панель управления, Записи на сегодня, Отделения, Врачи, Услуги, Руководство, Новости, Галерея, События) are visible and functional. The Leadership section shows existing leaders and has a working 'Добавить руководителя' button that opens a modal form. There are still some minor React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart, but these don't affect the core functionality of the admin panel."
+      - working: true
+        agent: "testing"
+        comment: "Verified that the admin panel is now accessible directly at /admin. The login page loads correctly and login with admin@neuro.uz/admin123 credentials works properly. The routing issue has been fixed. There are still some minor React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart, but these don't affect the core functionality of the admin panel. The localStorage quota exceeded error in the Leadership section appears to be fixed as well."
         
   - task: "Leadership section UI improvements"
     implemented: true
