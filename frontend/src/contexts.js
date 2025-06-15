@@ -519,33 +519,56 @@ export const AdminProvider = ({ children }) => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  // Автосохранение данных в localStorage
+  // Автосохранение данных в localStorage (с защитой от переполнения)
+  const saveToLocalStorage = (key, data) => {
+    try {
+      const serializedData = JSON.stringify(data);
+      // Проверяем размер данных (если больше 1MB, не сохраняем)
+      if (serializedData.length > 1024 * 1024) {
+        console.warn(`Data too large to save in localStorage: ${key}`);
+        return;
+      }
+      localStorage.setItem(`neuro_${key}`, serializedData);
+    } catch (error) {
+      console.error(`Failed to save to localStorage: ${key}`, error);
+      // Очищаем localStorage если он переполнен
+      if (error.name === 'QuotaExceededError') {
+        try {
+          localStorage.clear();
+          console.log('localStorage cleared due to quota exceeded');
+        } catch (clearError) {
+          console.error('Failed to clear localStorage', clearError);
+        }
+      }
+    }
+  };
+
   useEffect(() => {
-    localStorage.setItem('neuro_departments', JSON.stringify(departments));
+    saveToLocalStorage('departments', departments);
   }, [departments]);
 
   useEffect(() => {
-    localStorage.setItem('neuro_doctors', JSON.stringify(doctors));
+    saveToLocalStorage('doctors', doctors);
   }, [doctors]);
 
   useEffect(() => {
-    localStorage.setItem('neuro_news', JSON.stringify(news));
+    saveToLocalStorage('news', news);
   }, [news]);
 
   useEffect(() => {
-    localStorage.setItem('neuro_services', JSON.stringify(services));
+    saveToLocalStorage('services', services);
   }, [services]);
 
   useEffect(() => {
-    localStorage.setItem('neuro_galleryImages', JSON.stringify(galleryImages));
+    saveToLocalStorage('galleryImages', galleryImages);
   }, [galleryImages]);
 
   useEffect(() => {
-    localStorage.setItem('neuro_accounts', JSON.stringify(accounts));
+    saveToLocalStorage('accounts', accounts);
   }, [accounts]);
 
   useEffect(() => {
-    localStorage.setItem('neuro_leadership', JSON.stringify(leadership));
+    saveToLocalStorage('leadership', leadership);
   }, [leadership]);
   
   // Fetch data from API on component mount
