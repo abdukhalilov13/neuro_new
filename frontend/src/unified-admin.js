@@ -344,7 +344,7 @@ export const UnifiedAdminPanel = () => {
     document.body.removeChild(link);
   };
   
-  // Модальные окна
+  // Состояния для модальных окон
   const [isDepartmentModalOpen, setIsDepartmentModalOpen] = useState(false);
   const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false);
   const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
@@ -360,6 +360,7 @@ export const UnifiedAdminPanel = () => {
   const [editingService, setEditingService] = useState(null);
   const [editingGalleryImage, setEditingGalleryImage] = useState(null);
   const [editingLeadership, setEditingLeadership] = useState(null);
+  const [editingEvent, setEditingEvent] = useState(null);
   // Пользователи системы
   const [users, setUsers] = useState(() => {
     try {
