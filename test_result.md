@@ -475,6 +475,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "Tested the gallery categories management functionality. Verified that the Gallery section has a 'Категории галереи' block at the top showing 4 categories (Здание, Оборудование, Персонал, События). Each category displays translation status indicators (RU: ✓, UZ: ✓/✗, EN: ✓/✗). The 'Добавить категорию' button opens a modal window with language switching functionality. Edit and delete buttons are present for each category. The language switching in the modal works correctly, showing the appropriate field labels based on the selected language."
+      - working: true
+        agent: "testing"
+        comment: "Retested the gallery categories management functionality. The category filters in the Gallery section work correctly - clicking on a category filter shows only images from that category. The categories (Здание, Оборудование, Персонал, Операции) are properly implemented and the filtering works as expected."
         
   - task: "Enhanced settings section"
     implemented: true
