@@ -295,7 +295,36 @@ export const LanguageProvider = ({ children }) => {
       openDay: 'Ochiq eshiklar kuni',
       masterclass: 'Masterкlass',
       seminar: 'Seminar',
-      update: 'Yangilash'
+      update: 'Yangilash',
+      
+      // Additional translations
+      building: 'Markaz binosi',
+      equipment: 'Tibbiy asbob-uskunalar',
+      staff: 'Xodimlar',
+      operations: 'Operatsiyalar',
+      mainHall: 'Asosiy zal',
+      operatingRoom: 'Operatsiya xonasi',
+      
+      // Appointment form
+      appointmentForm: 'Qabulga yozilish formasi',
+      patientName: 'Bemorning F.I.Sh.',
+      patientPhone: 'Telefon',
+      patientEmail: 'Email',
+      preferredDate: 'Afzal ko\'rilgan sana',
+      preferredTime: 'Afzal ko\'rilgan vaqt',
+      doctorChoice: 'Shifokor tanlash',
+      serviceChoice: 'Xizmat tanlash',
+      additionalInfo: 'Qo\'shimcha ma\'lumot',
+      submitAppointment: 'Arizani yuborish',
+      
+      // Gallery
+      galleryCategories: 'Galereya kategoriyalari',
+      viewAll: 'Barchasini ko\'rish',
+      
+      // Footer additional
+      quickLinks: 'Tezkor havolalar',
+      socialNetworks: 'Ijtimoiy tarmoqlar',
+      followUs: 'Bizni kuzatib boring'
     },
     en: {
       // Navigation
