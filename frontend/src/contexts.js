@@ -450,7 +450,36 @@ export const LanguageProvider = ({ children }) => {
       openDay: 'Open day',
       masterclass: 'Masterclass',
       seminar: 'Seminar',
-      update: 'Update'
+      update: 'Update',
+      
+      // Additional translations
+      building: 'Center building',
+      equipment: 'Medical equipment',
+      staff: 'Staff',
+      operations: 'Operations',
+      mainHall: 'Main hall',
+      operatingRoom: 'Operating room',
+      
+      // Appointment form
+      appointmentForm: 'Appointment form',
+      patientName: 'Patient full name',
+      patientPhone: 'Phone',
+      patientEmail: 'Email',
+      preferredDate: 'Preferred date',
+      preferredTime: 'Preferred time',
+      doctorChoice: 'Choose doctor',
+      serviceChoice: 'Choose service',
+      additionalInfo: 'Additional information',
+      submitAppointment: 'Submit appointment',
+      
+      // Gallery
+      galleryCategories: 'Gallery categories',
+      viewAll: 'View all',
+      
+      // Footer additional
+      quickLinks: 'Quick links',
+      socialNetworks: 'Social networks',
+      followUs: 'Follow us'
     }
   };
 
