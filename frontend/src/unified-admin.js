@@ -786,6 +786,68 @@ export const UnifiedAdminPanel = () => {
     setEvents(events.filter(event => event.id !== id));
   };
 
+  // Функции управления пользователями
+  const handleUserSubmit = (e) => {
+    e.preventDefault();
+    if (editingUser) {
+      const updatedUsers = users.map(user => 
+        user.id === editingUser.id ? { ...newUser, id: editingUser.id } : user
+      );
+      setUsers(updatedUsers);
+      alert('Пользователь обновлен!');
+    } else {
+      const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+      setUsers([...users, { 
+        ...newUser, 
+        id: newId,
+        created_at: new Date().toISOString().split('T')[0],
+        last_login: '-'
+      }]);
+      alert('Пользователь создан!');
+    }
+    setIsUserModalOpen(false);
+    resetUserForm();
+  };
+
+  const resetUserForm = () => {
+    setNewUser({
+      username: '',
+      name: '',
+      role: 'doctor',
+      email: '',
+      phone: '',
+      password: '',
+      status: 'active'
+    });
+    setEditingUser(null);
+  };
+
+  const startEditUser = (user) => {
+    setEditingUser(user);
+    setNewUser({...user, password: ''});
+    setIsUserModalOpen(true);
+  };
+
+  const deleteUser = (id) => {
+    if (id === 1) {
+      alert('Нельзя удалить главного администратора!');
+      return;
+    }
+    setUsers(users.filter(user => user.id !== id));
+  };
+
+  const toggleUserStatus = (id) => {
+    if (id === 1) {
+      alert('Нельзя деактивировать главного администратора!');
+      return;
+    }
+    setUsers(users.map(user => 
+      user.id === id 
+        ? { ...user, status: user.status === 'active' ? 'inactive' : 'active' }
+        : user
+    ));
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white flex items-center justify-center">
