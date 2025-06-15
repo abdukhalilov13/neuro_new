@@ -1803,6 +1803,8 @@ export const UnifiedAdminPanel = () => {
               onFileSelect={(file) => setNewLeadership({...newLeadership, image: file})}
               currentFile={newLeadership.image}
               label="Фото руководителя"
+              enableCrop={true}
+              aspectRatio={1}
             />
             
             <div>
