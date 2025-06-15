@@ -2356,6 +2356,8 @@ export const UnifiedAdminPanel = () => {
               onFileSelect={(file) => setNewGalleryImage({...newGalleryImage, url: file})}
               currentFile={newGalleryImage.url}
               label="Изображение для галереи"
+              enableCrop={true}
+              aspectRatio={4/3}
             />
             
             <div>
