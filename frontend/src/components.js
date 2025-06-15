@@ -662,11 +662,13 @@ export const AboutPage = () => {
                   onClick={() => openBioModal(leader)}
                 >
                   <div className="text-center">
-                    <img
-                      src={leader.image}
-                      alt={leader.name}
-                      className="w-48 h-48 rounded-2xl object-cover mx-auto mb-6 ring-4 ring-blue-100 shadow-lg"
-                    />
+                    <div className="w-48 h-48 mx-auto mb-6 ring-4 ring-blue-100 shadow-lg rounded-2xl overflow-hidden">
+                      <img
+                        src={leader.image}
+                        alt={leader.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
                       {leader.name}
                     </h3>
