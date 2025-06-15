@@ -515,6 +515,8 @@ metadata:
 test_plan:
   current_focus:
     - "Unified admin panel with website synchronization"
+    - "Image upload functionality"
+    - "Gallery categories management"
   stuck_tasks:
   test_all: false
   test_priority: "high_first"
