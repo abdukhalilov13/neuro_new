@@ -50,7 +50,6 @@ import {
   Briefcase,
   Info,
   UserPlus,
-  Shield,
   Target,
   Wrench
 } from 'lucide-react';
