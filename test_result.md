@@ -303,12 +303,16 @@
 
 ## test_plan:
   current_focus:
-    - "Admin panel sections functionality"
+    - "Admin panel access issue"
+  stuck_tasks:
+    - "Departments management section"
+    - "Doctors management section"
+    - "Services management section"
+    - "News management section"
+    - "Gallery management with categories"
+    - "Events management section"
     - "File upload component"
-    - "Multilingual support"
-    - "Events management"
-    - "Gallery categories"
-  stuck_tasks: []
+    - "Multilingual support (3 languages)"
   test_all: false
   test_priority: "high_first"
 
