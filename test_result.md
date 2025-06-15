@@ -291,6 +291,8 @@
 ## agent_communication:
   - agent: "main"
     message: "Fixed major admin panel issues: Added all missing sections (departments, doctors, services, news, gallery, events), implemented FileUploader component for image uploads with base64 conversion, added category management for gallery, fixed syntax errors in events, completed multilingual support for all sections. All sections now have proper CRUD operations, modal windows, and synchronization with site data. Ready for testing."
+  - agent: "testing"
+    message: "Attempted to test the admin panel functionality as requested. However, I encountered an issue where navigating to /admin or clicking the 'Единая Админка' button in the header redirects to the homepage instead of showing the admin login form. This suggests there might be an issue with the React Router configuration or authentication logic in the admin panel. The HTTP request to /admin returns a 200 status code, but the browser redirects to the homepage. This could be due to a client-side redirect in the React code. I recommend checking the routing configuration in App.js and any authentication/redirect logic in the UnifiedAdminPanel component."
 
 user_problem_statement: "Fix the neurosurgery center website that is not working. The issues are: 1) Site compilation errors, 2) Event management code has syntax errors, 3) Multi-language support (3 languages) needs completion"
 
