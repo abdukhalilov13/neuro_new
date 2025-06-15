@@ -360,7 +360,44 @@ export const UnifiedAdminPanel = () => {
   const [editingService, setEditingService] = useState(null);
   const [editingGalleryImage, setEditingGalleryImage] = useState(null);
   const [editingLeadership, setEditingLeadership] = useState(null);
-  const [editingEvent, setEditingEvent] = useState(null);
+  // Пользователи системы
+  const [users, setUsers] = useState(() => loadFromStorage('users', [
+    {
+      id: 1,
+      username: 'admin@neuro.uz',
+      name: 'Системный администратор',
+      role: 'admin',
+      email: 'admin@neuro.uz',
+      phone: '+998 71 264-96-00',
+      created_at: '2024-01-01',
+      last_login: '2025-06-11',
+      status: 'active'
+    },
+    {
+      id: 2,
+      username: 'doctor1',
+      name: 'Иванов Иван Иванович',
+      role: 'doctor',
+      email: 'doctor1@neuro.uz',
+      phone: '+998 71 264-96-01',
+      created_at: '2024-03-15',
+      last_login: '2025-06-10',
+      status: 'active'
+    }
+  ]));
+
+  // Состояния для модальных окон пользователей
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
+  const [newUser, setNewUser] = useState({
+    username: '',
+    name: '',
+    role: 'doctor',
+    email: '',
+    phone: '',
+    password: '',
+    status: 'active'
+  });
   
   // Новые записи с многоязычностью
   const [newDepartment, setNewDepartment] = useState({
