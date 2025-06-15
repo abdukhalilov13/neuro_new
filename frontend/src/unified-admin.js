@@ -112,8 +112,8 @@ const AdminLanguageSwitcher = ({ currentLanguage, onLanguageChange, languages })
 // Упрощенный компонент обрезки изображений
 const ImageCropper = ({ onCrop, aspectRatio = 1, onClose }) => {
   const [imageSrc, setImageSrc] = useState(null);
-  const canvasRef = React.useRef(null);
-  const imageRef = React.useRef(null);
+  const canvasRef = useRef(null);
+  const imageRef = useRef(null);
   
   const onFileSelect = (e) => {
     const file = e.target.files[0];
