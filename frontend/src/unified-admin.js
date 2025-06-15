@@ -1017,23 +1017,88 @@ export const UnifiedAdminPanel = () => {
           </div>
         )}
 
+        {/* СЕКЦИЯ ЗАПИСЕЙ НА СЕГОДНЯ (только просмотр) */}
         {activeTab === 'appointments' && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-gray-900">
-                Записи на сегодня ({new Date().toLocaleDateString('ru-RU')})
+                Записи на сегодня ({new Date().toLocaleDateString('ru-RU')}) - {todayAppointments.length}
               </h2>
               <div className="flex space-x-3">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+                <button 
+                  onClick={exportToExcel}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                >
                   <Download className="w-4 h-4" />
-                  <span>Экспорт</span>
+                  <span>Экспорт в Excel</span>
                 </button>
-                <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
-                  <RefreshCw className="w-4 h-4" />
-                  <span>Обновить</span>
+                <button 
+                  onClick={() => setShowAppointmentFilters(!showAppointmentFilters)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+                >
+                  <Filter className="w-4 h-4" />
+                  <span>Фильтры</span>
                 </button>
               </div>
             </div>
+
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <Info className="w-5 h-5 text-yellow-600" />
+                <div>
+                  <h3 className="font-medium text-yellow-900">Только для просмотра</h3>
+                  <p className="text-sm text-yellow-700">
+                    Записи создаются через форму на сайте. Здесь можно только просматривать и экспортировать данные.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Фильтры */}
+            {showAppointmentFilters && (
+              <div className="bg-white rounded-lg p-4 shadow mb-6">
+                <h3 className="font-medium text-gray-900 mb-3">Фильтры записей</h3>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Статус</label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                      <option value="">Все статусы</option>
+                      <option value="pending">Ожидает</option>
+                      <option value="confirmed">Подтверждено</option>
+                      <option value="completed">Завершено</option>
+                      <option value="cancelled">Отменено</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Врач</label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                      <option value="">Все врачи</option>
+                      {adminData.doctors?.map((doctor) => (
+                        <option key={doctor.id} value={doctor.id}>
+                          {doctor.name_ru || doctor.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Время</label>
+                    <select className="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                      <option value="">Все время</option>
+                      <option value="morning">Утро (9:00-12:00)</option>
+                      <option value="afternoon">День (12:00-17:00)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Дата</label>
+                    <input 
+                      type="date" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                      defaultValue={new Date().toISOString().split('T')[0]}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="bg-white rounded-lg shadow overflow-hidden">
               <table className="min-w-full divide-y divide-gray-200">
@@ -1055,19 +1120,28 @@ export const UnifiedAdminPanel = () => {
                       Статус
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Действия
+                      Контакты
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {todayAppointments.map((appointment) => (
-                    <tr key={appointment.id}>
+                    <tr key={appointment.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {appointment.time}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">{appointment.patient_name}</div>
-                        <div className="text-sm text-gray-500">{appointment.phone}</div>
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 h-8 w-8">
+                            <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                              <User className="h-4 w-4 text-blue-600" />
+                            </div>
+                          </div>
+                          <div className="ml-3">
+                            <div className="text-sm font-medium text-gray-900">{appointment.patient_name}</div>
+                            <div className="text-sm text-gray-500">ID: {appointment.id}</div>
+                          </div>
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {appointment.doctor_name}
@@ -1079,28 +1153,36 @@ export const UnifiedAdminPanel = () => {
                         <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                           appointment.status === 'confirmed' 
                             ? 'bg-green-100 text-green-800'
-                            : 'bg-yellow-100 text-yellow-800'
+                            : appointment.status === 'pending'
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : appointment.status === 'completed'
+                            ? 'bg-blue-100 text-blue-800'
+                            : 'bg-red-100 text-red-800'
                         }`}>
-                          {appointment.status === 'confirmed' ? 'Подтверждено' : 'Ожидает'}
+                          {appointment.status === 'confirmed' ? 'Подтверждено' :
+                           appointment.status === 'pending' ? 'Ожидает' :
+                           appointment.status === 'completed' ? 'Завершено' :
+                           'Отменено'}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex space-x-2">
-                          <button className="text-blue-600 hover:text-blue-900">
-                            <Eye className="w-4 h-4" />
-                          </button>
-                          <button className="text-green-600 hover:text-green-900">
-                            <CheckCircle className="w-4 h-4" />
-                          </button>
-                          <button className="text-red-600 hover:text-red-900">
-                            <XCircle className="w-4 h-4" />
-                          </button>
-                        </div>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <div>{appointment.phone}</div>
+                        <div className="text-gray-500">{appointment.email}</div>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              
+              {todayAppointments.length === 0 && (
+                <div className="text-center py-12">
+                  <Calendar className="mx-auto h-12 w-12 text-gray-400" />
+                  <h3 className="mt-2 text-sm font-medium text-gray-900">Нет записей</h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    На сегодня нет записей на прием
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
