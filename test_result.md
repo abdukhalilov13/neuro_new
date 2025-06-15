@@ -460,6 +460,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "Tested the image upload functionality in the admin panel. Successfully verified that file upload buttons are present in all relevant sections: 1) In the Doctors section, the 'Фото врача' field has a 'Выбрать файл' button for uploading images, 2) In the News section, the 'Изображение новости' field has a file upload button, 3) In the Events section, the 'Изображение события' field has a file upload button, 4) In the Leadership section, the 'Фото руководителя' field has a file upload button. The image upload component is properly implemented with preview functionality."
+      - working: true
+        agent: "testing"
+        comment: "Retested the image upload functionality with focus on the image cropping feature. The file upload component includes an 'Обрезать изображение' button that opens the image cropping interface. The cropping interface allows selecting and cropping images before uploading. The cropped images are properly displayed in the preview. No compression issues were observed with the uploaded images."
         
   - task: "Gallery categories management"
     implemented: true
