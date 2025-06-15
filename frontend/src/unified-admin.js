@@ -371,7 +371,7 @@ export const UnifiedAdminPanel = () => {
     location: '',
     type: 'conference'
   });
-  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  
   // Пользователи системы
   const [users, setUsers] = useState(() => {
     try {
