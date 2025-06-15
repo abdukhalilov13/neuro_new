@@ -194,13 +194,16 @@
     implemented: true
     working: false
     file: "/app/frontend/src/unified-admin.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "main"
         comment: "Added doctors section with CRUD, file upload, multilingual support, needs testing"
+      - working: false
+        agent: "testing"
+        comment: "Unable to test the doctors section as the admin panel is not accessible. Navigating to /admin or clicking the 'Единая Админка' button redirects to the homepage instead of showing the admin login form."
         
   - task: "Services management section"
     implemented: true
