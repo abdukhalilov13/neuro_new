@@ -640,9 +640,7 @@ export const AdminProvider = ({ children }) => {
     saveToLocalStorage('leadership', leadership);
   }, [leadership]);
 
-  useEffect(() => {
-    saveToLocalStorage('users', users);
-  }, [users]);
+  // Removed reference to undefined 'users' variable
   
   // Fetch data from API on component mount
   useEffect(() => {
