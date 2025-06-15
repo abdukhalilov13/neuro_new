@@ -706,7 +706,9 @@ export const AboutPage = () => {
               
               <div className="p-8">
                 <div className="flex items-start space-x-6 mb-6">
-                  <img src={selectedLeader.image} alt={selectedLeader.name} className="w-24 h-24 rounded-full object-cover" />
+                  <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0">
+                    <img src={selectedLeader.image} alt={selectedLeader.name} className="w-full h-full object-cover" />
+                  </div>
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">{selectedLeader.name}</h2>
                     <p className="text-lg text-blue-600 font-medium mb-3">{selectedLeader.position}</p>
