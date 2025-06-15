@@ -500,15 +500,6 @@ export const UnifiedAdminPanel = () => {
     category: 'building'
   });
 
-  const [newEvent, setNewEvent] = useState({
-    title_ru: '', title_uz: '', title_en: '',
-    description_ru: '', description_uz: '', description_en: '',
-    date: '',
-    time: '',
-    location: '',
-    type: 'conference'
-  });
-
   // События (добавляем новое состояние)
   const [events, setEvents] = useState([
     {
