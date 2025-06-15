@@ -341,155 +341,53 @@ backend:
         comment: "Tested all API endpoints (/, /health, /departments, /doctors, /services, /news, /appointments, /gallery). All endpoints are working correctly and returning the expected data structure."
 
 frontend:
-  - task: "Fix compilation errors"
+  - task: "Admin panel improvements"
     implemented: true
-    working: true
-    file: "/app/frontend/src/App.js,/app/frontend/src/components.js,/app/frontend/src/admin-full.js,/app/frontend/src/doctor-admin-components.js"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: false
-        agent: "main"
-        comment: "Frontend had compilation errors due to incorrect import/export statements for DoctorDashboard and AdminPanel components"
-      - working: true
-        agent: "main"
-        comment: "Fixed import/export issues - DoctorDashboard imported from doctor-admin-components.js, AdminPanel imported from admin-full.js. Frontend now compiles successfully"
-      - working: true
-        agent: "testing"
-        comment: "Verified that the frontend compiles and loads successfully. The homepage displays properly with all content and navigation menu visible."
-
-  - task: "Event management functionality"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/admin-full.js"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: "NA"
-        agent: "main"
-        comment: "Event management code is already implemented in admin-full.js with CRUD operations, modal forms, and proper UI. No syntax errors found. Needs testing to verify functionality"
-      - working: true
-        agent: "testing"
-        comment: "Tested event management functionality in the admin panel. Successfully accessed the admin panel via the header link, logged in with admin@neuro.uz/admin123, navigated to the Events tab, and verified that events are displayed and the add event modal works correctly."
-
-  - task: "Multi-language support completion"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/contexts.js,/app/frontend/src/enhanced-components.js"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: false
-        agent: "main"
-        comment: "Language context exists with basic translations for ru, uz, en but is incomplete. Only has basic navigation and footer translations. Needs comprehensive translations for all UI elements"
-      - working: false
-        agent: "testing"
-        comment: "Tested language switching functionality. The language switcher in the header works and shows options for Russian, Uzbek, and English. Switching to English changes some UI elements but not all content is translated."
-      - working: true
-        agent: "main"
-        comment: "Expanded translations to include comprehensive set for all UI elements including homepage, about page, services, doctors, events, admin panel, and common elements. Added translations for ru, uz, and en languages with over 100 translation keys each."
-
-  - task: "Test accounts page accessibility"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/enhanced-components.js,/app/frontend/src/TestAccounts.js"
-    stuck_count: 0
-    priority: "medium"
-    needs_retesting: false
-    status_history:
-      - working: false
-        agent: "testing"
-        comment: "The /test-accounts route doesn't work - it redirects to the homepage making it difficult for users to find login credentials"
-      - working: true
-        agent: "main"
-        comment: "Added 'Тестовые аккаунты' link to the header top bar between 'Запись на прием' and 'Кабинет врача' with green styling. Now users can easily access test login credentials."
-      - working: true
-        agent: "testing"
-        comment: "Verified that the 'Тестовые аккаунты' link has been removed from the header as requested. The header now only contains 'Кабинет врача' and 'Админ-панель' links in the top bar. The test accounts page is still accessible via direct URL but no longer has a dedicated navigation link."
-        
-  - task: "Multilingual admin panel functionality"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/multilingual-admin.js,/app/frontend/src/admin-sections.js,/app/frontend/src/multilingual-admin-fixed.js,/app/frontend/src/unified-admin.js"
+    working: false
+    file: "/app/frontend/src/unified-admin.js"
     stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
       - working: false
         agent: "testing"
-        comment: "Attempted to test the multilingual admin panel functionality. The 'Админ-панель' link is visible in the header, but when clicking on it or navigating directly to /admin, the page redirects to the homepage instead of showing the login form. This suggests there might be an issue with the admin panel routing or authentication flow. The console shows some React component errors related to incorrect casing for components like Activity, Brain, and Heart, but these appear to be minor styling issues rather than critical functionality problems."
-      - working: true
-        agent: "testing"
-        comment: "Retested the multilingual admin panel functionality. The admin panel is now working correctly. Direct access to /admin shows the login form, and login with admin@neuro.uz/admin123 credentials works properly. All navigation tabs are visible and functional. The multilingual functionality works in all modals with language switchers (RU/UZ/EN) present and working correctly. CRUD operations for departments, doctors, and events work as expected. There are some minor JavaScript errors related to incorrect casing for components (Activity, Brain, Heart) and a more significant error in the Settings tab (updateSiteSettings is not defined), but these don't affect the core functionality of the admin panel."
+        comment: "Attempted to test the admin panel improvements. The admin login page loads correctly, but after entering credentials (admin@neuro.uz/admin123), the login fails with a JavaScript error: 'editingEvent is not defined'. Fixed this error, but there are still issues with the admin panel functionality. The console shows errors related to incorrect casing for components like Activity, Brain, and Heart."
+        
+  - task: "Appointments section changes"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/unified-admin.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
       - working: false
         agent: "testing"
-        comment: "Tested the fixed multilingual admin panel. When trying to access the /admin-multilingual-fixed URL directly, we're being redirected to the homepage. The 'Многоязычная админка' button is visible in the header, but unable to successfully click it or navigate to the admin panel. There are still React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart. The admin panel appears to have routing or authentication flow issues that prevent access."
-      - working: true
-        agent: "testing"
-        comment: "Tested the unified admin panel functionality. The 'Единая Админка' button is visible in the header and clicking it successfully navigates to the admin login page. Login with admin@neuro.uz/admin123 credentials works properly. After login, the admin panel dashboard is displayed with statistics showing the number of departments, doctors, leadership, and news. The navigation tabs (Панель управления, Записи на сегодня, Отделения, Врачи, Услуги, Руководство, Новости, Галерея, События) are visible and functional. The Leadership section shows existing leaders and has a working 'Добавить руководителя' button that opens a modal form. There are still some minor React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart, but these don't affect the core functionality of the admin panel."
-      - working: true
-        agent: "testing"
-        comment: "Verified that the admin panel is now accessible directly at /admin. The login page loads correctly and login with admin@neuro.uz/admin123 credentials works properly. The routing issue has been fixed. There are still some minor React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart, but these don't affect the core functionality of the admin panel. The localStorage quota exceeded error in the Leadership section appears to be fixed as well."
+        comment: "Unable to test the appointments section changes due to admin panel login issues. The code review shows that the appointments section has been updated to be read-only with export to Excel functionality and filters, but this couldn't be verified in the UI."
         
-  - task: "Leadership section UI improvements"
+  - task: "Multilingual support on main website"
     implemented: true
     working: true
-    file: "/app/frontend/src/components.js"
-    stuck_count: 0
-    priority: "medium"
-    needs_retesting: false
-    status_history:
-      - working: true
-        agent: "testing"
-        comment: "Tested the leadership section on the About page. Verified that the leadership cards have been enlarged as requested - images are now 32x32 (larger than previous 24x24), cards have more padding (p-8), and the 'Читать биографию' button is now styled as a proper button with blue background and white text. The modal functionality works correctly - clicking on a leadership card opens the biography modal, and it can be closed properly. No console errors related to this functionality."
-      - working: true
-        agent: "testing"
-        comment: "Retested the leadership section on the About page. Verified that all requested changes have been implemented successfully: 1) Photos are now significantly larger (w-48 h-48, 192x192px), 2) Photos have rectangular shape with rounded corners (rounded-2xl), 3) Photos have shadow (shadow-lg) and border (ring-4 ring-blue-100), 4) Cards are taller (min-h-[500px]), 5) Cards have more padding (p-10), 6) Responsive design works correctly (1 column on mobile, 2 columns on tablet, 3 columns on desktop), 7) Modal functionality works properly - clicking on a card opens the biography modal which can be closed. The leadership cards now have a more professional and visually appealing design with the photos being the dominant element."
-        
-  - task: "Image upload functionality"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/enhanced-admin-sections.js"
+    file: "/app/frontend/src/contexts.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
       - working: true
         agent: "testing"
-        comment: "Tested the image upload functionality in the admin panel. Successfully verified that file upload buttons are present in all relevant sections: 1) In the Doctors section, the 'Фото врача' field has a 'Выбрать файл' button for uploading images, 2) In the News section, the 'Изображение новости' field has a file upload button, 3) In the Events section, the 'Изображение события' field has a file upload button, 4) In the Leadership section, the 'Фото руководителя' field has a file upload button. The image upload component is properly implemented with preview functionality."
-      - working: true
-        agent: "testing"
-        comment: "Retested the image upload functionality with focus on the image cropping feature. The file upload component includes an 'Обрезать изображение' button that opens the image cropping interface. The cropping interface allows selecting and cropping images before uploading. The cropped images are properly displayed in the preview. No compression issues were observed with the uploaded images."
+        comment: "Verified that the language switcher is present in the header with options for Russian, Uzbek, and English. The translations are comprehensive with over 100 translation keys for each language. The navigation menu and main content areas are properly translated."
         
-  - task: "Gallery categories management"
+  - task: "Image cropping functionality"
     implemented: true
-    working: true
-    file: "/app/frontend/src/enhanced-admin-sections.js"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: true
-        agent: "testing"
-        comment: "Tested the gallery categories management functionality. Verified that the Gallery section has a 'Категории галереи' block at the top showing 4 categories (Здание, Оборудование, Персонал, События). Each category displays translation status indicators (RU: ✓, UZ: ✓/✗, EN: ✓/✗). The 'Добавить категорию' button opens a modal window with language switching functionality. Edit and delete buttons are present for each category. The language switching in the modal works correctly, showing the appropriate field labels based on the selected language."
-      - working: true
-        agent: "testing"
-        comment: "Retested the gallery categories management functionality. The category filters in the Gallery section work correctly - clicking on a category filter shows only images from that category. The categories (Здание, Оборудование, Персонал, Операции) are properly implemented and the filtering works as expected."
-        
-  - task: "Enhanced settings section"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/enhanced-admin-sections.js"
-    stuck_count: 0
+    working: false
+    file: "/app/frontend/src/unified-admin.js"
+    stuck_count: 1
     priority: "medium"
     needs_retesting: false
     status_history:
-      - working: true
+      - working: false
         agent: "testing"
-        comment: "Tested the enhanced settings section in the admin panel. Verified that the settings are divided into 3 columns as required: 1) Контактная информация (with phone numbers, email addresses, and physical address), 2) Социальные сети (with fields for Facebook, Instagram, YouTube, and official website), 3) SEO настройки (with fields for site title, description, and keywords). The '+ Добавить' buttons for adding phones and emails are present and functional. Social media sections have appropriate icons for each platform."
+        comment: "Unable to test the image cropping functionality due to admin panel login issues. The code review shows that the FileUploader component includes image cropping capabilities with the ImageCropper component, but this couldn't be verified in the UI."
 
   - task: "Unified admin panel with website synchronization"
     implemented: true
