@@ -499,6 +499,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "Tested the unified admin panel with website synchronization. The 'Единая Админка' button is visible in the header and clicking it successfully navigates to the admin login page with the new design 'Единая Админ-панель'. Login with admin@neuro.uz/admin123 credentials works properly. After login, the admin panel dashboard is displayed with statistics showing the number of departments, doctors, leadership, and news. All navigation tabs (Панель управления, Записи на сегодня, Отделения, Врачи, Услуги, Руководство, Новости, Галерея, События) are visible and functional. The Leadership section shows existing leaders and has a working 'Добавить руководителя' button that opens a modal form. The synchronization with the website works correctly - when viewing the About page, the leadership section displays the same leaders as in the admin panel. There are some minor React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart, but these don't affect the core functionality of the admin panel or the synchronization with the website."
+      - working: true
+        agent: "testing"
+        comment: "Retested the unified admin panel with focus on the leadership section and synchronization. The leadership names now match exactly between the admin panel and the 'О центре' page. When editing a leadership entry in the admin panel, the changes are immediately reflected on the 'О центре' page. No localStorage quota errors were observed during testing. The localStorage implementation has been fixed to handle large data properly."
 
 metadata:
   created_by: "main_agent"
