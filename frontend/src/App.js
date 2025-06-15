@@ -15,7 +15,7 @@ import {
   AppointmentPage
 } from "./pages";
 import { DoctorDashboard } from "./doctor-admin-components";
-import { UnifiedAdminPanel } from "./unified-admin";
+import UnifiedAdminPanel from "./unified-admin";
 import { TestAccountsPage } from "./TestAccounts";
 import { VacanciesPage, GalleryPage } from "./AdditionalPages";
 import { NewsDetailPage } from "./NewsDetail";
