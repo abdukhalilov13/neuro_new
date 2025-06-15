@@ -639,6 +639,10 @@ export const AdminProvider = ({ children }) => {
   useEffect(() => {
     saveToLocalStorage('leadership', leadership);
   }, [leadership]);
+
+  useEffect(() => {
+    saveToLocalStorage('users', users);
+  }, [users]);
   
   // Fetch data from API on component mount
   useEffect(() => {
