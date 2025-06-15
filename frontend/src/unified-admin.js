@@ -1723,6 +1723,194 @@ export const UnifiedAdminPanel = () => {
           </div>
         )}
 
+        {/* СЕКЦИЯ ПОЛЬЗОВАТЕЛЕЙ */}
+        {activeTab === 'users' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Пользователи ({users.length})</h2>
+              <button
+                onClick={() => {
+                  setEditingUser(null);
+                  resetUserForm();
+                  setIsUserModalOpen(true);
+                }}
+                className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <UserPlus className="w-4 h-4" />
+                <span>Добавить пользователя</span>
+              </button>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <Shield className="w-5 h-5 text-blue-600" />
+                <div>
+                  <h3 className="font-medium text-blue-900">Управление доступом</h3>
+                  <p className="text-sm text-blue-700">
+                    Управление пользователями системы и их правами доступа.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div className="bg-green-50 rounded-lg p-4">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <CheckCircle className="h-8 w-8 text-green-600" />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-green-600">Активных</p>
+                    <p className="text-2xl font-bold text-green-900">
+                      {users.filter(u => u.status === 'active').length}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-blue-50 rounded-lg p-4">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <Shield className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-blue-600">Администраторов</p>
+                    <p className="text-2xl font-bold text-blue-900">
+                      {users.filter(u => u.role === 'admin').length}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-purple-50 rounded-lg p-4">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <Stethoscope className="h-8 w-8 text-purple-600" />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-purple-600">Врачей</p>
+                    <p className="text-2xl font-bold text-purple-900">
+                      {users.filter(u => u.role === 'doctor').length}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Пользователь
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Роль
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Контакты
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Последний вход
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Статус
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Действия
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {users.map((user) => (
+                    <tr key={user.id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 h-10 w-10">
+                            <div className={`h-10 w-10 rounded-full flex items-center justify-center ${
+                              user.role === 'admin' 
+                                ? 'bg-red-100' 
+                                : 'bg-blue-100'
+                            }`}>
+                              {user.role === 'admin' 
+                                ? <Shield className="h-5 w-5 text-red-600" />
+                                : <Stethoscope className="h-5 w-5 text-blue-600" />
+                              }
+                            </div>
+                          </div>
+                          <div className="ml-4">
+                            <div className="text-sm font-medium text-gray-900">
+                              {user.name}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              @{user.username}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                          user.role === 'admin'
+                            ? 'bg-red-100 text-red-800'
+                            : user.role === 'doctor'
+                            ? 'bg-blue-100 text-blue-800'
+                            : 'bg-gray-100 text-gray-800'
+                        }`}>
+                          {user.role === 'admin' ? 'Администратор' :
+                           user.role === 'doctor' ? 'Врач' :
+                           user.role === 'nurse' ? 'Медсестра' : user.role}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <div>{user.email}</div>
+                        <div className="text-gray-500">{user.phone}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {user.last_login}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <button
+                          onClick={() => toggleUserStatus(user.id)}
+                          className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                            user.status === 'active'
+                              ? 'bg-green-100 text-green-800 hover:bg-green-200'
+                              : 'bg-red-100 text-red-800 hover:bg-red-200'
+                          }`}
+                        >
+                          {user.status === 'active' ? 'Активен' : 'Заблокирован'}
+                        </button>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => startEditUser(user)}
+                            className="text-blue-600 hover:text-blue-900"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          {user.id !== 1 && (
+                            <button
+                              onClick={() => {
+                                if (confirm('Удалить этого пользователя?')) {
+                                  deleteUser(user.id);
+                                  alert('Пользователь удален!');
+                                }
+                              }}
+                              className="text-red-600 hover:text-red-900"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
         {/* СЕКЦИЯ СОБЫТИЙ */}
         {activeTab === 'events' && (
           <div className="space-y-6">
