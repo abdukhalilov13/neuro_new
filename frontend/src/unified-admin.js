@@ -109,15 +109,170 @@ const AdminLanguageSwitcher = ({ currentLanguage, onLanguageChange, languages })
   );
 };
 
-// Компонент загрузки файлов
-const FileUploader = ({ onFileSelect, currentFile, accept = "image/*", label = "Выберите файл" }) => {
+// Компонент обрезки изображений
+const ImageCropper = ({ onCrop, aspectRatio = 1, onClose }) => {
+  const [imageSrc, setImageSrc] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
+
+  const onFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageSrc(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const createCroppedImage = async () => {
+    if (!imageSrc || !croppedAreaPixels) return;
+    
+    try {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const image = new Image();
+      
+      image.onload = () => {
+        canvas.width = croppedAreaPixels.width;
+        canvas.height = croppedAreaPixels.height;
+        
+        ctx.drawImage(
+          image,
+          croppedAreaPixels.x,
+          croppedAreaPixels.y,
+          croppedAreaPixels.width,
+          croppedAreaPixels.height,
+          0,
+          0,
+          croppedAreaPixels.width,
+          croppedAreaPixels.height
+        );
+        
+        canvas.toBlob((blob) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            onCrop(reader.result);
+            onClose();
+          };
+          reader.readAsDataURL(blob);
+        }, 'image/jpeg', 0.8);
+      };
+      
+      image.src = imageSrc;
+    } catch (error) {
+      console.error('Ошибка обрезки изображения:', error);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg max-w-2xl w-full">
+        <div className="flex items-center justify-between p-4 border-b">
+          <h3 className="text-lg font-semibold">Обрезка изображения</h3>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+        
+        <div className="p-4">
+          {!imageSrc ? (
+            <div className="text-center py-8">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={onFileSelect}
+                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              />
+              <p className="text-gray-500 mt-2">Выберите изображение для обрезки</p>
+            </div>
+          ) : (
+            <div>
+              <div className="relative w-full h-64 mb-4">
+                <img
+                  src={imageSrc}
+                  alt="Для обрезки"
+                  className="w-full h-full object-contain"
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: `translate(-50%, -50%) scale(${zoom})`,
+                    transformOrigin: `${crop.x}px ${crop.y}px`
+                  }}
+                />
+                <div 
+                  className="absolute border-2 border-white border-dashed bg-black bg-opacity-30"
+                  style={{
+                    left: `${crop.x}px`,
+                    top: `${crop.y}px`,
+                    width: `${200 * aspectRatio}px`,
+                    height: '200px'
+                  }}
+                />
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Масштаб</label>
+                  <input
+                    type="range"
+                    min="0.5"
+                    max="3"
+                    step="0.1"
+                    value={zoom}
+                    onChange={(e) => setZoom(parseFloat(e.target.value))}
+                    className="w-full"
+                  />
+                </div>
+                
+                <div className="flex justify-end space-x-3">
+                  <button
+                    onClick={() => setImageSrc(null)}
+                    className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg"
+                  >
+                    Выбрать другое
+                  </button>
+                  <button
+                    onClick={createCroppedImage}
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                  >
+                    Обрезать
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Обновленный компонент загрузки файлов с обрезкой
+const FileUploader = ({ onFileSelect, currentFile, accept = "image/*", label = "Выберите файл", enableCrop = true, aspectRatio = 1 }) => {
   const [preview, setPreview] = useState(currentFile || '');
   const [isUploading, setIsUploading] = useState(false);
+  const [showCropper, setShowCropper] = useState(false);
   
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     
+    if (enableCrop && file.type.startsWith('image/')) {
+      setShowCropper(true);
+    } else {
+      processFile(file);
+    }
+  };
+  
+  const processFile = (file) => {
     setIsUploading(true);
     
     try {
@@ -133,6 +288,12 @@ const FileUploader = ({ onFileSelect, currentFile, accept = "image/*", label = "
       console.error('Ошибка загрузки файла:', error);
       setIsUploading(false);
     }
+  };
+  
+  const handleCroppedImage = (croppedImage) => {
+    setPreview(croppedImage);
+    onFileSelect(croppedImage);
+    setShowCropper(false);
   };
   
   return (
@@ -158,7 +319,23 @@ const FileUploader = ({ onFileSelect, currentFile, accept = "image/*", label = "
             alt="Превью" 
             className="w-32 h-32 object-cover rounded-lg border"
           />
+          {enableCrop && (
+            <button
+              onClick={() => setShowCropper(true)}
+              className="mt-2 text-sm text-blue-600 hover:text-blue-700 font-medium"
+            >
+              Обрезать изображение
+            </button>
+          )}
         </div>
+      )}
+      
+      {showCropper && (
+        <ImageCropper
+          onCrop={handleCroppedImage}
+          aspectRatio={aspectRatio}
+          onClose={() => setShowCropper(false)}
+        />
       )}
     </div>
   );
