@@ -140,7 +140,36 @@ export const LanguageProvider = ({ children }) => {
       openDay: 'День открытых дверей',
       masterclass: 'Мастер-класс',
       seminar: 'Семинар',
-      update: 'Обновить'
+      update: 'Обновить',
+      
+      // Additional translations
+      building: 'Здание центра',
+      equipment: 'Медицинское оборудование',
+      staff: 'Персонал',
+      operations: 'Операции',
+      mainHall: 'Главный холл',
+      operatingRoom: 'Операционная',
+      
+      // Appointment form
+      appointmentForm: 'Форма записи на прием',
+      patientName: 'ФИО пациента',
+      patientPhone: 'Телефон',
+      patientEmail: 'Email',
+      preferredDate: 'Предпочитаемая дата',
+      preferredTime: 'Предпочитаемое время',
+      doctorChoice: 'Выбор врача',
+      serviceChoice: 'Выбор услуги',
+      additionalInfo: 'Дополнительная информация',
+      submitAppointment: 'Отправить заявку',
+      
+      // Gallery
+      galleryCategories: 'Категории галереи',
+      viewAll: 'Смотреть все',
+      
+      // Footer additional
+      quickLinks: 'Быстрые ссылки',
+      socialNetworks: 'Социальные сети',
+      followUs: 'Следите за нами'
     },
     uz: {
       // Navigation
