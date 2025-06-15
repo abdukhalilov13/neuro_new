@@ -412,10 +412,14 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Unified admin panel with website synchronization"
-    - "Image upload functionality"
-    - "Gallery categories management"
+    - "Admin panel improvements"
+    - "Appointments section changes"
+    - "Multilingual support on main website"
+    - "Image cropping functionality"
   stuck_tasks:
+    - "Admin panel improvements"
+    - "Appointments section changes"
+    - "Image cropping functionality"
   test_all: false
   test_priority: "high_first"
 
