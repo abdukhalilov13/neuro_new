@@ -361,6 +361,17 @@ export const UnifiedAdminPanel = () => {
   const [editingGalleryImage, setEditingGalleryImage] = useState(null);
   const [editingLeadership, setEditingLeadership] = useState(null);
   const [editingEvent, setEditingEvent] = useState(null);
+
+  // Данные событий
+  const [newEvent, setNewEvent] = useState({
+    title_ru: '', title_uz: '', title_en: '',
+    description_ru: '', description_uz: '', description_en: '',
+    date: '',
+    time: '',
+    location: '',
+    type: 'conference'
+  });
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   // Пользователи системы
   const [users, setUsers] = useState(() => {
     try {
