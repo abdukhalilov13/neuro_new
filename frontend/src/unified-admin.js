@@ -2291,6 +2291,8 @@ export const UnifiedAdminPanel = () => {
               onFileSelect={(file) => setNewNews({...newNews, image: file})}
               currentFile={newNews.image}
               label="Изображение новости"
+              enableCrop={true}
+              aspectRatio={16/9}
             />
             
             <div className="flex items-center">
