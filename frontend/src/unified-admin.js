@@ -2076,6 +2076,8 @@ export const UnifiedAdminPanel = () => {
               onFileSelect={(file) => setNewDoctor({...newDoctor, image: file})}
               currentFile={newDoctor.image}
               label="Фото врача"
+              enableCrop={true}
+              aspectRatio={1}
             />
             
             <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
