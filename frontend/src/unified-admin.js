@@ -109,17 +109,12 @@ const AdminLanguageSwitcher = ({ currentLanguage, onLanguageChange, languages })
   );
 };
 
-// Компонент обрезки изображений
+// Упрощенный компонент обрезки изображений
 const ImageCropper = ({ onCrop, aspectRatio = 1, onClose }) => {
   const [imageSrc, setImageSrc] = useState(null);
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const canvasRef = React.useRef(null);
+  const imageRef = React.useRef(null);
   
-  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels);
-  }, []);
-
   const onFileSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -131,49 +126,43 @@ const ImageCropper = ({ onCrop, aspectRatio = 1, onClose }) => {
     }
   };
 
-  const createCroppedImage = async () => {
-    if (!imageSrc || !croppedAreaPixels) return;
+  const cropImage = () => {
+    if (!imageSrc) return;
     
-    try {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      const image = new Image();
-      
-      image.onload = () => {
-        canvas.width = croppedAreaPixels.width;
-        canvas.height = croppedAreaPixels.height;
-        
-        ctx.drawImage(
-          image,
-          croppedAreaPixels.x,
-          croppedAreaPixels.y,
-          croppedAreaPixels.width,
-          croppedAreaPixels.height,
-          0,
-          0,
-          croppedAreaPixels.width,
-          croppedAreaPixels.height
-        );
-        
-        canvas.toBlob((blob) => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            onCrop(reader.result);
-            onClose();
-          };
-          reader.readAsDataURL(blob);
-        }, 'image/jpeg', 0.8);
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const image = imageRef.current;
+    
+    if (!image || !canvas) return;
+    
+    const size = Math.min(image.naturalWidth, image.naturalHeight);
+    const cropSize = aspectRatio === 1 ? size : size * aspectRatio;
+    
+    canvas.width = 400;
+    canvas.height = 400 / aspectRatio;
+    
+    const sourceX = (image.naturalWidth - size) / 2;
+    const sourceY = (image.naturalHeight - size) / 2;
+    
+    ctx.drawImage(
+      image,
+      sourceX, sourceY, size, size,
+      0, 0, canvas.width, canvas.height
+    );
+    
+    canvas.toBlob((blob) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        onCrop(reader.result);
+        onClose();
       };
-      
-      image.src = imageSrc;
-    } catch (error) {
-      console.error('Ошибка обрезки изображения:', error);
-    }
+      reader.readAsDataURL(blob);
+    }, 'image/jpeg', 0.8);
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-2xl w-full">
+      <div className="bg-white rounded-lg max-w-md w-full">
         <div className="flex items-center justify-between p-4 border-b">
           <h3 className="text-lg font-semibold">Обрезка изображения</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
@@ -193,62 +182,48 @@ const ImageCropper = ({ onCrop, aspectRatio = 1, onClose }) => {
               <p className="text-gray-500 mt-2">Выберите изображение для обрезки</p>
             </div>
           ) : (
-            <div>
-              <div className="relative w-full h-64 mb-4">
+            <div className="text-center">
+              <div className="mb-4">
                 <img
+                  ref={imageRef}
                   src={imageSrc}
                   alt="Для обрезки"
-                  className="w-full h-full object-contain"
-                  style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: `translate(-50%, -50%) scale(${zoom})`,
-                    transformOrigin: `${crop.x}px ${crop.y}px`
+                  className="max-w-full max-h-64 mx-auto"
+                  style={{ display: 'none' }}
+                  onLoad={() => {
+                    // Автоматически обрезаем после загрузки
+                    setTimeout(cropImage, 100);
                   }}
                 />
-                <div 
-                  className="absolute border-2 border-white border-dashed bg-black bg-opacity-30"
-                  style={{
-                    left: `${crop.x}px`,
-                    top: `${crop.y}px`,
-                    width: `${200 * aspectRatio}px`,
-                    height: '200px'
-                  }}
+                <img
+                  src={imageSrc}
+                  alt="Превью"
+                  className="max-w-full max-h-64 mx-auto rounded-lg"
                 />
               </div>
               
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Масштаб</label>
-                  <input
-                    type="range"
-                    min="0.5"
-                    max="3"
-                    step="0.1"
-                    value={zoom}
-                    onChange={(e) => setZoom(parseFloat(e.target.value))}
-                    className="w-full"
-                  />
-                </div>
-                
-                <div className="flex justify-end space-x-3">
-                  <button
-                    onClick={() => setImageSrc(null)}
-                    className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg"
-                  >
-                    Выбрать другое
-                  </button>
-                  <button
-                    onClick={createCroppedImage}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
-                  >
-                    Обрезать
-                  </button>
-                </div>
+              <p className="text-sm text-gray-600 mb-4">
+                Изображение будет автоматически обрезано до {aspectRatio === 1 ? 'квадратного' : 'прямоугольного'} формата
+              </p>
+              
+              <div className="flex justify-end space-x-3">
+                <button
+                  onClick={() => setImageSrc(null)}
+                  className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg"
+                >
+                  Выбрать другое
+                </button>
+                <button
+                  onClick={cropImage}
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                >
+                  Обрезать
+                </button>
               </div>
             </div>
           )}
+          
+          <canvas ref={canvasRef} style={{ display: 'none' }} />
         </div>
       </div>
     </div>
