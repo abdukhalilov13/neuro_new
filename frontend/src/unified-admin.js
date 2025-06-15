@@ -48,6 +48,8 @@ import {
   Languages,
   ChevronDown,
   Briefcase,
+  Info,
+  UserPlus,
   Target,
   Wrench
 } from 'lucide-react';
