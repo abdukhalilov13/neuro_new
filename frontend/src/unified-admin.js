@@ -319,7 +319,7 @@ const FileUploader = ({ onFileSelect, currentFile, accept = "image/*", label = "
 };
 
 // ЕДИНАЯ АДМИН-ПАНЕЛЬ (объединены все функции)
-export const UnifiedAdminPanel = () => {
+const UnifiedAdminPanel = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [loginData, setLoginData] = useState({ email: '', password: '' });
