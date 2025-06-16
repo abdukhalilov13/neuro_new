@@ -168,7 +168,7 @@ export const ImprovedDoctorDashboard = () => {
   };
 
   const handleAppointmentAction = (appointmentId, action, data = {}) => {
-    setAppointments(prev => prev.map(apt => {
+    const updatedAppointments = appointments.map(apt => {
       if (apt.id === appointmentId) {
         switch (action) {
           case 'confirm':
@@ -192,7 +192,22 @@ export const ImprovedDoctorDashboard = () => {
         }
       }
       return apt;
-    }));
+    });
+    
+    setAppointments(updatedAppointments);
+    
+    // Сохраняем в localStorage
+    try {
+      const allAppointments = JSON.parse(localStorage.getItem('neuro_appointments') || '[]');
+      const otherDoctorAppointments = allAppointments.filter(apt => 
+        apt.doctorId !== currentDoctor?.id && apt.doctorId !== String(currentDoctor?.id)
+      );
+      const finalAppointments = [...otherDoctorAppointments, ...updatedAppointments.filter(apt => !apt.id.toString().startsWith('demo'))];
+      localStorage.setItem('neuro_appointments', JSON.stringify(finalAppointments));
+      console.log('Записи обновлены в localStorage');
+    } catch (error) {
+      console.error('Ошибка сохранения:', error);
+    }
     
     setSelectedAppointment(null);
     setIsAppointmentModalOpen(false);
