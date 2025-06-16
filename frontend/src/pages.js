@@ -65,9 +65,9 @@ export const DepartmentsPage = () => {
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">{dept.name_ru || dept.name}</h3>
                     <p className="text-gray-600 mb-4">{dept.description_ru || dept.description}</p>
                     <div className="space-y-2">
-                      <h4 className="font-semibold text-gray-900">Основные услуги:</h4>
+                      <h4 className="font-semibold text-gray-900">{t('ourServices')}:</h4>
                       <ul className="text-sm text-gray-600 space-y-1">
-                        <li>• Диагностика и консультации</li>
+                        <li>• {t('diagnostics')} и {t('consultations')}</li>
                         <li>• Хирургическое лечение</li>
                         <li>• Послеоперационная реабилитация</li>
                         <li>• Амбулаторное наблюдение</li>
