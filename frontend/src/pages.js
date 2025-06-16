@@ -933,7 +933,11 @@ export const AppointmentPage = () => {
                       {doctors.map((doctor) => (
                         <button
                           key={doctor.id}
-                          onClick={() => setAppointmentData({...appointmentData, doctor: doctor.name_ru || doctor.name})}
+                          onClick={() => setAppointmentData({
+                            ...appointmentData, 
+                            doctor: doctor.name_ru || doctor.name,
+                            doctorId: doctor.id
+                          })}
                           className={`p-4 text-left border-2 rounded-lg transition-colors ${
                             appointmentData.doctor === (doctor.name_ru || doctor.name)
                               ? 'border-blue-500 bg-blue-50'
