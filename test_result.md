@@ -147,7 +147,7 @@
         agent: "testing"
         comment: "Tested GET /api/leadership and POST /api/leadership endpoints. Both endpoints are working correctly. GET returns a list of leadership entries with proper structure, and POST successfully creates a new leadership entry with multilingual data."
         
-  - task: "CRUD operations for all entities"
+  - task: "Appointments API endpoints"
     implemented: true
     working: true
     file: "/app/backend/server.py"
@@ -155,12 +155,27 @@
     priority: "high"
     needs_retesting: false
     status_history:
-      - working: false
+      - working: "NA"
         agent: "main"
-        comment: "Added POST/PUT/DELETE endpoints for all entities, needs testing"
+        comment: "Added appointments API endpoints (GET, POST, PUT, DELETE)"
       - working: true
         agent: "testing"
-        comment: "Tested all CRUD operations for departments, doctors, services, news, gallery, leadership, and events. All endpoints are working correctly. POST endpoints successfully create new entries with multilingual data, PUT endpoints update existing entries, and DELETE endpoints remove entries. All responses have the correct structure with appropriate status codes."
+        comment: "Tested all appointments endpoints. GET /api/appointments returns a list of appointments with proper structure including patient info. GET with doctor_id filter works correctly. POST /api/appointments successfully creates new appointments. PUT /api/appointments/{id} correctly updates appointment status. DELETE /api/appointments/{id} successfully removes appointments."
+        
+  - task: "Job Applications API endpoints"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added job applications API endpoints (GET, POST, PUT)"
+      - working: true
+        agent: "testing"
+        comment: "Tested all job applications endpoints. GET /api/job-applications returns a list of job applications with proper structure including applicant info. POST /api/job-applications successfully creates new job applications. PUT /api/job-applications/{id} correctly updates application status."
 
 ## frontend:
   - task: "Admin panel login and authentication"
