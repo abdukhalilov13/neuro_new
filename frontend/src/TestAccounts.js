@@ -45,10 +45,9 @@ export const TestAccountsPage = () => {
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <div className="flex items-center space-x-2 mb-2">
                     <Lock className="w-4 h-4 text-blue-600" />
-                    <span className="font-semibold text-blue-900">Данные для входа:</span>
+                    <span className="font-semibold text-blue-900">Информация о доступе:</span>
                   </div>
-                  <p className="text-blue-800"><strong>Email:</strong> doctor@neuro.uz</p>
-                  <p className="text-blue-800"><strong>Пароль:</strong> demo123</p>
+                  <p className="text-blue-800">Доступ предоставляется администратором</p>
                 </div>
                 
                 <div>
