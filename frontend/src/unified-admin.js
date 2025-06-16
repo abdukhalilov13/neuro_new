@@ -3196,9 +3196,6 @@ const UnifiedAdminPanel = () => {
             </div>
           </form>
         </Modal>
-      </div>
-    </div>
-  );
 
         {/* СЕКЦИЯ КОНТАКТОВ */}
         {activeTab === 'contacts' && <ContactsSection />}
@@ -3208,6 +3205,9 @@ const UnifiedAdminPanel = () => {
 
         {/* СЕКЦИЯ РЕДИРЕКТОВ */}
         {activeTab === 'redirects' && <RedirectsSection />}
+      </div>
+    </div>
+  );
 };
 
 export default UnifiedAdminPanel;
