@@ -204,8 +204,7 @@ export const LanguageProvider = ({ children }) => {
       patientTestimonials: 'Отзывы пациентов',
       
       // Footer translations
-      careers: 'Вакансии'
-      operatingRoom: 'Операционная',
+      careers: 'Вакансии',
       
       // Appointment form
       appointmentForm: 'Форма записи на прием',
