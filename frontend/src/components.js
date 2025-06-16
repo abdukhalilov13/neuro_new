@@ -732,6 +732,37 @@ export const AboutPage = () => {
         </div>
       )}
 
+      {/* Секция консультации */}
+      <section className="py-16 bg-blue-600">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-white mb-4">{t('needConsultation')}</h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              {t('contactSpecialists')}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/appointment"
+                className="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors"
+              >
+                {t('scheduleConsultation')}
+              </Link>
+              <Link
+                to="/contact"
+                className="bg-blue-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-400 transition-colors"
+              >
+                {t('contactUs')}
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
