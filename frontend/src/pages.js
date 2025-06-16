@@ -204,9 +204,9 @@ export const ServicesPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">Наши услуги</h1>
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">{t('ourServices')}</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Полный спектр медицинских услуг в области нейрохирургии с прозрачным ценообразованием ({services.length} услуг)
+              {t('medicalServices')} ({services.length} услуг)
             </p>
           </motion.div>
 
