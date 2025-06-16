@@ -343,6 +343,47 @@ async def update_event(event_id: str, event_data: dict):
 async def delete_event(event_id: str):
     return {"message": "Event deleted successfully"}
 
+# Appointments endpoints
+@api_router.get("/appointments")
+async def get_appointments(doctor_id: str = None):
+    # Возвращаем записи для конкретного врача или все записи
+    appointments = [
+        {
+            "id": 1,
+            "doctorId": "1",
+            "doctorName": "Кариев Габрат Маратович",
+            "date": "2025-06-13",
+            "time": "09:00",
+            "patient": {
+                "name": "Иванов Алексей Петрович",
+                "phone": "+998 90 123-45-67",
+                "email": "ivanov@mail.uz",
+                "age": 45,
+                "complaint": "Головные боли и головокружение"
+            },
+            "status": "pending",
+            "type": "consultation",
+            "createdAt": "2025-06-12T10:30:00"
+        }
+    ]
+    
+    if doctor_id:
+        appointments = [apt for apt in appointments if apt["doctorId"] == doctor_id]
+    
+    return appointments
+
+@api_router.post("/appointments")
+async def create_appointment(appointment_data: dict):
+    return {"id": "new_id", "message": "Appointment created successfully", **appointment_data}
+
+@api_router.put("/appointments/{appointment_id}")
+async def update_appointment(appointment_id: str, appointment_data: dict):
+    return {"id": appointment_id, "message": "Appointment updated successfully", **appointment_data}
+
+@api_router.delete("/appointments/{appointment_id}")
+async def delete_appointment(appointment_id: str):
+    return {"message": "Appointment deleted successfully"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
