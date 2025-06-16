@@ -408,8 +408,8 @@ export const HomePage = () => {
                 className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2"
               >
                 <div className="flex items-center mb-4">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${dept.color} rounded-2xl flex items-center justify-center mr-4 flex-shrink-0`}>
-                    {React.createElement(dept.icon, { className: "w-8 h-8 text-white" })}
+                  <div className={`w-16 h-16 bg-gradient-to-br ${dept.color || 'from-blue-500 to-blue-600'} rounded-2xl flex items-center justify-center mr-4 flex-shrink-0`}>
+                    <Brain className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900">{dept.name_ru || dept.name}</h3>
                 </div>
