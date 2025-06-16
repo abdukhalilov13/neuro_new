@@ -169,7 +169,14 @@ export const LanguageProvider = ({ children }) => {
       // Footer additional
       quickLinks: 'Быстрые ссылки',
       socialNetworks: 'Социальные сети',
-      followUs: 'Следите за нами'
+      followUs: 'Следите за нами',
+      
+      // Additional keys
+      surgicalTreatment: 'Хирургическое лечение',
+      postOperativeRehabilitation: 'Послеоперационная реабилитация',
+      outpatientObservation: 'Амбулаторное наблюдение',
+      highQualifiedSpecialists: 'Команда высококвалифицированных специалистов с многолетним опытом',
+      fullRangeServices: 'Полный спектр медицинских услуг в области нейрохирургии с прозрачным ценообразованием'
     },
     uz: {
       // Navigation
