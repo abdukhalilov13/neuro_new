@@ -41,9 +41,9 @@ export const DepartmentsPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">Отделения центра</h1>
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">{t('allDepartments')}</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {departments.length} специализированных отделений с передовыми технологиями и опытными специалистами
+              {departments.length} {t('specializedDivisions')}
             </p>
           </motion.div>
 
