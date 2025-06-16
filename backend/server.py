@@ -384,6 +384,35 @@ async def update_appointment(appointment_id: str, appointment_data: dict):
 async def delete_appointment(appointment_id: str):
     return {"message": "Appointment deleted successfully"}
 
+# Job applications endpoints  
+@api_router.get("/job-applications")
+async def get_job_applications():
+    return [
+        {
+            "id": 1,
+            "vacancyId": 1,
+            "vacancyTitle": "Врач-нейрохирург",
+            "applicant": {
+                "name": "Иванов Иван Иванович",
+                "phone": "+998 90 123-45-67",
+                "email": "ivanov@mail.uz",
+                "experience": "5 лет в нейрохирургии",
+                "education": "ТМА, специальность нейрохирургия",
+                "coverLetter": "Хочу работать в вашем центре..."
+            },
+            "submittedAt": "2025-06-13T10:30:00",
+            "status": "new"
+        }
+    ]
+
+@api_router.post("/job-applications")
+async def create_job_application(application_data: dict):
+    return {"id": "new_id", "message": "Job application created successfully", **application_data}
+
+@api_router.put("/job-applications/{application_id}")
+async def update_job_application(application_id: str, application_data: dict):
+    return {"id": application_id, "message": "Job application updated successfully", **application_data}
+
 # Include the router in the main app
 app.include_router(api_router)
 
