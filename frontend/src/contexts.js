@@ -331,7 +331,14 @@ export const LanguageProvider = ({ children }) => {
       // Footer additional
       quickLinks: 'Tezkor havolalar',
       socialNetworks: 'Ijtimoiy tarmoqlar',
-      followUs: 'Bizni kuzatib boring'
+      followUs: 'Bizni kuzatib boring',
+      
+      // Additional keys
+      surgicalTreatment: 'Jarrohlik davolash',
+      postOperativeRehabilitation: 'Operatsiyadan keyingi reabilitatsiya',
+      outpatientObservation: 'Ambulatoriya kuzatuvi',
+      highQualifiedSpecialists: 'Ko\'p yillik tajribaga ega yuqori malakali mutaxassislar jamoasi',
+      fullRangeServices: 'Neyroxirurgiya sohasida to\'liq tibbiy xizmatlar spektri'
     },
     en: {
       // Navigation
