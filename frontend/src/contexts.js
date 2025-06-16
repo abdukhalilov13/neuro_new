@@ -493,7 +493,14 @@ export const LanguageProvider = ({ children }) => {
       // Footer additional
       quickLinks: 'Quick links',
       socialNetworks: 'Social networks',
-      followUs: 'Follow us'
+      followUs: 'Follow us',
+      
+      // Additional keys  
+      surgicalTreatment: 'Surgical treatment',
+      postOperativeRehabilitation: 'Postoperative rehabilitation',
+      outpatientObservation: 'Outpatient observation',
+      highQualifiedSpecialists: 'Team of highly qualified specialists with years of experience',
+      fullRangeServices: 'Full range of medical services in neurosurgery with transparent pricing'
     }
   };
 
