@@ -619,6 +619,54 @@ export const LanguageProvider = ({ children }) => {
       centerLeadership: 'Markaz rahbariyati',
       experiencedSpecialistsLeading: 'Respublikada neyroxirurgiya rivojlanishini boshqarayotgan tajribali mutaxassislar',
       
+      // About page content - Uzbek
+      establishedText: '1986 yilda Neyroxirurglar ilmiy jamiyati tashkil etildi, 1998 yilda esa O\'zbekiston neyroxirurglar assotsiatsiyasi tuzildi, u shuningdek Turkiy tillarda so\'zlashuvchi mintaqa neyroxirurglar assotsiatsiyasi va Jahon neyroxirurglar assotsiatsiyasi (WFNS) a\'zosi hisoblanadi.',
+      cooperationText: 'Jamiyat uzoq va yaqin xorijiy mamlakatlarning (AQSH, Germaniya, Rossiya, Hindiston, Ozarbayjon, Ukraina, Belorusiya, Qozog\'iston, Qirg\'iziston, Gruziya, Tojikiston va boshqalar) ilmiy jamoalari va alohida olimlari bilan hamkorlik qiladi.',
+      mainGoalsText: 'Neyroxirurglar jamiyatining asosiy maqsadlari: neyroxirurgiya sohasidagi dolzarb nazariy, amaliy va ilmiy muammolarni hal qilish maqsadida jamiyat a\'zolarining ijodiy salohiyatini amalga oshirishga ko\'maklashish.',
+      associationTasks: 'Assotsiatsiya vazifalari:',
+      task1: 'Assotsiatsiya a\'zolarining malakasini oshirishga qaratilgan tadbirlarni amalga oshirish, ularning amaliy va (yoki) ilmiy faoliyati neyroxirurgiya bilan bog\'liq',
+      task2: 'Neyroxirurgiya sohasida ilmiy tadqiqotlarning ustuvor yo\'nalishlarini rivojlantirishga ko\'maklashish',
+      task3: 'Jamiyat a\'zolariga, yosh olim va shifokorlarga ilmiy va amaliy yordam ko\'rsatish, tibbiy ta\'lim tizimini takomillashtirishga ko\'maklashish va mutaxassislarning kasbiy malakasini oshirish, tibbiyotda kasbiy, axloqiy va deontologik an\'analarni rivojlantirish',
+      task4: 'Xalqaro va milliy ilmiy tibbiy jamiyatlar va assotsiatsiyalar bilan hamkorlikni rivojlantirish',
+      
+      // Services page bottom section - Uzbek
+      needConsultationServices: 'Xizmatlar bo\'yicha maslahat kerakmi?',
+      specialistsAnswerServices: 'Mutaxassislarimiz barcha savollaringizga javob berishadi va optimal davolanishni tanlashda yordam berishadi',
+      
+      // Contact page translations - Uzbek
+      contactInformation: 'Aloqa ma\'lumotlari',
+      writeToUs: 'Bizga yozing',
+      yourName: 'Ismingiz',
+      enterYourName: 'Ismingizni kiriting',
+      enterYourEmail: 'Emailingizni kiriting',
+      telephone: 'Telefon',
+      message: 'Xabar',
+      enterYourMessage: 'Xabaringizni kiriting',
+      sendMessage: 'Xabar yuborish',
+      workingHours: 'Ish vaqti',
+      weekdays: 'Dushanba - Juma: 8:00 - 18:00',
+      saturday: 'Shanba: 9:00 - 15:00',
+      sunday: 'Yakshanba: Dam olish kuni',
+      emergencyHelp: 'Shoshilinch yordam: 24/7',
+      joinNeurosurgeonsAssociation: 'O\'zbekiston neyroxirurglar assotsiatsiyasiga kirish',
+      joinAssociationText: 'O\'zbekiston neyroxirurglar assotsiatsiyasiga kirish uchun taqdim etish kerak:',
+      applicationChairman: 'Assotsiatsiya raisi Kariyev G.M. nomiga ariza.',
+      paymentReceipt: 'Minimal ish haqi 1 o\'lchamini to\'lash kvitansiyasi.',
+      associationRequirements: 'O\'zbekiston neyroxirurglar assotsiatsiyasining rekvizitlari:',
+      
+      // News page translations - Uzbek
+      latestNews: 'Markazimizning so\'nggi yangiliklari, yutuqlari va voqealari',
+      readMore: 'To\'liq o\'qish',
+      newsCount: 'yangiliklar',
+      
+      // Appointment application - Uzbek
+      applyForVacancy: 'Vakansiyaga ariza berish',
+      applicationSent: 'Ariza yuborildi!',
+      applicationSentMessage: 'Arizangiz muvaffaqiyatli yuborildi. Biz siz bilan yaqin orada bog\'lanamiz.',
+      attachResume: 'Rezyume ilova qiling',
+      coverLetter: 'Qo\'shimcha xat',
+      writeAboutYourself: 'O\'zingiz va tajribangiz haqida so\'zlab bering',
+      
       // Consultation section - Uzbek
       needConsultation: 'Xizmatlar bo\'yicha maslahat kerakmi?',
       specialistsWillAnswer: 'Mutaxassislarimiz barcha savollaringizga javob berishadi va optimal davolanishni tanlashda yordam berishadi',
