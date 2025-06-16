@@ -388,29 +388,71 @@ class NeuroUzAPITester:
         )
     
     # Appointment Tests
-    def test_appointment_submission(self):
-        """Test appointment submission"""
+    def test_get_appointments(self):
+        """Test getting all appointments"""
+        return self.run_test(
+            "Get All Appointments",
+            "GET",
+            "appointments",
+            200
+        )
+        
+    def test_get_appointments_by_doctor(self):
+        """Test getting appointments by doctor ID"""
+        return self.run_test(
+            "Get Appointments by Doctor",
+            "GET",
+            "appointments?doctor_id=1",
+            200
+        )
+        
+    def test_create_appointment(self):
+        """Test creating a new appointment"""
         appointment_data = {
-            "doctor": "Кариев Габрат Маратович",
-            "date": "2025-06-15",
-            "time": "10:00",
+            "doctorId": "1",
+            "doctorName": "Кариев Габрат Маратович",
+            "date": "2025-07-15",
+            "time": "11:30",
             "patient": {
-                "firstName": "Тест",
-                "lastName": "Тестов",
-                "phone": "+998 90 123-45-67",
-                "email": "test@example.com",
-                "birthDate": "1990-01-01",
-                "address": "г. Ташкент"
+                "name": "Петров Алексей Иванович",
+                "phone": "+998 90 987-65-43",
+                "email": "petrov@mail.uz",
+                "age": 38,
+                "complaint": "Периодические головные боли"
             },
-            "complaint": "Тестовая запись на прием"
+            "status": "pending",
+            "type": "consultation"
         }
         
         return self.run_test(
-            "Appointment Submission",
+            "Create Appointment",
             "POST",
             "appointments",
             200,
             data=appointment_data
+        )
+        
+    def test_update_appointment(self):
+        """Test updating an appointment status"""
+        update_data = {
+            "status": "confirmed"
+        }
+        
+        return self.run_test(
+            "Update Appointment Status",
+            "PUT",
+            "appointments/1",
+            200,
+            data=update_data
+        )
+        
+    def test_delete_appointment(self):
+        """Test deleting an appointment"""
+        return self.run_test(
+            "Delete Appointment",
+            "DELETE",
+            "appointments/1",
+            200
         )
 
 def main():
