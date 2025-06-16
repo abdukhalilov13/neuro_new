@@ -908,7 +908,7 @@ export const LanguageProvider = ({ children }) => {
       // Services page additional translations
       serviceConsultation: 'Need consultation?',
       serviceContactText: 'Contact us for professional medical help',
-      scheduleAppointment: 'Schedule appointment'
+      scheduleAppointment: 'Schedule appointment',
       
       // Services
       ourServices: 'Our services',
