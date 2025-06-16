@@ -341,9 +341,9 @@ backend:
         comment: "Tested all API endpoints (/, /health, /departments, /doctors, /services, /news, /appointments, /gallery). All endpoints are working correctly and returning the expected data structure."
 
 frontend:
-  - task: "Admin panel improvements"
+  - task: "Admin panel contacts section"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/unified-admin.js"
     stuck_count: 1
     priority: "high"
@@ -351,25 +351,7 @@ frontend:
     status_history:
       - working: false
         agent: "testing"
-        comment: "Attempted to test the admin panel improvements. The admin login page loads correctly, but after entering credentials (admin@neuro.uz/admin123), the login fails with a JavaScript error: 'editingEvent is not defined'. Fixed this error, but there are still issues with the admin panel functionality. The console shows errors related to incorrect casing for components like Activity, Brain, and Heart."
-      - working: true
-        agent: "testing"
-        comment: "Retested the admin panel. The login page loads correctly and login with admin@neuro.uz/admin123 credentials works properly. After login, the admin dashboard is displayed with all sections accessible. There are still some minor React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart, but these don't affect the core functionality."
-        
-  - task: "Appointments section changes"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/unified-admin.js"
-    stuck_count: 1
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: false
-        agent: "testing"
-        comment: "Unable to test the appointments section changes due to admin panel login issues. The code review shows that the appointments section has been updated to be read-only with export to Excel functionality and filters, but this couldn't be verified in the UI."
-      - working: true
-        agent: "testing"
-        comment: "Verified that the Appointments section in the admin panel is accessible and displays correctly. The section is properly implemented as read-only with export to Excel functionality and filters as required."
+        comment: "Unable to access the admin panel. When navigating to /admin or clicking the 'Админ Панель' button in the header, I'm being redirected to the homepage instead of seeing the admin login form. This suggests there might be an issue with the routing or authentication logic in the application. Based on code review, the contacts section is properly implemented with Phones (3 fields), Emails (2 fields), Social Media (Facebook, Instagram, YouTube, Telegram), and a Save button, but couldn't verify in the UI due to access issue."
         
   - task: "Multilingual support on main website"
     implemented: true
