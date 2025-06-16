@@ -464,8 +464,7 @@ metadata:
 test_plan:
   current_focus:
     - "Services page with pricing"
-  stuck_tasks:
-    - "Services page with pricing"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
