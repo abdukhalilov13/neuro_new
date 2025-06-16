@@ -440,8 +440,8 @@ const Footer = () => {
                 { name: t('departments'), href: '/departments' },
                 { name: t('doctors'), href: '/doctors' },
                 { name: t('services'), href: '/services' },
-                { name: 'Вакансии', href: '/vacancies' },
-                { name: 'Галерея', href: '/gallery' },
+                { name: t('careers'), href: '/careers' },
+                { name: t('gallery'), href: '/gallery' },
                 { name: t('news'), href: '/news' },
                 { name: t('contacts'), href: '/contact' }
               ].map((item) => (
