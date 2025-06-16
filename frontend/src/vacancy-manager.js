@@ -238,6 +238,7 @@ export const VacancyApplicationsManager = () => {
           <div className="text-center">
             <p className="text-2xl font-bold text-blue-600">{applications.length}</p>
             <p className="text-sm text-gray-600">Всего заявок</p>
+            <p className="text-xs text-gray-400">localStorage: {JSON.parse(localStorage.getItem('neuro_job_applications') || '[]').length}</p>
           </div>
         </div>
         <div className="bg-white rounded-lg p-4 shadow">
