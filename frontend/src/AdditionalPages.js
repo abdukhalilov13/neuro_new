@@ -160,7 +160,30 @@ export const VacanciesPage = () => {
     setIsSubmitting(true);
     
     try {
+      // Отправляем данные на email
+      const emailData = {
+        to: 'admin@neuro.uz',
+        subject: `Отклик на вакансию: ${selectedVacancy.title}`,
+        body: `
+Новый отклик на вакансию: ${selectedVacancy.title}
+
+ФИО: ${applicationForm.name}
+Телефон: ${applicationForm.phone}
+Email: ${applicationForm.email}
+Опыт работы: ${applicationForm.experience}
+Образование: ${applicationForm.education}
+
+Сопроводительное письмо:
+${applicationForm.coverLetter}
+
+Отправлено: ${new Date().toLocaleString('ru-RU')}
+        `
+      };
+
+      // Здесь должна быть интеграция с email сервисом
+      // Пока что имитируем отправку
       await new Promise(resolve => setTimeout(resolve, 2000));
+      
       setSubmitStatus('success');
       setApplicationForm({
         name: '',
@@ -172,6 +195,7 @@ export const VacanciesPage = () => {
       });
     } catch (error) {
       setSubmitStatus('error');
+      console.error('Ошибка отправки:', error);
     } finally {
       setIsSubmitting(false);
     }
