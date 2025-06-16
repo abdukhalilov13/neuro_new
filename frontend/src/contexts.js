@@ -545,7 +545,7 @@ export const LanguageProvider = ({ children }) => {
       // Services page additional translations
       serviceConsultation: 'Konsultatsiya kerakmi?',
       serviceContactText: 'Professional tibbiy yordam olish uchun biz bilan bog\'laning',
-      scheduleAppointment: 'Qabulga yozilish'
+      scheduleAppointment: 'Qabulga yozilish',
       
       // Services
       ourServices: 'Bizning xizmatlar',
