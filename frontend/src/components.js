@@ -301,7 +301,7 @@ export const HomePage = () => {
                 <Heart className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-sm text-red-100">Экстренная помощь 24/7</p>
+                <p className="text-sm text-red-100">{t('emergency24')}</p>
                 <p className="font-semibold">{adminData?.siteSettings?.phones?.[2] || siteData.hero.emergency}</p>
               </div>
             </div>
