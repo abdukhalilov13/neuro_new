@@ -51,7 +51,8 @@ import {
   Info,
   UserPlus,
   Target,
-  Wrench
+  Wrench,
+  ArrowRight
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
 import { ContactsSection, SeoSection, RedirectsSection } from './admin-additional-sections';
