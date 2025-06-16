@@ -352,8 +352,8 @@ export const NewsPage = () => {
                     </div>
                     <div className="md:w-2/3 p-6">
                       <p className="text-sm text-blue-600 mb-2">{newsItem.date}</p>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-3">{newsItem.title}</h2>
-                      <p className="text-gray-600 mb-4">{newsItem.excerpt}</p>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-3">{newsItem.title_ru || newsItem.title}</h2>
+                      <p className="text-gray-600 mb-4">{newsItem.excerpt_ru || newsItem.excerpt}</p>
                       
                       {expandedNews[newsItem.id] && (
                         <div className="mb-4">
