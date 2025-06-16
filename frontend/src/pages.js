@@ -128,7 +128,7 @@ export const DoctorsPage = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{doctor.name_ru || doctor.name}</h3>
                   <p className="text-blue-600 font-medium mb-3">{doctor.specialization_ru || doctor.specialization}</p>
-                  <p className="text-gray-600 mb-4">{doctor.experience} опыта</p>
+                  <p className="text-gray-600 mb-4">{doctor.experience} {t('experience')}</p>
                   
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center space-x-2 text-sm">
