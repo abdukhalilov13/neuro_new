@@ -587,48 +587,42 @@ export const AboutPage = () => {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <h2 className="text-3xl font-bold text-gray-900">История и миссия</h2>
+              <h2 className="text-3xl font-bold text-gray-900">{t('historyMission')}</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  В 1986 году организовано Научное общество нейрохирургов, а в 1998 г. создана Ассоциация нейрохирургов Узбекистана, которая является также и членом Ассоциации нейрохирургов стран Тихоокеанского региона и Всемирной Ассоциации нейрохирургов (WFNS).
-                </p>
-                <p>
-                  Общество сотрудничает с научными коллективами и отдельными учеными многих стран дальнего и ближнего зарубежья (США, Германия, Россия, Индия, Азербайджан, Украина, Белоруссия, Казахстан, Киргизия, Грузия, Таджикистан и др.).
-                </p>
-                <p>
-                  Основными целями общества нейрохирургов являются: содействие реализации творческого потенциала членов Общества в интересах решения актуальных теоретических, практических и научных проблем в области нейрохирургии.
-                </p>
+                <p>{t('aboutHistoryText1')}</p>
+                <p>{t('aboutHistoryText2')}</p>
+                <p>{t('aboutHistoryText3')}</p>
               </div>
               
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Задачи Ассоциации:</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{t('associationTasks')}</h3>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-start space-x-2">
                     <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Осуществление мероприятий, направленных на повышение квалификации членов Ассоциации, практическая и (или) научная деятельность которых связана с нейрохирургией</span>
+                    <span>{t('task1')}</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Содействие развитию приоритетных направлений научных исследований в области нейрохирургии</span>
+                    <span>{t('task2')}</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Оказание научной и практической помощи членам Общества, молодым ученым и врачам, содействие совершенствованию системы медицинского образования и повышению профессиональной квалификации специалистов, развитию профессиональной, этической и деонтологической традиций в медицине</span>
+                    <span>{t('task3')}</span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Развитие сотрудничества с международными и национальными научными медицинскими обществами и ассоциациями</span>
+                    <span>{t('task4')}</span>
                   </li>
                 </ul>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-blue-50 p-4 rounded-xl">
-                  <h4 className="font-semibold text-gray-900 mb-2">Год основания</h4>
+                  <h4 className="font-semibold text-gray-900 mb-2">{t('yearFounded')}</h4>
                   <p className="text-2xl font-bold text-blue-600">1986</p>
                 </div>
                 <div className="bg-green-50 p-4 rounded-xl">
-                  <h4 className="font-semibold text-gray-900 mb-2">Пациентов в год</h4>
+                  <h4 className="font-semibold text-gray-900 mb-2">{t('patientsPerYear')}</h4>
                   <p className="text-2xl font-bold text-green-600">5000+</p>
                 </div>
               </div>
