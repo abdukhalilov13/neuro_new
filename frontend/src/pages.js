@@ -26,6 +26,7 @@ import { siteData } from './components';
 // Отделения - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const DepartmentsPage = () => {
   const { adminData } = useAdmin();
+  const { t } = useLanguage();
   const departments = adminData?.departments || siteData.departments;
 
   return (
