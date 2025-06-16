@@ -985,6 +985,7 @@ export const UnifiedAdminPanel = () => {
               { id: 'news', label: 'Новости', icon: FileText },
               { id: 'gallery', label: 'Галерея', icon: ImageIcon },
               { id: 'events', label: 'События', icon: Star },
+              { id: 'contacts', label: 'Контакты', icon: Settings },
     { id: 'users', label: 'Пользователи', icon: UserPlus }
             ].map((tab) => (
               <button
