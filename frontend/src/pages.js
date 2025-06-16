@@ -885,9 +885,9 @@ export const AppointmentPage = () => {
                       {doctors.map((doctor) => (
                         <button
                           key={doctor.id}
-                          onClick={() => setAppointmentData({...appointmentData, doctor: doctor.name})}
+                          onClick={() => setAppointmentData({...appointmentData, doctor: doctor.name_ru || doctor.name})}
                           className={`p-4 text-left border-2 rounded-lg transition-colors ${
-                            appointmentData.doctor === doctor.name
+                            appointmentData.doctor === (doctor.name_ru || doctor.name)
                               ? 'border-blue-500 bg-blue-50'
                               : 'border-gray-200 hover:border-gray-300'
                           }`}
@@ -895,12 +895,12 @@ export const AppointmentPage = () => {
                           <div className="flex items-center space-x-3">
                             <img
                               src={doctor.image}
-                              alt={doctor.name}
+                              alt={doctor.name_ru || doctor.name}
                               className="w-12 h-12 rounded-full object-cover"
                             />
                             <div>
-                              <h3 className="font-medium text-gray-900">{doctor.name}</h3>
-                              <p className="text-sm text-gray-600">{doctor.specialization}</p>
+                              <h3 className="font-medium text-gray-900">{doctor.name_ru || doctor.name}</h3>
+                              <p className="text-sm text-gray-600">{doctor.specialization_ru || doctor.specialization}</p>
                               <p className="text-xs text-blue-600">{doctor.experience}</p>
                             </div>
                           </div>
