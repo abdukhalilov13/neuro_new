@@ -168,15 +168,27 @@ const siteData = {
   ]
 };
 
-// Language Switcher Component
+// Language Switcher Component (упрощенная версия)
 const LanguageSwitcher = () => {
   const { currentLanguage, changeLanguage, availableLanguages, languageNames } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
+  // Закрытие при клике вне компонента
+  React.useEffect(() => {
+    const handleClickOutside = () => setIsOpen(false);
+    if (isOpen) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [isOpen]);
+
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen(!isOpen);
+        }}
         className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors"
       >
         <Globe className="w-4 h-4" />
@@ -184,31 +196,25 @@ const LanguageSwitcher = () => {
         <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg border overflow-hidden z-50"
-          >
-            {availableLanguages.map((lang) => (
-              <button
-                key={lang}
-                onClick={() => {
-                  changeLanguage(lang);
-                  setIsOpen(false);
-                }}
-                className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                  currentLanguage === lang ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
-                }`}
-              >
-                {languageNames[lang]}
-              </button>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg border overflow-hidden z-50 min-w-[120px]">
+          {availableLanguages.map((lang) => (
+            <button
+              key={lang}
+              onClick={(e) => {
+                e.stopPropagation();
+                changeLanguage(lang);
+                setIsOpen(false);
+              }}
+              className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
+                currentLanguage === lang ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+              }`}
+            >
+              {languageNames[lang]}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
