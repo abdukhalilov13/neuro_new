@@ -3199,6 +3199,15 @@ const UnifiedAdminPanel = () => {
       </div>
     </div>
   );
+
+        {/* СЕКЦИЯ КОНТАКТОВ */}
+        {activeTab === 'contacts' && <ContactsSection />}
+
+        {/* СЕКЦИЯ SEO */}
+        {activeTab === 'seo' && <SeoSection />}
+
+        {/* СЕКЦИЯ РЕДИРЕКТОВ */}
+        {activeTab === 'redirects' && <RedirectsSection />}
 };
 
 export default UnifiedAdminPanel;
