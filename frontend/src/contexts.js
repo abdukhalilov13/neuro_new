@@ -862,12 +862,53 @@ export const LanguageProvider = ({ children }) => {
       aboutPageTitle: 'About center',
       aboutPageSubtitle: 'Republican Scientific Center of Neurosurgery - leading medical institution in Central Asia in the field of neurosurgery',
       historyMission: 'History and mission',
+      aboutHistoryText1: 'In 1986, the Scientific Society of Neurosurgeons was organized, and in 1998 the Association of Neurosurgeons of Uzbekistan was created, which is also a member of the Association of Neurosurgeons of the Pacific Region and the World Federation of Neurosurgical Societies (WFNS).',
+      aboutHistoryText2: 'The Society cooperates with scientific teams and individual scientists from many countries near and far abroad (USA, Germany, Russia, India, Azerbaijan, Ukraine, Belarus, Kazakhstan, Kyrgyzstan, Georgia, Tajikistan, etc.).',
+      aboutHistoryText3: 'The main goals of the neurosurgeons society are: to promote the realization of the creative potential of Society members in the interests of solving urgent theoretical, practical and scientific problems in the field of neurosurgery.',
       associationTasks: 'Association tasks:',
+      task1: 'Implementation of measures aimed at improving the qualifications of Association members whose practical and (or) scientific activities are related to neurosurgery',
+      task2: 'Promoting the development of priority areas of scientific research in neurosurgery',
+      task3: 'Providing scientific and practical assistance to Society members, young scientists and doctors, promoting the improvement of the medical education system and professional development of specialists',
+      task4: 'Development of cooperation with international and national scientific medical societies and associations',
       yearFounded: 'Year founded',
+      patientsPerYear: 'Patients per year',
       centerLeadership: 'Center leadership',
       experiencedSpecialists: 'Experienced specialists leading the development of neurosurgery in the republic',
       readBiography: 'Read biography',
       biography: 'Biography',
+      needConsultation: 'Need consultation about services?',
+      contactSpecialists: 'Our specialists will answer all your questions and help you choose optimal treatment',
+      scheduleConsultation: 'Schedule consultation',
+      contactUs: 'Contact us',
+      
+      // News page
+      newsAndEvents: 'News and events',
+      latestNewsDescription: 'Latest news, achievements and events of our center (2 news)',
+      upcomingEvents: 'Upcoming events',
+      readFull: 'Read full',
+      
+      // Contact page
+      contacts: 'Contacts',
+      contactDescription: 'Contact us for consultation or appointment booking',
+      contactInfo: 'Contact information',
+      address: 'Address',
+      phones: 'Phones',
+      workingHours: 'Working hours',
+      emergency24: 'Emergency help: 24/7',
+      writeToUs: 'Write to us',
+      yourName: 'Your name',
+      message: 'Message',
+      sendMessage: 'Send message',
+      membershipInfo: 'Joining the Association of Neurosurgeons of Uzbekistan',
+      membershipDescription: 'To join the Association of Neurosurgeons of Uzbekistan, you need to provide:',
+      membershipReq1: 'Application addressed to the Association Chairman G.M. Kariev.',
+      membershipReq2: 'Receipt of payment in the amount of 1 minimum wage.',
+      membershipRequisites: 'Requisites of the Association of Neurosurgeons of Uzbekistan:',
+      
+      // Services page additional translations
+      serviceConsultation: 'Need consultation?',
+      serviceContactText: 'Contact us for professional medical help',
+      scheduleAppointment: 'Schedule appointment'
       
       // Services
       ourServices: 'Our services',
