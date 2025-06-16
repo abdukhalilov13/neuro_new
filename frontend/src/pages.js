@@ -808,9 +808,54 @@ export const AppointmentPage = () => {
     setIsSubmitting(true);
     
     try {
+      // Найдем врача по имени
+      const selectedDoctor = doctors.find(doc => 
+        (doc.name_ru || doc.name) === appointmentData.doctor
+      );
+      
+      // Создаем объект записи
+      const newAppointment = {
+        id: Date.now(),
+        doctorId: selectedDoctor?.id,
+        doctorName: appointmentData.doctor,
+        date: appointmentData.date,
+        time: appointmentData.time,
+        patient: {
+          name: `${appointmentData.patient.firstName} ${appointmentData.patient.lastName}`,
+          phone: appointmentData.patient.phone,
+          email: appointmentData.patient.email,
+          age: appointmentData.patient.birthDate ? 
+               new Date().getFullYear() - new Date(appointmentData.patient.birthDate).getFullYear() : null,
+          complaint: appointmentData.complaint,
+          address: appointmentData.patient.address
+        },
+        status: 'pending',
+        type: 'consultation',
+        createdAt: new Date().toISOString()
+      };
+      
+      // Сохраняем запись в localStorage
+      const existingAppointments = JSON.parse(localStorage.getItem('neuro_appointments') || '[]');
+      existingAppointments.push(newAppointment);
+      localStorage.setItem('neuro_appointments', JSON.stringify(existingAppointments));
+      
+      // Здесь должен быть API запрос для сохранения в базе данных
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/appointments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newAppointment)
+      });
+      
+      if (!response.ok) {
+        throw new Error('Ошибка отправки записи');
+      }
+      
       await new Promise(resolve => setTimeout(resolve, 2000));
       setStep(4);
     } catch (error) {
+      console.error('Ошибка записи:', error);
       alert(t('submissionError'));
     } finally {
       setIsSubmitting(false);
