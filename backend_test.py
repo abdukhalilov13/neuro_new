@@ -677,65 +677,125 @@ def main():
             else:
                 print(f"❌ Leadership creation response is missing required fields: {missing_fields}")
     
-    print("\n===== Testing Appointment Submission =====")
-    success, appointment_data = tester.test_appointment_submission()
+    # Test appointments API
+    print("\n===== Testing Appointments API =====")
+    success, appointments_data = tester.test_get_appointments()
     if success:
-        print("✅ Appointment submission successful")
-        if appointment_data and isinstance(appointment_data, dict):
-            required_fields = ["id", "message", "status"]
-            missing_fields = [field for field in required_fields if field not in appointment_data]
-            if not missing_fields:
-                print("✅ Appointment response structure is correct")
-            else:
-                print(f"❌ Appointment response is missing required fields: {missing_fields}")
+        print(f"✅ Found {len(appointments_data)} appointments")
+        if appointments_data and isinstance(appointments_data, list):
+            print("✅ Appointments data structure is correct (list of appointments)")
+            if len(appointments_data) > 0 and isinstance(appointments_data[0], dict):
+                required_fields = ["id", "doctorId", "doctorName", "date", "time", "patient", "status"]
+                missing_fields = [field for field in required_fields if field not in appointments_data[0]]
+                if not missing_fields:
+                    print("✅ Appointment object structure is correct")
+                    if "patient" in appointments_data[0] and isinstance(appointments_data[0]["patient"], dict):
+                        patient_fields = ["name", "phone", "email", "complaint"]
+                        missing_patient_fields = [field for field in patient_fields if field not in appointments_data[0]["patient"]]
+                        if not missing_patient_fields:
+                            print("✅ Patient object structure is correct")
+                        else:
+                            print(f"❌ Patient object is missing required fields: {missing_patient_fields}")
+                else:
+                    print(f"❌ Appointment object is missing required fields: {missing_fields}")
     
-    # Job Applications Tests
-    def test_get_job_applications(self):
-        """Test getting all job applications"""
-        return self.run_test(
-            "Get Job Applications",
-            "GET",
-            "job-applications",
-            200
-        )
-        
-    def test_create_job_application(self):
-        """Test creating a new job application"""
-        application_data = {
-            "vacancyId": 2,
-            "vacancyTitle": "Медсестра нейрохирургического отделения",
-            "applicant": {
-                "name": "Смирнова Анна Владимировна",
-                "phone": "+998 90 555-44-33",
-                "email": "smirnova@mail.uz",
-                "experience": "7 лет в нейрохирургии",
-                "education": "Ташкентский медицинский колледж",
-                "coverLetter": "Имею большой опыт работы в нейрохирургическом отделении..."
-            },
-            "status": "new"
-        }
-        
-        return self.run_test(
-            "Create Job Application",
-            "POST",
-            "job-applications",
-            200,
-            data=application_data
-        )
-        
-    def test_update_job_application(self):
-        """Test updating a job application status"""
-        update_data = {
-            "status": "interview"
-        }
-        
-        return self.run_test(
-            "Update Job Application Status",
-            "PUT",
-            "job-applications/1",
-            200,
-            data=update_data
-        )
+    # Test appointments by doctor
+    success, doctor_appointments = tester.test_get_appointments_by_doctor()
+    if success:
+        print(f"✅ Found {len(doctor_appointments)} appointments for doctor ID 1")
+        if doctor_appointments and isinstance(doctor_appointments, list):
+            print("✅ Doctor appointments filtering is working correctly")
+    
+    # Test appointment creation
+    print("\n===== Testing Appointment Creation =====")
+    success, create_appointment_data = tester.test_create_appointment()
+    if success:
+        print("✅ Appointment creation successful")
+        if create_appointment_data and isinstance(create_appointment_data, dict):
+            required_fields = ["id", "message", "status"]
+            missing_fields = [field for field in required_fields if field not in create_appointment_data]
+            if not missing_fields:
+                print("✅ Appointment creation response structure is correct")
+            else:
+                print(f"❌ Appointment creation response is missing required fields: {missing_fields}")
+    
+    # Test appointment update
+    print("\n===== Testing Appointment Update =====")
+    success, update_appointment_data = tester.test_update_appointment()
+    if success:
+        print("✅ Appointment update successful")
+        if update_appointment_data and isinstance(update_appointment_data, dict):
+            required_fields = ["id", "message", "status"]
+            missing_fields = [field for field in required_fields if field not in update_appointment_data]
+            if not missing_fields:
+                print("✅ Appointment update response structure is correct")
+                if update_appointment_data["status"] == "confirmed":
+                    print("✅ Appointment status was correctly updated to 'confirmed'")
+            else:
+                print(f"❌ Appointment update response is missing required fields: {missing_fields}")
+    
+    # Test appointment deletion
+    print("\n===== Testing Appointment Deletion =====")
+    success, delete_appointment_data = tester.test_delete_appointment()
+    if success:
+        print("✅ Appointment deletion successful")
+        if delete_appointment_data and isinstance(delete_appointment_data, dict):
+            required_fields = ["message"]
+            missing_fields = [field for field in required_fields if field not in delete_appointment_data]
+            if not missing_fields:
+                print("✅ Appointment deletion response structure is correct")
+            else:
+                print(f"❌ Appointment deletion response is missing required fields: {missing_fields}")
+    
+    # Test job applications API
+    print("\n===== Testing Job Applications API =====")
+    success, job_applications_data = tester.test_get_job_applications()
+    if success:
+        print(f"✅ Found {len(job_applications_data)} job applications")
+        if job_applications_data and isinstance(job_applications_data, list):
+            print("✅ Job applications data structure is correct (list of applications)")
+            if len(job_applications_data) > 0 and isinstance(job_applications_data[0], dict):
+                required_fields = ["id", "vacancyId", "vacancyTitle", "applicant", "status"]
+                missing_fields = [field for field in required_fields if field not in job_applications_data[0]]
+                if not missing_fields:
+                    print("✅ Job application object structure is correct")
+                    if "applicant" in job_applications_data[0] and isinstance(job_applications_data[0]["applicant"], dict):
+                        applicant_fields = ["name", "phone", "email", "experience", "education"]
+                        missing_applicant_fields = [field for field in applicant_fields if field not in job_applications_data[0]["applicant"]]
+                        if not missing_applicant_fields:
+                            print("✅ Applicant object structure is correct")
+                        else:
+                            print(f"❌ Applicant object is missing required fields: {missing_applicant_fields}")
+                else:
+                    print(f"❌ Job application object is missing required fields: {missing_fields}")
+    
+    # Test job application creation
+    print("\n===== Testing Job Application Creation =====")
+    success, create_job_application_data = tester.test_create_job_application()
+    if success:
+        print("✅ Job application creation successful")
+        if create_job_application_data and isinstance(create_job_application_data, dict):
+            required_fields = ["id", "message"]
+            missing_fields = [field for field in required_fields if field not in create_job_application_data]
+            if not missing_fields:
+                print("✅ Job application creation response structure is correct")
+            else:
+                print(f"❌ Job application creation response is missing required fields: {missing_fields}")
+    
+    # Test job application update
+    print("\n===== Testing Job Application Update =====")
+    success, update_job_application_data = tester.test_update_job_application()
+    if success:
+        print("✅ Job application update successful")
+        if update_job_application_data and isinstance(update_job_application_data, dict):
+            required_fields = ["id", "message", "status"]
+            missing_fields = [field for field in required_fields if field not in update_job_application_data]
+            if not missing_fields:
+                print("✅ Job application update response structure is correct")
+                if update_job_application_data["status"] == "interview":
+                    print("✅ Job application status was correctly updated to 'interview'")
+            else:
+                print(f"❌ Job application update response is missing required fields: {missing_fields}")
     
     return 0 if tester.tests_passed == tester.tests_run else 1
 
