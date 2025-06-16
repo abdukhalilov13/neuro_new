@@ -2057,6 +2057,29 @@ const UnifiedAdminPanel = () => {
           </div>
         )}
 
+        {/* СЕКЦИЯ ВАКАНСИЙ И ЗАЯВОК */}
+        {activeTab === 'vacancies' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Управление вакансиями</h2>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <Briefcase className="w-5 h-5 text-blue-600" />
+                <div>
+                  <h3 className="font-medium text-blue-900">Заявки на вакансии</h3>
+                  <p className="text-sm text-blue-700">
+                    Все заявки сохраняются автоматически и доступны для просмотра.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <VacancyApplicationsManager />
+          </div>
+        )}
+
         {/* Руководство */}
         {activeTab === 'leadership' && (
           <div className="space-y-6">
