@@ -54,6 +54,7 @@ import {
   Wrench
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
+import { ContactsSection, SeoSection, RedirectsSection } from './admin-additional-sections';
 
 // Компонент модального окна
 const Modal = ({ isOpen, onClose, title, children, size = 'default' }) => {
