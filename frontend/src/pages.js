@@ -740,6 +740,7 @@ export const AppointmentPage = () => {
   const [appointmentData, setAppointmentData] = useState({
     department: '',
     doctor: '',
+    doctorId: '',
     date: '',
     time: '',
     patient: {
