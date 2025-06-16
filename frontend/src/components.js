@@ -677,8 +677,11 @@ export const AboutPage = () => {
                         <span>{leader.email}</span>
                       </div>
                     </div>
-                    <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium text-sm flex items-center justify-center mx-auto space-x-2 transition-colors">
-                      <span>Читать биографию</span>
+                    <button 
+                      onClick={() => openBioModal(leader)}
+                      className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium text-sm flex items-center justify-center mx-auto space-x-2 transition-colors"
+                    >
+                      <span>{t('readBiography')}</span>
                       <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
