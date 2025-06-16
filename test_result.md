@@ -458,12 +458,14 @@ frontend:
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 3
+  test_sequence: 4
   run_ui: false
 
 test_plan:
   current_focus:
-    - "Services page with pricing"
+    - "Button renaming in header"
+    - "Demo access removal"
+    - "Mobile responsive header"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -483,3 +485,7 @@ agent_communication:
     message: "Conducted the ULTIMATE FINAL TEST of the neurosurgery center website. Results: 1) Language Switching: ✅ PASS - Language switcher works correctly for RU/UZ/EN, all text changes properly including navigation, content sections, and static elements. 2) Services Page: ❌ FAIL - Only shows 3 services instead of the required 5 services with prices. Categories are displayed correctly (Консультации, Диагностика, Хирургия). 3) Admin Panel: ✅ PASS - Login works with admin@neuro.uz/admin123, all sections (Dashboard, Appointments, Departments, Doctors, Services, Leadership, News, Gallery, Events) load properly. Leadership section displays content correctly. 4) Error Check: ✅ PASS - Page title shows 'NEURO.UZ - Центр Нейрохирургии' correctly, mobile view works properly, no Emergent badge present. There are minor JavaScript console errors related to component casing (Activity, Brain, Heart) but they don't affect functionality. 5) Contact Form: ✅ PASS - Contact form displays correctly and can be submitted. OVERALL STATUS: The system is mostly functional but requires fixing the Services page to show all 5 services with pricing before final delivery."
   - agent: "testing"
     message: "Conducted the FINAL ACCEPTANCE TEST of the neurosurgery center website. Results: 1) Language Switching: ✅ PASS - Language switcher works correctly for RU/UZ/EN, all text changes properly including navigation, content sections, and static elements. 2) Services Page: ✅ PASS - Now shows all 5 services with proper pricing and categories (Консультации, Диагностика, Хирургия, Реабилитация). Fixed by updating the backend API to return all 5 services. 3) Admin Panel: ✅ PASS - Login works with admin@neuro.uz/admin123, all sections (Dashboard, Appointments, Departments, Doctors, Services, Leadership, News, Gallery, Events) load properly. Leadership section displays content correctly. 4) Error Check: ✅ PASS - Page title shows 'NEURO.UZ - Центр Нейрохирургии' correctly, mobile view works properly, no Emergent badge present. There are minor JavaScript console errors related to component casing (Activity, Brain, Heart) but they don't affect functionality. 5) Contact Form: ✅ PASS - Contact form displays correctly and can be submitted. OVERALL STATUS: ✅ PASS - The system is fully functional and ready for production. All requirements have been met."
+  - agent: "user"
+    message: "Please test the latest improvements made to the neurosurgery center website: 1) Button Renaming: Header navigation button previously labeled 'Единая Админка' should now be labeled 'Админ Панель' (without emoji) and still link to /admin correctly. 2) Demo Access Removal: Test Accounts page should no longer show demo credentials (admin@neuro.uz / admin123 and doctor@neuro.uz / demo123) and instead show 'Доступ предоставляется администратором'. 3) Mobile Responsive Header: Desktop view should show full header with all elements, while mobile view should show only phone number and language switcher (hiding email, appointment button, doctor dashboard, and admin panel links). 4) Overall Functionality: Admin panel access, language switching, and navigation should still work correctly."
+  - agent: "testing"
+    message: "Tested the latest improvements to the neurosurgery center website. Results: 1) Button Renaming: ✅ PASS - The header navigation button is correctly labeled 'Админ Панель' without emoji and still links to /admin correctly. 2) Demo Access Removal: ✅ PASS - The Test Accounts page no longer shows demo credentials and instead shows 'Доступ предоставляется администратором' for both admin panel and doctor dashboard sections. 3) Mobile Responsive Header: ✅ PASS - Desktop view shows the full header with all elements, while mobile view correctly shows only the phone number and language switcher, hiding email, appointment button, doctor dashboard, and admin panel links. 4) Overall Functionality: ✅ PASS - Admin panel access still works correctly, language switching works on both desktop and mobile, and navigation functions properly. There are still some minor React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart, but these don't affect the core functionality. OVERALL STATUS: ✅ PASS - All requested improvements have been successfully implemented."
