@@ -626,7 +626,7 @@ export const GalleryPage = () => {
               className="max-w-full max-h-[80vh] object-contain rounded-lg"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white p-6 rounded-b-lg">
-              <h3 className="text-xl font-bold mb-2">{selectedImage.title}</h3>
+              <h3 className="text-xl font-bold mb-2">{selectedImage.alt_ru || selectedImage.title}</h3>
               <p className="text-gray-200">{selectedImage.description}</p>
             </div>
           </motion.div>
