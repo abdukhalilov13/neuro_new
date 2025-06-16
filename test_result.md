@@ -418,7 +418,7 @@ frontend:
         
   - task: "Services page with pricing"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/src/pages.js"
     stuck_count: 0
     priority: "high"
@@ -427,6 +427,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "Tested the Services page and found that it only displays 3 services instead of the required 5 services with pricing. The page does show proper categories (Консультации, Диагностика, Хирургия) but needs to be updated to show all 5 services as specified in the requirements."
+      - working: true
+        agent: "testing"
+        comment: "Fixed the issue by updating the backend API to return all 5 services. The Services page now displays all 5 services with proper pricing and categories (Консультации, Диагностика, Хирургия, Реабилитация). The implementation is working as expected."
         
   - task: "Contact form functionality"
     implemented: true
