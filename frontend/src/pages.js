@@ -68,9 +68,9 @@ export const DepartmentsPage = () => {
                       <h4 className="font-semibold text-gray-900">{t('ourServices')}:</h4>
                       <ul className="text-sm text-gray-600 space-y-1">
                         <li>• {t('diagnostics')} и {t('consultations')}</li>
-                        <li>• Хирургическое лечение</li>
-                        <li>• Послеоперационная реабилитация</li>
-                        <li>• Амбулаторное наблюдение</li>
+                        <li>• {t('surgicalTreatment')}</li>
+                        <li>• {t('postOperativeRehabilitation')}</li>
+                        <li>• {t('outpatientObservation')}</li>
                       </ul>
                     </div>
                   </div>
