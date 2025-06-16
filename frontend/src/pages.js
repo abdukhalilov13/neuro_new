@@ -755,6 +755,7 @@ export const AppointmentPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const { adminData } = useAdmin();
+  const { t } = useLanguage();
   const doctors = adminData?.doctors || siteData.doctors;
 
   const timeSlots = [
@@ -768,28 +769,28 @@ export const AppointmentPage = () => {
     switch (step) {
       case 1:
         if (!appointmentData.doctor) {
-          newErrors.doctor = 'Выберите врача';
+          newErrors.doctor = t('selectDoctor');
         }
         break;
       case 2:
         if (!appointmentData.date) {
-          newErrors.date = 'Выберите дату';
+          newErrors.date = t('selectDate');
         }
         if (!appointmentData.time) {
-          newErrors.time = 'Выберите время';
+          newErrors.time = t('selectTime');
         }
         break;
       case 3:
         if (!appointmentData.patient.firstName) {
-          newErrors.firstName = 'Введите имя';
+          newErrors.firstName = t('enterName');
         }
         if (!appointmentData.patient.lastName) {
-          newErrors.lastName = 'Введите фамилию';
+          newErrors.lastName = t('enterSurname');
         }
         if (!appointmentData.patient.phone) {
-          newErrors.phone = 'Введите телефон';
+          newErrors.phone = t('enterPhone');
         } else if (!/^\+998\s\d{2}\s\d{3}-\d{2}-\d{2}$/.test(appointmentData.patient.phone)) {
-          newErrors.phone = 'Неверный формат телефона';
+          newErrors.phone = t('invalidPhoneFormat');
         }
         break;
       default:
@@ -810,7 +811,7 @@ export const AppointmentPage = () => {
       await new Promise(resolve => setTimeout(resolve, 2000));
       setStep(4);
     } catch (error) {
-      alert('Произошла ошибка при отправке заявки. Попробуйте еще раз.');
+      alert(t('submissionError'));
     } finally {
       setIsSubmitting(false);
     }
@@ -834,9 +835,9 @@ export const AppointmentPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-8"
           >
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Запись на прием</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('appointmentBooking')}</h1>
             <p className="text-xl text-gray-600">
-              Выберите удобное время для консультации с нашими специалистами
+              {t('appointmentDescription')}
             </p>
           </motion.div>
 
@@ -860,9 +861,9 @@ export const AppointmentPage = () => {
             </div>
             <div className="flex justify-center mt-2 text-sm text-gray-600">
               <div className="grid grid-cols-3 gap-8 text-center">
-                <span>Выбор врача</span>
-                <span>Дата и время</span>
-                <span>Личные данные</span>
+                <span>{t('doctorSelection')}</span>
+                <span>{t('dateAndTime')}</span>
+                <span>{t('personalData')}</span>
               </div>
             </div>
           </div>
@@ -876,12 +877,12 @@ export const AppointmentPage = () => {
           >
             {step === 1 && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Выберите врача</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('selectDoctor')}</h2>
                 
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Врач ({doctors.length} доступно)
+                      {t('doctor')} ({doctors.length} {t('available')})
                     </label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {doctors.map((doctor) => (
@@ -917,7 +918,7 @@ export const AppointmentPage = () => {
                       onClick={nextStep}
                       className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
                     >
-                      Далее
+                      {t('next')}
                     </button>
                   </div>
                 </div>
@@ -926,12 +927,12 @@ export const AppointmentPage = () => {
 
             {step === 2 && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Выберите дату и время</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('selectDateAndTime')}</h2>
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Дата приема
+                      {t('appointmentDate')}
                     </label>
                     <input
                       type="date"
@@ -946,7 +947,7 @@ export const AppointmentPage = () => {
                   {appointmentData.date && (
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-3">
-                        Время приема
+                        {t('appointmentTime')}
                       </label>
                       <div className="grid grid-cols-3 gap-2">
                         {timeSlots.map((time) => (
@@ -973,13 +974,13 @@ export const AppointmentPage = () => {
                     onClick={() => setStep(1)}
                     className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-8 py-3 rounded-lg font-medium transition-colors"
                   >
-                    Назад
+                    {t('back')}
                   </button>
                   <button
                     onClick={nextStep}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
                   >
-                    Далее
+                    {t('next')}
                   </button>
                 </div>
               </div>
@@ -987,12 +988,12 @@ export const AppointmentPage = () => {
 
             {step === 3 && (
               <form onSubmit={handleSubmit}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Личные данные</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('personalData')}</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Имя *
+                      {t('firstName')} *
                     </label>
                     <input
                       type="text"
@@ -1009,7 +1010,7 @@ export const AppointmentPage = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Фамилия *
+                      {t('lastName')} *
                     </label>
                     <input
                       type="text"
@@ -1026,7 +1027,7 @@ export const AppointmentPage = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Телефон *
+                      {t('phone')} *
                     </label>
                     <input
                       type="tel"
@@ -1059,7 +1060,7 @@ export const AppointmentPage = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Дата рождения
+                      {t('birthDate')}
                     </label>
                     <input
                       type="date"
@@ -1074,7 +1075,7 @@ export const AppointmentPage = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Адрес
+                      {t('address')}
                     </label>
                     <input
                       type="text"
@@ -1090,14 +1091,14 @@ export const AppointmentPage = () => {
 
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Жалобы и симптомы
+                    {t('complaintsAndSymptoms')}
                   </label>
                   <textarea
                     rows={4}
                     value={appointmentData.complaint}
                     onChange={(e) => setAppointmentData({...appointmentData, complaint: e.target.value})}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    placeholder="Опишите ваши симптомы и жалобы"
+                    placeholder={t('describeSymptomsPlaceholder')}
                   />
                 </div>
 
@@ -1107,7 +1108,7 @@ export const AppointmentPage = () => {
                     onClick={() => setStep(2)}
                     className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-8 py-3 rounded-lg font-medium transition-colors"
                   >
-                    Назад
+                    {t('back')}
                   </button>
                   <button
                     type="submit"
@@ -1117,10 +1118,10 @@ export const AppointmentPage = () => {
                     {isSubmitting ? (
                       <>
                         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                        <span>Отправка...</span>
+                        <span>{t('submitting')}</span>
                       </>
                     ) : (
-                      <span>Записаться</span>
+                      <span>{t('bookAppointment')}</span>
                     )}
                   </button>
                 </div>
@@ -1132,17 +1133,17 @@ export const AppointmentPage = () => {
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <CheckCircle className="w-10 h-10 text-green-600" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Запись успешно создана!</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('appointmentSuccessTitle')}</h2>
                 <p className="text-gray-600 mb-6">
-                  Ваша запись на прием к врачу {appointmentData.doctor} на {appointmentData.date} в {appointmentData.time} успешно создана.
-                  Мы свяжемся с вами для подтверждения записи.
+                  {t('appointmentSuccessMessage')} {appointmentData.doctor} {t('on')} {appointmentData.date} {t('at')} {appointmentData.time} {t('appointmentCreatedSuccessfully')}
+                  {t('contactConfirmation')}
                 </p>
                 <div className="space-y-4">
                   <Link
                     to="/"
                     className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-block"
                   >
-                    На главную
+                    {t('toHomePage')}
                   </Link>
                   <div>
                     <button
@@ -1166,7 +1167,7 @@ export const AppointmentPage = () => {
                       }}
                       className="text-blue-600 hover:text-blue-700 font-medium"
                     >
-                      Записаться еще раз
+                      {t('bookAnotherAppointment')}
                     </button>
                   </div>
                 </div>
