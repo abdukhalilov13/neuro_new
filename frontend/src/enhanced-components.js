@@ -244,11 +244,21 @@ const Header = () => {
       transition={{ duration: 0.6 }}
       className="bg-white shadow-lg sticky top-0 z-50"
     >
-      {/* Top bar */}
+      {/* Top bar - Минимальная версия для мобильных */}
       <div className="bg-blue-900 text-white py-2">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col sm:flex-row justify-between items-center text-sm space-y-2 sm:space-y-0">
-            <div className="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-6">
+          {/* Мобильная версия - только телефон и язык */}
+          <div className="flex md:hidden justify-between items-center text-sm">
+            <div className="flex items-center space-x-2">
+              <Phone className="w-4 h-4" />
+              <span>{adminData.siteSettings.phones[0]}</span>
+            </div>
+            <LanguageSwitcher />
+          </div>
+          
+          {/* Десктопная версия - полная */}
+          <div className="hidden md:flex justify-between items-center text-sm">
+            <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4" />
                 <span>{adminData.siteSettings.phones[0]}</span>
@@ -258,7 +268,7 @@ const Header = () => {
                 <span>{adminData.siteSettings.emails[0]}</span>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <div className="flex items-center space-x-4">
               <LanguageSwitcher />
               <Link to="/appointment" className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm transition-colors">
                 {t('appointment')}
