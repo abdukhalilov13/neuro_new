@@ -622,7 +622,7 @@ export const GalleryPage = () => {
             </button>
             <img
               src={selectedImage.url}
-              alt={selectedImage.title}
+              alt={selectedImage.alt_ru || selectedImage.title}
               className="max-w-full max-h-[80vh] object-contain rounded-lg"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white p-6 rounded-b-lg">
