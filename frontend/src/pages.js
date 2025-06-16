@@ -809,15 +809,16 @@ export const AppointmentPage = () => {
     setIsSubmitting(true);
     
     try {
-      // Найдем врача по имени
+      // Найдем врача по имени или ID
       const selectedDoctor = doctors.find(doc => 
+        doc.id === appointmentData.doctorId || 
         (doc.name_ru || doc.name) === appointmentData.doctor
       );
       
       // Создаем объект записи
       const newAppointment = {
         id: Date.now(),
-        doctorId: selectedDoctor?.id,
+        doctorId: selectedDoctor?.id || appointmentData.doctorId,
         doctorName: appointmentData.doctor,
         date: appointmentData.date,
         time: appointmentData.time,
@@ -840,20 +841,26 @@ export const AppointmentPage = () => {
       existingAppointments.push(newAppointment);
       localStorage.setItem('neuro_appointments', JSON.stringify(existingAppointments));
       
-      // Здесь должен быть API запрос для сохранения в базе данных
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/appointments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newAppointment)
-      });
+      console.log('Запись сохранена:', newAppointment);
       
-      if (!response.ok) {
-        throw new Error('Ошибка отправки записи');
+      // Здесь должен быть API запрос для сохранения в базе данных
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/appointments`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newAppointment)
+        });
+        
+        if (response.ok) {
+          console.log('Запись сохранена на сервере');
+        }
+      } catch (apiError) {
+        console.log('API недоступен, данные сохранены локально');
       }
       
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       setStep(4);
     } catch (error) {
       console.error('Ошибка записи:', error);
