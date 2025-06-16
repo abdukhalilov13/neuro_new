@@ -89,6 +89,7 @@ export const DepartmentsPage = () => {
 // Врачи - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const DoctorsPage = () => {
   const { adminData } = useAdmin();
+  const { t } = useLanguage();
   const doctors = adminData?.doctors || siteData.doctors;
 
   return (
