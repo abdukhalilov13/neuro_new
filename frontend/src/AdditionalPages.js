@@ -182,16 +182,24 @@ export const VacanciesPage = () => {
       existingApplications.push(applicationData);
       localStorage.setItem('neuro_job_applications', JSON.stringify(existingApplications));
 
-      // Отправляем на бэкенд (для будущей интеграции)
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/job-applications`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(applicationData)
-      });
+      console.log('Заявка сохранена в localStorage:', applicationData);
 
-      console.log('Заявка сохранена:', applicationData);
+      // Отправляем на бэкенд (для будущей интеграции)
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/job-applications`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(applicationData)
+        });
+
+        if (response.ok) {
+          console.log('Заявка отправлена на сервер');
+        }
+      } catch (apiError) {
+        console.log('API недоступен, заявка сохранена локально');
+      }
       
       setSubmitStatus('success');
       setApplicationForm({
@@ -203,11 +211,11 @@ export const VacanciesPage = () => {
         coverLetter: ''
       });
       
-      // Закрываем модальное окно через 2 секунды
+      // Закрываем модальное окно через 3 секунды
       setTimeout(() => {
         setSelectedVacancy(null);
         setSubmitStatus(null);
-      }, 2000);
+      }, 3000);
       
     } catch (error) {
       setSubmitStatus('error');
