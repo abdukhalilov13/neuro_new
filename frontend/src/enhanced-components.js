@@ -267,7 +267,7 @@ const Header = () => {
                 {t('doctorDashboard')}
               </Link>
               <Link to="/admin" className="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-sm transition-colors">
-                🎯 Админ Панель
+                Админ Панель
               </Link>
             </div>
           </div>
