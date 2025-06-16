@@ -499,12 +499,53 @@ export const LanguageProvider = ({ children }) => {
       aboutPageTitle: 'Markaz haqida',
       aboutPageSubtitle: 'Respublika Neyroxirurgiya Ilmiy Markazi - Markaziy Osiyodagi neyroxirurgiya sohasidagi yetakchi tibbiyot muassasasi',
       historyMission: 'Tarix va missiya',
+      aboutHistoryText1: '1986 yilda Neyroxirurglar ilmiy jamiyati tashkil etilgan, 1998 yilda O\'zbekiston neyroxirurglar assotsiatsiyasi yaratilgan, u Tinch okeani mintaqasi davlatlari neyroxirurglar assotsiatsiyasi va Butunjahon neyroxirurglar assotsiatsiyasi (WFNS) a\'zosi hisoblanadi.',
+      aboutHistoryText2: 'Jamiyat uzoq va yaqin xorijiy mamlakatlarning (AQSh, Germaniya, Rossiya, Hindiston, Ozarbayjon, Ukraina, Belarus, Qozog\'iston, Qirg\'iziston, Gruziya, Tojikiston va boshqalar) ilmiy jamoalari va alohida olimlari bilan hamkorlik qiladi.',
+      aboutHistoryText3: 'Neyroxirurglar jamiyatining asosiy maqsadlari: neyroxirurgiya sohasidagi dolzarb nazariy, amaliy va ilmiy muammolarni hal etish manfaatlarida jamiyat a\'zolarining ijodiy salohiyatini ro\'yobga chiqarishga ko\'maklashish.',
       associationTasks: 'Assotsiatsiya vazifalari:',
+      task1: 'Amaliy va (yoki) ilmiy faoliyati neyroxirurgiya bilan bog\'liq bo\'lgan assotsiatsiya a\'zolarining malakasini oshirishga qaratilgan tadbirlarni amalga oshirish',
+      task2: 'Neyroxirurgiya sohasidagi ustuvor ilmiy tadqiqot yo\'nalishlarini rivojlantirishga ko\'maklashish',
+      task3: 'Jamiyat a\'zolariga, yosh olim va shifokoriarga ilmiy va amaliy yordam ko\'rsatish, tibbiy ta\'lim tizimini takomillashtirishga va mutaxassislarning kasbiy malakasini oshirishga ko\'maklashish',
+      task4: 'Xalqaro va milliy ilmiy tibbiyot jamiyatlari va assotsiatsiyalar bilan hamkorlikni rivojlantirish',
       yearFounded: 'Tashkil etilgan yil',
+      patientsPerYear: 'Yiliga bemorlar',
       centerLeadership: 'Markaz rahbariyati',
       experiencedSpecialists: 'Respublikada neyroxirurgiyani rivojlantirishga rahbarlik qilayotgan tajribali mutaxassislar',
       readBiography: 'Tarjimai holni o\'qish',
       biography: 'Tarjimai hol',
+      needConsultation: 'Xizmatlar bo\'yicha konsultatsiya kerakmi?',
+      contactSpecialists: 'Bizning mutaxassislar barcha savollaringizga javob beradi va optimal davolanishni tanlashda yordam beradi',
+      scheduleConsultation: 'Konsultatsiyaga yozilish',
+      contactUs: 'Bog\'lanish',
+      
+      // News page
+      newsAndEvents: 'Yangiliklar va tadbirlar',
+      latestNewsDescription: 'Markazimizning so\'nggi yangiliklari, yutuqlari va tadbirlari (2 ta yangilik)',
+      upcomingEvents: 'Yaqinlashayotgan tadbirlar',
+      readFull: 'To\'liq o\'qish',
+      
+      // Contact page
+      contacts: 'Aloqa',
+      contactDescription: 'Konsultatsiya olish yoki qabulga yozilish uchun biz bilan bog\'laning',
+      contactInfo: 'Aloqa ma\'lumotlari',
+      address: 'Manzil',
+      phones: 'Telefonlar',
+      workingHours: 'Ish vaqti',
+      emergency24: 'Shoshilinch yordam: 24/7',
+      writeToUs: 'Bizga yozing',
+      yourName: 'Ismingiz',
+      message: 'Xabar',
+      sendMessage: 'Xabar yuborish',
+      membershipInfo: 'O\'zbekiston neyroxirurglar assotsiatsiyasiga kirish',
+      membershipDescription: 'O\'zbekiston neyroxirurglar assotsiatsiyasiga kirish uchun taqdim etish kerak:',
+      membershipReq1: 'Assotsiatsiya raisi G.M.Kariev nomiga ariza.',
+      membershipReq2: 'Minimal ish haqi miqdorida 1 o\'lchovda to\'lov kvitansiyasi.',
+      membershipRequisites: 'O\'zbekiston neyroxirurglar assotsiatsiyasi rekvizitlari:',
+      
+      // Services page additional translations
+      serviceConsultation: 'Konsultatsiya kerakmi?',
+      serviceContactText: 'Professional tibbiy yordam olish uchun biz bilan bog\'laning',
+      scheduleAppointment: 'Qabulga yozilish'
       
       // Services
       ourServices: 'Bizning xizmatlar',
