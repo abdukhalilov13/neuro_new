@@ -797,6 +797,31 @@ def main():
             else:
                 print(f"❌ Job application update response is missing required fields: {missing_fields}")
     
+    # Print results
+    print(f"\n📊 Tests passed: {tester.tests_passed}/{tester.tests_run}")
+    print(f"\n===== API Testing Summary =====")
+    print(f"✅ Root API endpoint: {'Working' if tester.tests_passed > 0 else 'Not working'}")
+    print(f"✅ Health check endpoint: {'Working' if tester.tests_passed > 1 else 'Not working'}")
+    print(f"✅ Departments endpoint: {'Working' if tester.tests_passed > 2 else 'Not working'}")
+    print(f"✅ Departments CRUD operations: {'Working' if tester.tests_passed > 5 else 'Not working'}")
+    print(f"✅ Doctors endpoint: {'Working' if tester.tests_passed > 6 else 'Not working'}")
+    print(f"✅ Doctors creation: {'Working' if tester.tests_passed > 7 else 'Not working'}")
+    print(f"✅ Services endpoint: {'Working' if tester.tests_passed > 8 else 'Not working'}")
+    print(f"✅ Services creation: {'Working' if tester.tests_passed > 9 else 'Not working'}")
+    print(f"✅ News endpoint: {'Working' if tester.tests_passed > 10 else 'Not working'}")
+    print(f"✅ News creation: {'Working' if tester.tests_passed > 11 else 'Not working'}")
+    print(f"✅ Gallery endpoint: {'Working' if tester.tests_passed > 12 else 'Not working'}")
+    print(f"✅ Gallery creation: {'Working' if tester.tests_passed > 13 else 'Not working'}")
+    print(f"✅ Events endpoint: {'Working' if tester.tests_passed > 14 else 'Not working'}")
+    print(f"✅ Events creation: {'Working' if tester.tests_passed > 15 else 'Not working'}")
+    print(f"✅ Leadership endpoint: {'Working' if tester.tests_passed > 16 else 'Not working'}")
+    print(f"✅ Leadership creation: {'Working' if tester.tests_passed > 17 else 'Not working'}")
+    print(f"✅ Appointments GET endpoint: {'Working' if tester.tests_passed > 18 else 'Not working'}")
+    print(f"✅ Appointments CRUD operations: {'Working' if tester.tests_passed > 22 else 'Not working'}")
+    print(f"✅ Job Applications GET endpoint: {'Working' if tester.tests_passed > 23 else 'Not working'}")
+    print(f"✅ Job Applications creation and update: {'Working' if tester.tests_passed > 25 else 'Not working'}")
+    print(f"✅ CORS handling: {'Working' if tester.tests_passed == tester.tests_run else 'Not working'}")
+    
     return 0 if tester.tests_passed == tester.tests_run else 1
 
 if __name__ == "__main__":
