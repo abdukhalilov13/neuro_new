@@ -448,7 +448,9 @@ test_plan:
     - "Button renaming in header"
     - "Demo access removal"
     - "Mobile responsive header"
-  stuck_tasks: []
+    - "Admin panel contacts section"
+  stuck_tasks:
+    - "Admin panel contacts section"
   test_all: false
   test_priority: "high_first"
 
