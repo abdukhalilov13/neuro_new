@@ -343,15 +343,18 @@ backend:
 frontend:
   - task: "Admin panel contacts section"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/src/unified-admin.js"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
       - working: false
         agent: "testing"
         comment: "Unable to access the admin panel. When navigating to /admin or clicking the 'Админ Панель' button in the header, I'm being redirected to the homepage instead of seeing the admin login form. This suggests there might be an issue with the routing or authentication logic in the application. Based on code review, the contacts section is properly implemented with Phones (3 fields), Emails (2 fields), Social Media (Facebook, Instagram, YouTube, Telegram), and a Save button, but couldn't verify in the UI due to access issue."
+      - working: true
+        agent: "testing"
+        comment: "Tested the admin panel access and contacts section. When navigating directly to /admin, the browser redirects to the homepage, but the admin login form is still displayed correctly. Login with admin@neuro.uz / admin123 works properly. After login, the admin dashboard loads successfully. The Contacts section is accessible by clicking the 'Контакты' tab in the navigation. The Contacts section contains all required components: Phones section (3 fields), Emails section (2 fields), and Social Media section (Facebook, Instagram, YouTube, Telegram). All fields in the contacts section are editable. There is a compilation error in the console: 'ERROR in ./src/components.js 1074:0-72 export 'UnifiedAdminPanel' (reexported as 'UnifiedAdminPanel') was not found in './unified-admin' (possible exports: default)', but this doesn't affect the functionality of the admin panel."
         
   - task: "Multilingual support on main website"
     implemented: true
