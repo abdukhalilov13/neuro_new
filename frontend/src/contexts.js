@@ -529,7 +529,68 @@ export const AdminProvider = ({ children }) => {
   const [departments, setDepartments] = useState(() => loadFromStorage('departments', []));
   const [doctors, setDoctors] = useState(() => loadFromStorage('doctors', []));
   const [news, setNews] = useState(() => loadFromStorage('news', []));
-  const [services, setServices] = useState(() => loadFromStorage('services', []));
+  const [services, setServices] = useState(() => loadFromStorage('services', [
+    {
+      id: 1,
+      title_ru: 'Консультация нейрохирурга',
+      title_uz: 'Neyroxirurg maslahati',
+      title_en: 'Neurosurgeon consultation',
+      description_ru: 'Первичная или повторная консультация специалиста',
+      description_uz: 'Mutaxassisning birlamchi yoki takroriy maslahati',
+      description_en: 'Primary or follow-up specialist consultation',
+      price: 150000,
+      duration: '30-45 мин',
+      category: 'Консультации'
+    },
+    {
+      id: 2,
+      title_ru: 'МРТ головного мозга',
+      title_uz: 'Bosh miya MRT',
+      title_en: 'Brain MRI',
+      description_ru: 'Магнитно-резонансная томография головного мозга',
+      description_uz: 'Bosh miyaning magnit-rezonans tomografiyasi',
+      description_en: 'Magnetic resonance imaging of the brain',
+      price: 350000,
+      duration: '30-60 мин',
+      category: 'Диагностика'
+    },
+    {
+      id: 3,
+      title_ru: 'Эндоскопическая операция',
+      title_uz: 'Endoskopik operatsiya',
+      title_en: 'Endoscopic surgery',
+      description_ru: 'Минимально инвазивная нейрохирургическая операция',
+      description_uz: 'Minimal invaziv neyroxirurgik operatsiya',
+      description_en: 'Minimally invasive neurosurgical operation',
+      price: 5000000,
+      duration: '2-4 часа',
+      category: 'Хирургия'
+    },
+    {
+      id: 4,
+      title_ru: 'Микрохирургическое удаление опухоли',
+      title_uz: 'Mikroxirurgik usul bilan o\'smani olib tashlash',
+      title_en: 'Microsurgical tumor removal',
+      description_ru: 'Прецизионное удаление новообразований мозга',
+      description_uz: 'Miya yangiformalarini aniq olib tashlash',
+      description_en: 'Precision removal of brain tumors',
+      price: 8000000,
+      duration: '3-6 часов',
+      category: 'Хирургия'
+    },
+    {
+      id: 5,
+      title_ru: 'Реабилитационная программа',
+      title_uz: 'Reabilitatsiya dasturi',
+      title_en: 'Rehabilitation program',
+      description_ru: 'Комплексная послеоперационная реабилитация',
+      description_uz: 'Operatsiyadan keyingi kompleks reabilitatsiya',
+      description_en: 'Comprehensive postoperative rehabilitation',
+      price: 250000,
+      duration: '1-2 недели',
+      category: 'Реабилитация'
+    }
+  ]));
   const [galleryImages, setGalleryImages] = useState(() => loadFromStorage('galleryImages', []));
   const [accounts, setAccounts] = useState(() => loadFromStorage('accounts', [
     { id: 1, name: 'Админ', email: 'admin@neuro.uz', role: 'admin', status: 'active', createdAt: '2025-01-01' },
