@@ -57,12 +57,12 @@ export const DepartmentsPage = () => {
                 className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2"
               >
                 <div className="flex items-start space-x-6">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${dept.color} rounded-2xl flex items-center justify-center flex-shrink-0`}>
-                    {React.createElement(dept.icon, { className: "w-8 h-8 text-white" })}
+                  <div className={`w-16 h-16 bg-gradient-to-br ${dept.color || 'from-blue-500 to-blue-600'} rounded-2xl flex items-center justify-center flex-shrink-0`}>
+                    <Brain className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{dept.name}</h3>
-                    <p className="text-gray-600 mb-4">{dept.description}</p>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{dept.name_ru || dept.name}</h3>
+                    <p className="text-gray-600 mb-4">{dept.description_ru || dept.description}</p>
                     <div className="space-y-2">
                       <h4 className="font-semibold text-gray-900">Основные услуги:</h4>
                       <ul className="text-sm text-gray-600 space-y-1">
