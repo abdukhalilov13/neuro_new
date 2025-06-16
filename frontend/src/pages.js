@@ -1044,145 +1044,151 @@ export const AppointmentPage = () => {
             )}
 
             {step === 3 && (
-              <form onSubmit={handleSubmit}>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('personalData')}</h2>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('firstName')} *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={appointmentData.patient.firstName}
-                      onChange={(e) => setAppointmentData({
-                        ...appointmentData,
-                        patient: {...appointmentData.patient, firstName: e.target.value}
-                      })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.firstName && <p className="text-red-600 text-sm mt-1">{errors.firstName}</p>}
+              <div className="bg-white rounded-2xl p-8 shadow-lg">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('personalData')}</h2>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('firstName')} *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={appointmentData.patient.firstName}
+                        onChange={(e) => setAppointmentData({
+                          ...appointmentData,
+                          patient: {...appointmentData.patient, firstName: e.target.value}
+                        })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="Введите имя"
+                      />
+                      {errors.firstName && <p className="text-red-600 text-sm mt-1">{errors.firstName}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('lastName')} *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={appointmentData.patient.lastName}
+                        onChange={(e) => setAppointmentData({
+                          ...appointmentData,
+                          patient: {...appointmentData.patient, lastName: e.target.value}
+                        })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="Введите фамилию"
+                      />
+                      {errors.lastName && <p className="text-red-600 text-sm mt-1">{errors.lastName}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('phone')} *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={appointmentData.patient.phone}
+                        onChange={(e) => setAppointmentData({
+                          ...appointmentData,
+                          patient: {...appointmentData.patient, phone: e.target.value}
+                        })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="+998 90 123-45-67"
+                      />
+                      {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        value={appointmentData.patient.email}
+                        onChange={(e) => setAppointmentData({
+                          ...appointmentData,
+                          patient: {...appointmentData.patient, email: e.target.value}
+                        })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="example@mail.uz"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('birthDate')}
+                      </label>
+                      <input
+                        type="date"
+                        value={appointmentData.patient.birthDate}
+                        onChange={(e) => setAppointmentData({
+                          ...appointmentData,
+                          patient: {...appointmentData.patient, birthDate: e.target.value}
+                        })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('address')}
+                      </label>
+                      <input
+                        type="text"
+                        value={appointmentData.patient.address}
+                        onChange={(e) => setAppointmentData({
+                          ...appointmentData,
+                          patient: {...appointmentData.patient, address: e.target.value}
+                        })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="Ваш адрес"
+                      />
+                    </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('lastName')} *
+                      {t('complaintsAndSymptoms')}
                     </label>
-                    <input
-                      type="text"
-                      required
-                      value={appointmentData.patient.lastName}
-                      onChange={(e) => setAppointmentData({
-                        ...appointmentData,
-                        patient: {...appointmentData.patient, lastName: e.target.value}
-                      })}
+                    <textarea
+                      rows={4}
+                      value={appointmentData.complaint}
+                      onChange={(e) => setAppointmentData({...appointmentData, complaint: e.target.value})}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.lastName && <p className="text-red-600 text-sm mt-1">{errors.lastName}</p>}
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('phone')} *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={appointmentData.patient.phone}
-                      onChange={(e) => setAppointmentData({
-                        ...appointmentData,
-                        patient: {...appointmentData.patient, phone: e.target.value}
-                      })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                      placeholder="+998 90 123-45-67"
-                    />
-                    {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      value={appointmentData.patient.email}
-                      onChange={(e) => setAppointmentData({
-                        ...appointmentData,
-                        patient: {...appointmentData.patient, email: e.target.value}
-                      })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder={t('describeSymptomsPlaceholder') || "Опишите ваши симптомы и жалобы"}
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('birthDate')}
-                    </label>
-                    <input
-                      type="date"
-                      value={appointmentData.patient.birthDate}
-                      onChange={(e) => setAppointmentData({
-                        ...appointmentData,
-                        patient: {...appointmentData.patient, birthDate: e.target.value}
-                      })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    />
+                  <div className="flex justify-between pt-6">
+                    <button
+                      type="button"
+                      onClick={() => setStep(2)}
+                      className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-8 py-3 rounded-lg font-medium transition-colors"
+                    >
+                      {t('back')}
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center space-x-2"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                          <span>{t('submitting')}</span>
+                        </>
+                      ) : (
+                        <span>{t('submitBooking')}</span>
+                      )}
+                    </button>
                   </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('address')}
-                    </label>
-                    <input
-                      type="text"
-                      value={appointmentData.patient.address}
-                      onChange={(e) => setAppointmentData({
-                        ...appointmentData,
-                        patient: {...appointmentData.patient, address: e.target.value}
-                      })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('complaintsAndSymptoms')}
-                  </label>
-                  <textarea
-                    rows={4}
-                    value={appointmentData.complaint}
-                    onChange={(e) => setAppointmentData({...appointmentData, complaint: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    placeholder={t('describeSymptomsPlaceholder')}
-                  />
-                </div>
-
-                <div className="flex justify-between">
-                  <button
-                    type="button"
-                    onClick={() => setStep(2)}
-                    className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-8 py-3 rounded-lg font-medium transition-colors"
-                  >
-                    {t('back')}
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center space-x-2"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                        <span>{t('submitting')}</span>
-                      </>
-                    ) : (
-                      <span>{t('bookAppointment')}</span>
-                    )}
-                  </button>
-                </div>
-              </form>
+                </form>
+              </div>
             )}
 
             {step === 4 && (
