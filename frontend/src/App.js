@@ -19,6 +19,7 @@ import UnifiedAdminPanel from "./unified-admin";
 import { TestAccountsPage } from "./TestAccounts";
 import { VacanciesPage, GalleryPage } from "./additional-pages";
 import { NewsDetailPage } from "./NewsDetail";
+import { ImprovedDoctorDashboard } from "./doctor-dashboard-improved";
 
 function App() {
   return (
