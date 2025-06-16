@@ -242,11 +242,11 @@ export const ServicesPage = () => {
                           viewport={{ once: true }}
                           className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
                         >
-                          <h3 className="text-xl font-bold text-gray-900 mb-3">{service.name}</h3>
-                          <p className="text-gray-600 mb-4">{service.description}</p>
+                          <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title_ru || service.name}</h3>
+                          <p className="text-gray-600 mb-4">{service.description_ru || service.description}</p>
                           <div className="flex justify-between items-center">
                             <span className="text-2xl font-bold text-blue-600">
-                              {service.price.toLocaleString()} UZS
+                              {service.price ? `${service.price.toLocaleString()} UZS` : 'По запросу'}
                             </span>
                             <Link
                               to="/appointment"
