@@ -17,7 +17,7 @@ import {
 import { DoctorDashboard } from "./doctor-admin-components";
 import UnifiedAdminPanel from "./unified-admin";
 import { TestAccountsPage } from "./TestAccounts";
-import { VacanciesPage, GalleryPage } from "./AdditionalPages";
+import { VacanciesPage, GalleryPage } from "./additional-pages";
 import { NewsDetailPage } from "./NewsDetail";
 
 function App() {
