@@ -452,8 +452,7 @@ test_plan:
     - "Demo access removal"
     - "Mobile responsive header"
     - "Admin panel contacts section"
-  stuck_tasks:
-    - "Admin panel contacts section"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
