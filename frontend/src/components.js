@@ -411,9 +411,9 @@ export const HomePage = () => {
                   <div className={`w-16 h-16 bg-gradient-to-br ${dept.color} rounded-2xl flex items-center justify-center mr-4 flex-shrink-0`}>
                     {React.createElement(dept.icon, { className: "w-8 h-8 text-white" })}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">{dept.name}</h3>
+                  <h3 className="text-xl font-bold text-gray-900">{dept.name_ru || dept.name}</h3>
                 </div>
-                <p className="text-gray-600 mb-4">{dept.description}</p>
+                <p className="text-gray-600 mb-4">{dept.description_ru || dept.description}</p>
                 <Link
                   to="/departments"
                   className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center"
