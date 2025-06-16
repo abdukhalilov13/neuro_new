@@ -165,8 +165,22 @@ export const VacancyApplicationsManager = () => {
 
   // Загрузка заявок из localStorage
   useEffect(() => {
-    const savedApplications = JSON.parse(localStorage.getItem('neuro_job_applications') || '[]');
-    setApplications(savedApplications);
+    const loadApplications = () => {
+      try {
+        const savedApplications = JSON.parse(localStorage.getItem('neuro_job_applications') || '[]');
+        console.log('Загружены заявки:', savedApplications);
+        setApplications(savedApplications);
+      } catch (error) {
+        console.error('Ошибка загрузки заявок:', error);
+        setApplications([]);
+      }
+    };
+    
+    loadApplications();
+    
+    // Обновляем каждые 5 секунд для отладки
+    const interval = setInterval(loadApplications, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   // Обновление статуса заявки
