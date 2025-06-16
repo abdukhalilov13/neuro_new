@@ -562,7 +562,62 @@ export const LanguageProvider = ({ children }) => {
       patientTestimonials: 'Bemorlarning fikrlari',
       
       // Footer translations - Uzbek
-      careers: 'Bo\'sh o\'rinlar'
+      careers: 'Bo\'sh o\'rinlar',
+      
+      // Pages content translations - Uzbek
+      historyAndMission: 'Tarix va missiya',
+      foundedYear: 'Tashkil etilgan yil',
+      patientsPerYear: 'Yiliga bemorlar',
+      centerLeadership: 'Markaz rahbariyati',
+      experiencedSpecialistsLeading: 'Respublikada neyroxirurgiya rivojlanishini boshqarayotgan tajribali mutaxassislar',
+      
+      // Consultation section - Uzbek
+      needConsultation: 'Xizmatlar bo\'yicha maslahat kerakmi?',
+      specialistsWillAnswer: 'Mutaxassislarimiz barcha savollaringizga javob berishadi va optimal davolanishni tanlashda yordam berishadi',
+      bookConsultation: 'Maslahatga yozilish',
+      contactUs: 'Biz bilan bog\'laning',
+      
+      // Vacancies page - Uzbek
+      joinProfessionalTeam: 'Neyroxirurgiyaning yetakchi markazida professionallar jamoasiga qo\'shiling',
+      neurosurgeon: 'Neyroxirurg shifokor',
+      neurosurgeryFullTime: 'Neyroxirurgiya, To\'liq bandlik',
+      mainRequirements: 'Asosiy talablar:',
+      higherMedicalEducation: 'Oliy tibbiy ta\'lim',
+      neurosurgerySpecialization: 'Neyroxirurgiya bo\'yicha mutaxassislik',
+      experienceFrom3Years: '3 yildan ortiq ish tajribasi',
+      detailsAndApply: 'Batafsil va ariza berish',
+      
+      operatingRoomNurse: 'Operatsiya bloki hamshirasi',
+      operatingBlockFullTime: 'Operatsiya bloki, To\'liq bandlik',
+      secondaryMedicalEducation: 'O\'rta tibbiy ta\'lim',
+      operatingNurseCertificate: 'Operatsiya hamshirasi sertifikati',
+      experienceFrom1Year: '1 yildan ortiq ish tajribasi',
+      
+      anesthesiologist: 'Anesteziologo shifokor',
+      anesthesiologyFullTime: 'Anesteziologiya va reanimatologiya, To\'liq bandlik',
+      anesthesiologySpecialization: 'Anesteziologiya bo\'yicha mutaxassislik',
+      experienceFrom2Years: '2 yildan ortiq ish tajribasi',
+      
+      whyWorkWithUs: 'Nega biz bilan ishlash kerak?',
+      professionalTeam: 'Professional jamoa',
+      workWithBestSpecialists: 'Neyroxirurgiya sohasidagi eng yaxshi mutaxassislar bilan ishlang',
+      modernEquipment: 'Zamonaviy asbob-uskunalar',
+      latestTechnologies: 'Eng yangi texnologiyalar va davolash usullari',
+      decentSalary: 'Munosib maosh',
+      competitiveSalary: 'Raqobatbardosh maosh va mukofotlar',
+      
+      noSuitableVacancy: 'Mos vakansiya topmadingizmi?',
+      sendResume: 'Bizga rezyumeingizni yuboring, mos pozitsiyalar paydo bo\'lganda siz bilan bog\'lanamiz',
+      hrDepartment: 'Kadrlar bo\'limi',
+      
+      // Gallery page - Uzbek
+      centerPhotosDescription: 'Markazimiz, asbob-uskunalar va mutaxassislarimizning ish faoliyati rasmlari',
+      allPhotos: 'Barcha rasmlar',
+      operatingRooms: 'Operatsiya xonalari',
+      equipment: 'Asbob-uskunalar',
+      centerBuilding: 'Markaz binosi',
+      staff: 'Xodimlar',
+      patients: 'Bemorlar'
     },
     en: {
       // Navigation
