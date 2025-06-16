@@ -343,7 +343,7 @@ backend:
 frontend:
   - task: "Admin panel improvements"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/src/unified-admin.js"
     stuck_count: 1
     priority: "high"
@@ -352,10 +352,13 @@ frontend:
       - working: false
         agent: "testing"
         comment: "Attempted to test the admin panel improvements. The admin login page loads correctly, but after entering credentials (admin@neuro.uz/admin123), the login fails with a JavaScript error: 'editingEvent is not defined'. Fixed this error, but there are still issues with the admin panel functionality. The console shows errors related to incorrect casing for components like Activity, Brain, and Heart."
+      - working: true
+        agent: "testing"
+        comment: "Retested the admin panel. The login page loads correctly and login with admin@neuro.uz/admin123 credentials works properly. After login, the admin dashboard is displayed with all sections accessible. There are still some minor React component errors in the console related to incorrect casing for components like Activity, Brain, and Heart, but these don't affect the core functionality."
         
   - task: "Appointments section changes"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/src/unified-admin.js"
     stuck_count: 1
     priority: "high"
@@ -364,6 +367,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "Unable to test the appointments section changes due to admin panel login issues. The code review shows that the appointments section has been updated to be read-only with export to Excel functionality and filters, but this couldn't be verified in the UI."
+      - working: true
+        agent: "testing"
+        comment: "Verified that the Appointments section in the admin panel is accessible and displays correctly. The section is properly implemented as read-only with export to Excel functionality and filters as required."
         
   - task: "Multilingual support on main website"
     implemented: true
@@ -376,10 +382,13 @@ frontend:
       - working: true
         agent: "testing"
         comment: "Verified that the language switcher is present in the header with options for Russian, Uzbek, and English. The translations are comprehensive with over 100 translation keys for each language. The navigation menu and main content areas are properly translated."
+      - working: true
+        agent: "testing"
+        comment: "Conducted a thorough test of the language switching functionality. The language switcher works correctly, changing between Russian, Uzbek, and English. All navigation menu items, headings, and content sections properly translate when switching languages. The implementation is comprehensive and working as expected."
         
   - task: "Image cropping functionality"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/src/unified-admin.js"
     stuck_count: 1
     priority: "medium"
@@ -388,6 +397,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "Unable to test the image cropping functionality due to admin panel login issues. The code review shows that the FileUploader component includes image cropping capabilities with the ImageCropper component, but this couldn't be verified in the UI."
+      - working: true
+        agent: "testing"
+        comment: "Verified that the image cropping functionality is implemented in the admin panel. The Leadership section includes a file upload component with image cropping capabilities. The implementation is working as expected."
 
   - task: "Unified admin panel with website synchronization"
     implemented: true
@@ -403,6 +415,42 @@ frontend:
       - working: true
         agent: "testing"
         comment: "Retested the unified admin panel with focus on the leadership section and synchronization. The leadership names now match exactly between the admin panel and the 'О центре' page. When editing a leadership entry in the admin panel, the changes are immediately reflected on the 'О центре' page. No localStorage quota errors were observed during testing. The localStorage implementation has been fixed to handle large data properly."
+        
+  - task: "Services page with pricing"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/pages.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "Tested the Services page and found that it only displays 3 services instead of the required 5 services with pricing. The page does show proper categories (Консультации, Диагностика, Хирургия) but needs to be updated to show all 5 services as specified in the requirements."
+        
+  - task: "Contact form functionality"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Verified that the contact form on the Contact page displays correctly and can be submitted. The form includes fields for name, email, phone, and message, and shows a success message after submission."
+        
+  - task: "Page titles and branding"
+    implemented: true
+    working: true
+    file: "/app/frontend/public/index.html"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Verified that the page title shows 'NEURO.UZ - Центр Нейрохирургии' correctly. No Emergent badge is present on the site as required."
 
 metadata:
   created_by: "main_agent"
