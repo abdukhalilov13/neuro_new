@@ -838,7 +838,62 @@ export const LanguageProvider = ({ children }) => {
       biography: 'Biography',
       
       // Footer translations - English
-      careers: 'Careers'
+      careers: 'Careers',
+      
+      // Pages content translations - English
+      historyAndMission: 'History and Mission',
+      foundedYear: 'Founded Year',
+      patientsPerYear: 'Patients per Year',
+      centerLeadership: 'Center Leadership',
+      experiencedSpecialistsLeading: 'Experienced specialists leading the development of neurosurgery in the republic',
+      
+      // Consultation section - English
+      needConsultation: 'Need consultation on services?',
+      specialistsWillAnswer: 'Our specialists will answer all your questions and help you choose optimal treatment',
+      bookConsultation: 'Book Consultation',
+      contactUs: 'Contact Us',
+      
+      // Vacancies page - English
+      joinProfessionalTeam: 'Join the team of professionals at the leading neurosurgery center',
+      neurosurgeon: 'Neurosurgeon',
+      neurosurgeryFullTime: 'Neurosurgery, Full-time',
+      mainRequirements: 'Main requirements:',
+      higherMedicalEducation: 'Higher medical education',
+      neurosurgerySpecialization: 'Neurosurgery specialization',
+      experienceFrom3Years: '3+ years of experience',
+      detailsAndApply: 'Details and apply',
+      
+      operatingRoomNurse: 'Operating room nurse',
+      operatingBlockFullTime: 'Operating block, Full-time',
+      secondaryMedicalEducation: 'Secondary medical education',
+      operatingNurseCertificate: 'Operating nurse certificate',
+      experienceFrom1Year: '1+ years of experience',
+      
+      anesthesiologist: 'Anesthesiologist',
+      anesthesiologyFullTime: 'Anesthesiology and resuscitation, Full-time',
+      anesthesiologySpecialization: 'Anesthesiology specialization',
+      experienceFrom2Years: '2+ years of experience',
+      
+      whyWorkWithUs: 'Why work with us?',
+      professionalTeam: 'Professional team',
+      workWithBestSpecialists: 'Work with the best specialists in neurosurgery',
+      modernEquipment: 'Modern equipment',
+      latestTechnologies: 'Latest technologies and treatment methods',
+      decentSalary: 'Decent salary',
+      competitiveSalary: 'Competitive salary and bonuses',
+      
+      noSuitableVacancy: 'Didn\'t find a suitable vacancy?',
+      sendResume: 'Send us your resume and we will contact you when suitable positions become available',
+      hrDepartment: 'HR Department',
+      
+      // Gallery page - English
+      centerPhotosDescription: 'Photos of our center, equipment and work of our specialists',
+      allPhotos: 'All photos',
+      operatingRooms: 'Operating rooms',
+      equipment: 'Equipment',
+      centerBuilding: 'Center building',
+      staff: 'Staff',
+      patients: 'Patients'
     }
   };
 
