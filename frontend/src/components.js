@@ -257,7 +257,7 @@ export const HomePage = () => {
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-gray-900">25+</p>
-                    <p className="text-sm text-gray-600">Лет опыта</p>
+                    <p className="text-sm text-gray-600">{t('years')} {t('experience')}</p>
                   </div>
                 </div>
               </div>
