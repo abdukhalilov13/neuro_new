@@ -160,29 +160,38 @@ export const VacanciesPage = () => {
     setIsSubmitting(true);
     
     try {
-      // Отправляем данные на email
-      const emailData = {
-        to: 'admin@neuro.uz',
-        subject: `Отклик на вакансию: ${selectedVacancy.title}`,
-        body: `
-Новый отклик на вакансию: ${selectedVacancy.title}
-
-ФИО: ${applicationForm.name}
-Телефон: ${applicationForm.phone}
-Email: ${applicationForm.email}
-Опыт работы: ${applicationForm.experience}
-Образование: ${applicationForm.education}
-
-Сопроводительное письмо:
-${applicationForm.coverLetter}
-
-Отправлено: ${new Date().toLocaleString('ru-RU')}
-        `
+      // Создаем объект заявки
+      const applicationData = {
+        id: Date.now(),
+        vacancyId: selectedVacancy.id,
+        vacancyTitle: selectedVacancy.title,
+        applicant: {
+          name: applicationForm.name,
+          phone: applicationForm.phone,
+          email: applicationForm.email,
+          experience: applicationForm.experience,
+          education: applicationForm.education,
+          coverLetter: applicationForm.coverLetter
+        },
+        submittedAt: new Date().toISOString(),
+        status: 'new' // new, reviewed, contacted, hired, rejected
       };
 
-      // Здесь должна быть интеграция с email сервисом
-      // Пока что имитируем отправку
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Сохраняем заявку в localStorage
+      const existingApplications = JSON.parse(localStorage.getItem('neuro_job_applications') || '[]');
+      existingApplications.push(applicationData);
+      localStorage.setItem('neuro_job_applications', JSON.stringify(existingApplications));
+
+      // Отправляем на бэкенд (для будущей интеграции)
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/job-applications`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(applicationData)
+      });
+
+      console.log('Заявка сохранена:', applicationData);
       
       setSubmitStatus('success');
       setApplicationForm({
@@ -193,9 +202,16 @@ ${applicationForm.coverLetter}
         education: '',
         coverLetter: ''
       });
+      
+      // Закрываем модальное окно через 2 секунды
+      setTimeout(() => {
+        setSelectedVacancy(null);
+        setSubmitStatus(null);
+      }, 2000);
+      
     } catch (error) {
       setSubmitStatus('error');
-      console.error('Ошибка отправки:', error);
+      console.error('Ошибка отправки заявки:', error);
     } finally {
       setIsSubmitting(false);
     }
