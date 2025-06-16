@@ -319,12 +319,27 @@ export const VacancyApplicationsManager = () => {
 
       {/* Список заявок */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
+        {/* Отладочная информация */}
+        <div className="p-4 bg-gray-50 border-b">
+          <p className="text-sm text-gray-600">
+            Всего заявок в localStorage: {JSON.parse(localStorage.getItem('neuro_job_applications') || '[]').length} | 
+            Отфильтровано: {filteredApplications.length} | 
+            Поиск: "{searchTerm}" | 
+            Статус: {statusFilter}
+          </p>
+        </div>
+        
         {filteredApplications.length === 0 ? (
           <div className="p-8 text-center">
             <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <p className="text-gray-500">
               {applications.length === 0 ? 'Пока нет заявок на вакансии' : 'Нет заявок, соответствующих фильтрам'}
             </p>
+            {applications.length === 0 && (
+              <p className="text-sm text-gray-400 mt-2">
+                Отправьте заявку через страницу /vacancies для тестирования
+              </p>
+            )}
           </div>
         ) : (
           <table className="min-w-full divide-y divide-gray-200">
