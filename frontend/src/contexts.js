@@ -127,7 +127,7 @@ export const LanguageProvider = ({ children }) => {
       // Services page additional translations
       serviceConsultation: 'Нужна консультация?',
       serviceContactText: 'Свяжитесь с нами для получения профессиональной медицинской помощи',
-      scheduleAppointment: 'Записаться на прием'
+      scheduleAppointment: 'Записаться на прием',
       
       // Services
       ourServices: 'Наши услуги',
