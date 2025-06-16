@@ -689,27 +689,53 @@ def main():
             else:
                 print(f"❌ Appointment response is missing required fields: {missing_fields}")
     
-    # Print results
-    print(f"\n📊 Tests passed: {tester.tests_passed}/{tester.tests_run}")
-    print(f"\n===== API Testing Summary =====")
-    print(f"✅ Root API endpoint: {'Working' if tester.tests_passed > 0 else 'Not working'}")
-    print(f"✅ Health check endpoint: {'Working' if tester.tests_passed > 1 else 'Not working'}")
-    print(f"✅ Departments endpoint: {'Working' if tester.tests_passed > 2 else 'Not working'}")
-    print(f"✅ Departments CRUD operations: {'Working' if tester.tests_passed > 5 else 'Not working'}")
-    print(f"✅ Doctors endpoint: {'Working' if tester.tests_passed > 6 else 'Not working'}")
-    print(f"✅ Doctors creation: {'Working' if tester.tests_passed > 7 else 'Not working'}")
-    print(f"✅ Services endpoint: {'Working' if tester.tests_passed > 8 else 'Not working'}")
-    print(f"✅ Services creation: {'Working' if tester.tests_passed > 9 else 'Not working'}")
-    print(f"✅ News endpoint: {'Working' if tester.tests_passed > 10 else 'Not working'}")
-    print(f"✅ News creation: {'Working' if tester.tests_passed > 11 else 'Not working'}")
-    print(f"✅ Gallery endpoint: {'Working' if tester.tests_passed > 12 else 'Not working'}")
-    print(f"✅ Gallery creation: {'Working' if tester.tests_passed > 13 else 'Not working'}")
-    print(f"✅ Events endpoint: {'Working' if tester.tests_passed > 14 else 'Not working'}")
-    print(f"✅ Events creation: {'Working' if tester.tests_passed > 15 else 'Not working'}")
-    print(f"✅ Leadership endpoint: {'Working' if tester.tests_passed > 16 else 'Not working'}")
-    print(f"✅ Leadership creation: {'Working' if tester.tests_passed > 17 else 'Not working'}")
-    print(f"✅ Appointments endpoint: {'Working' if tester.tests_passed > 18 else 'Not working'}")
-    print(f"✅ CORS handling: {'Working' if tester.tests_passed == tester.tests_run else 'Not working'}")
+    # Job Applications Tests
+    def test_get_job_applications(self):
+        """Test getting all job applications"""
+        return self.run_test(
+            "Get Job Applications",
+            "GET",
+            "job-applications",
+            200
+        )
+        
+    def test_create_job_application(self):
+        """Test creating a new job application"""
+        application_data = {
+            "vacancyId": 2,
+            "vacancyTitle": "Медсестра нейрохирургического отделения",
+            "applicant": {
+                "name": "Смирнова Анна Владимировна",
+                "phone": "+998 90 555-44-33",
+                "email": "smirnova@mail.uz",
+                "experience": "7 лет в нейрохирургии",
+                "education": "Ташкентский медицинский колледж",
+                "coverLetter": "Имею большой опыт работы в нейрохирургическом отделении..."
+            },
+            "status": "new"
+        }
+        
+        return self.run_test(
+            "Create Job Application",
+            "POST",
+            "job-applications",
+            200,
+            data=application_data
+        )
+        
+    def test_update_job_application(self):
+        """Test updating a job application status"""
+        update_data = {
+            "status": "interview"
+        }
+        
+        return self.run_test(
+            "Update Job Application Status",
+            "PUT",
+            "job-applications/1",
+            200,
+            data=update_data
+        )
     
     return 0 if tester.tests_passed == tester.tests_run else 1
 
