@@ -92,68 +92,62 @@ export const ImprovedDoctorDashboard = () => {
     }
   }, [currentDoctor, filterDate, filterStatus]);
 
+  // Загрузка записей для текущего врача
+  useEffect(() => {
+    if (currentDoctor) {
+      loadAppointments();
+    }
+  }, [currentDoctor, filterDate, filterStatus]);
+
   const loadAppointments = () => {
-    // Здесь будет API запрос для получения записей врача
-    // Пока используем mock данные, но привязанные к конкретному врачу
-    const mockData = [
-      {
-        id: 1,
-        doctorId: currentDoctor?.id,
-        date: '2025-06-13',
-        time: '09:00',
-        patient: {
-          name: 'Иванов Алексей Петрович',
-          phone: '+998 90 123-45-67',
-          email: 'ivanov@mail.uz',
-          age: 45,
-          complaint: 'Головные боли и головокружение, длятся уже 2 недели'
-        },
-        status: 'pending',
-        type: 'consultation',
-        createdAt: '2025-06-12T10:30:00',
-        notes: ''
-      },
-      {
-        id: 2,
-        doctorId: currentDoctor?.id,
-        date: '2025-06-13',
-        time: '10:30',
-        patient: {
-          name: 'Петрова Мария Ивановна',
-          phone: '+998 91 234-56-78',
-          email: 'petrova@mail.uz',
-          age: 32,
-          complaint: 'Онемение в левой руке после травмы'
-        },
-        status: 'confirmed',
-        type: 'follow-up',
-        createdAt: '2025-06-12T14:15:00',
-        notes: 'Повторный прием после МРТ'
-      },
-      {
-        id: 3,
-        doctorId: currentDoctor?.id,
-        date: '2025-06-14',
-        time: '14:00',
-        patient: {
-          name: 'Сидоров Петр Иванович',
-          phone: '+998 93 345-67-89',
-          email: 'sidorov@mail.uz',
-          age: 58,
-          complaint: 'Боли в пояснице, онемение ног'
-        },
-        status: 'pending',
-        type: 'consultation',
-        createdAt: '2025-06-13T09:20:00',
-        notes: ''
+    try {
+      // Загружаем реальные записи из localStorage
+      const savedAppointments = JSON.parse(localStorage.getItem('neuro_appointments') || '[]');
+      console.log('Все записи:', savedAppointments);
+      console.log('Текущий врач ID:', currentDoctor?.id);
+      
+      // Фильтруем записи по врачу
+      const doctorAppointments = savedAppointments.filter(apt => {
+        const matchesDoctor = apt.doctorId === currentDoctor?.id || apt.doctorId === String(currentDoctor?.id);
+        const matchesDate = !filterDate || apt.date === filterDate;
+        const matchesStatus = filterStatus === 'all' || apt.status === filterStatus;
+        const matchesSearch = !searchTerm || apt.patient.name.toLowerCase().includes(searchTerm.toLowerCase());
+        
+        return matchesDoctor && matchesDate && matchesStatus && matchesSearch;
+      });
+      
+      console.log('Записи врача:', doctorAppointments);
+      
+      // Если нет реальных записей, добавляем demo данные для этого врача
+      if (doctorAppointments.length === 0) {
+        const mockData = [
+          {
+            id: `demo-${currentDoctor.id}-1`,
+            doctorId: currentDoctor?.id,
+            doctorName: currentDoctor?.name_ru || currentDoctor?.name,
+            date: new Date().toISOString().split('T')[0],
+            time: '09:00',
+            patient: {
+              name: 'Демо пациент Иванов А.П.',
+              phone: '+998 90 123-45-67',
+              email: 'demo@mail.uz',
+              age: 45,
+              complaint: 'Демо жалоба: головные боли и головокружение'
+            },
+            status: 'pending',
+            type: 'consultation',
+            createdAt: new Date().toISOString(),
+            notes: ''
+          }
+        ];
+        setAppointments(mockData);
+      } else {
+        setAppointments(doctorAppointments);
       }
-    ];
-    
-    setAppointments(mockData.filter(apt => 
-      (!filterDate || apt.date === filterDate) &&
-      (filterStatus === 'all' || apt.status === filterStatus) &&
-      (!searchTerm || apt.patient.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    ));
+    } catch (error) {
+      console.error('Ошибка загрузки записей:', error);
+      setAppointments([]);
+    }
   };
 
   const handleLogin = (e) => {
