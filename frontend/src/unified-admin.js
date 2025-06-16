@@ -352,6 +352,9 @@ const UnifiedAdminPanel = () => {
   const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
   const [isLeadershipModalOpen, setIsLeadershipModalOpen] = useState(false);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isSeoModalOpen, setIsSeoModalOpen] = useState(false);
+  const [isRedirectModalOpen, setIsRedirectModalOpen] = useState(false);
   
   // Данные для редактирования
   const [editingDepartment, setEditingDepartment] = useState(null);
@@ -361,6 +364,9 @@ const UnifiedAdminPanel = () => {
   const [editingGalleryImage, setEditingGalleryImage] = useState(null);
   const [editingLeadership, setEditingLeadership] = useState(null);
   const [editingEvent, setEditingEvent] = useState(null);
+  const [editingContact, setEditingContact] = useState(null);
+  const [editingSeo, setEditingSeo] = useState(null);
+  const [editingRedirect, setEditingRedirect] = useState(null);
 
   // Данные событий
   const [newEvent, setNewEvent] = useState({
