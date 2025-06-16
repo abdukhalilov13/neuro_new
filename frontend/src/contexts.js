@@ -288,7 +288,62 @@ export const LanguageProvider = ({ children }) => {
       postOperativeRehabilitation: 'Послеоперационная реабилитация',
       outpatientObservation: 'Амбулаторное наблюдение',
       highQualifiedSpecialists: 'Команда высококвалифицированных специалистов с многолетним опытом',
-      fullRangeServices: 'Полный спектр медицинских услуг в области нейрохирургии с прозрачным ценообразованием'
+      fullRangeServices: 'Полный спектр медицинских услуг в области нейрохирургии с прозрачным ценообразованием',
+      
+      // Pages content translations
+      historyAndMission: 'История и миссия',
+      foundedYear: 'Год основания',
+      patientsPerYear: 'Пациентов в год',
+      centerLeadership: 'Руководство центра',
+      experiencedSpecialistsLeading: 'Опытные специалисты, возглавляющие развитие нейрохирургии в республике',
+      
+      // Consultation section
+      needConsultation: 'Нужна консультация по услугам?',
+      specialistsWillAnswer: 'Наши специалисты ответят на все ваши вопросы и помогут выбрать оптимальное лечение',
+      bookConsultation: 'Записаться на консультацию',
+      contactUs: 'Связаться с нами',
+      
+      // Vacancies page
+      joinProfessionalTeam: 'Присоединяйтесь к команде профессионалов в ведущем центре нейрохирургии',
+      neurosurgeon: 'Врач-нейрохирург',
+      neurosurgeryFullTime: 'Нейрохирургия, Полная занятость',
+      mainRequirements: 'Основные требования:',
+      higherMedicalEducation: 'Высшее медицинское образование',
+      neurosurgerySpecialization: 'Специализация по нейрохирургии',
+      experienceFrom3Years: 'Опыт работы от 3 лет',
+      detailsAndApply: 'Подробнее и откликнуться',
+      
+      operatingRoomNurse: 'Медицинская сестра операционного блока',
+      operatingBlockFullTime: 'Операционный блок, Полная занятость',
+      secondaryMedicalEducation: 'Среднее медицинское образование',
+      operatingNurseCertificate: 'Сертификат операционной медсестры',
+      experienceFrom1Year: 'Опыт работы от 1 года',
+      
+      anesthesiologist: 'Врач-анестезиолог',
+      anesthesiologyFullTime: 'Анестезиология и реанимация, Полная занятость',
+      anesthesiologySpecialization: 'Специализация по анестезиологии',
+      experienceFrom2Years: 'Опыт работы от 2 лет',
+      
+      whyWorkWithUs: 'Почему работать у нас?',
+      professionalTeam: 'Профессиональная команда',
+      workWithBestSpecialists: 'Работайте с лучшими специалистами в области нейрохирургии',
+      modernEquipment: 'Современное оборудование',
+      latestTechnologies: 'Новейшие технологии и методы лечения',
+      decentSalary: 'Достойная оплата',
+      competitiveSalary: 'Конкурентная заработная плата и премии',
+      
+      noSuitableVacancy: 'Не нашли подходящую вакансию?',
+      sendResume: 'Отправьте нам свое резюме, и мы свяжемся с вами при появлении подходящих позиций',
+      hrDepartment: 'Отдел кадров',
+      
+      // Gallery page
+      centerPhotosDescription: 'Фотографии нашего центра, оборудования и работы наших специалистов',
+      allPhotos: 'Все фотографии',
+      operatingRooms: 'Операционные',
+      equipment: 'Оборудование',
+      centerBuilding: 'Здание центра',
+      staff: 'Персонал',
+      patients: 'Пациенты'
     },
     uz: {
       // Navigation
