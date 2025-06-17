@@ -454,6 +454,54 @@ class NeuroUzAPITester:
             "appointments/1",
             200
         )
+        
+    # Job Applications Tests
+    def test_get_job_applications(self):
+        """Test getting all job applications"""
+        return self.run_test(
+            "Get All Job Applications",
+            "GET",
+            "job-applications",
+            200
+        )
+        
+    def test_create_job_application(self):
+        """Test creating a new job application"""
+        job_application_data = {
+            "vacancyId": 2,
+            "vacancyTitle": "Медсестра нейрохирургического отделения",
+            "applicant": {
+                "name": "Смирнова Анна Владимировна",
+                "phone": "+998 90 123-45-67",
+                "email": "smirnova@mail.uz",
+                "experience": "7 лет в нейрохирургии",
+                "education": "Медицинский колледж, специальность сестринское дело",
+                "coverLetter": "Имею большой опыт работы в нейрохирургии и хотела бы присоединиться к вашей команде..."
+            },
+            "status": "new"
+        }
+        
+        return self.run_test(
+            "Create Job Application",
+            "POST",
+            "job-applications",
+            200,
+            data=job_application_data
+        )
+        
+    def test_update_job_application(self):
+        """Test updating a job application status"""
+        update_data = {
+            "status": "interview"
+        }
+        
+        return self.run_test(
+            "Update Job Application Status",
+            "PUT",
+            "job-applications/1",
+            200,
+            data=update_data
+        )
 
 def main():
     # Setup
