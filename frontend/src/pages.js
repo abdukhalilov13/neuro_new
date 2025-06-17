@@ -66,8 +66,8 @@ export const DepartmentsPage = () => {
                     <Brain className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{dept.name_ru || dept.name}</h3>
-                    <p className="text-gray-600 mb-4">{dept.description_ru || dept.description}</p>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{getFieldByLanguage(dept, 'name')}</h3>
+                    <p className="text-gray-600 mb-4">{getFieldByLanguage(dept, 'description')}</p>
                   </div>
                 </div>
               </motion.div>
