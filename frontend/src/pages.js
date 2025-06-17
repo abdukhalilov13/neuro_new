@@ -1044,10 +1044,15 @@ export const AppointmentPage = () => {
             )}
 
             {step === 3 && (
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('personalData')}</h2>
-                  
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white rounded-2xl p-8 shadow-lg"
+              >
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('personalData')}</h2>
+                
+                <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1061,7 +1066,7 @@ export const AppointmentPage = () => {
                           ...appointmentData,
                           patient: {...appointmentData.patient, firstName: e.target.value}
                         })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Введите имя"
                       />
                       {errors.firstName && <p className="text-red-600 text-sm mt-1">{errors.firstName}</p>}
@@ -1079,7 +1084,7 @@ export const AppointmentPage = () => {
                           ...appointmentData,
                           patient: {...appointmentData.patient, lastName: e.target.value}
                         })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Введите фамилию"
                       />
                       {errors.lastName && <p className="text-red-600 text-sm mt-1">{errors.lastName}</p>}
@@ -1097,7 +1102,7 @@ export const AppointmentPage = () => {
                           ...appointmentData,
                           patient: {...appointmentData.patient, phone: e.target.value}
                         })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="+998 90 123-45-67"
                       />
                       {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
@@ -1114,7 +1119,7 @@ export const AppointmentPage = () => {
                           ...appointmentData,
                           patient: {...appointmentData.patient, email: e.target.value}
                         })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="example@mail.uz"
                       />
                     </div>
@@ -1130,7 +1135,7 @@ export const AppointmentPage = () => {
                           ...appointmentData,
                           patient: {...appointmentData.patient, birthDate: e.target.value}
                         })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       />
                     </div>
 
@@ -1145,7 +1150,7 @@ export const AppointmentPage = () => {
                           ...appointmentData,
                           patient: {...appointmentData.patient, address: e.target.value}
                         })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Ваш адрес"
                       />
                     </div>
@@ -1159,12 +1164,12 @@ export const AppointmentPage = () => {
                       rows={4}
                       value={appointmentData.complaint}
                       onChange={(e) => setAppointmentData({...appointmentData, complaint: e.target.value})}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                      placeholder={t('describeSymptomsPlaceholder') || "Опишите ваши симптомы и жалобы"}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Опишите ваши симптомы и жалобы подробно"
                     />
                   </div>
 
-                  <div className="flex justify-between pt-6">
+                  <div className="flex justify-between pt-6 border-t border-gray-200">
                     <button
                       type="button"
                       onClick={() => setStep(2)}
@@ -1173,7 +1178,8 @@ export const AppointmentPage = () => {
                       {t('back')}
                     </button>
                     <button
-                      type="submit"
+                      type="button"
+                      onClick={handleSubmit}
                       disabled={isSubmitting}
                       className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center space-x-2"
                     >
@@ -1183,12 +1189,12 @@ export const AppointmentPage = () => {
                           <span>{t('submitting')}</span>
                         </>
                       ) : (
-                        <span>{t('submitBooking')}</span>
+                        <span>{t('submitBooking') || 'Записаться'}</span>
                       )}
                     </button>
                   </div>
-                </form>
-              </div>
+                </div>
+              </motion.div>
             )}
 
             {step === 4 && (
