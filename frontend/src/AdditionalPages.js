@@ -7,7 +7,7 @@ import { useAdmin, useLanguage } from './contexts';
 
 // Вакансии
 export const VacanciesPage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { adminData } = useAdmin();
   const [selectedVacancy, setSelectedVacancy] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,6 +20,10 @@ export const VacanciesPage = () => {
     education: '',
     coverLetter: ''
   });
+
+  const getFieldByLanguage = (item, fieldName) => {
+    return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
+  };
 
   // Загружаем вакансии из админки или используем fallback данные
   const vacancies = adminData?.vacancies?.filter(v => v.isActive) || [
