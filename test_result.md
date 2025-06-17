@@ -386,20 +386,17 @@ frontend:
         agent: "testing"
         comment: "Tested the admin panel access and contacts section. When navigating directly to /admin, the browser redirects to the homepage, but the admin login form is still displayed correctly. Login with admin@neuro.uz / admin123 works properly. After login, the admin dashboard loads successfully. The Contacts section is accessible by clicking the 'Контакты' tab in the navigation. The Contacts section contains all required components: Phones section (3 fields), Emails section (2 fields), and Social Media section (Facebook, Instagram, YouTube, Telegram). All fields in the contacts section are editable. There is a compilation error in the console: 'ERROR in ./src/components.js 1074:0-72 export 'UnifiedAdminPanel' (reexported as 'UnifiedAdminPanel') was not found in './unified-admin' (possible exports: default)', but this doesn't affect the functionality of the admin panel."
         
-  - task: "Multilingual support on main website"
+  - task: "Multilingual support on website pages"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/contexts.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
-      - working: true
+      - working: false
         agent: "testing"
-        comment: "Verified that the language switcher is present in the header with options for Russian, Uzbek, and English. The translations are comprehensive with over 100 translation keys for each language. The navigation menu and main content areas are properly translated."
-      - working: true
-        agent: "testing"
-        comment: "Conducted a thorough test of the language switching functionality. The language switcher works correctly, changing between Russian, Uzbek, and English. All navigation menu items, headings, and content sections properly translate when switching languages. The implementation is comprehensive and working as expected."
+        comment: "Tested multilingual functionality on various pages. The admin panel has proper language switcher buttons (RU/UZ/EN) in forms, but the frontend language switching functionality is not working correctly. When using URL parameters to switch languages (?lang=uz, ?lang=en), the content does not change. All pages continue to display Russian text regardless of the language parameter. This suggests an issue with the language context or the language switching mechanism in the frontend code."
         
   - task: "Image cropping functionality"
     implemented: true
