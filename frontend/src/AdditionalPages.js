@@ -260,21 +260,30 @@ export const VacanciesPage = () => {
                 >
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2">{vacancy.title}</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                        {vacancy.title_ru && t === undefined ? vacancy.title_ru : 
+                         vacancy[`title_${typeof t === 'function' ? 'ru' : 'ru'}`] || vacancy.title}
+                      </h2>
                       <div className="flex items-center space-x-4 text-sm text-gray-600">
                         <div className="flex items-center space-x-1">
                           <Building className="w-4 h-4" />
-                          <span>{vacancy.department}</span>
+                          <span>
+                            {vacancy.department_ru && t === undefined ? vacancy.department_ru :
+                             vacancy[`department_${typeof t === 'function' ? 'ru' : 'ru'}`] || vacancy.department}
+                          </span>
                         </div>
                         <div className="flex items-center space-x-1">
                           <Clock className="w-4 h-4" />
-                          <span>{vacancy.type}</span>
+                          <span>
+                            {vacancy.type_ru && t === undefined ? vacancy.type_ru :
+                             vacancy[`type_${typeof t === 'function' ? 'ru' : 'ru'}`] || vacancy.type}
+                          </span>
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="flex items-center space-x-1 text-green-600 font-semibold">
-                        <span>{vacancy.salary} UZS</span>
+                        <span>{vacancy.salary ? `${parseInt(vacancy.salary).toLocaleString()} сум` : 'По договоренности'}</span>
                       </div>
                     </div>
                   </div>
@@ -283,7 +292,8 @@ export const VacanciesPage = () => {
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">Основные требования:</h3>
                       <ul className="text-sm text-gray-600 space-y-1">
-                        {vacancy.requirements.slice(0, 3).map((req, i) => (
+                        {(vacancy.requirements_ru && t === undefined ? vacancy.requirements_ru :
+                          vacancy[`requirements_${typeof t === 'function' ? 'ru' : 'ru'}`] || vacancy.requirements).slice(0, 3).map((req, i) => (
                           <li key={i} className="flex items-start space-x-2">
                             <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                             <span>{req}</span>
