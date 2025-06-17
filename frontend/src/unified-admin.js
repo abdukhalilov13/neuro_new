@@ -2687,18 +2687,20 @@ const UnifiedAdminPanel = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Категория</label>
-                <select
-                  value={newService.category}
-                  onChange={(e) => setNewService({...newService, category: e.target.value})}
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Категория ({currentAdminLanguage.toUpperCase()})
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newService[`category_${currentAdminLanguage}`]}
+                  onChange={(e) => setNewService({
+                    ...newService, 
+                    [`category_${currentAdminLanguage}`]: e.target.value
+                  })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-                >
-                  <option value="">Выберите категорию</option>
-                  <option value="Консультации">Консультации</option>
-                  <option value="Диагностика">Диагностика</option>
-                  <option value="Хирургия">Хирургия</option>
-                  <option value="Реабилитация">Реабилитация</option>
-                </select>
+                  placeholder="Консультации, Диагностика, Хирургия..."
+                />
               </div>
             </div>
             
