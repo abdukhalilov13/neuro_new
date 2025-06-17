@@ -452,6 +452,29 @@ const UnifiedAdminPanel = () => {
     category: 'building'
   });
 
+  // Состояния для вакансий
+  const [isVacancyModalOpen, setIsVacancyModalOpen] = useState(false);
+  const [editingVacancy, setEditingVacancy] = useState(null);
+  const [newVacancy, setNewVacancy] = useState({
+    title_ru: '', title_uz: '', title_en: '',
+    department_ru: '', department_uz: '', department_en: '',
+    type_ru: '', type_uz: '', type_en: '',
+    salary: '',
+    requirements_ru: [''], requirements_uz: [''], requirements_en: [''],
+    responsibilities_ru: [''], responsibilities_uz: [''], responsibilities_en: [''],
+    benefits_ru: [''], benefits_uz: [''], benefits_en: ['']
+  });
+
+  // Загружаем заявки на вакансии
+  const [jobApplications, setJobApplications] = useState(() => {
+    try {
+      const saved = localStorage.getItem('neuro_job_applications');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
   // События (добавляем новое состояние)
   const [events, setEvents] = useState([
     {
