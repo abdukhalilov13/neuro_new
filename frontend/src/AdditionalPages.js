@@ -313,7 +313,7 @@ export const VacanciesPage = () => {
                 transition={{ duration: 0.6 }}
                 className="bg-white rounded-2xl p-6 shadow-lg"
               >
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Почему работать у нас?</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{t('whyWorkWithUs')}</h3>
                 <div className="space-y-3">
                   <div className="flex items-start space-x-3">
                     <Users className="w-5 h-5 text-blue-500 mt-1" />
