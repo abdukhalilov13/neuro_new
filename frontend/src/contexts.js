@@ -449,7 +449,12 @@ export const LanguageProvider = ({ children }) => {
       // Consultation block
       needConsultationQuestion: 'Konsultatsiya kerakmi?',
       consultationBlockText: 'Tajribali mutaxassislarimiz sizga har qanday savollar bo\'yicha professional tibbiy maslahat berishga tayyor',
-      getConsultation: 'Konsultatsiya olish'
+      getConsultation: 'Konsultatsiya olish',
+      
+      // About page detailed content
+      aboutHistoryText1: 'Respublika Neyroxirurgiya Ilmiy Markazi 1999 yilda O\'zbekiston Respublikasida yuqori texnologiyali neyroxirurgik yordam ko\'rsatish bo\'yicha yetakchi ixtisoslashgan tibbiyot muassasasi sifatida tashkil etilgan.',
+      aboutHistoryText2: '25 yildan ortiq faoliyat davomida markaz zamonaviy texnologiyalardan foydalangan holda bosh va orqa miya bo\'yicha eng murakkab operatsiyalar o\'tkaziladigan Markaziy Osiyodagi neyroxirurgiya sohasidagi yetakchi tibbiyot muassasasiga aylandi.',
+      aboutHistoryText3: 'Bizning missiyamiz - nerv sistemasi kasalliklari bilan og\'rigan bemorlarga yuqori sifatli, qulay va innovatsion tibbiy yordam ko\'rsatish, ilm-fanni rivojlantirish va yuqori malakali mutaxassislar tayyorlash.'
     },
     en: {
       // Navigation
