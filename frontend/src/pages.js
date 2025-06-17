@@ -363,23 +363,13 @@ export const NewsPage = () => {
                     </div>
                     <div className="md:w-2/3 p-6">
                       <p className="text-sm text-blue-600 mb-2">{newsItem.date}</p>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-3">{newsItem.title_ru || newsItem.title}</h2>
-                      <p className="text-gray-600 mb-4">{newsItem.excerpt_ru || newsItem.excerpt}</p>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-3">{getFieldByLanguage(newsItem, 'title')}</h2>
+                      <p className="text-gray-600 mb-4">{getFieldByLanguage(newsItem, 'excerpt')}</p>
                       
                       {expandedNews[newsItem.id] && (
                         <div className="mb-4">
                           <p className="text-gray-700 mb-4">
-                            {newsItem.content} Здесь располагается полный текст новости с подробной информацией о событии. 
-                            В статье рассматриваются все аспекты происходящего, приводятся комментарии экспертов и 
-                            дополнительные факты, которые помогают читателю полностью понять суть события.
-                          </p>
-                          <p className="text-gray-700 mb-4">
-                            Специалисты центра отмечают важность данного события для развития нейрохирургии в регионе. 
-                            Данная инициатива позволит улучшить качество медицинской помощи и внедрить новые технологии лечения.
-                          </p>
-                          <p className="text-gray-700">
-                            За дополнительной информацией вы можете обратиться в пресс-службу центра или посетить наш официальный сайт. 
-                            Мы всегда готовы ответить на ваши вопросы и предоставить актуальную информацию о наших достижениях.
+                            {getFieldByLanguage(newsItem, 'content')}
                           </p>
                         </div>
                       )}
