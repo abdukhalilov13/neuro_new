@@ -157,7 +157,7 @@ const DoctorDashboard = () => {
             <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <User className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900">Вход в кабинет врача</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Кабинет врача</h1>
             <p className="text-gray-600 mt-2">Введите ваши учетные данные</p>
           </div>
 
