@@ -708,11 +708,11 @@ export const AboutPage = () => {
               <div className="p-8">
                 <div className="flex items-start space-x-6 mb-6">
                   <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0">
-                    <img src={selectedLeader.image} alt={selectedLeader.name} className="w-full h-full object-cover" />
+                    <img src={selectedLeader.image} alt={getFieldByLanguage(selectedLeader, 'name')} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">{selectedLeader.name}</h2>
-                    <p className="text-lg text-blue-600 font-medium mb-3">{selectedLeader.position}</p>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">{getFieldByLanguage(selectedLeader, 'name')}</h2>
+                    <p className="text-lg text-blue-600 font-medium mb-3">{getFieldByLanguage(selectedLeader, 'position')}</p>
                     <div className="flex flex-col space-y-1 text-sm text-gray-600">
                       <div className="flex items-center space-x-2">
                         <Phone className="w-4 h-4" />
