@@ -130,7 +130,7 @@ export const LanguageProvider = ({ children }) => {
       scheduleAppointment: 'Записаться на прием',
       
       // Additional missing translations
-      professionalTeam: 'Профессиональная команда',
+      whyWorkWithUs: 'Почему выбирают нас?',
       workWithBestSpecialists: 'Работайте с лучшими специалистами в области нейрохирургии',
       modernEquipment: 'Современное оборудование',
       latestTechnologies: 'Новейшие технологии и методы лечения',
@@ -142,6 +142,7 @@ export const LanguageProvider = ({ children }) => {
       upcomingEvents: 'Ближайшие события',
       needConsultationQuestion: 'Нужна консультация?',
       contactForHelp: 'Свяжитесь с нами для получения профессиональной медицинской помощи',
+      learnMore: 'Подробнее',
       
       // Job application form
       fullName: 'ФИО',
