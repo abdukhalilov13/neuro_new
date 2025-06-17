@@ -1826,7 +1826,7 @@ const UnifiedAdminPanel = () => {
                   <div className="ml-3">
                     <p className="text-sm font-medium text-blue-600">Администраторов</p>
                     <p className="text-2xl font-bold text-blue-900">
-                      {users.filter(u => u.role === 'admin').length}
+                      {(adminData.accounts || []).filter(u => u.role === 'admin').length}
                     </p>
                   </div>
                 </div>
