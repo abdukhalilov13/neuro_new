@@ -2062,9 +2062,16 @@ const UnifiedAdminPanel = () => {
         {activeTab === 'vacancies' && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-gray-900">Управление вакансиями</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Управление вакансиями и заявками</h2>
             </div>
 
+            {/* Управление вакансиями */}
+            <VacanciesAdminManager />
+            
+            {/* Разделитель */}
+            <div className="border-t border-gray-200 my-8"></div>
+            
+            {/* Управление заявками */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
               <div className="flex items-center space-x-3">
                 <Briefcase className="w-5 h-5 text-blue-600" />
