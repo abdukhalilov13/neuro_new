@@ -1764,7 +1764,7 @@ const UnifiedAdminPanel = () => {
         {activeTab === 'users' && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-gray-900">Пользователи ({users.length})</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Пользователи ({(adminData.accounts || []).length})</h2>
               <button
                 onClick={() => {
                   setEditingUser(null);
