@@ -446,7 +446,7 @@ frontend:
   - task: "Routing for special pages"
     implemented: true
     working: false
-    file: "/app/frontend/src/App.js"
+    file: "/app/frontend/package.json"
     stuck_count: 1
     priority: "high"
     needs_retesting: true
@@ -454,6 +454,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "All special pages (/doctor-dashboard, /appointment, /vacancies, etc.) are redirecting to the homepage instead of showing their respective content. This suggests there might be an issue with the React Router configuration or a client-side redirect in the code. The routing in App.js looks correct, and all the component files exist, but the routes are not working properly."
+      - working: false
+        agent: "testing"
+        comment: "Identified the issue: The React Router version in package.json is v7.5.1, which is a very new version, but the code is using the older React Router syntax. This is causing the routing to not work properly. The solution is to either downgrade the React Router version to v6.x or update the code to use the newer React Router v7 syntax."
 
 metadata:
   created_by: "main_agent"
