@@ -84,8 +84,12 @@ export const DepartmentsPage = () => {
 // Врачи - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const DoctorsPage = () => {
   const { adminData } = useAdmin();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const doctors = adminData?.doctors || siteData.doctors;
+
+  const getFieldByLanguage = (item, fieldName) => {
+    return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
+  };
 
   return (
     <div className="min-h-screen">
