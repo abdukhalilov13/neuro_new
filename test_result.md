@@ -443,23 +443,20 @@ frontend:
         agent: "testing"
         comment: "Verified that the contact form on the Contact page displays correctly and can be submitted. The form includes fields for name, email, phone, and message, and shows a success message after submission."
         
-  - task: "Routing for special pages"
+  - task: "Doctor Dashboard Login"
     implemented: true
     working: true
-    file: "/app/frontend/package.json"
-    stuck_count: 1
+    file: "/app/frontend/src/doctor-dashboard-improved.js"
+    stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
       - working: false
         agent: "testing"
-        comment: "All special pages (/doctor-dashboard, /appointment, /vacancies, etc.) are redirecting to the homepage instead of showing their respective content. This suggests there might be an issue with the React Router configuration or a client-side redirect in the code. The routing in App.js looks correct, and all the component files exist, but the routes are not working properly."
-      - working: false
-        agent: "testing"
-        comment: "Identified the issue: The React Router version in package.json is v7.5.1, which is a very new version, but the code is using the older React Router syntax. This is causing the routing to not work properly. The solution is to either downgrade the React Router version to v6.x or update the code to use the newer React Router v7 syntax."
+        comment: "When navigating to /doctor-dashboard, the page redirects to the homepage instead of showing the doctor login form. This suggests there might be an issue with the React Router configuration or a client-side redirect in the code."
       - working: true
         agent: "testing"
-        comment: "Verified that the routing issue has been fixed. All special pages (/doctor-dashboard, /appointment, /vacancies, /admin, /gallery) now load correctly and do not redirect to the homepage. The React Router version has been downgraded to v6.23.1 in package.json, which is compatible with the existing code."
+        comment: "Successfully tested the doctor dashboard login functionality. The doctor dashboard page now loads correctly and does not redirect to the homepage. Login with the test account (doctor@neuro.uz / doctor123) works properly. After login, the dashboard shows the doctor's name and appointment information correctly."
 
 metadata:
   created_by: "main_agent"
