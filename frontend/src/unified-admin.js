@@ -795,11 +795,9 @@ const UnifiedAdminPanel = () => {
 
   const resetUserForm = () => {
     setNewUser({
-      username: '',
       name: '',
       role: 'doctor',
       email: '',
-      phone: '',
       password: '',
       status: 'active'
     });
