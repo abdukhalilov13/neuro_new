@@ -1840,7 +1840,7 @@ const UnifiedAdminPanel = () => {
                   <div className="ml-3">
                     <p className="text-sm font-medium text-purple-600">Врачей</p>
                     <p className="text-2xl font-bold text-purple-900">
-                      {users.filter(u => u.role === 'doctor').length}
+                      {(adminData.accounts || []).filter(u => u.role === 'doctor').length}
                     </p>
                   </div>
                 </div>
