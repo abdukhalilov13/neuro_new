@@ -567,32 +567,32 @@ export const ContactPage = () => {
 
               {/* Информация о вступлении в ассоциацию */}
               <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Вступление в Ассоциацию нейрохирургов Узбекистана</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('associationMembership')}</h2>
                 
                 <div className="space-y-4">
-                  <p className="text-gray-700 font-medium">Для вступления в Ассоциацию нейрохирургов Узбекистана необходимо предоставить:</p>
+                  <p className="text-gray-700 font-medium">{t('membershipRequirements')}</p>
                   
                   <ol className="space-y-3 text-gray-600">
                     <li className="flex items-start space-x-3">
                       <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">1</span>
-                      <span>Заявление на имя председателя Ассоциации Кариева Г.М.</span>
+                      <span>{t('membershipApplication')}</span>
                     </li>
                     <li className="flex items-start space-x-3">
                       <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">2</span>
-                      <span>Квитанцию об уплате 1 размера минимальной заработной платы.</span>
+                      <span>{t('membershipPayment')}</span>
                     </li>
                   </ol>
 
                   <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                    <h4 className="font-semibold text-gray-900 mb-3">Реквизиты Ассоциации нейрохирургов Узбекистана:</h4>
+                    <h4 className="font-semibold text-gray-900 mb-3">{t('associationDetails')}</h4>
                     <div className="text-sm text-gray-700 space-y-1">
-                      <p><strong>р/с:</strong> 20212000404984462001</p>
-                      <p><strong>Банк:</strong> Ташкентский городской филиал банка «Асака» (ОАЖ)</p>
-                      <p><strong>МФО:</strong> 00416</p>
-                      <p><strong>ИНН:</strong> 207146456</p>
-                      <p><strong>ОКОНХ:</strong> 98500</p>
-                      <p><strong>От кого:</strong> Ф.И.О.</p>
-                      <p><strong>Основание:</strong> Членский взнос за 2025 год</p>
+                      <p><strong>{t('accountNumber')}:</strong> 20212000404984462001</p>
+                      <p><strong>{t('bankName')}:</strong> Ташкентский городской филиал банка «Асака» (ОАЖ)</p>
+                      <p><strong>{t('bankCode')}:</strong> 00416</p>
+                      <p><strong>{t('taxNumber')}:</strong> 207146456</p>
+                      <p><strong>{t('activityCode')}:</strong> 98500</p>
+                      <p><strong>{t('payerName')}:</strong> Ф.И.О.</p>
+                      <p><strong>{t('paymentPurpose')}:</strong> {t('membershipFee2025')}</p>
                     </div>
                   </div>
                 </div>
