@@ -345,8 +345,8 @@ export const VacanciesPage = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="bg-blue-600 rounded-2xl p-6 text-white"
               >
-                <h3 className="text-xl font-bold mb-4">Не нашли подходящую вакансию?</h3>
-                <p className="mb-4">Отправьте нам свое резюме, и мы свяжемся с вами при появлении подходящих позиций.</p>
+                <h3 className="text-xl font-bold mb-4">{t('notFoundVacancy')}</h3>
+                <p className="mb-4">{t('sendResume')}</p>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center space-x-2">
                     <Mail className="w-4 h-4" />
@@ -354,7 +354,7 @@ export const VacanciesPage = () => {
                   </div>
                   <div className="flex items-center space-x-2">
                     <Users className="w-4 h-4" />
-                    <span>Отдел кадров: +998 71 264 96 22</span>
+                    <span>{t('hrDepartmentContact')}</span>
                   </div>
                 </div>
               </motion.div>
