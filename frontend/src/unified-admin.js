@@ -884,11 +884,8 @@ const UnifiedAdminPanel = () => {
       alert('Нельзя деактивировать главного администратора!');
       return;
     }
-    setUsers(users.map(user => 
-      user.id === id 
-        ? { ...user, status: user.status === 'active' ? 'inactive' : 'active' }
-        : user
-    ));
+    toggleAccountStatus(id);
+    alert('Статус пользователя изменен!');
   };
 
   if (!isAuthenticated) {
