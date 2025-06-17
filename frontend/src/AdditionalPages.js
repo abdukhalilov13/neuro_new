@@ -444,7 +444,7 @@ export const VacanciesPage = () => {
                 <form onSubmit={handleApplicationSubmit} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      ФИО *
+                      {t('fullName')} *
                     </label>
                     <input
                       type="text"
@@ -452,12 +452,13 @@ export const VacanciesPage = () => {
                       value={applicationForm.name}
                       onChange={(e) => setApplicationForm({...applicationForm, name: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder={t('fullName')}
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Телефон *
+                      {t('phone')} *
                     </label>
                     <input
                       type="tel"
@@ -465,58 +466,62 @@ export const VacanciesPage = () => {
                       value={applicationForm.phone}
                       onChange={(e) => setApplicationForm({...applicationForm, phone: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder="+998 90 123-45-67"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Email
+                      Email *
                     </label>
                     <input
                       type="email"
+                      required
                       value={applicationForm.email}
                       onChange={(e) => setApplicationForm({...applicationForm, email: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder="example@mail.uz"
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Опыт работы
+                      {t('workExperience')} *
                     </label>
                     <input
                       type="text"
+                      required
                       value={applicationForm.experience}
                       onChange={(e) => setApplicationForm({...applicationForm, experience: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                      placeholder="5 лет в нейрохирургии"
+                      placeholder={t('workExperience')}
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Образование
+                      {t('education')} *
                     </label>
                     <input
                       type="text"
+                      required
                       value={applicationForm.education}
                       onChange={(e) => setApplicationForm({...applicationForm, education: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                      placeholder="ТашГосМедИнститут"
+                      placeholder={t('education')}
                     />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Сопроводительное письмо
+                      {t('coverLetter')}
                     </label>
                     <textarea
                       rows={4}
                       value={applicationForm.coverLetter}
                       onChange={(e) => setApplicationForm({...applicationForm, coverLetter: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                      placeholder="Расскажите о себе и почему хотите работать у нас"
-                    />
+                      placeholder={t('coverLetter')}
                   </div>
 
                   <button
