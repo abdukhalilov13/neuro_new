@@ -443,17 +443,17 @@ frontend:
         agent: "testing"
         comment: "Verified that the contact form on the Contact page displays correctly and can be submitted. The form includes fields for name, email, phone, and message, and shows a success message after submission."
         
-  - task: "Page titles and branding"
+  - task: "Routing for special pages"
     implemented: true
-    working: true
-    file: "/app/frontend/public/index.html"
-    stuck_count: 0
-    priority: "medium"
-    needs_retesting: false
+    working: false
+    file: "/app/frontend/src/App.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
     status_history:
-      - working: true
+      - working: false
         agent: "testing"
-        comment: "Verified that the page title shows 'NEURO.UZ - Центр Нейрохирургии' correctly. No Emergent badge is present on the site as required."
+        comment: "All special pages (/doctor-dashboard, /appointment, /vacancies, etc.) are redirecting to the homepage instead of showing their respective content. This suggests there might be an issue with the React Router configuration or a client-side redirect in the code. The routing in App.js looks correct, and all the component files exist, but the routes are not working properly."
 
 metadata:
   created_by: "main_agent"
