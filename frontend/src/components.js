@@ -728,7 +728,7 @@ export const AboutPage = () => {
                 
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">{t('biography')}</h3>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">{selectedLeader.biography}</p>
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">{getFieldByLanguage(selectedLeader, 'biography')}</p>
                 </div>
               </div>
             </div>
