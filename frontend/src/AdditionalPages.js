@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Clock, DollarSign, Users, Building, Mail, Send, CheckCircle } from 'lucide-react';
+import { MapPin, Clock, DollarSign, Users, Building, Mail, Send, CheckCircle, Upload, X } from 'lucide-react';
 import { Header, Footer } from './enhanced-components';
 import { useAdmin, useLanguage } from './contexts';
 
 // Вакансии
 export const VacanciesPage = () => {
   const { t } = useLanguage();
+  const { adminData } = useAdmin();
   const [selectedVacancy, setSelectedVacancy] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
@@ -20,138 +21,146 @@ export const VacanciesPage = () => {
     coverLetter: ''
   });
 
-  // Загружаем вакансии из localStorage (управляемые через админку)
-  const [vacancies, setVacancies] = useState(() => {
-    const saved = localStorage.getItem('neuro_vacancies');
-    return saved ? JSON.parse(saved).filter(v => v.isActive) : [
+  // Загружаем вакансии из админки или используем fallback данные
+  const vacancies = adminData?.vacancies?.filter(v => v.isActive) || [
     {
       id: 1,
-      title: 'Врач-нейрохирург',
-      department: 'Нейрохирургия',
-      type: 'Полная занятость',
+      title_ru: 'Врач-нейрохирург',
+      title_uz: 'Neyroxirurg shifokor',
+      title_en: 'Neurosurgeon',
+      department_ru: 'Нейрохирургия',
+      department_uz: 'Neyroxirurgiya',
+      department_en: 'Neurosurgery',
+      type_ru: 'Полная занятость',
+      type_uz: 'To\'liq bandlik',
+      type_en: 'Full time',
       salary: '15000000 - 25000000',
-      requirements: [
+      requirements_ru: [
         'Высшее медицинское образование',
         'Специализация по нейрохирургии',
         'Опыт работы от 3 лет',
         'Сертификат специалиста',
         'Знание современных методов диагностики и лечения'
       ],
-      responsibilities: [
+      requirements_uz: [
+        'Oliy tibbiy ta\'lim',
+        'Neyroxirurgiya bo\'yicha mutaxassislik',
+        '3 yildan ortiq ish tajribasi',
+        'Mutaxassis sertifikati',
+        'Zamonaviy diagnostika va davolash usullarini bilish'
+      ],
+      requirements_en: [
+        'Higher medical education',
+        'Specialization in neurosurgery',
+        'Work experience from 3 years',
+        'Specialist certificate',
+        'Knowledge of modern diagnostic and treatment methods'
+      ],
+      responsibilities_ru: [
         'Проведение нейрохирургических операций',
         'Консультирование пациентов',
         'Ведение медицинской документации',
         'Участие в научной деятельности'
       ],
-      benefits: [
+      responsibilities_uz: [
+        'Neyroxirurgik operatsiyalar o\'tkazish',
+        'Bemorlarni maslahat berish',
+        'Tibbiy hujjatlarni yuritish',
+        'Ilmiy faoliyatda qatnashish'
+      ],
+      responsibilities_en: [
+        'Performing neurosurgical operations',
+        'Patient consultation',
+        'Medical documentation',
+        'Participation in scientific activities'
+      ],
+      benefits_ru: [
         'Официальное трудоустройство',
         'Медицинская страховка',
         'Премии за достижения',
         'Повышение квалификации'
+      ],
+      benefits_uz: [
+        'Rasmiy ishga joylashish',
+        'Tibbiy sug\'urta',
+        'Yutuqlar uchun mukofotlar',
+        'Malaka oshirish'
+      ],
+      benefits_en: [
+        'Official employment',
+        'Medical insurance',
+        'Achievement bonuses',
+        'Professional development'
       ]
     },
     {
       id: 2,
-      title: 'Медицинская сестра операционного блока',
-      department: 'Операционный блок',
-      type: 'Полная занятость',
+      title_ru: 'Медицинская сестра операционного блока',
+      title_uz: 'Operatsiya bloki hamshirasi',
+      title_en: 'Operating room nurse',
+      department_ru: 'Операционный блок',
+      department_uz: 'Operatsiya bloki',
+      department_en: 'Operating room',
+      type_ru: 'Полная занятость',
+      type_uz: 'To\'liq bandlik',
+      type_en: 'Full time',
       salary: '5000000 - 8000000',
-      requirements: [
+      requirements_ru: [
         'Среднее медицинское образование',
         'Сертификат операционной медсестры',
         'Опыт работы от 1 года',
         'Знание асептики и антисептики',
         'Внимательность и стрессоустойчивость'
       ],
-      responsibilities: [
+      requirements_uz: [
+        'O\'rta tibbiy ta\'lim',
+        'Operatsiya hamshirasi sertifikati',
+        '1 yildan ortiq ish tajribasi',
+        'Aseptika va antiseptikani bilish',
+        'Diqqat va stress bardoshligi'
+      ],
+      requirements_en: [
+        'Secondary medical education',
+        'Operating nurse certificate',
+        'Work experience from 1 year',
+        'Knowledge of asepsis and antisepsis',
+        'Attention and stress resistance'
+      ],
+      responsibilities_ru: [
         'Подготовка операционной к вмешательствам',
         'Ассистирование врачам во время операций',
         'Стерилизация инструментов',
         'Контроль соблюдения санэпидрежима'
       ],
-      benefits: [
+      responsibilities_uz: [
+        'Operatsiya xonasini aralashuvlarga tayyorlash',
+        'Operatsiya vaqtida shifokorlarga yordam berish',
+        'Asboblarni sterilizatsiya qilish',
+        'Sanitar-epidemiologik rejimga rioya qilishni nazorat qilish'
+      ],
+      responsibilities_en: [
+        'Preparing the operating room for procedures',
+        'Assisting doctors during operations',
+        'Sterilization of instruments',
+        'Control of sanitary and epidemiological regime'
+      ],
+      benefits_ru: [
         'Стабильная заработная плата',
         'Социальные гарантии',
         'Обучение и развитие',
         'Дружный коллектив'
-      ]
-    },
-    {
-      id: 3,
-      title: 'Врач-анестезиолог',
-      department: 'Анестезиология и реанимация',
-      type: 'Полная занятость',
-      salary: '12000000 - 18000000',
-      requirements: [
-        'Высшее медицинское образование',
-        'Специализация по анестезиологии',
-        'Опыт работы от 2 лет',
-        'Сертификат специалиста',
-        'Знание современного оборудования'
       ],
-      responsibilities: [
-        'Проведение анестезии при операциях',
-        'Мониторинг состояния пациентов',
-        'Реанимационные мероприятия',
-        'Послеоперационное наблюдение'
+      benefits_uz: [
+        'Barqaror ish haqi',
+        'Ijtimoiy kafolatlar',
+        'O\'qitish va rivojlantirish',
+        'Do\'stona jamoa'
       ],
-      benefits: [
-        'Высокая заработная плата',
-        'Премии и надбавки',
-        'Современное оборудование',
-        'Профессиональный рост'
-      ]
-    },
-    {
-      id: 4,
-      title: 'Врач функциональной диагностики',
-      department: 'Диагностическое отделение',
-      type: 'Полная занятость',
-      salary: '8000000 - 12000000',
-      requirements: [
-        'Высшее медицинское образование',
-        'Специализация по функциональной диагностике',
-        'Опыт работы от 1 года',
-        'Знание МРТ, КТ, ЭЭГ',
-        'Внимательность к деталям'
-      ],
-      responsibilities: [
-        'Проведение диагностических исследований',
-        'Интерпретация результатов',
-        'Консультирование пациентов',
-        'Ведение протоколов исследований'
-      ],
-      benefits: [
-        'Работа с современным оборудованием',
-        'Гибкий график',
-        'Обучение новым методикам',
-        'Карьерный рост'
-      ]
-    },
-    {
-      id: 5,
-      title: 'Администратор регистратуры',
-      department: 'Административный персонал',
-      type: 'Полная занятость',
-      salary: '3500000 - 5000000',
-      requirements: [
-        'Среднее образование',
-        'Опыт работы в медицине желателен',
-        'Знание ПК',
-        'Коммуникабельность',
-        'Вежливость и терпение'
-      ],
-      responsibilities: [
-        'Запись пациентов на прием',
-        'Работа с медицинскими картами',
-        'Прием звонков',
-        'Информирование пациентов'
-      ],
-      benefits: [
-        'Стабильная работа',
-        'Обучение на рабочем месте',
-        'Социальный пакет',
-        'Удобный график'
+      benefits_en: [
+        'Stable salary',
+        'Social guarantees',
+        'Training and development',
+        'Friendly team'
       ]
     }
   ];
@@ -165,7 +174,7 @@ export const VacanciesPage = () => {
       const applicationData = {
         id: Date.now(),
         vacancyId: selectedVacancy.id,
-        vacancyTitle: selectedVacancy.title,
+        vacancyTitle: selectedVacancy.title_ru || selectedVacancy.title,
         applicant: {
           name: applicationForm.name,
           phone: applicationForm.phone,
@@ -226,6 +235,11 @@ export const VacanciesPage = () => {
     }
   };
 
+  const getCurrentField = (vacancy, fieldName) => {
+    const currentLang = t === undefined ? 'ru' : 'ru'; // Default to ru for now
+    return vacancy[`${fieldName}_${currentLang}`] || vacancy[fieldName];
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -261,23 +275,16 @@ export const VacanciesPage = () => {
                   <div className="flex justify-between items-start mb-4">
                     <div>
                       <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                        {vacancy.title_ru && t === undefined ? vacancy.title_ru : 
-                         vacancy[`title_${typeof t === 'function' ? 'ru' : 'ru'}`] || vacancy.title}
+                        {getCurrentField(vacancy, 'title')}
                       </h2>
                       <div className="flex items-center space-x-4 text-sm text-gray-600">
                         <div className="flex items-center space-x-1">
                           <Building className="w-4 h-4" />
-                          <span>
-                            {vacancy.department_ru && t === undefined ? vacancy.department_ru :
-                             vacancy[`department_${typeof t === 'function' ? 'ru' : 'ru'}`] || vacancy.department}
-                          </span>
+                          <span>{getCurrentField(vacancy, 'department')}</span>
                         </div>
                         <div className="flex items-center space-x-1">
                           <Clock className="w-4 h-4" />
-                          <span>
-                            {vacancy.type_ru && t === undefined ? vacancy.type_ru :
-                             vacancy[`type_${typeof t === 'function' ? 'ru' : 'ru'}`] || vacancy.type}
-                          </span>
+                          <span>{getCurrentField(vacancy, 'type')}</span>
                         </div>
                       </div>
                     </div>
@@ -292,8 +299,7 @@ export const VacanciesPage = () => {
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-2">Основные требования:</h3>
                       <ul className="text-sm text-gray-600 space-y-1">
-                        {(vacancy.requirements_ru && t === undefined ? vacancy.requirements_ru :
-                          vacancy[`requirements_${typeof t === 'function' ? 'ru' : 'ru'}`] || vacancy.requirements).slice(0, 3).map((req, i) => (
+                        {getCurrentField(vacancy, 'requirements').slice(0, 3).map((req, i) => (
                           <li key={i} className="flex items-start space-x-2">
                             <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                             <span>{req}</span>
@@ -384,11 +390,11 @@ export const VacanciesPage = () => {
           >
             <div className="flex justify-between items-start mb-6">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">{selectedVacancy.title}</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">{getCurrentField(selectedVacancy, 'title')}</h2>
                 <div className="flex items-center space-x-4 text-sm text-gray-600">
-                  <span>{selectedVacancy.department}</span>
+                  <span>{getCurrentField(selectedVacancy, 'department')}</span>
                   <span>•</span>
-                  <span>{selectedVacancy.type}</span>
+                  <span>{getCurrentField(selectedVacancy, 'type')}</span>
                   <span>•</span>
                   <span className="text-green-600 font-semibold">{selectedVacancy.salary} UZS</span>
                 </div>
@@ -397,7 +403,7 @@ export const VacanciesPage = () => {
                 onClick={() => setSelectedVacancy(null)}
                 className="text-gray-400 hover:text-gray-600 text-2xl"
               >
-                ×
+                <X className="w-6 h-6" />
               </button>
             </div>
 
@@ -406,7 +412,7 @@ export const VacanciesPage = () => {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">Требования к кандидату</h3>
                   <ul className="space-y-2">
-                    {selectedVacancy.requirements.map((req, i) => (
+                    {getCurrentField(selectedVacancy, 'requirements').map((req, i) => (
                       <li key={i} className="flex items-start space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-500 mt-1 flex-shrink-0" />
                         <span className="text-gray-600">{req}</span>
@@ -418,7 +424,7 @@ export const VacanciesPage = () => {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">Обязанности</h3>
                   <ul className="space-y-2">
-                    {selectedVacancy.responsibilities.map((resp, i) => (
+                    {getCurrentField(selectedVacancy, 'responsibilities').map((resp, i) => (
                       <li key={i} className="flex items-start space-x-2">
                         <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
                         <span className="text-gray-600">{resp}</span>
@@ -430,7 +436,7 @@ export const VacanciesPage = () => {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">Мы предлагаем</h3>
                   <ul className="space-y-2">
-                    {selectedVacancy.benefits.map((benefit, i) => (
+                    {getCurrentField(selectedVacancy, 'benefits').map((benefit, i) => (
                       <li key={i} className="flex items-start space-x-2">
                         <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></span>
                         <span className="text-gray-600">{benefit}</span>
@@ -549,7 +555,7 @@ export const VacanciesPage = () => {
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        <span>Отправить заявку</span>
+                        <span>{t('apply')}</span>
                       </>
                     )}
                   </button>
@@ -567,38 +573,50 @@ export const VacanciesPage = () => {
 
 // Галерея
 export const GalleryPage = () => {
-  const { adminData } = useAdmin(); // Получаем данные из админ-панели
+  const { adminData } = useAdmin();
+  const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  const categories = [
-    { id: 'all', name: 'Все фотографии' },
-    { id: 'operations', name: 'Операционные' },
-    { id: 'equipment', name: 'Оборудование' },
-    { id: 'building', name: 'Здание центра' },
-    { id: 'staff', name: 'Персонал' },
-    { id: 'patients', name: 'Пациенты' }
+  // Получаем категории из админки или используем fallback
+  const categories = adminData?.galleryCategories || [
+    { id: 'all', name_ru: 'Все фотографии', name_uz: 'Barcha suratlar', name_en: 'All photos' },
+    { id: 'operations', name_ru: 'Операционные', name_uz: 'Operatsiya xonalari', name_en: 'Operating rooms' },
+    { id: 'equipment', name_ru: 'Оборудование', name_uz: 'Jihozlar', name_en: 'Equipment' },
+    { id: 'building', name_ru: 'Здание центра', name_uz: 'Markaz binosi', name_en: 'Center building' },
+    { id: 'staff', name_ru: 'Персонал', name_uz: 'Xodimlar', name_en: 'Staff' },
+    { id: 'patients', name_ru: 'Пациенты', name_uz: 'Bemorlar', name_en: 'Patients' }
   ];
 
   // Используем данные из админ-панели или fallback данные
   const images = adminData?.galleryImages || [
-    { id: 1, url: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56', category: 'operations', title: 'Операционная №1', description: 'Современная нейрохирургическая операционная' },
-    { id: 2, url: 'https://images.unsplash.com/photo-1516549655169-df83a0774514', category: 'equipment', title: 'МРТ аппарат', description: 'Высокопольный МРТ сканер 3 Тесла' },
-    { id: 3, url: 'https://images.unsplash.com/photo-1476889155166-39ae3886a3ef', category: 'building', title: 'Главный корпус', description: 'Фасад центра нейрохирургии' },
-    { id: 4, url: 'https://images.unsplash.com/photo-1512678080530-7760d81faba6', category: 'operations', title: 'Микрохирургия', description: 'Микрохирургическая операция на головном мозге' },
-    { id: 5, url: 'https://images.unsplash.com/photo-1551076805-e1869033e561', category: 'equipment', title: 'КТ сканер', description: 'Компьютерный томограф последнего поколения' },
-    { id: 6, url: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef', category: 'staff', title: 'Врачебная конференция', description: 'Еженедельная конференция специалистов' },
-    { id: 7, url: 'https://images.unsplash.com/photo-1519494140681-8b17d830a3e9', category: 'building', title: 'Холл центра', description: 'Современный интерьер главного холла' },
-    { id: 8, url: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54', category: 'staff', title: 'Медицинский персонал', description: 'Команда профессионалов' },
-    { id: 9, url: 'https://images.unsplash.com/photo-1504439468489-c8920d796a29', category: 'equipment', title: 'Нейромониторинг', description: 'Система нейромониторинга во время операций' },
-    { id: 10, url: 'https://images.unsplash.com/photo-1538108149393-fbbd81895907', category: 'patients', title: 'Палата пациента', description: 'Комфортные условия для пациентов' },
-    { id: 11, url: 'https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d', category: 'building', title: 'Диагностический центр', description: 'Отделение лучевой диагностики' },
-    { id: 12, url: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842', category: 'operations', title: 'Эндоскопическая операция', description: 'Малоинвазивная нейрохирургия' }
+    { id: 1, url: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56', category: 'operations', alt_ru: 'Операционная №1', alt_uz: 'Operatsiya xonasi №1', alt_en: 'Operating room №1', description: 'Современная нейрохирургическая операционная' },
+    { id: 2, url: 'https://images.unsplash.com/photo-1516549655169-df83a0774514', category: 'equipment', alt_ru: 'МРТ аппарат', alt_uz: 'MRT qurilmasi', alt_en: 'MRI scanner', description: 'Высокопольный МРТ сканер 3 Тесла' },
+    { id: 3, url: 'https://images.unsplash.com/photo-1476889155166-39ae3886a3ef', category: 'building', alt_ru: 'Главный корпус', alt_uz: 'Asosiy bino', alt_en: 'Main building', description: 'Фасад центра нейрохирургии' },
+    { id: 4, url: 'https://images.unsplash.com/photo-1512678080530-7760d81faba6', category: 'operations', alt_ru: 'Микрохирургия', alt_uz: 'Mikroxirurgiya', alt_en: 'Microsurgery', description: 'Микрохирургическая операция на головном мозге' },
+    { id: 5, url: 'https://images.unsplash.com/photo-1551076805-e1869033e561', category: 'equipment', alt_ru: 'КТ сканер', alt_uz: 'KT skaneri', alt_en: 'CT scanner', description: 'Компьютерный томограф последнего поколения' },
+    { id: 6, url: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef', category: 'staff', alt_ru: 'Врачебная конференция', alt_uz: 'Shifokorlar konferensiyasi', alt_en: 'Medical conference', description: 'Еженедельная конференция специалистов' },
+    { id: 7, url: 'https://images.unsplash.com/photo-1519494140681-8b17d830a3e9', category: 'building', alt_ru: 'Холл центра', alt_uz: 'Markaz vestibuli', alt_en: 'Center hall', description: 'Современный интерьер главного холла' },
+    { id: 8, url: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54', category: 'staff', alt_ru: 'Медицинский персонал', alt_uz: 'Tibbiy xodimlar', alt_en: 'Medical staff', description: 'Команда профессионалов' },
+    { id: 9, url: 'https://images.unsplash.com/photo-1504439468489-c8920d796a29', category: 'equipment', alt_ru: 'Нейромониторинг', alt_uz: 'Neyromonitoring', alt_en: 'Neuromonitoring', description: 'Система нейромониторинга во время операций' },
+    { id: 10, url: 'https://images.unsplash.com/photo-1538108149393-fbbd81895907', category: 'patients', alt_ru: 'Палата пациента', alt_uz: 'Bemor palatasi', alt_en: 'Patient room', description: 'Комфортные условия для пациентов' },
+    { id: 11, url: 'https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d', category: 'building', alt_ru: 'Диагностический центр', alt_uz: 'Diagnostika markazi', alt_en: 'Diagnostic center', description: 'Отделение лучевой диагностики' },
+    { id: 12, url: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842', category: 'operations', alt_ru: 'Эндоскопическая операция', alt_uz: 'Endoskopik operatsiya', alt_en: 'Endoscopic surgery', description: 'Малоинвазивная нейрохирургия' }
   ];
 
   const filteredImages = selectedCategory === 'all' 
     ? images 
     : images.filter(img => img.category === selectedCategory);
+
+  const getCategoryName = (category) => {
+    const currentLang = t === undefined ? 'ru' : 'ru'; // Default to ru for now
+    return category[`name_${currentLang}`] || category.name_ru;
+  };
+
+  const getImageAlt = (image) => {
+    const currentLang = t === undefined ? 'ru' : 'ru'; // Default to ru for now
+    return image[`alt_${currentLang}`] || image.alt_ru || image.title;
+  };
 
   return (
     <div className="min-h-screen">
@@ -612,9 +630,9 @@ export const GalleryPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">Галерея</h1>
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">{t('galleryTitle')}</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Фотографии нашего центра, оборудования и работы наших специалистов
+              {t('galleryDescription')}
             </p>
           </motion.div>
 
@@ -630,7 +648,7 @@ export const GalleryPage = () => {
                     : 'bg-white text-gray-700 hover:bg-blue-50'
                 }`}
               >
-                {category.name}
+                {getCategoryName(category)}
               </button>
             ))}
           </div>
@@ -650,12 +668,12 @@ export const GalleryPage = () => {
                 <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300">
                   <img
                     src={image.url}
-                    alt={image.alt_ru || image.title}
+                    alt={getImageAlt(image)}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-4 left-4 text-white">
-                      <h3 className="font-semibold text-lg">{image.alt_ru || image.title}</h3>
+                      <h3 className="font-semibold text-lg">{getImageAlt(image)}</h3>
                       <p className="text-sm text-gray-200">{image.description}</p>
                     </div>
                   </div>
@@ -684,15 +702,15 @@ export const GalleryPage = () => {
               onClick={() => setSelectedImage(null)}
               className="absolute -top-12 right-0 text-white hover:text-gray-300 text-2xl z-10"
             >
-              ✕ Закрыть
+              ✕ {t('close')}
             </button>
             <img
               src={selectedImage.url}
-              alt={selectedImage.alt_ru || selectedImage.title}
+              alt={getImageAlt(selectedImage)}
               className="max-w-full max-h-[80vh] object-contain rounded-lg"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent text-white p-6 rounded-b-lg">
-              <h3 className="text-xl font-bold mb-2">{selectedImage.alt_ru || selectedImage.title}</h3>
+              <h3 className="text-xl font-bold mb-2">{getImageAlt(selectedImage)}</h3>
               <p className="text-gray-200">{selectedImage.description}</p>
             </div>
           </motion.div>
