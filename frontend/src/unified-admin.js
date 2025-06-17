@@ -513,6 +513,7 @@ const UnifiedAdminPanel = () => {
     addService, updateService, deleteService,
     addLeadership, updateLeadership, deleteLeadership,
     addGalleryImage, updateGalleryImage, deleteGalleryImage,
+    addVacancy, updateVacancy, deleteVacancy,
     addAccount, updateAccount, deleteAccount, toggleAccountStatus
   } = useAdmin();
   
