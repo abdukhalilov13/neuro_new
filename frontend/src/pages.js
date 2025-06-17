@@ -309,8 +309,12 @@ export const ServicesPage = () => {
 export const NewsPage = () => {
   const [expandedNews, setExpandedNews] = useState({});
   const { adminData } = useAdmin();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const news = adminData?.news || siteData.news;
+
+  const getFieldByLanguage = (item, fieldName) => {
+    return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
+  };
 
   const toggleNewsExpanded = (newsId) => {
     setExpandedNews(prev => ({
