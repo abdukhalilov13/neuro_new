@@ -577,9 +577,13 @@ export const VacanciesPage = () => {
 // Галерея
 export const GalleryPage = () => {
   const { adminData } = useAdmin();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
+
+  const getFieldByLanguage = (item, fieldName) => {
+    return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
+  };
 
   // Получаем категории из админки или используем fallback
   const categories = adminData?.galleryCategories || [
