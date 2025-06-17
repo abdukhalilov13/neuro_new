@@ -125,8 +125,8 @@ export const DoctorsPage = () => {
                   className="w-full h-64 object-cover"
                 />
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{doctor.name_ru || doctor.name}</h3>
-                  <p className="text-blue-600 font-medium mb-3">{doctor.specialization_ru || doctor.specialization}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{getFieldByLanguage(doctor, 'name')}</h3>
+                  <p className="text-blue-600 font-medium mb-3">{getFieldByLanguage(doctor, 'specialization')}</p>
                   <p className="text-gray-600 mb-4">{doctor.experience} {t('experience')}</p>
                   
                   <div className="space-y-2 mb-4">
@@ -136,7 +136,7 @@ export const DoctorsPage = () => {
                     </div>
                     <div className="flex items-center space-x-2 text-sm">
                       <Clock className="w-4 h-4 text-gray-400" />
-                      <span className="text-gray-600">{doctor.reception_ru || doctor.reception}</span>
+                      <span className="text-gray-600">{getFieldByLanguage(doctor, 'reception')}</span>
                     </div>
                   </div>
 
