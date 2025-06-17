@@ -161,7 +161,11 @@ export const DoctorsPage = () => {
 // Услуги - ИСПОЛЬЗУЕМ ВСЕ ДАННЫЕ ИЗ АДМИНКИ
 export const ServicesPage = () => {
   const { adminData, isLoading } = useAdmin();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  const getFieldByLanguage = (item, fieldName) => {
+    return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
+  };
 
   // Проверяем что данные загружены и безопасно обращаемся к services
   const services = adminData?.services || [];
