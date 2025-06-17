@@ -29,14 +29,8 @@ export const DepartmentsPage = () => {
   const { t, language } = useLanguage();
   const departments = adminData?.departments || siteData.departments;
 
-  // Отладочная информация
-  console.log('Current language:', language);
-  console.log('Departments:', departments);
-
   const getFieldByLanguage = (item, fieldName) => {
-    const result = item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
-    console.log(`Getting ${fieldName} for language ${language}:`, result);
-    return result;
+    return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
   };
 
   return (
