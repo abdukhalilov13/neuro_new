@@ -875,7 +875,8 @@ const UnifiedAdminPanel = () => {
       alert('Нельзя удалить главного администратора!');
       return;
     }
-    setUsers(users.filter(user => user.id !== id));
+    deleteAccount(id);
+    alert('Пользователь удален!');
   };
 
   const toggleUserStatus = (id) => {
