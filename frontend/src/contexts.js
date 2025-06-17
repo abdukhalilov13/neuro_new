@@ -669,7 +669,12 @@ export const LanguageProvider = ({ children }) => {
       // Consultation block
       needConsultationQuestion: 'Need consultation?',
       consultationBlockText: 'Our experienced specialists are ready to provide you with professional medical consultation on any questions',
-      getConsultation: 'Get consultation'
+      getConsultation: 'Get consultation',
+      
+      // About page detailed content
+      aboutHistoryText1: 'The Republican Scientific Center of Neurosurgery was established in 1999 as the leading specialized medical institution of the Republic of Uzbekistan for providing high-tech neurosurgical care.',
+      aboutHistoryText2: 'For more than 25 years of operation, the center has become the leading medical institution in Central Asia in the field of neurosurgery, where the most complex operations on the brain and spinal cord are performed using modern technologies.',
+      aboutHistoryText3: 'Our mission is to provide high-quality, accessible and innovative medical care to patients with nervous system diseases, develop science and train highly qualified specialists.'
     }
   };
 
