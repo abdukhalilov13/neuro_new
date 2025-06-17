@@ -3149,6 +3149,102 @@ const UnifiedAdminPanel = () => {
           </form>
         </Modal>
 
+        {/* СЕКЦИЯ ВАКАНСИЙ */}
+        {activeTab === 'vacancies' && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">Вакансии ({adminData.vacancies?.length || 0})</h2>
+              <button
+                onClick={() => {
+                  setEditingVacancy(null);
+                  resetVacancyForm();
+                  setIsVacancyModalOpen(true);
+                }}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Добавить вакансию</span>
+              </button>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+              <div className="flex items-center space-x-3">
+                <CheckCircle className="w-5 h-5 text-blue-600" />
+                <div>
+                  <h3 className="font-medium text-blue-900">Многоязычная поддержка</h3>
+                  <p className="text-sm text-blue-700">
+                    Вакансии автоматически отображаются на странице "Вакансии" с поддержкой 3 языков.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Заявки на вакансии */}
+            {jobApplications.length > 0 && (
+              <div className="bg-white rounded-lg p-6 shadow">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Поступившие заявки ({jobApplications.length})</h3>
+                <div className="space-y-4">
+                  {jobApplications.slice(0, 5).map((application) => (
+                    <div key={application.id} className="border rounded-lg p-4">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <p className="font-medium text-gray-900">{application.applicant.name}</p>
+                          <p className="text-sm text-gray-600">Вакансия: {application.vacancyTitle}</p>
+                          <p className="text-sm text-gray-600">Email: {application.applicant.email}</p>
+                          <p className="text-sm text-gray-600">Телефон: {application.applicant.phone}</p>
+                        </div>
+                        <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">
+                          Новая
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Список вакансий */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {adminData.vacancies?.map((vacancy) => (
+                <div key={vacancy.id} className="bg-white rounded-lg p-6 shadow">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">{vacancy.title_ru}</h3>
+                      <p className="text-gray-600">{vacancy.department_ru}</p>
+                      <p className="text-sm text-gray-500">{vacancy.type_ru}</p>
+                    </div>
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => startEditVacancy(vacancy)}
+                        className="text-blue-600 hover:text-blue-900"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (confirm('Удалить эту вакансию?')) {
+                            deleteVacancy(vacancy.id);
+                            alert('Вакансия удалена!');
+                          }
+                        }}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-2">
+                    <strong>Зарплата:</strong> {vacancy.salary} UZS
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    <strong>Требования:</strong> {vacancy.requirements_ru?.slice(0, 2).join(', ')}...
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* СЕКЦИЯ КОНТАКТОВ */}
         {activeTab === 'contacts' && <ContactsSection />}
 
