@@ -974,6 +974,38 @@ export const LanguageProvider = ({ children }) => {
       serviceContactText: 'Contact us for professional medical help',
       scheduleAppointment: 'Schedule appointment',
       
+      // Additional missing translations
+      professionalTeam: 'Professional team',
+      workWithBestSpecialists: 'Work with the best specialists in neurosurgery',
+      modernEquipment: 'Modern equipment',
+      latestTechnologies: 'Latest technologies and treatment methods',
+      competitiveSalary: 'Competitive salary',
+      competitiveSalaryDesc: 'Competitive salary and bonuses',
+      notFoundVacancy: 'Didn\'t find a suitable vacancy?',
+      sendResume: 'Send us your resume and we will contact you when suitable positions appear',
+      hrDepartment: 'HR Department',
+      upcomingEvents: 'Upcoming events',
+      needConsultationQuestion: 'Need consultation?',
+      contactForHelp: 'Contact us for professional medical help',
+      
+      // Job application form
+      fullName: 'Full Name',
+      workExperience: 'Work Experience',
+      education: 'Education',
+      coverLetter: 'Cover Letter',
+      apply: 'Apply',
+      submitApplication: 'Submit Application',
+      applicationSent: 'Application Sent',
+      applicationSuccess: 'Your application has been successfully submitted. We will contact you soon.',
+      
+      // Gallery
+      allPhotos: 'All Photos',
+      surgical: 'Operating Rooms',
+      equipment: 'Equipment',
+      buildingPhotos: 'Center Building',
+      staff: 'Staff',
+      patients: 'Patients',
+      
       // Services
       ourServices: 'Our services',
       medicalServices: 'Medical services of the center',
