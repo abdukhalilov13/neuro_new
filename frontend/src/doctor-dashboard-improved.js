@@ -154,16 +154,51 @@ export const ImprovedDoctorDashboard = () => {
     e.preventDefault();
     setLoginError('');
     
-    // Проверяем email в списке врачей
+    // Проверяем email в списке врачей из контекста
     const doctor = adminData.doctors?.find(doc => 
-      doc.email === loginData.email
+      doc.email === loginData.email || 
+      doc.email_ru === loginData.email ||
+      doc.email_uz === loginData.email ||
+      doc.email_en === loginData.email
     );
     
+    // Если врач найден в базе данных
     if (doctor && loginData.password === 'doctor123') {
       setCurrentDoctor(doctor);
       setIsAuthenticated(true);
+      return;
+    }
+    
+    // Проверяем специальные тестовые аккаунты
+    const testAccounts = [
+      { email: 'doctor@neuro.uz', password: 'doctor123', name: 'Тестовый врач', specialization: 'Нейрохирург', id: 'test-1' },
+      { email: 'neuro.doctor@mail.uz', password: 'doctor123', name: 'Доктор Тест', specialization: 'Невролог', id: 'test-2' }
+    ];
+    
+    const testAccount = testAccounts.find(acc => 
+      acc.email === loginData.email && acc.password === loginData.password
+    );
+    
+    if (testAccount) {
+      setCurrentDoctor({
+        id: testAccount.id,
+        name_ru: testAccount.name,
+        name: testAccount.name,
+        specialization_ru: testAccount.specialization,
+        specialization: testAccount.specialization,
+        email: testAccount.email
+      });
+      setIsAuthenticated(true);
     } else {
-      setLoginError('Неверный email или пароль. Попробуйте doctor123 в качестве пароля.');
+      setLoginError(`Неверный email или пароль. 
+      
+Доступные варианты входа:
+1. Email любого врача из базы данных + пароль: doctor123
+2. Тестовые аккаунты:
+   - doctor@neuro.uz / doctor123
+   - neuro.doctor@mail.uz / doctor123
+   
+Ваш email: ${loginData.email}`);
     }
   };
 
