@@ -432,9 +432,9 @@ const UnifiedAdminPanel = () => {
   const [newService, setNewService] = useState({
     title_ru: '', title_uz: '', title_en: '',
     description_ru: '', description_uz: '', description_en: '',
+    category_ru: '', category_uz: '', category_en: '',
     price: '',
-    duration: '',
-    category: ''
+    duration: ''
   });
   
   const [newLeadership, setNewLeadership] = useState({
