@@ -663,14 +663,14 @@ export const AboutPage = () => {
                     <div className="w-48 h-48 mx-auto mb-6 ring-4 ring-blue-100 shadow-lg rounded-2xl overflow-hidden">
                       <img
                         src={leader.image}
-                        alt={leader.name}
+                        alt={getFieldByLanguage(leader, 'name')}
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
-                      {leader.name}
+                      {getFieldByLanguage(leader, 'name')}
                     </h3>
-                    <p className="text-blue-600 font-medium mb-4 text-lg">{leader.position}</p>
+                    <p className="text-blue-600 font-medium mb-4 text-lg">{getFieldByLanguage(leader, 'position')}</p>
                     <div className="space-y-2 text-sm text-gray-600">
                       <div className="flex items-center justify-center space-x-2">
                         <Phone className="w-4 h-4" />
