@@ -469,14 +469,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Routing for special pages"
     - "Translations Test"
-    - "Doctor Dashboard Login Fix"
     - "Fixed Appointment Booking Step 3"
     - "Doctor Dashboard Appointments Display"
     - "Job Application with Translations"
-  stuck_tasks: 
-    - "Routing for special pages"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
