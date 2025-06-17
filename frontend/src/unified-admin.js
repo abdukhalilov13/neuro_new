@@ -3324,6 +3324,135 @@ const UnifiedAdminPanel = () => {
 
         {/* СЕКЦИЯ РЕДИРЕКТОВ */}
         {activeTab === 'redirects' && <RedirectsSection />}
+
+        {/* Модальное окно вакансии */}
+        <Modal
+          isOpen={isVacancyModalOpen}
+          onClose={() => setIsVacancyModalOpen(false)}
+          title={editingVacancy ? 'Редактировать вакансию' : 'Добавить вакансию'}
+          size="large"
+        >
+          <form onSubmit={handleVacancySubmit} className="space-y-6">
+            <AdminLanguageSwitcher
+              currentLanguage={currentAdminLanguage}
+              onLanguageChange={setCurrentAdminLanguage}
+              languages={languages}
+            />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Название ({currentAdminLanguage.toUpperCase()})
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newVacancy[`title_${currentAdminLanguage}`]}
+                  onChange={(e) => setNewVacancy({...newVacancy, [`title_${currentAdminLanguage}`]: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Отделение ({currentAdminLanguage.toUpperCase()})
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newVacancy[`department_${currentAdminLanguage}`]}
+                  onChange={(e) => setNewVacancy({...newVacancy, [`department_${currentAdminLanguage}`]: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Тип занятости ({currentAdminLanguage.toUpperCase()})
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newVacancy[`type_${currentAdminLanguage}`]}
+                  onChange={(e) => setNewVacancy({...newVacancy, [`type_${currentAdminLanguage}`]: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  placeholder="Полная занятость, Частичная занятость..."
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Зарплата (UZS)</label>
+                <input
+                  type="text"
+                  value={newVacancy.salary}
+                  onChange={(e) => setNewVacancy({...newVacancy, salary: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  placeholder="5000000 - 8000000"
+                />
+              </div>
+            </div>
+            
+            {/* Требования */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Требования ({currentAdminLanguage.toUpperCase()})
+              </label>
+              {newVacancy[`requirements_${currentAdminLanguage}`]?.map((req, index) => (
+                <div key={index} className="flex mb-2">
+                  <input
+                    type="text"
+                    value={req}
+                    onChange={(e) => {
+                      const newReqs = [...newVacancy[`requirements_${currentAdminLanguage}`]];
+                      newReqs[index] = e.target.value;
+                      setNewVacancy({...newVacancy, [`requirements_${currentAdminLanguage}`]: newReqs});
+                    }}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    placeholder="Требование..."
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newReqs = newVacancy[`requirements_${currentAdminLanguage}`].filter((_, i) => i !== index);
+                      setNewVacancy({...newVacancy, [`requirements_${currentAdminLanguage}`]: newReqs});
+                    }}
+                    className="ml-2 text-red-600 hover:text-red-900"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => {
+                  const newReqs = [...(newVacancy[`requirements_${currentAdminLanguage}`] || []), ''];
+                  setNewVacancy({...newVacancy, [`requirements_${currentAdminLanguage}`]: newReqs});
+                }}
+                className="text-purple-600 hover:text-purple-900 text-sm"
+              >
+                + Добавить требование
+              </button>
+            </div>
+            
+            <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={() => setIsVacancyModalOpen(false)}
+                className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                {editingVacancy ? 'Обновить' : 'Добавить'}
+              </button>
+            </div>
+          </form>
+        </Modal>
       </div>
     </div>
   );
