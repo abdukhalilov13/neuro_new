@@ -57,6 +57,7 @@ import {
 import { useLanguage, useAdmin } from './contexts';
 import { ContactsSection, SeoSection, RedirectsSection } from './admin-additional-sections';
 import { VacancyApplicationsManager } from './vacancy-manager';
+import { VacanciesAdminManager } from './vacancies-admin';
 
 // Компонент модального окна
 const Modal = ({ isOpen, onClose, title, children, size = 'default' }) => {
