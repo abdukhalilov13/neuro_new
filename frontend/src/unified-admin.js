@@ -489,7 +489,8 @@ const UnifiedAdminPanel = () => {
     addNews, updateNews, deleteNews,
     addService, updateService, deleteService,
     addLeadership, updateLeadership, deleteLeadership,
-    addGalleryImage, updateGalleryImage, deleteGalleryImage
+    addGalleryImage, updateGalleryImage, deleteGalleryImage,
+    addAccount, updateAccount, deleteAccount, toggleAccountStatus
   } = useAdmin();
   
   const { t } = useLanguage();
