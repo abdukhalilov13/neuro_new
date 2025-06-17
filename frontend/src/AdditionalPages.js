@@ -240,8 +240,7 @@ export const VacanciesPage = () => {
   };
 
   const getCurrentField = (vacancy, fieldName) => {
-    const currentLang = t === undefined ? 'ru' : 'ru'; // Default to ru for now
-    return vacancy[`${fieldName}_${currentLang}`] || vacancy[fieldName];
+    return getFieldByLanguage(vacancy, fieldName);
   };
 
   return (
