@@ -129,6 +129,38 @@ export const LanguageProvider = ({ children }) => {
       serviceContactText: 'Свяжитесь с нами для получения профессиональной медицинской помощи',
       scheduleAppointment: 'Записаться на прием',
       
+      // Additional missing translations
+      professionalTeam: 'Профессиональная команда',
+      workWithBestSpecialists: 'Работайте с лучшими специалистами в области нейрохирургии',
+      modernEquipment: 'Современное оборудование',
+      latestTechnologies: 'Новейшие технологии и методы лечения',
+      competitiveSalary: 'Достойная оплата',
+      competitiveSalaryDesc: 'Конкурентная заработная плата и премии',
+      notFoundVacancy: 'Не нашли подходящую вакансию?',
+      sendResume: 'Отправьте нам свое резюме, и мы свяжемся с вами при появлении подходящих позиций',
+      hrDepartment: 'Отдел кадров',
+      upcomingEvents: 'Ближайшие события',
+      needConsultationQuestion: 'Нужна консультация?',
+      contactForHelp: 'Свяжитесь с нами для получения профессиональной медицинской помощи',
+      
+      // Job application form
+      fullName: 'ФИО',
+      workExperience: 'Опыт работы',
+      education: 'Образование',
+      coverLetter: 'Сопроводительное письмо',
+      apply: 'Откликнуться',
+      submitApplication: 'Отправить заявку',
+      applicationSent: 'Заявка отправлена',
+      applicationSuccess: 'Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.',
+      
+      // Gallery
+      allPhotos: 'Все фотографии',
+      surgical: 'Операционные',
+      equipment: 'Оборудование', 
+      buildingPhotos: 'Здание центра',
+      staff: 'Персонал',
+      patients: 'Пациенты',
+      
       // Services
       ourServices: 'Наши услуги',
       medicalServices: 'Медицинские услуги центра',
