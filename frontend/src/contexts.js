@@ -628,7 +628,38 @@ export const LanguageProvider = ({ children }) => {
       openDay: 'Open day',
       masterclass: 'Masterclass',
       seminar: 'Seminar',
-      update: 'Update'
+      update: 'Update',
+      
+      // Association membership
+      associationMembership: 'Membership in the Association of Neurosurgeons of Uzbekistan',
+      membershipRequirements: 'To join the Association of Neurosurgeons of Uzbekistan, you must provide:',
+      membershipApplication: 'Application addressed to the Chairman of the Association Kariev G.M.',
+      membershipPayment: 'Receipt of payment of 1 minimum wage.',
+      associationDetails: 'Details of the Association of Neurosurgeons of Uzbekistan:',
+      accountNumber: 'a/c',
+      bankName: 'Bank',
+      bankCode: 'MFO',
+      taxNumber: 'TIN',
+      activityCode: 'OKONH',
+      payerName: 'From',
+      paymentPurpose: 'Purpose',
+      membershipFee2025: 'Membership fee for 2025',
+      
+      // About page content
+      historyMission: 'History and mission',
+      centerHistory: 'The Republican Scientific Center of Neurosurgery was established in 1999 as the leading specialized medical institution of the Republic of Uzbekistan.',
+      centerMission: 'Our mission is to provide high-quality medical care to patients with nervous system diseases.',
+      associationTasks: 'Association tasks:',
+      task1: 'Development of neurosurgical service in Uzbekistan',
+      task2: 'Professional development of specialists',
+      task3: 'Implementation of modern treatment methods',
+      task4: 'International cooperation',
+      task5: 'Scientific research activities',
+      
+      // Consultation block
+      needConsultationQuestion: 'Need consultation?',
+      consultationBlockText: 'Our experienced specialists are ready to provide you with professional medical consultation on any questions',
+      getConsultation: 'Get consultation'
     }
   };
 
