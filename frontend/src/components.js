@@ -172,7 +172,7 @@ const siteData = {
 // Главная страница - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const HomePage = () => {
   const { adminData, isLoading } = useAdmin();
-  const { t } = useLanguage(); // Добавляем поддержку переводов
+  const { t, language } = useLanguage(); // Добавляем поддержку переводов
   const departments = adminData?.departments || siteData.departments;
   const news = adminData?.news || siteData.news;
   
