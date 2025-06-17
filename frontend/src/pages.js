@@ -64,15 +64,6 @@ export const DepartmentsPage = () => {
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">{dept.name_ru || dept.name}</h3>
                     <p className="text-gray-600 mb-4">{dept.description_ru || dept.description}</p>
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-gray-900">{t('ourServices')}:</h4>
-                      <ul className="text-sm text-gray-600 space-y-1">
-                        <li>• {t('diagnostics')} и {t('consultations')}</li>
-                        <li>• {t('surgicalTreatment')}</li>
-                        <li>• {t('postOperativeRehabilitation')}</li>
-                        <li>• {t('outpatientObservation')}</li>
-                      </ul>
-                    </div>
                   </div>
                 </div>
               </motion.div>
