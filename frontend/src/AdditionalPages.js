@@ -430,13 +430,13 @@ export const VacanciesPage = () => {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Откликнуться на вакансию</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('apply')}</h3>
                 
                 {submitStatus === 'success' && (
                   <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
                     <div className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
-                      <p className="text-green-800">Ваша заявка успешно отправлена!</p>
+                      <p className="text-green-800">{t('applicationSuccess')}</p>
                     </div>
                   </div>
                 )}
