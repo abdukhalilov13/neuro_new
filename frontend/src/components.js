@@ -175,6 +175,11 @@ export const HomePage = () => {
   const { t, language } = useLanguage(); // Добавляем поддержку переводов
   const departments = adminData?.departments || siteData.departments;
   const news = adminData?.news || siteData.news;
+
+  // Отладочная информация для проверки изменения языка
+  React.useEffect(() => {
+    console.log('HomePage: Language changed to:', language);
+  }, [language]);
   
   return (
     <div className="min-h-screen">
