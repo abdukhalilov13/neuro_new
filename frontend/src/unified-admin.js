@@ -1820,7 +1820,7 @@ const UnifiedAdminPanel = () => {
                               {user.name}
                             </div>
                             <div className="text-sm text-gray-500">
-                              @{user.username}
+                              {user.email}
                             </div>
                           </div>
                         </div>
