@@ -413,7 +413,38 @@ export const LanguageProvider = ({ children }) => {
       openDay: 'Ochiq eshiklar kuni',
       masterclass: 'Masterкlass',
       seminar: 'Seminar',
-      update: 'Yangilash'
+      update: 'Yangilash',
+      
+      // Association membership
+      associationMembership: 'O\'zbekiston neyroxirurglari assotsiatsiyasiga a\'zo bo\'lish',
+      membershipRequirements: 'O\'zbekiston neyroxirurglari assotsiatsiyasiga a\'zo bo\'lish uchun taqdim etish kerak:',
+      membershipApplication: 'Assotsiatsiya raisi Kariyev G.M. nomiga ariza',
+      membershipPayment: 'Minimal ish haqining 1 o\'lchamini to\'lash to\'g\'risidagi kvitansiya.',
+      associationDetails: 'O\'zbekiston neyroxirurglari assotsiatsiyasining rekvizitlari:',
+      accountNumber: 'h/r',
+      bankName: 'Bank',
+      bankCode: 'MFO',
+      taxNumber: 'STIR',
+      activityCode: 'OKONX',
+      payerName: 'Kimdan',
+      paymentPurpose: 'Asos',
+      membershipFee2025: '2025 yil uchun a\'zolik badali',
+      
+      // About page content
+      historyMission: 'Tarix va missiya',
+      centerHistory: 'Respublika Neyroxirurgiya Ilmiy Markazi 1999 yilda O\'zbekiston Respublikasining yetakchi ixtisoslashgan tibbiyot muassasasi sifatida tashkil etilgan.',
+      centerMission: 'Bizning missiyamiz - nerv sistemasi kasalliklari bilan og\'rigan bemorlarga yuqori sifatli tibbiy yordam ko\'rsatish.',
+      associationTasks: 'Assotsiatsiya vazifalari:',
+      task1: 'O\'zbekistonda neyroxirurgiya xizmatini rivojlantirish',
+      task2: 'Mutaxassislar malakasini oshirish',
+      task3: 'Zamonaviy davolash usullarini joriy etish',
+      task4: 'Xalqaro hamkorlik',
+      task5: 'Ilmiy-tadqiqot faoliyati',
+      
+      // Consultation block
+      needConsultationQuestion: 'Konsultatsiya kerakmi?',
+      consultationBlockText: 'Tajribali mutaxassislarimiz sizga har qanday savollar bo\'yicha professional tibbiy maslahat berishga tayyor',
+      getConsultation: 'Konsultatsiya olish'
     },
     en: {
       // Navigation
