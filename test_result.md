@@ -356,6 +356,21 @@ backend:
         comment: "Tested all API endpoints (/, /health, /departments, /doctors, /services, /news, /appointments, /gallery). All endpoints are working correctly and returning the expected data structure."
 
 frontend:
+  - task: "Admin panel users section"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/unified-admin.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "Unable to access the admin panel. When navigating to /admin or clicking the 'Админ Панель' button in the header, I'm being redirected to the homepage instead of seeing the admin login form. This suggests there might be an issue with the routing or authentication logic in the application. Based on code review, the users section is properly implemented with user management functionality, but couldn't verify in the UI due to access issue."
+      - working: true
+        agent: "testing"
+        comment: "Tested the admin panel functionality as requested. Successfully accessed the admin panel at /admin and the login form is displayed correctly. Successfully logged in with admin@neuro.uz / admin123 credentials. The Users tab is accessible and displays the users page correctly with proper statistics (active users, administrators, doctors). The user list is displayed correctly, showing 4 users with their details (name, role, email, status). The 'Add User' button works and opens a modal form with all required fields (name, email, role, password). Navigation to other tabs (like Departments) works correctly after visiting the Users tab, and navigation back to Users tab also works correctly. There are some React Router warnings about future changes in v7 and a console error about duplicate keys for 'contacts', but these don't affect functionality. The admin panel is fully functional with the Users section working as expected."
+        
   - task: "Admin panel contacts section"
     implemented: true
     working: true
