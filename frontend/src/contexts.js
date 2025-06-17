@@ -581,7 +581,7 @@ export const LanguageProvider = ({ children }) => {
       scheduleAppointment: 'Qabulga yozilish',
       
       // Additional missing translations
-      professionalTeam: 'Professional jamoa',
+      whyWorkWithUs: 'Nega bizni tanlashadi?',
       workWithBestSpecialists: 'Neyroxirurgiya sohasidagi eng yaxshi mutaxassislar bilan ishlang',
       modernEquipment: 'Zamonaviy asbob-uskunalar',
       latestTechnologies: 'Eng yangi texnologiyalar va davolash usullari',
@@ -593,6 +593,7 @@ export const LanguageProvider = ({ children }) => {
       upcomingEvents: 'Yaqinlashayotgan tadbirlar',
       needConsultationQuestion: 'Konsultatsiya kerakmi?',
       contactForHelp: 'Professional tibbiy yordam olish uchun biz bilan bog\'laning',
+      learnMore: 'Batafsil',
       
       // Job application form
       fullName: 'F.I.Sh.',
