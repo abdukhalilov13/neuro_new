@@ -233,13 +233,14 @@ export const VacanciesPage = () => {
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            viewport={{ once: true }}
+            className="text-center mb-12"
           >
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">Вакансии</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Присоединяйтесь к команде профессионалов в ведущем центре нейрохирургии
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('careers')}</h1>
+            <p className="text-xl text-gray-600">
+              {t('joinProfessionalTeam')}
             </p>
           </motion.div>
 
