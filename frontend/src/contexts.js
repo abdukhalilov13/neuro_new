@@ -579,6 +579,38 @@ export const LanguageProvider = ({ children }) => {
       serviceContactText: 'Professional tibbiy yordam olish uchun biz bilan bog\'laning',
       scheduleAppointment: 'Qabulga yozilish',
       
+      // Additional missing translations
+      professionalTeam: 'Professional jamoa',
+      workWithBestSpecialists: 'Neyroxirurgiya sohasidagi eng yaxshi mutaxassislar bilan ishlang',
+      modernEquipment: 'Zamonaviy asbob-uskunalar',
+      latestTechnologies: 'Eng yangi texnologiyalar va davolash usullari',
+      competitiveSalary: 'Munosib ish haqi',
+      competitiveSalaryDesc: 'Raqobatbardosh ish haqi va mukofotlar',
+      notFoundVacancy: 'Mos bo\'sh o\'rinni topa olmadingizmi?',
+      sendResume: 'Bizga rezyumeingizni yuboring, mos pozitsiyalar paydo bo\'lganda siz bilan bog\'lanamiz',
+      hrDepartment: 'Kadrlar bo\'limi',
+      upcomingEvents: 'Yaqinlashayotgan tadbirlar',
+      needConsultationQuestion: 'Konsultatsiya kerakmi?',
+      contactForHelp: 'Professional tibbiy yordam olish uchun biz bilan bog\'laning',
+      
+      // Job application form
+      fullName: 'F.I.Sh.',
+      workExperience: 'Ish tajribasi',
+      education: 'Ma\'lumot',
+      coverLetter: 'Qo\'shimcha xat',
+      apply: 'Ariza berish',
+      submitApplication: 'Ariza yuborish',
+      applicationSent: 'Ariza yuborildi',
+      applicationSuccess: 'Arizangiz muvaffaqiyatli yuborildi. Tez orada siz bilan bog\'lanamiz.',
+      
+      // Gallery
+      allPhotos: 'Barcha fotosuratlar',
+      surgical: 'Jarrohlik xonalari',
+      equipment: 'Asbob-uskunalar',
+      buildingPhotos: 'Markaz binosi',
+      staff: 'Xodimlar',
+      patients: 'Bemorlar',
+      
       // Services
       ourServices: 'Bizning xizmatlar',
       medicalServices: 'Markaz tibbiy xizmatlari',
