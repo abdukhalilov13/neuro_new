@@ -1812,7 +1812,7 @@ const UnifiedAdminPanel = () => {
                   <div className="ml-3">
                     <p className="text-sm font-medium text-green-600">Активных</p>
                     <p className="text-2xl font-bold text-green-900">
-                      {users.filter(u => u.status === 'active').length}
+                      {(adminData.accounts || []).filter(u => u.status === 'active').length}
                     </p>
                   </div>
                 </div>
