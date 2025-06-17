@@ -696,6 +696,12 @@ export const LanguageProvider = ({ children }) => {
 
   const changeLanguage = (newLanguage) => {
     setLanguage(newLanguage);
+    // Сохраняем язык в localStorage
+    try {
+      localStorage.setItem('neuro_language', newLanguage);
+    } catch (error) {
+      console.warn('Could not save language to localStorage:', error);
+    }
   };
 
   return (
