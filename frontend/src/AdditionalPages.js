@@ -522,6 +522,7 @@ export const VacanciesPage = () => {
                       onChange={(e) => setApplicationForm({...applicationForm, coverLetter: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                       placeholder={t('coverLetter')}
+                    ></textarea>
                   </div>
 
                   <button
