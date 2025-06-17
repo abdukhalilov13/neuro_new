@@ -203,6 +203,7 @@ const LanguageSwitcher = () => {
               key={lang}
               onClick={(e) => {
                 e.stopPropagation();
+                console.log('Switching language to:', lang);
                 changeLanguage(lang);
                 setIsOpen(false);
               }}
