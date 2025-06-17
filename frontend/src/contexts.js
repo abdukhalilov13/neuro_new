@@ -13,7 +13,14 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('ru');
+  const [language, setLanguage] = useState(() => {
+    // Загружаем язык из localStorage или используем 'ru' по умолчанию
+    try {
+      return localStorage.getItem('neuro_language') || 'ru';
+    } catch {
+      return 'ru';
+    }
+  });
 
   const translations = {
     ru: {
