@@ -20,8 +20,10 @@ export const VacanciesPage = () => {
     coverLetter: ''
   });
 
-  // Используем данные из админ-панели или fallback данные
-  const vacancies = adminData?.vacancies || [
+  // Загружаем вакансии из localStorage (управляемые через админку)
+  const [vacancies, setVacancies] = useState(() => {
+    const saved = localStorage.getItem('neuro_vacancies');
+    return saved ? JSON.parse(saved).filter(v => v.isActive) : [
     {
       id: 1,
       title: 'Врач-нейрохирург',
