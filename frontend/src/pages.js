@@ -272,22 +272,22 @@ export const ServicesPage = () => {
                 viewport={{ once: true }}
                 className="mt-16 text-center"
               >
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Нужна консультация по услугам?</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('serviceConsultation')}</h3>
                 <p className="text-gray-600 mb-6">
-                  Наши специалисты ответят на все ваши вопросы и помогут выбрать оптимальное лечение
+                  {t('serviceContactText')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     to="/appointment"
                     className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
                   >
-                    Записаться на консультацию
+                    {t('scheduleConsultation')}
                   </Link>
                   <Link
                     to="/contact"
                     className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors"
                   >
-                    Связаться с нами
+                    {t('contactUs')}
                   </Link>
                 </div>
               </motion.div>
