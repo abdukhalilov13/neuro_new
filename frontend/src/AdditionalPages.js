@@ -318,22 +318,22 @@ export const VacanciesPage = () => {
                   <div className="flex items-start space-x-3">
                     <Users className="w-5 h-5 text-blue-500 mt-1" />
                     <div>
-                      <h4 className="font-medium text-gray-900">Профессиональная команда</h4>
-                      <p className="text-sm text-gray-600">Работайте с лучшими специалистами в области нейрохирургии</p>
+                      <h4 className="font-medium text-gray-900">{t('professionalTeam')}</h4>
+                      <p className="text-sm text-gray-600">{t('workWithBestSpecialists')}</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <Building className="w-5 h-5 text-green-500 mt-1" />
                     <div>
-                      <h4 className="font-medium text-gray-900">Современное оборудование</h4>
-                      <p className="text-sm text-gray-600">Новейшие технологии и методы лечения</p>
+                      <h4 className="font-medium text-gray-900">{t('modernEquipment')}</h4>
+                      <p className="text-sm text-gray-600">{t('latestTechnologies')}</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <DollarSign className="w-5 h-5 text-purple-500 mt-1" />
                     <div>
-                      <h4 className="font-medium text-gray-900">Достойная оплата</h4>
-                      <p className="text-sm text-gray-600">Конкурентная заработная плата и премии</p>
+                      <h4 className="font-medium text-gray-900">{t('competitiveSalary')}</h4>
+                      <p className="text-sm text-gray-600">{t('competitiveSalaryDesc')}</p>
                     </div>
                   </div>
                 </div>
