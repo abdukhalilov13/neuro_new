@@ -26,8 +26,12 @@ import { siteData } from './components';
 // Отделения - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
 export const DepartmentsPage = () => {
   const { adminData } = useAdmin();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const departments = adminData?.departments || siteData.departments;
+
+  const getFieldByLanguage = (item, fieldName) => {
+    return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
+  };
 
   return (
     <div className="min-h-screen">
