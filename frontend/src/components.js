@@ -523,6 +523,11 @@ export const AboutPage = () => {
 
   // Используем данные о руководстве из админ-панели
   const leadershipData = adminData?.leadership || [];
+  
+  // Отладочная информация
+  console.log('AboutPage: adminData.leadership:', adminData?.leadership);
+  console.log('AboutPage: leadershipData:', leadershipData);
+  console.log('AboutPage: current language:', language);
 
   const openBioModal = (leader) => {
     setSelectedLeader(leader);
