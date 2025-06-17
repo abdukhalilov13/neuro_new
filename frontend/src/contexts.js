@@ -76,91 +76,25 @@ export const LanguageProvider = ({ children }) => {
       centerEvents: 'События и достижения центра',
       readMore: 'Читать далее',
       allNews: 'Все новости',
+      newsAndEvents: 'Новости и события',
+      newsDescription: 'Последние новости, достижения и события нашего центра',
+      readFull: 'Читать полностью',
+      collapse: 'Свернуть',
+      upcomingEvents: 'Ближайшие события',
+      needConsultation: 'Нужна консультация?',
+      consultationText: 'Свяжитесь с нами для получения профессиональной медицинской помощи',
+      scheduleAppointment: 'Записаться на прием',
       
       // About page
       aboutPageTitle: 'О центре',
       aboutPageSubtitle: 'Республиканский Научный Центр Нейрохирургии - ведущее медицинское учреждение Центральной Азии в области нейрохирургии',
       historyMission: 'История и миссия',
-      aboutHistoryText1: 'В 1986 году организовано Научное общество нейрохирургов, а в 1998 г. создана Ассоциация нейрохирургов Узбекистана, которая является также и членом Ассоциации нейрохирургов стран Тихоокеанского региона и Всемирной Ассоциации нейрохирургов (WFNS).',
-      aboutHistoryText2: 'Общество сотрудничает с научными коллективами и отдельными учеными многих стран дальнего и ближнего зарубежья (США, Германия, Россия, Индия, Азербайджан, Украина, Белоруссия, Казахстан, Киргизия, Грузия, Таджикистан и др.).',
-      aboutHistoryText3: 'Основными целями общества нейрохирургов являются: содействие реализации творческого потенциала членов Общества в интересах решения актуальных теоретических, практических и научных проблем в области нейрохирургии.',
       associationTasks: 'Задачи Ассоциации:',
-      task1: 'Осуществление мероприятий, направленных на повышение квалификации членов Ассоциации, практическая и (или) научная деятельность которых связана с нейрохирургией',
-      task2: 'Содействие развитию приоритетных направлений научных исследований в области нейрохирургии',
-      task3: 'Оказание научной и практической помощи членам Общества, молодым ученым и врачам, содействие совершенствованию системы медицинского образования и повышению профессиональной квалификации специалистов, развитию профессиональной, этической и деонтологической традиций в медицине',
-      task4: 'Развитие сотрудничества с международными и национальными научными медицинскими обществами и ассоциациями',
       yearFounded: 'Год основания',
-      patientsPerYear: 'Пациентов в год',
       centerLeadership: 'Руководство центра',
       experiencedSpecialists: 'Опытные специалисты, возглавляющие развитие нейрохирургии в республике',
       readBiography: 'Читать биографию',
       biography: 'Биография',
-      needConsultation: 'Нужна консультация по услугам?',
-      contactSpecialists: 'Наши специалисты ответят на все ваши вопросы и помогут выбрать оптимальное лечение',
-      scheduleConsultation: 'Записаться на консультацию',
-      contactUs: 'Связаться с нами',
-      
-      // News page
-      newsAndEvents: 'Новости и события',
-      latestNewsDescription: 'Последние новости, достижения и события нашего центра (2 новости)',
-      upcomingEvents: 'Ближайшие события',
-      readFull: 'Читать полностью',
-      
-      // Contact page
-      contacts: 'Контакты',
-      contactDescription: 'Свяжитесь с нами для получения консультации или записи на прием',
-      contactInfo: 'Контактная информация',
-      address: 'Адрес',
-      phones: 'Телефоны',
-      workingHours: 'Режим работы',
-      emergency24: 'Экстренная помощь: 24/7',
-      writeToUs: 'Написать нам',
-      yourName: 'Ваше имя',
-      message: 'Сообщение',
-      sendMessage: 'Отправить сообщение',
-      membershipInfo: 'Вступление в Ассоциацию нейрохирургов Узбекистана',
-      membershipDescription: 'Для вступления в Ассоциацию нейрохирургов Узбекистана необходимо предоставить:',
-      membershipReq1: 'Заявление на имя председателя Ассоциации Кариева Г.М.',
-      membershipReq2: 'Квитанцию об уплате 1 размера минимальной заработной платы.',
-      membershipRequisites: 'Реквизиты Ассоциации нейрохирургов Узбекистана:',
-      
-      // Services page additional translations
-      serviceConsultation: 'Нужна консультация?',
-      serviceContactText: 'Свяжитесь с нами для получения профессиональной медицинской помощи',
-      scheduleAppointment: 'Записаться на прием',
-      
-      // Additional missing translations
-      whyWorkWithUs: 'Почему выбирают нас?',
-      workWithBestSpecialists: 'Работайте с лучшими специалистами в области нейрохирургии',
-      modernEquipment: 'Современное оборудование',
-      latestTechnologies: 'Новейшие технологии и методы лечения',
-      competitiveSalary: 'Достойная оплата',
-      competitiveSalaryDesc: 'Конкурентная заработная плата и премии',
-      notFoundVacancy: 'Не нашли подходящую вакансию?',
-      sendResume: 'Отправьте нам свое резюме, и мы свяжемся с вами при появлении подходящих позиций',
-      hrDepartment: 'Отдел кадров',
-      upcomingEvents: 'Ближайшие события',
-      needConsultationQuestion: 'Нужна консультация?',
-      contactForHelp: 'Свяжитесь с нами для получения профессиональной медицинской помощи',
-      learnMore: 'Подробнее',
-      
-      // Job application form
-      fullName: 'ФИО',
-      workExperience: 'Опыт работы',
-      education: 'Образование',
-      coverLetter: 'Сопроводительное письмо',
-      apply: 'Откликнуться',
-      submitApplication: 'Отправить заявку',
-      applicationSent: 'Заявка отправлена',
-      applicationSuccess: 'Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.',
-      
-      // Gallery
-      allPhotos: 'Все фотографии',
-      surgical: 'Операционные',
-      equipment: 'Оборудование', 
-      buildingPhotos: 'Здание центра',
-      staff: 'Персонал',
-      patients: 'Пациенты',
       
       // Services
       ourServices: 'Наши услуги',
@@ -170,6 +104,9 @@ export const LanguageProvider = ({ children }) => {
       surgery: 'Хирургия',
       price: 'Цена',
       currency: 'сум',
+      serviceConsultation: 'Нужна консультация по услугам?',
+      serviceContactText: 'Наши специалисты готовы проконсультировать вас по любым вопросам оказываемых услуг',
+      scheduleConsultation: 'Записаться на консультацию',
       
       // Doctors
       ourDoctors: 'Наши врачи',
@@ -177,6 +114,54 @@ export const LanguageProvider = ({ children }) => {
       experience: 'Опыт',
       years: 'лет',
       reception: 'Прием',
+      
+      // Gallery
+      galleryTitle: 'Галерея',
+      galleryDescription: 'Фотографии нашего центра, оборудования и работы наших специалистов',
+      allPhotos: 'Все фотографии',
+      operatingRooms: 'Операционные',
+      equipment: 'Оборудование',
+      centerBuilding: 'Здание центра',
+      staff: 'Персонал',
+      patients: 'Пациенты',
+      close: 'Закрыть',
+      
+      // Contacts
+      contactsTitle: 'Контакты',
+      contactsDescription: 'Свяжитесь с нами для получения консультации или записи на прием',
+      contactInfo: 'Контактная информация',
+      writeToUs: 'Написать нам',
+      yourName: 'Ваше имя',
+      enterName: 'Введите ваше имя',
+      enterEmail: 'Введите ваш email',
+      enterPhone: 'Введите телефон',
+      message: 'Сообщение',
+      enterMessage: 'Введите ваше сообщение',
+      sendMessage: 'Отправить сообщение',
+      sending: 'Отправка...',
+      messageSent: 'Сообщение успешно отправлено!',
+      sendError: 'Произошла ошибка. Попробуйте еще раз.',
+      findUs: 'Где нас найти',
+      
+      // Vacancies
+      careers: 'Вакансии',
+      joinProfessionalTeam: 'Присоединяйтесь к команде профессионалов',
+      whyWorkWithUs: 'Почему стоит работать с нами?',
+      professionalTeam: 'Профессиональная команда',
+      workWithBestSpecialists: 'Работа с лучшими специалистами',
+      modernEquipment: 'Современное оборудование',
+      latestTechnologies: 'Новейшие технологии и методики',
+      competitiveSalary: 'Конкурентная зарплата',
+      competitiveSalaryDesc: 'Достойная оплата труда и бонусы',
+      notFoundVacancy: 'Не нашли подходящую вакансию?',
+      sendResume: 'Отправьте нам свое резюме, и мы обязательно свяжемся с вами',
+      hrDepartmentContact: 'Отдел кадров всегда на связи',
+      apply: 'Откликнуться',
+      applicationSuccess: 'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.',
+      fullName: 'ФИО',
+      workExperience: 'Опыт работы',
+      education: 'Образование',
+      coverLetter: 'Сопроводительное письмо',
       
       // Common
       phone: 'Телефон',
@@ -188,7 +173,6 @@ export const LanguageProvider = ({ children }) => {
       add: 'Добавить',
       search: 'Поиск',
       filter: 'Фильтр',
-      close: 'Закрыть',
       loading: 'Загрузка...',
       
       // Admin panel
@@ -214,258 +198,7 @@ export const LanguageProvider = ({ children }) => {
       openDay: 'День открытых дверей',
       masterclass: 'Мастер-класс',
       seminar: 'Семинар',
-      update: 'Обновить',
-      
-      // Additional translations
-      building: 'Здание центра',
-      equipment: 'Медицинское оборудование',
-      staff: 'Персонал',
-      operations: 'Операции',
-      mainHall: 'Главный холл',
-      
-      // Appointment booking
-      appointmentBooking: 'Запись на прием',
-      appointmentDescription: 'Выберите удобное время для консультации с нашими специалистами',
-      selectDoctor: 'Выберите врача',
-      selectDate: 'Выберите дату',
-      selectTime: 'Выберите время',
-      selectDateAndTime: 'Выберите дату и время',
-      doctorSelection: 'Выбор врача',
-      dateAndTime: 'Дата и время',
-      personalData: 'Личные данные',
-      doctor: 'Врач',
-      available: 'доступно',
-      next: 'Далее',
-      back: 'Назад',
-      appointmentDate: 'Дата приема',
-      appointmentTime: 'Время приема',
-      firstName: 'Имя',
-      lastName: 'Фамилия',
-      birthDate: 'Дата рождения',
-      address: 'Адрес',
-      complaintsAndSymptoms: 'Жалобы и симптомы',
-      describeSymptomsPlaceholder: 'Опишите ваши симптомы и жалобы',
-      submitting: 'Отправка...',
-      appointmentSuccessTitle: 'Запись успешно создана!',
-      appointmentSuccessMessage: 'Ваша запись на прием к врачу',
-      on: 'на',
-      at: 'в',
-      appointmentCreatedSuccessfully: 'успешно создана.',
-      contactConfirmation: 'Мы свяжемся с вами для подтверждения записи.',
-      toHomePage: 'На главную',
-      bookAnotherAppointment: 'Записаться еще раз',
-      enterName: 'Введите имя',
-      enterSurname: 'Введите фамилию',
-      enterPhone: 'Введите телефон',
-      invalidPhoneFormat: 'Неверный формат телефона',
-      submissionError: 'Произошла ошибка при отправке заявки. Попробуйте еще раз.',
-      
-      // About page translations
-      aboutCenter: 'О центре',
-      aboutCenterDescription: 'Ведущий центр нейрохирургии в Республике Узбекистан',
-      aboutCenterTitle: 'Наша миссия',
-      aboutCenterText1: 'Республиканский центр нейрохирургии является ведущим медицинским учреждением Узбекистана, специализирующимся на лечении заболеваний нервной системы.',
-      aboutCenterText2: 'Наш центр оснащен самым современным медицинским оборудованием и располагает высококвалифицированными специалистами с многолетним опытом работы.',
-      aboutCenterText3: 'Мы предоставляем комплексную медицинскую помощь, начиная от диагностики и консервативного лечения до сложнейших нейрохирургических операций.',
-      centerBuilding: 'Здание центра',
-      successfulOperations: 'Успешных операций',
-      leadership: 'Руководство',
-      leadershipDescription: 'Наш центр возглавляют выдающиеся специалисты с многолетним опытом работы в области нейрохирургии',
-      videoGallery: 'Видео галерея',
-      videoGalleryDescription: 'Познакомьтесь с нашим центром через видеоматериалы',
-      operatingRoom: 'Операционная',
-      medicalEquipment: 'Медицинское оборудование',
-      patientTestimonials: 'Отзывы пациентов',
-      
-      // Footer translations
-      careers: 'Вакансии',
-      
-      // Appointment booking
-      appointmentBooking: 'Запись на прием',
-      appointmentDescription: 'Выберите удобное время для консультации с нашими специалистами',
-      selectDoctor: 'Выберите врача',
-      selectDate: 'Выберите дату',
-      selectTime: 'Выберите время',
-      selectDateAndTime: 'Выберите дату и время',
-      doctorSelection: 'Выбор врача',
-      dateAndTime: 'Дата и время',
-      personalData: 'Личные данные',
-      doctor: 'Врач',
-      available: 'доступно',
-      next: 'Далее',
-      back: 'Назад',
-      appointmentDate: 'Дата приема',
-      appointmentTime: 'Время приема',
-      firstName: 'Имя',
-      lastName: 'Фамилия',
-      birthDate: 'Дата рождения',
-      address: 'Адрес',
-      complaintsAndSymptoms: 'Жалобы и симптомы',
-      describeSymptomsPlaceholder: 'Опишите ваши симптомы и жалобы',
-      submitting: 'Отправка...',
-      bookAppointment: 'Записаться',
-      appointmentSuccessTitle: 'Запись успешно создана!',
-      appointmentSuccessMessage: 'Ваша запись на прием к врачу',
-      on: 'на',
-      at: 'в',
-      appointmentCreatedSuccessfully: 'успешно создана.',
-      contactConfirmation: 'Мы свяжемся с вами для подтверждения записи.',
-      toHomePage: 'На главную',
-      bookAnotherAppointment: 'Записаться еще раз',
-      enterName: 'Введите имя',
-      enterSurname: 'Введите фамилию',
-      enterPhone: 'Введите телефон',
-      invalidPhoneFormat: 'Неверный формат телефона',
-      submissionError: 'Произошла ошибка при отправке заявки. Попробуйте еще раз.',
-      
-      // About page translations
-      aboutCenter: 'О центре',
-      aboutCenterDescription: 'Ведущий центр нейрохирургии в Республике Узбекистан',
-      aboutCenterTitle: 'Наша миссия',
-      aboutCenterText1: 'Республиканский центр нейрохирургии является ведущим медицинским учреждением Узбекистана, специализирующимся на лечении заболеваний нервной системы.',
-      aboutCenterText2: 'Наш центр оснащен самым современным медицинским оборудованием и располагает высококвалифицированными специалистами с многолетним опытом работы.',
-      aboutCenterText3: 'Мы предоставляем комплексную медицинскую помощь, начиная от диагностики и консервативного лечения до сложнейших нейрохирургических операций.',
-      centerBuilding: 'Здание центра',
-      successfulOperations: 'Успешных операций',
-      leadership: 'Руководство',
-      leadershipDescription: 'Наш центр возглавляют выдающиеся специалисты с многолетним опытом работы в области нейрохирургии',
-      videoGallery: 'Видео галерея',
-      videoGalleryDescription: 'Познакомьтесь с нашим центром через видеоматериалы',
-      operatingRoom: 'Операционная',
-      medicalEquipment: 'Медицинское оборудование',
-      patientTestimonials: 'Отзывы пациентов',
-      biography: 'Биография',
-      
-      // Appointment form
-      appointmentForm: 'Форма записи на прием',
-      patientName: 'ФИО пациента',
-      patientPhone: 'Телефон',
-      patientEmail: 'Email',
-      preferredDate: 'Предпочитаемая дата',
-      preferredTime: 'Предпочитаемое время',
-      doctorChoice: 'Выбор врача',
-      serviceChoice: 'Выбор услуги',
-      additionalInfo: 'Дополнительная информация',
-      submitAppointment: 'Отправить заявку',
-      
-      // Gallery
-      galleryCategories: 'Категории галереи',
-      viewAll: 'Смотреть все',
-      
-      // Footer additional
-      quickLinks: 'Быстрые ссылки',
-      socialNetworks: 'Социальные сети',
-      followUs: 'Следите за нами',
-      
-      // Additional keys
-      surgicalTreatment: 'Хирургическое лечение',
-      postOperativeRehabilitation: 'Послеоперационная реабилитация',
-      outpatientObservation: 'Амбулаторное наблюдение',
-      highQualifiedSpecialists: 'Команда высококвалифицированных специалистов с многолетним опытом',
-      fullRangeServices: 'Полный спектр медицинских услуг в области нейрохирургии с прозрачным ценообразованием',
-      
-      // Pages content translations
-      historyAndMission: 'История и миссия',
-      foundedYear: 'Год основания',
-      patientsPerYear: 'Пациентов в год',
-      centerLeadership: 'Руководство центра',
-      experiencedSpecialistsLeading: 'Опытные специалисты, возглавляющие развитие нейрохирургии в республике',
-      
-      // About page content from screenshots
-      establishedText: 'В 1986 году организовано Научное общество нейрохирургов, а в 1998 г. создана Ассоциация нейрохирургов Узбекистана, которая является также и членом Ассоциации нейрохирургов стран Тюркоязычного региона и Всемирной Ассоциации нейрохирургов (WFNS).',
-      cooperationText: 'Общество сотрудничает с научными коллективами и отдельными учеными многих стран дальнего и ближнего зарубежья (США, Германия, Россия, Индия, Азербайджан, Украина, Белоруссия, Казахстан, Кыргызстан, Грузия, Таджикистан и др.).',
-      mainGoalsText: 'Основными целями общества нейрохирургов являются: содействие реализации творческого потенциала членов Общества в интересах решения актуальных теоретических, практических и научных проблем в области нейрохирургии.',
-      associationTasks: 'Задачи Ассоциации:',
-      task1: 'Осуществление мероприятий, направленных на повышение квалификации членов Ассоциации, практическая и (или) научная деятельность которых связана с нейрохирургией',
-      task2: 'Содействие развитию приоритетных направлений научных исследований в области нейрохирургии',
-      task3: 'Оказание научной и практической помощи членам Общества, молодым ученым и врачам, содействие совершенствованию системы медицинского образования и повышение профессиональной квалификации специалистов, развитие профессиональной, этической и деонтологической традиций в медицине',
-      task4: 'Развитие сотрудничества с международными и национальными научными медицинскими обществами и ассоциациями',
-      
-      // Services page bottom section
-      needConsultationServices: 'Нужна консультация по услугам?',
-      specialistsAnswerServices: 'Наши специалисты ответят на все ваши вопросы и помогут выбрать оптимальное лечение',
-      
-      // Contact page translations
-      contactInformation: 'Контактная информация',
-      writeToUs: 'Написать нам',
-      yourName: 'Ваше имя',
-      enterYourName: 'Введите ваше имя',
-      enterYourEmail: 'Введите ваш email',
-      telephone: 'Телефон',
-      message: 'Сообщение',
-      enterYourMessage: 'Введите ваше сообщение',
-      sendMessage: 'Отправить сообщение',
-      workingHours: 'Режим работы',
-      weekdays: 'Понедельник - Пятница: 8:00 - 18:00',
-      saturday: 'Суббота: 9:00 - 15:00',
-      sunday: 'Воскресенье: Выходной',
-      emergencyHelp: 'Экстренная помощь: 24/7',
-      joinNeurosurgeonsAssociation: 'Вступление в Ассоциацию нейрохирургов Узбекистана',
-      joinAssociationText: 'Для вступления в Ассоциацию нейрохирургов Узбекистана необходимо предоставить:',
-      applicationChairman: 'Заявление на имя председателя Ассоциации Кариева Г.М.',
-      paymentReceipt: 'Квитанцию об уплате 1 размера минимальной заработной платы.',
-      associationRequirements: 'Реквизиты Ассоциации нейрохирургов Узбекистана:',
-      
-      // News page translations
-      latestNews: 'Последние новости, достижения и события нашего центра',
-      readMore: 'Читать полностью',
-      newsCount: 'новостей',
-      
-      // Appointment application
-      applyForVacancy: 'Откликнуться на вакансию',
-      applicationSent: 'Заявка отправлена!',
-      applicationSentMessage: 'Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.',
-      attachResume: 'Прикрепить резюме',
-      coverLetter: 'Сопроводительное письмо',
-      writeAboutYourself: 'Расскажите о себе и своем опыте',
-      
-      // Consultation section
-      needConsultation: 'Нужна консультация по услугам?',
-      specialistsWillAnswer: 'Наши специалисты ответят на все ваши вопросы и помогут выбрать оптимальное лечение',
-      bookConsultation: 'Записаться на консультацию',
-      contactUs: 'Связаться с нами',
-      
-      // Vacancies page
-      joinProfessionalTeam: 'Присоединяйтесь к команде профессионалов в ведущем центре нейрохирургии',
-      neurosurgeon: 'Врач-нейрохирург',
-      neurosurgeryFullTime: 'Нейрохирургия, Полная занятость',
-      mainRequirements: 'Основные требования:',
-      higherMedicalEducation: 'Высшее медицинское образование',
-      neurosurgerySpecialization: 'Специализация по нейрохирургии',
-      experienceFrom3Years: 'Опыт работы от 3 лет',
-      detailsAndApply: 'Подробнее и откликнуться',
-      
-      operatingRoomNurse: 'Медицинская сестра операционного блока',
-      operatingBlockFullTime: 'Операционный блок, Полная занятость',
-      secondaryMedicalEducation: 'Среднее медицинское образование',
-      operatingNurseCertificate: 'Сертификат операционной медсестры',
-      experienceFrom1Year: 'Опыт работы от 1 года',
-      
-      anesthesiologist: 'Врач-анестезиолог',
-      anesthesiologyFullTime: 'Анестезиология и реанимация, Полная занятость',
-      anesthesiologySpecialization: 'Специализация по анестезиологии',
-      experienceFrom2Years: 'Опыт работы от 2 лет',
-      
-      whyWorkWithUs: 'Почему работать у нас?',
-      professionalTeam: 'Профессиональная команда',
-      workWithBestSpecialists: 'Работайте с лучшими специалистами в области нейрохирургии',
-      modernEquipment: 'Современное оборудование',
-      latestTechnologies: 'Новейшие технологии и методы лечения',
-      decentSalary: 'Достойная оплата',
-      competitiveSalary: 'Конкурентная заработная плата и премии',
-      
-      noSuitableVacancy: 'Не нашли подходящую вакансию?',
-      sendResume: 'Отправьте нам свое резюме, и мы свяжемся с вами при появлении подходящих позиций',
-      hrDepartment: 'Отдел кадров',
-      
-      // Gallery page
-      centerPhotosDescription: 'Фотографии нашего центра, оборудования и работы наших специалистов',
-      allPhotos: 'Все фотографии',
-      operatingRooms: 'Операционные',
-      equipment: 'Оборудование',
-      centerBuilding: 'Здание центра',
-      staff: 'Персонал',
-      patients: 'Пациенты'
+      update: 'Обновить'
     },
     uz: {
       // Navigation
@@ -527,91 +260,25 @@ export const LanguageProvider = ({ children }) => {
       centerEvents: 'Markaz voqealari va yutuqlari',
       readMore: 'Davomini o\'qish',
       allNews: 'Barcha yangiliklar',
+      newsAndEvents: 'Yangiliklar va tadbirlar',
+      newsDescription: 'Markazimizning so\'nggi yangiliklari, yutuqlari va tadbirlari',
+      readFull: 'To\'liq o\'qish',
+      collapse: 'Yig\'ish',
+      upcomingEvents: 'Yaqinlashayotgan tadbirlar',
+      needConsultation: 'Konsultatsiya kerakmi?',
+      consultationText: 'Professional tibbiy yordam olish uchun biz bilan bog\'laning',
+      scheduleAppointment: 'Qabulga yozilish',
       
       // About page
       aboutPageTitle: 'Markaz haqida',
       aboutPageSubtitle: 'Respublika Neyroxirurgiya Ilmiy Markazi - Markaziy Osiyodagi neyroxirurgiya sohasidagi yetakchi tibbiyot muassasasi',
       historyMission: 'Tarix va missiya',
-      aboutHistoryText1: '1986 yilda Neyroxirurglar ilmiy jamiyati tashkil etilgan, 1998 yilda O\'zbekiston neyroxirurglar assotsiatsiyasi yaratilgan, u Tinch okeani mintaqasi davlatlari neyroxirurglar assotsiatsiyasi va Butunjahon neyroxirurglar assotsiatsiyasi (WFNS) a\'zosi hisoblanadi.',
-      aboutHistoryText2: 'Jamiyat uzoq va yaqin xorijiy mamlakatlarning (AQSh, Germaniya, Rossiya, Hindiston, Ozarbayjon, Ukraina, Belarus, Qozog\'iston, Qirg\'iziston, Gruziya, Tojikiston va boshqalar) ilmiy jamoalari va alohida olimlari bilan hamkorlik qiladi.',
-      aboutHistoryText3: 'Neyroxirurglar jamiyatining asosiy maqsadlari: neyroxirurgiya sohasidagi dolzarb nazariy, amaliy va ilmiy muammolarni hal etish manfaatlarida jamiyat a\'zolarining ijodiy salohiyatini ro\'yobga chiqarishga ko\'maklashish.',
       associationTasks: 'Assotsiatsiya vazifalari:',
-      task1: 'Amaliy va (yoki) ilmiy faoliyati neyroxirurgiya bilan bog\'liq bo\'lgan assotsiatsiya a\'zolarining malakasini oshirishga qaratilgan tadbirlarni amalga oshirish',
-      task2: 'Neyroxirurgiya sohasidagi ustuvor ilmiy tadqiqot yo\'nalishlarini rivojlantirishga ko\'maklashish',
-      task3: 'Jamiyat a\'zolariga, yosh olim va shifokoriarga ilmiy va amaliy yordam ko\'rsatish, tibbiy ta\'lim tizimini takomillashtirishga va mutaxassislarning kasbiy malakasini oshirishga ko\'maklashish',
-      task4: 'Xalqaro va milliy ilmiy tibbiyot jamiyatlari va assotsiatsiyalar bilan hamkorlikni rivojlantirish',
       yearFounded: 'Tashkil etilgan yil',
-      patientsPerYear: 'Yiliga bemorlar',
       centerLeadership: 'Markaz rahbariyati',
       experiencedSpecialists: 'Respublikada neyroxirurgiyani rivojlantirishga rahbarlik qilayotgan tajribali mutaxassislar',
       readBiography: 'Tarjimai holni o\'qish',
       biography: 'Tarjimai hol',
-      needConsultation: 'Xizmatlar bo\'yicha konsultatsiya kerakmi?',
-      contactSpecialists: 'Bizning mutaxassislar barcha savollaringizga javob beradi va optimal davolanishni tanlashda yordam beradi',
-      scheduleConsultation: 'Konsultatsiyaga yozilish',
-      contactUs: 'Bog\'lanish',
-      
-      // News page
-      newsAndEvents: 'Yangiliklar va tadbirlar',
-      latestNewsDescription: 'Markazimizning so\'nggi yangiliklari, yutuqlari va tadbirlari (2 ta yangilik)',
-      upcomingEvents: 'Yaqinlashayotgan tadbirlar',
-      readFull: 'To\'liq o\'qish',
-      
-      // Contact page
-      contacts: 'Aloqa',
-      contactDescription: 'Konsultatsiya olish yoki qabulga yozilish uchun biz bilan bog\'laning',
-      contactInfo: 'Aloqa ma\'lumotlari',
-      address: 'Manzil',
-      phones: 'Telefonlar',
-      workingHours: 'Ish vaqti',
-      emergency24: 'Shoshilinch yordam: 24/7',
-      writeToUs: 'Bizga yozing',
-      yourName: 'Ismingiz',
-      message: 'Xabar',
-      sendMessage: 'Xabar yuborish',
-      membershipInfo: 'O\'zbekiston neyroxirurglar assotsiatsiyasiga kirish',
-      membershipDescription: 'O\'zbekiston neyroxirurglar assotsiatsiyasiga kirish uchun taqdim etish kerak:',
-      membershipReq1: 'Assotsiatsiya raisi G.M.Kariev nomiga ariza.',
-      membershipReq2: 'Minimal ish haqi miqdorida 1 o\'lchovda to\'lov kvitansiyasi.',
-      membershipRequisites: 'O\'zbekiston neyroxirurglar assotsiatsiyasi rekvizitlari:',
-      
-      // Services page additional translations
-      serviceConsultation: 'Konsultatsiya kerakmi?',
-      serviceContactText: 'Professional tibbiy yordam olish uchun biz bilan bog\'laning',
-      scheduleAppointment: 'Qabulga yozilish',
-      
-      // Additional missing translations
-      whyWorkWithUs: 'Nega bizni tanlashadi?',
-      workWithBestSpecialists: 'Neyroxirurgiya sohasidagi eng yaxshi mutaxassislar bilan ishlang',
-      modernEquipment: 'Zamonaviy asbob-uskunalar',
-      latestTechnologies: 'Eng yangi texnologiyalar va davolash usullari',
-      competitiveSalary: 'Munosib ish haqi',
-      competitiveSalaryDesc: 'Raqobatbardosh ish haqi va mukofotlar',
-      notFoundVacancy: 'Mos bo\'sh o\'rinni topa olmadingizmi?',
-      sendResume: 'Bizga rezyumeingizni yuboring, mos pozitsiyalar paydo bo\'lganda siz bilan bog\'lanamiz',
-      hrDepartment: 'Kadrlar bo\'limi',
-      upcomingEvents: 'Yaqinlashayotgan tadbirlar',
-      needConsultationQuestion: 'Konsultatsiya kerakmi?',
-      contactForHelp: 'Professional tibbiy yordam olish uchun biz bilan bog\'laning',
-      learnMore: 'Batafsil',
-      
-      // Job application form
-      fullName: 'F.I.Sh.',
-      workExperience: 'Ish tajribasi',
-      education: 'Ma\'lumot',
-      coverLetter: 'Qo\'shimcha xat',
-      apply: 'Ariza berish',
-      submitApplication: 'Ariza yuborish',
-      applicationSent: 'Ariza yuborildi',
-      applicationSuccess: 'Arizangiz muvaffaqiyatli yuborildi. Tez orada siz bilan bog\'lanamiz.',
-      
-      // Gallery
-      allPhotos: 'Barcha fotosuratlar',
-      surgical: 'Jarrohlik xonalari',
-      equipment: 'Asbob-uskunalar',
-      buildingPhotos: 'Markaz binosi',
-      staff: 'Xodimlar',
-      patients: 'Bemorlar',
       
       // Services
       ourServices: 'Bizning xizmatlar',
@@ -621,6 +288,9 @@ export const LanguageProvider = ({ children }) => {
       surgery: 'Jarrohlik',
       price: 'Narx',
       currency: 'so\'m',
+      serviceConsultation: 'Xizmatlar bo\'yicha konsultatsiya kerakmi?',
+      serviceContactText: 'Mutaxassislarimiz sizni ko\'rsatiladigan xizmatlar bo\'yicha har qanday savollarda maslahat berishga tayyor',
+      scheduleConsultation: 'Konsultatsiyaga yozilish',
       
       // Doctors
       ourDoctors: 'Bizning shifokorlar',
@@ -628,6 +298,54 @@ export const LanguageProvider = ({ children }) => {
       experience: 'Tajriba',
       years: 'yil',
       reception: 'Qabul',
+      
+      // Gallery
+      galleryTitle: 'Galereya',
+      galleryDescription: 'Markazimiz, jihozlar va mutaxassislarimiz ishining fotosuratlar',
+      allPhotos: 'Barcha fotosuratlar',
+      operatingRooms: 'Operatsiya xonalari',
+      equipment: 'Jihozlar',
+      centerBuilding: 'Markaz binosi',
+      staff: 'Xodimlar',
+      patients: 'Bemorlar',
+      close: 'Yopish',
+      
+      // Contacts
+      contactsTitle: 'Aloqa',
+      contactsDescription: 'Konsultatsiya olish yoki qabulga yozilish uchun biz bilan bog\'laning',
+      contactInfo: 'Aloqa ma\'lumotlari',
+      writeToUs: 'Bizga yozing',
+      yourName: 'Ismingiz',
+      enterName: 'Ismingizni kiriting',
+      enterEmail: 'Email-ingizni kiriting',
+      enterPhone: 'Telefon raqamingizni kiriting',
+      message: 'Xabar',
+      enterMessage: 'Xabaringizni kiriting',
+      sendMessage: 'Xabar yuborish',
+      sending: 'Yuborilmoqda...',
+      messageSent: 'Xabar muvaffaqiyatli yuborildi!',
+      sendError: 'Xatolik yuz berdi. Qayta urinib ko\'ring.',
+      findUs: 'Bizni qayerdan topish mumkin',
+      
+      // Vacancies
+      careers: 'Bo\'sh o\'rinlar',
+      joinProfessionalTeam: 'Professional jamoaga qo\'shiling',
+      whyWorkWithUs: 'Nima uchun biz bilan ishlashga arziydi?',
+      professionalTeam: 'Professional jamoa',
+      workWithBestSpecialists: 'Eng yaxshi mutaxassislar bilan ishlash',
+      modernEquipment: 'Zamonaviy jihozlar',
+      latestTechnologies: 'Eng yangi texnologiya va usullar',
+      competitiveSalary: 'Raqobatbardosh maosh',
+      competitiveSalaryDesc: 'Munosib mehnat haqi va bonuslar',
+      notFoundVacancy: 'Mos bo\'sh o\'rin topmadingizmi?',
+      sendResume: 'Bizga rezyumengizni yuboring, albatta siz bilan bog\'lanamiz',
+      hrDepartmentContact: 'Kadrlar bo\'limi doimo aloqada',
+      apply: 'Ariza topshirish',
+      applicationSuccess: 'Ariza muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.',
+      fullName: 'F.I.Sh.',
+      workExperience: 'Ish tajribasi',
+      education: 'Ta\'lim',
+      coverLetter: 'Qo\'shimcha xat',
       
       // Common
       phone: 'Telefon',
@@ -639,7 +357,6 @@ export const LanguageProvider = ({ children }) => {
       add: 'Qo\'shish',
       search: 'Qidiruv',
       filter: 'Filtr',
-      close: 'Yopish',
       loading: 'Yuklanmoqda...',
       
       // Admin panel
@@ -665,203 +382,7 @@ export const LanguageProvider = ({ children }) => {
       openDay: 'Ochiq eshiklar kuni',
       masterclass: 'Masterкlass',
       seminar: 'Seminar',
-      update: 'Yangilash',
-      
-      // Additional translations
-      building: 'Markaz binosi',
-      equipment: 'Tibbiy asbob-uskunalar',
-      staff: 'Xodimlar',
-      operations: 'Operatsiyalar',
-      mainHall: 'Asosiy zal',
-      operatingRoom: 'Operatsiya xonasi',
-      
-      // Appointment form
-      appointmentForm: 'Qabulga yozilish formasi',
-      patientName: 'Bemorning F.I.Sh.',
-      patientPhone: 'Telefon',
-      patientEmail: 'Email',
-      preferredDate: 'Afzal ko\'rilgan sana',
-      preferredTime: 'Afzal ko\'rilgan vaqt',
-      doctorChoice: 'Shifokor tanlash',
-      serviceChoice: 'Xizmat tanlash',
-      additionalInfo: 'Qo\'shimcha ma\'lumot',
-      submitAppointment: 'Arizani yuborish',
-      
-      // Gallery
-      galleryCategories: 'Galereya kategoriyalari',
-      viewAll: 'Barchasini ko\'rish',
-      
-      // Footer additional
-      quickLinks: 'Tezkor havolalar',
-      socialNetworks: 'Ijtimoiy tarmoqlar',
-      followUs: 'Bizni kuzatib boring',
-      
-      // Additional keys
-      surgicalTreatment: 'Jarrohlik davolash',
-      postOperativeRehabilitation: 'Operatsiyadan keyingi reabilitatsiya',
-      outpatientObservation: 'Ambulatoriya kuzatuvi',
-      highQualifiedSpecialists: 'Ko\'p yillik tajribaga ega yuqori malakali mutaxassislar jamoasi',
-      fullRangeServices: 'Neyroxirurgiya sohasida to\'liq tibbiy xizmatlar spektri',
-      
-      // Appointment booking - Uzbek
-      appointmentBooking: 'Qabulga yozilish',
-      appointmentDescription: 'Mutaxassislarimiz bilan maslahatlashish uchun qulay vaqtni tanlang',
-      selectDoctor: 'Shifokorni tanlang',
-      selectDate: 'Sanani tanlang',
-      selectTime: 'Vaqtni tanlang',
-      selectDateAndTime: 'Sana va vaqtni tanlang',
-      doctorSelection: 'Shifokor tanlash',
-      dateAndTime: 'Sana va vaqt',
-      personalData: 'Shaxsiy ma\'lumotlar',
-      doctor: 'Shifokor',
-      available: 'mavjud',
-      next: 'Keyingi',
-      back: 'Orqaga',
-      appointmentDate: 'Qabul sanasi',
-      appointmentTime: 'Qabul vaqti',
-      firstName: 'Ism',
-      lastName: 'Familiya',
-      birthDate: 'Tug\'ilgan sana',
-      address: 'Manzil',
-      complaintsAndSymptoms: 'Shikoyatlar va alomatlar',
-      describeSymptomsPlaceholder: 'Alomatlar va shikoyatlaringizni tasvirlab bering',
-      submitting: 'Jo\'natilmoqda...',
-      appointmentSuccessTitle: 'Qabul muvaffaqiyatli yaratildi!',
-      appointmentSuccessMessage: 'Shifokor',
-      on: 'sanasida',
-      at: 'soat',
-      appointmentCreatedSuccessfully: 'uchun qabulingiz muvaffaqiyatli yaratildi.',
-      contactConfirmation: 'Biz siz bilan qabulni tasdiqlash uchun bog\'lanamiz.',
-      toHomePage: 'Bosh sahifaga',
-      bookAnotherAppointment: 'Yana qabulga yozilish',
-      enterName: 'Ismni kiriting',
-      enterSurname: 'Familiyani kiriting',
-      enterPhone: 'Telefon raqamini kiriting',
-      invalidPhoneFormat: 'Noto\'g\'ri telefon formati',
-      submissionError: 'Arizani yuborishda xatolik yuz berdi. Qayta urinib ko\'ring.',
-      
-      // About page translations - Uzbek
-      aboutCenter: 'Markaz haqida',
-      aboutCenterDescription: 'O\'zbekiston Respublikasida neyroxirurgiyaning yetakchi markazi',
-      aboutCenterTitle: 'Bizning missiyamiz',
-      aboutCenterText1: 'Respublika neyroxirurgiya markazi asab tizimi kasalliklarini davolashga ixtisoslashgan O\'zbekistonning yetakchi tibbiy muassasasidir.',
-      aboutCenterText2: 'Markazimiz eng zamonaviy tibbiy asbob-uskunalar bilan jihozlangan va ko\'p yillik ish tajribasiga ega yuqori malakali mutaxassislarga ega.',
-      aboutCenterText3: 'Biz diagnostika va konservativ davolanishdan tortib eng murakkab neyroxirurgik operatsiyalargacha to\'liq tibbiy yordam ko\'rsatamiz.',
-      centerBuilding: 'Markaz binosi',
-      successfulOperations: 'Muvaffaqiyatli operatsiyalar',
-      leadership: 'Rahbariyat',
-      leadershipDescription: 'Markazimizni neyroxirurgiya sohasida ko\'p yillik ish tajribasiga ega ajoyib mutaxassislar boshqaradi',
-      videoGallery: 'Video galereya',
-      videoGalleryDescription: 'Video materiallar orqali markazimiz bilan tanishing',
-      operatingRoom: 'Operatsiya xonasi',
-      medicalEquipment: 'Tibbiy asbob-uskunalar',
-      patientTestimonials: 'Bemorlarning fikrlari',
-      
-      // Footer translations - Uzbek
-      careers: 'Bo\'sh o\'rinlar',
-      
-      // Pages content translations - Uzbek
-      historyAndMission: 'Tarix va missiya',
-      foundedYear: 'Tashkil etilgan yil',
-      patientsPerYear: 'Yiliga bemorlar',
-      centerLeadership: 'Markaz rahbariyati',
-      experiencedSpecialistsLeading: 'Respublikada neyroxirurgiya rivojlanishini boshqarayotgan tajribali mutaxassislar',
-      
-      // About page content - Uzbek
-      establishedText: '1986 yilda Neyroxirurglar ilmiy jamiyati tashkil etildi, 1998 yilda esa O\'zbekiston neyroxirurglar assotsiatsiyasi tuzildi, u shuningdek Turkiy tillarda so\'zlashuvchi mintaqa neyroxirurglar assotsiatsiyasi va Jahon neyroxirurglar assotsiatsiyasi (WFNS) a\'zosi hisoblanadi.',
-      cooperationText: 'Jamiyat uzoq va yaqin xorijiy mamlakatlarning (AQSH, Germaniya, Rossiya, Hindiston, Ozarbayjon, Ukraina, Belorusiya, Qozog\'iston, Qirg\'iziston, Gruziya, Tojikiston va boshqalar) ilmiy jamoalari va alohida olimlari bilan hamkorlik qiladi.',
-      mainGoalsText: 'Neyroxirurglar jamiyatining asosiy maqsadlari: neyroxirurgiya sohasidagi dolzarb nazariy, amaliy va ilmiy muammolarni hal qilish maqsadida jamiyat a\'zolarining ijodiy salohiyatini amalga oshirishga ko\'maklashish.',
-      associationTasks: 'Assotsiatsiya vazifalari:',
-      task1: 'Assotsiatsiya a\'zolarining malakasini oshirishga qaratilgan tadbirlarni amalga oshirish, ularning amaliy va (yoki) ilmiy faoliyati neyroxirurgiya bilan bog\'liq',
-      task2: 'Neyroxirurgiya sohasida ilmiy tadqiqotlarning ustuvor yo\'nalishlarini rivojlantirishga ko\'maklashish',
-      task3: 'Jamiyat a\'zolariga, yosh olim va shifokorlarga ilmiy va amaliy yordam ko\'rsatish, tibbiy ta\'lim tizimini takomillashtirishga ko\'maklashish va mutaxassislarning kasbiy malakasini oshirish, tibbiyotda kasbiy, axloqiy va deontologik an\'analarni rivojlantirish',
-      task4: 'Xalqaro va milliy ilmiy tibbiy jamiyatlar va assotsiatsiyalar bilan hamkorlikni rivojlantirish',
-      
-      // Services page bottom section - Uzbek
-      needConsultationServices: 'Xizmatlar bo\'yicha maslahat kerakmi?',
-      specialistsAnswerServices: 'Mutaxassislarimiz barcha savollaringizga javob berishadi va optimal davolanishni tanlashda yordam berishadi',
-      
-      // Contact page translations - Uzbek
-      contactInformation: 'Aloqa ma\'lumotlari',
-      writeToUs: 'Bizga yozing',
-      yourName: 'Ismingiz',
-      enterYourName: 'Ismingizni kiriting',
-      enterYourEmail: 'Emailingizni kiriting',
-      telephone: 'Telefon',
-      message: 'Xabar',
-      enterYourMessage: 'Xabaringizni kiriting',
-      sendMessage: 'Xabar yuborish',
-      workingHours: 'Ish vaqti',
-      weekdays: 'Dushanba - Juma: 8:00 - 18:00',
-      saturday: 'Shanba: 9:00 - 15:00',
-      sunday: 'Yakshanba: Dam olish kuni',
-      emergencyHelp: 'Shoshilinch yordam: 24/7',
-      joinNeurosurgeonsAssociation: 'O\'zbekiston neyroxirurglar assotsiatsiyasiga kirish',
-      joinAssociationText: 'O\'zbekiston neyroxirurglar assotsiatsiyasiga kirish uchun taqdim etish kerak:',
-      applicationChairman: 'Assotsiatsiya raisi Kariyev G.M. nomiga ariza.',
-      paymentReceipt: 'Minimal ish haqi 1 o\'lchamini to\'lash kvitansiyasi.',
-      associationRequirements: 'O\'zbekiston neyroxirurglar assotsiatsiyasining rekvizitlari:',
-      
-      // News page translations - Uzbek
-      latestNews: 'Markazimizning so\'nggi yangiliklari, yutuqlari va voqealari',
-      readMore: 'To\'liq o\'qish',
-      newsCount: 'yangiliklar',
-      
-      // Appointment application - Uzbek
-      applyForVacancy: 'Vakansiyaga ariza berish',
-      applicationSent: 'Ariza yuborildi!',
-      applicationSentMessage: 'Arizangiz muvaffaqiyatli yuborildi. Biz siz bilan yaqin orada bog\'lanamiz.',
-      attachResume: 'Rezyume ilova qiling',
-      coverLetter: 'Qo\'shimcha xat',
-      writeAboutYourself: 'O\'zingiz va tajribangiz haqida so\'zlab bering',
-      
-      // Consultation section - Uzbek
-      needConsultation: 'Xizmatlar bo\'yicha maslahat kerakmi?',
-      specialistsWillAnswer: 'Mutaxassislarimiz barcha savollaringizga javob berishadi va optimal davolanishni tanlashda yordam berishadi',
-      bookConsultation: 'Maslahatga yozilish',
-      contactUs: 'Biz bilan bog\'laning',
-      
-      // Vacancies page - Uzbek
-      joinProfessionalTeam: 'Neyroxirurgiyaning yetakchi markazida professionallar jamoasiga qo\'shiling',
-      neurosurgeon: 'Neyroxirurg shifokor',
-      neurosurgeryFullTime: 'Neyroxirurgiya, To\'liq bandlik',
-      mainRequirements: 'Asosiy talablar:',
-      higherMedicalEducation: 'Oliy tibbiy ta\'lim',
-      neurosurgerySpecialization: 'Neyroxirurgiya bo\'yicha mutaxassislik',
-      experienceFrom3Years: '3 yildan ortiq ish tajribasi',
-      detailsAndApply: 'Batafsil va ariza berish',
-      
-      operatingRoomNurse: 'Operatsiya bloki hamshirasi',
-      operatingBlockFullTime: 'Operatsiya bloki, To\'liq bandlik',
-      secondaryMedicalEducation: 'O\'rta tibbiy ta\'lim',
-      operatingNurseCertificate: 'Operatsiya hamshirasi sertifikati',
-      experienceFrom1Year: '1 yildan ortiq ish tajribasi',
-      
-      anesthesiologist: 'Anesteziologo shifokor',
-      anesthesiologyFullTime: 'Anesteziologiya va reanimatologiya, To\'liq bandlik',
-      anesthesiologySpecialization: 'Anesteziologiya bo\'yicha mutaxassislik',
-      experienceFrom2Years: '2 yildan ortiq ish tajribasi',
-      
-      whyWorkWithUs: 'Nega biz bilan ishlash kerak?',
-      professionalTeam: 'Professional jamoa',
-      workWithBestSpecialists: 'Neyroxirurgiya sohasidagi eng yaxshi mutaxassislar bilan ishlang',
-      modernEquipment: 'Zamonaviy asbob-uskunalar',
-      latestTechnologies: 'Eng yangi texnologiyalar va davolash usullari',
-      decentSalary: 'Munosib maosh',
-      competitiveSalary: 'Raqobatbardosh maosh va mukofotlar',
-      
-      noSuitableVacancy: 'Mos vakansiya topmadingizmi?',
-      sendResume: 'Bizga rezyumeingizni yuboring, mos pozitsiyalar paydo bo\'lganda siz bilan bog\'lanamiz',
-      hrDepartment: 'Kadrlar bo\'limi',
-      
-      // Gallery page - Uzbek
-      centerPhotosDescription: 'Markazimiz, asbob-uskunalar va mutaxassislarimizning ish faoliyati rasmlari',
-      allPhotos: 'Barcha rasmlar',
-      operatingRooms: 'Operatsiya xonalari',
-      equipment: 'Asbob-uskunalar',
-      centerBuilding: 'Markaz binosi',
-      staff: 'Xodimlar',
-      patients: 'Bemorlar'
+      update: 'Yangilash'
     },
     en: {
       // Navigation
@@ -923,91 +444,25 @@ export const LanguageProvider = ({ children }) => {
       centerEvents: 'Center events and achievements',
       readMore: 'Read more',
       allNews: 'All news',
+      newsAndEvents: 'News and events',
+      newsDescription: 'Latest news, achievements and events of our center',
+      readFull: 'Read full',
+      collapse: 'Collapse',
+      upcomingEvents: 'Upcoming events',
+      needConsultation: 'Need consultation?',
+      consultationText: 'Contact us for professional medical assistance',
+      scheduleAppointment: 'Schedule appointment',
       
       // About page
       aboutPageTitle: 'About center',
       aboutPageSubtitle: 'Republican Scientific Center of Neurosurgery - leading medical institution in Central Asia in the field of neurosurgery',
       historyMission: 'History and mission',
-      aboutHistoryText1: 'In 1986, the Scientific Society of Neurosurgeons was organized, and in 1998 the Association of Neurosurgeons of Uzbekistan was created, which is also a member of the Association of Neurosurgeons of the Pacific Region and the World Federation of Neurosurgical Societies (WFNS).',
-      aboutHistoryText2: 'The Society cooperates with scientific teams and individual scientists from many countries near and far abroad (USA, Germany, Russia, India, Azerbaijan, Ukraine, Belarus, Kazakhstan, Kyrgyzstan, Georgia, Tajikistan, etc.).',
-      aboutHistoryText3: 'The main goals of the neurosurgeons society are: to promote the realization of the creative potential of Society members in the interests of solving urgent theoretical, practical and scientific problems in the field of neurosurgery.',
       associationTasks: 'Association tasks:',
-      task1: 'Implementation of measures aimed at improving the qualifications of Association members whose practical and (or) scientific activities are related to neurosurgery',
-      task2: 'Promoting the development of priority areas of scientific research in neurosurgery',
-      task3: 'Providing scientific and practical assistance to Society members, young scientists and doctors, promoting the improvement of the medical education system and professional development of specialists',
-      task4: 'Development of cooperation with international and national scientific medical societies and associations',
       yearFounded: 'Year founded',
-      patientsPerYear: 'Patients per year',
       centerLeadership: 'Center leadership',
       experiencedSpecialists: 'Experienced specialists leading the development of neurosurgery in the republic',
       readBiography: 'Read biography',
       biography: 'Biography',
-      needConsultation: 'Need consultation about services?',
-      contactSpecialists: 'Our specialists will answer all your questions and help you choose optimal treatment',
-      scheduleConsultation: 'Schedule consultation',
-      contactUs: 'Contact us',
-      
-      // News page
-      newsAndEvents: 'News and events',
-      latestNewsDescription: 'Latest news, achievements and events of our center (2 news)',
-      upcomingEvents: 'Upcoming events',
-      readFull: 'Read full',
-      
-      // Contact page
-      contacts: 'Contacts',
-      contactDescription: 'Contact us for consultation or appointment booking',
-      contactInfo: 'Contact information',
-      address: 'Address',
-      phones: 'Phones',
-      workingHours: 'Working hours',
-      emergency24: 'Emergency help: 24/7',
-      writeToUs: 'Write to us',
-      yourName: 'Your name',
-      message: 'Message',
-      sendMessage: 'Send message',
-      membershipInfo: 'Joining the Association of Neurosurgeons of Uzbekistan',
-      membershipDescription: 'To join the Association of Neurosurgeons of Uzbekistan, you need to provide:',
-      membershipReq1: 'Application addressed to the Association Chairman G.M. Kariev.',
-      membershipReq2: 'Receipt of payment in the amount of 1 minimum wage.',
-      membershipRequisites: 'Requisites of the Association of Neurosurgeons of Uzbekistan:',
-      
-      // Services page additional translations
-      serviceConsultation: 'Need consultation?',
-      serviceContactText: 'Contact us for professional medical help',
-      scheduleAppointment: 'Schedule appointment',
-      
-      // Additional missing translations
-      whyWorkWithUs: 'Why choose us?',
-      workWithBestSpecialists: 'Work with the best specialists in neurosurgery',
-      modernEquipment: 'Modern equipment',
-      latestTechnologies: 'Latest technologies and treatment methods',
-      competitiveSalary: 'Competitive salary',
-      competitiveSalaryDesc: 'Competitive salary and bonuses',
-      notFoundVacancy: 'Didn\'t find a suitable vacancy?',
-      sendResume: 'Send us your resume and we will contact you when suitable positions appear',
-      hrDepartment: 'HR Department',
-      upcomingEvents: 'Upcoming events',
-      needConsultationQuestion: 'Need consultation?',
-      contactForHelp: 'Contact us for professional medical help',
-      learnMore: 'Learn More',
-      
-      // Job application form
-      fullName: 'Full Name',
-      workExperience: 'Work Experience',
-      education: 'Education',
-      coverLetter: 'Cover Letter',
-      apply: 'Apply',
-      submitApplication: 'Submit Application',
-      applicationSent: 'Application Sent',
-      applicationSuccess: 'Your application has been successfully submitted. We will contact you soon.',
-      
-      // Gallery
-      allPhotos: 'All Photos',
-      surgical: 'Operating Rooms',
-      equipment: 'Equipment',
-      buildingPhotos: 'Center Building',
-      staff: 'Staff',
-      patients: 'Patients',
       
       // Services
       ourServices: 'Our services',
@@ -1017,6 +472,9 @@ export const LanguageProvider = ({ children }) => {
       surgery: 'Surgery',
       price: 'Price',
       currency: 'UZS',
+      serviceConsultation: 'Need service consultation?',
+      serviceContactText: 'Our specialists are ready to consult you on any questions about provided services',
+      scheduleConsultation: 'Schedule consultation',
       
       // Doctors
       ourDoctors: 'Our doctors',
@@ -1024,6 +482,54 @@ export const LanguageProvider = ({ children }) => {
       experience: 'Experience',
       years: 'years',
       reception: 'Reception',
+      
+      // Gallery
+      galleryTitle: 'Gallery',
+      galleryDescription: 'Photos of our center, equipment and work of our specialists',
+      allPhotos: 'All photos',
+      operatingRooms: 'Operating rooms',
+      equipment: 'Equipment',
+      centerBuilding: 'Center building',
+      staff: 'Staff',
+      patients: 'Patients',
+      close: 'Close',
+      
+      // Contacts
+      contactsTitle: 'Contacts',
+      contactsDescription: 'Contact us for consultation or appointment booking',
+      contactInfo: 'Contact information',
+      writeToUs: 'Write to us',
+      yourName: 'Your name',
+      enterName: 'Enter your name',
+      enterEmail: 'Enter your email',
+      enterPhone: 'Enter your phone',
+      message: 'Message',
+      enterMessage: 'Enter your message',
+      sendMessage: 'Send message',
+      sending: 'Sending...',
+      messageSent: 'Message sent successfully!',
+      sendError: 'An error occurred. Please try again.',
+      findUs: 'Where to find us',
+      
+      // Vacancies
+      careers: 'Careers',
+      joinProfessionalTeam: 'Join our professional team',
+      whyWorkWithUs: 'Why work with us?',
+      professionalTeam: 'Professional team',
+      workWithBestSpecialists: 'Work with the best specialists',
+      modernEquipment: 'Modern equipment',
+      latestTechnologies: 'Latest technologies and methods',
+      competitiveSalary: 'Competitive salary',
+      competitiveSalaryDesc: 'Decent salary and bonuses',
+      notFoundVacancy: 'Didn\'t find suitable vacancy?',
+      sendResume: 'Send us your resume and we will definitely contact you',
+      hrDepartmentContact: 'HR department is always in touch',
+      apply: 'Apply',
+      applicationSuccess: 'Application sent successfully! We will contact you soon.',
+      fullName: 'Full name',
+      workExperience: 'Work experience',
+      education: 'Education',
+      coverLetter: 'Cover letter',
       
       // Common
       phone: 'Phone',
@@ -1035,7 +541,6 @@ export const LanguageProvider = ({ children }) => {
       add: 'Add',
       search: 'Search',
       filter: 'Filter',
-      close: 'Close',
       loading: 'Loading...',
       
       // Admin panel
@@ -1061,157 +566,7 @@ export const LanguageProvider = ({ children }) => {
       openDay: 'Open day',
       masterclass: 'Masterclass',
       seminar: 'Seminar',
-      update: 'Update',
-      
-      // Additional translations
-      building: 'Center building',
-      equipment: 'Medical equipment',
-      staff: 'Staff',
-      operations: 'Operations',
-      mainHall: 'Main hall',
-      operatingRoom: 'Operating room',
-      
-      // Appointment form
-      appointmentForm: 'Appointment form',
-      patientName: 'Patient full name',
-      patientPhone: 'Phone',
-      patientEmail: 'Email',
-      preferredDate: 'Preferred date',
-      preferredTime: 'Preferred time',
-      doctorChoice: 'Choose doctor',
-      serviceChoice: 'Choose service',
-      additionalInfo: 'Additional information',
-      submitAppointment: 'Submit appointment',
-      
-      // Gallery
-      galleryCategories: 'Gallery categories',
-      viewAll: 'View all',
-      
-      // Footer additional
-      quickLinks: 'Quick links',
-      socialNetworks: 'Social networks',
-      followUs: 'Follow us',
-      
-      // Additional keys  
-      surgicalTreatment: 'Surgical treatment',
-      postOperativeRehabilitation: 'Postoperative rehabilitation',
-      outpatientObservation: 'Outpatient observation',
-      highQualifiedSpecialists: 'Team of highly qualified specialists with years of experience',
-      fullRangeServices: 'Full range of medical services in neurosurgery with transparent pricing',
-      
-      // Appointment booking - English
-      appointmentBooking: 'Book Appointment',
-      appointmentDescription: 'Choose a convenient time to consult with our specialists',
-      selectDoctor: 'Select Doctor',
-      selectDate: 'Select Date',
-      selectTime: 'Select Time',
-      selectDateAndTime: 'Select Date and Time',
-      doctorSelection: 'Doctor Selection',
-      dateAndTime: 'Date and Time',
-      personalData: 'Personal Data',
-      doctor: 'Doctor',
-      available: 'available',
-      next: 'Next',
-      back: 'Back',
-      appointmentDate: 'Appointment Date',
-      appointmentTime: 'Appointment Time',
-      firstName: 'First Name',
-      lastName: 'Last Name',
-      birthDate: 'Date of Birth',
-      address: 'Address',
-      complaintsAndSymptoms: 'Complaints and Symptoms',
-      describeSymptomsPlaceholder: 'Describe your symptoms and complaints',
-      submitting: 'Submitting...',
-      bookAppointment: 'Book Appointment',
-      appointmentSuccessTitle: 'Appointment Successfully Created!',
-      appointmentSuccessMessage: 'Your appointment with doctor',
-      on: 'on',
-      at: 'at',
-      appointmentCreatedSuccessfully: 'has been successfully created.',
-      contactConfirmation: 'We will contact you to confirm the appointment.',
-      toHomePage: 'To Home Page',
-      bookAnotherAppointment: 'Book Another Appointment',
-      enterName: 'Enter first name',
-      enterSurname: 'Enter last name',
-      enterPhone: 'Enter phone number',
-      invalidPhoneFormat: 'Invalid phone format',
-      submissionError: 'An error occurred while submitting the request. Please try again.',
-      
-      // About page translations - English
-      aboutCenter: 'About Center',
-      aboutCenterDescription: 'Leading neurosurgery center in the Republic of Uzbekistan',
-      aboutCenterTitle: 'Our Mission',
-      aboutCenterText1: 'The Republican Center of Neurosurgery is a leading medical institution in Uzbekistan specializing in the treatment of nervous system diseases.',
-      aboutCenterText2: 'Our center is equipped with the most modern medical equipment and has highly qualified specialists with many years of experience.',
-      aboutCenterText3: 'We provide comprehensive medical care, from diagnosis and conservative treatment to the most complex neurosurgical operations.',
-      centerBuilding: 'Center Building',
-      successfulOperations: 'Successful Operations',
-      leadership: 'Leadership',
-      leadershipDescription: 'Our center is headed by outstanding specialists with many years of experience in neurosurgery',
-      videoGallery: 'Video Gallery',
-      videoGalleryDescription: 'Get to know our center through video materials',
-      operatingRoom: 'Operating Room',
-      medicalEquipment: 'Medical Equipment',
-      patientTestimonials: 'Patient Testimonials',
-      biography: 'Biography',
-      
-      // Footer translations - English
-      careers: 'Careers',
-      
-      // Pages content translations - English
-      historyAndMission: 'History and Mission',
-      foundedYear: 'Founded Year',
-      patientsPerYear: 'Patients per Year',
-      centerLeadership: 'Center Leadership',
-      experiencedSpecialistsLeading: 'Experienced specialists leading the development of neurosurgery in the republic',
-      
-      // Consultation section - English
-      needConsultation: 'Need consultation on services?',
-      specialistsWillAnswer: 'Our specialists will answer all your questions and help you choose optimal treatment',
-      bookConsultation: 'Book Consultation',
-      contactUs: 'Contact Us',
-      
-      // Vacancies page - English
-      joinProfessionalTeam: 'Join the team of professionals at the leading neurosurgery center',
-      neurosurgeon: 'Neurosurgeon',
-      neurosurgeryFullTime: 'Neurosurgery, Full-time',
-      mainRequirements: 'Main requirements:',
-      higherMedicalEducation: 'Higher medical education',
-      neurosurgerySpecialization: 'Neurosurgery specialization',
-      experienceFrom3Years: '3+ years of experience',
-      detailsAndApply: 'Details and apply',
-      
-      operatingRoomNurse: 'Operating room nurse',
-      operatingBlockFullTime: 'Operating block, Full-time',
-      secondaryMedicalEducation: 'Secondary medical education',
-      operatingNurseCertificate: 'Operating nurse certificate',
-      experienceFrom1Year: '1+ years of experience',
-      
-      anesthesiologist: 'Anesthesiologist',
-      anesthesiologyFullTime: 'Anesthesiology and resuscitation, Full-time',
-      anesthesiologySpecialization: 'Anesthesiology specialization',
-      experienceFrom2Years: '2+ years of experience',
-      
-      whyWorkWithUs: 'Why work with us?',
-      professionalTeam: 'Professional team',
-      workWithBestSpecialists: 'Work with the best specialists in neurosurgery',
-      modernEquipment: 'Modern equipment',
-      latestTechnologies: 'Latest technologies and treatment methods',
-      decentSalary: 'Decent salary',
-      competitiveSalary: 'Competitive salary and bonuses',
-      
-      noSuitableVacancy: 'Didn\'t find a suitable vacancy?',
-      sendResume: 'Send us your resume and we will contact you when suitable positions become available',
-      hrDepartment: 'HR Department',
-      
-      // Gallery page - English
-      centerPhotosDescription: 'Photos of our center, equipment and work of our specialists',
-      allPhotos: 'All photos',
-      operatingRooms: 'Operating rooms',
-      equipment: 'Equipment',
-      centerBuilding: 'Center building',
-      staff: 'Staff',
-      patients: 'Patients'
+      update: 'Update'
     }
   };
 
@@ -1261,102 +616,68 @@ export const AdminProvider = ({ children }) => {
   const [departments, setDepartments] = useState(() => loadFromStorage('departments', []));
   const [doctors, setDoctors] = useState(() => loadFromStorage('doctors', []));
   const [news, setNews] = useState(() => loadFromStorage('news', []));
-  const [services, setServices] = useState(() => loadFromStorage('services', [
-    {
-      id: 1,
-      title_ru: 'Консультация нейрохирурга',
-      title_uz: 'Neyroxirurg maslahati',
-      title_en: 'Neurosurgeon consultation',
-      description_ru: 'Первичная или повторная консультация специалиста',
-      description_uz: 'Mutaxassisning birlamchi yoki takroriy maslahati',
-      description_en: 'Primary or follow-up specialist consultation',
-      price: 150000,
-      duration: '30-45 мин',
-      category: 'Консультации'
-    },
-    {
-      id: 2,
-      title_ru: 'МРТ головного мозга',
-      title_uz: 'Bosh miya MRT',
-      title_en: 'Brain MRI',
-      description_ru: 'Магнитно-резонансная томография головного мозга',
-      description_uz: 'Bosh miyaning magnit-rezonans tomografiyasi',
-      description_en: 'Magnetic resonance imaging of the brain',
-      price: 350000,
-      duration: '30-60 мин',
-      category: 'Диагностика'
-    },
-    {
-      id: 3,
-      title_ru: 'Эндоскопическая операция',
-      title_uz: 'Endoskopik operatsiya',
-      title_en: 'Endoscopic surgery',
-      description_ru: 'Минимально инвазивная нейрохирургическая операция',
-      description_uz: 'Minimal invaziv neyroxirurgik operatsiya',
-      description_en: 'Minimally invasive neurosurgical operation',
-      price: 5000000,
-      duration: '2-4 часа',
-      category: 'Хирургия'
-    },
-    {
-      id: 4,
-      title_ru: 'Микрохирургическое удаление опухоли',
-      title_uz: 'Mikroxirurgik usul bilan o\'smani olib tashlash',
-      title_en: 'Microsurgical tumor removal',
-      description_ru: 'Прецизионное удаление новообразований мозга',
-      description_uz: 'Miya yangiformalarini aniq olib tashlash',
-      description_en: 'Precision removal of brain tumors',
-      price: 8000000,
-      duration: '3-6 часов',
-      category: 'Хирургия'
-    },
-    {
-      id: 5,
-      title_ru: 'Реабилитационная программа',
-      title_uz: 'Reabilitatsiya dasturi',
-      title_en: 'Rehabilitation program',
-      description_ru: 'Комплексная послеоперационная реабилитация',
-      description_uz: 'Operatsiyadan keyingi kompleks reabilitatsiya',
-      description_en: 'Comprehensive postoperative rehabilitation',
-      price: 250000,
-      duration: '1-2 недели',
-      category: 'Реабилитация'
-    }
-  ]));
+  const [services, setServices] = useState(() => loadFromStorage('services', []));
   const [galleryImages, setGalleryImages] = useState(() => loadFromStorage('galleryImages', []));
+  const [galleryCategories, setGalleryCategories] = useState(() => loadFromStorage('galleryCategories', [
+    { id: 'all', name_ru: 'Все фотографии', name_uz: 'Barcha suratlar', name_en: 'All photos' },
+    { id: 'operations', name_ru: 'Операционные', name_uz: 'Operatsiya xonalari', name_en: 'Operating rooms' },
+    { id: 'equipment', name_ru: 'Оборудование', name_uz: 'Jihozlar', name_en: 'Equipment' },
+    { id: 'building', name_ru: 'Здание центра', name_uz: 'Markaz binosi', name_en: 'Center building' },
+    { id: 'staff', name_ru: 'Персонал', name_uz: 'Xodimlar', name_en: 'Staff' },
+    { id: 'patients', name_ru: 'Пациенты', name_uz: 'Bemorlar', name_en: 'Patients' }
+  ]));
+  const [vacancies, setVacancies] = useState(() => loadFromStorage('vacancies', []));
   const [accounts, setAccounts] = useState(() => loadFromStorage('accounts', [
-    { id: 1, name: 'Админ', email: 'admin@neuro.uz', role: 'admin', status: 'active', createdAt: '2025-01-01' },
-    { id: 2, name: 'Доктор Кариев', email: 'kariev@neuro.uz', role: 'doctor', status: 'active', createdAt: '2025-01-15' },
-    { id: 3, name: 'Доктор Асадуллаев', email: 'asadullaev@neuro.uz', role: 'doctor', status: 'active', createdAt: '2025-02-01' },
-    { id: 4, name: 'Доктор Кодашев', email: 'kodashev@neuro.uz', role: 'doctor', status: 'active', createdAt: '2025-02-10' }
+    { id: 1, name: 'Админ', email: 'admin@neuro.uz', password: 'admin123', role: 'admin', status: 'active', createdAt: '2025-01-01' },
+    { id: 2, name: 'Доктор Кариев', email: 'kariev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-01-15' },
+    { id: 3, name: 'Доктор Асадуллаев', email: 'asadullaev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-02-01' },
+    { id: 4, name: 'Доктор Кодашев', email: 'kodashev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-02-10' }
   ]));
   const [leadership, setLeadership] = useState(() => loadFromStorage('leadership', [
     {
       id: 1,
-      name: 'Кариев Габрат Маратович',
-      position: 'Директор центра',
+      name_ru: 'Кариев Габрат Маратович',
+      name_uz: 'Kariyev Gabrat Maratovich',
+      name_en: 'Kariev Gabrat Maratovich',
+      position_ru: 'Директор центра',
+      position_uz: 'Markaz direktori',
+      position_en: 'Center Director',
       image: 'https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg',
       phone: '+998 71 264-96-10',
       email: 'director@neuro.uz',
-      biography: 'Заслуженный врач Республики Узбекистан, доктор медицинских наук. Более 30 лет опыта в нейрохирургии.'
+      biography_ru: 'Заслуженный врач Республики Узбекистан, доктор медицинских наук. Более 30 лет опыта в нейрохирургии.',
+      biography_uz: 'O\'zbekiston Respublikasining xizmatli shifokori, tibbiyot fanlari doktori. Neyroxirurgiyada 30 yildan ortiq tajriba.',
+      biography_en: 'Honored Doctor of the Republic of Uzbekistan, Doctor of Medical Sciences. Over 30 years of experience in neurosurgery.'
     },
     {
       id: 2,
-      name: 'Асадуллаев Улугбек Максудович',
-      position: 'Заместитель директора по научной работе',
+      name_ru: 'Асадуллаев Улугбек Максудович',
+      name_uz: 'Asadullayev Ulug\'bek Masud o\'g\'li',
+      name_en: 'Asadullaev Ulugbek Maksudovich',
+      position_ru: 'Заместитель директора по научной работе',
+      position_uz: 'Ilmiy ish bo\'yicha direktor o\'rinbosari',
+      position_en: 'Deputy Director for Scientific Work',
       image: 'https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg',
       phone: '+998 71 264-96-15',
       email: 'asadullaev@neuro.uz',
-      biography: 'Кандидат медицинских наук, старший научный сотрудник. Специалист по сосудистой нейрохирургии.'
+      biography_ru: 'Кандидат медицинских наук, старший научный сотрудник. Специалист по сосудистой нейрохирургии.',
+      biography_uz: 'Tibbiyot fanlari nomzodi, katta ilmiy xodim. Qon tomir neyroxirurgiyasi bo\'yicha mutaxassis.',
+      biography_en: 'Candidate of Medical Sciences, Senior Research Fellow. Specialist in vascular neurosurgery.'
     },
     {
       id: 3,
-      name: 'Кодашев Равшан Муслимович',
-      position: 'Заведующий отделением детской нейрохирургии',
+      name_ru: 'Кодашев Равшан Муслимович',
+      name_uz: 'Qodashev Ravshan Muslimovich',
+      name_en: 'Kodashev Ravshan Muslimovich',
+      position_ru: 'Заведующий отделением детской нейрохирургии',
+      position_uz: 'Bolalar neyroxirurgiyasi bo\'limi mudiri',
+      position_en: 'Head of Pediatric Neurosurgery Department',
       image: 'https://images.unsplash.com/photo-1536064479547-7ee40b74b807',
       phone: '+998 71 264-96-09',
       email: 'kodashev@neuro.uz',
-      biography: 'Доктор медицинских наук, профессор. 20 лет опыта в детской нейрохирургии.'
+      biography_ru: 'Доктор медицинских наук, профессор. 20 лет опыта в детской нейрохирургии.',
+      biography_uz: 'Tibbiyot fanlari doktori, professor. Bolalar neyroxirurgiyasida 20 yillik tajriba.',
+      biography_en: 'Doctor of Medical Sciences, Professor. 20 years of experience in pediatric neurosurgery.'
     }
   ]));
   const [siteSettings, setSiteSettings] = useState({
@@ -1381,59 +702,42 @@ export const AdminProvider = ({ children }) => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  // Автосохранение данных в localStorage (с защитой от переполнения)
-  const saveToLocalStorage = (key, data) => {
-    try {
-      const serializedData = JSON.stringify(data);
-      // Проверяем размер данных (если больше 1MB, не сохраняем)
-      if (serializedData.length > 1024 * 1024) {
-        console.warn(`Data too large to save in localStorage: ${key}`);
-        return;
-      }
-      localStorage.setItem(`neuro_${key}`, serializedData);
-    } catch (error) {
-      console.error(`Failed to save to localStorage: ${key}`, error);
-      // Очищаем localStorage если он переполнен
-      if (error.name === 'QuotaExceededError') {
-        try {
-          localStorage.clear();
-          console.log('localStorage cleared due to quota exceeded');
-        } catch (clearError) {
-          console.error('Failed to clear localStorage', clearError);
-        }
-      }
-    }
-  };
-
+  // Автосохранение данных в localStorage
   useEffect(() => {
-    saveToLocalStorage('departments', departments);
+    localStorage.setItem('neuro_departments', JSON.stringify(departments));
   }, [departments]);
 
   useEffect(() => {
-    saveToLocalStorage('doctors', doctors);
+    localStorage.setItem('neuro_doctors', JSON.stringify(doctors));
   }, [doctors]);
 
   useEffect(() => {
-    saveToLocalStorage('news', news);
+    localStorage.setItem('neuro_news', JSON.stringify(news));
   }, [news]);
 
   useEffect(() => {
-    saveToLocalStorage('services', services);
+    localStorage.setItem('neuro_services', JSON.stringify(services));
   }, [services]);
 
   useEffect(() => {
-    saveToLocalStorage('galleryImages', galleryImages);
+    localStorage.setItem('neuro_galleryImages', JSON.stringify(galleryImages));
   }, [galleryImages]);
 
   useEffect(() => {
-    saveToLocalStorage('accounts', accounts);
+    localStorage.setItem('neuro_galleryCategories', JSON.stringify(galleryCategories));
+  }, [galleryCategories]);
+
+  useEffect(() => {
+    localStorage.setItem('neuro_vacancies', JSON.stringify(vacancies));
+  }, [vacancies]);
+
+  useEffect(() => {
+    localStorage.setItem('neuro_accounts', JSON.stringify(accounts));
   }, [accounts]);
 
   useEffect(() => {
-    saveToLocalStorage('leadership', leadership);
+    localStorage.setItem('neuro_leadership', JSON.stringify(leadership));
   }, [leadership]);
-
-  // Removed reference to undefined 'users' variable
   
   // Fetch data from API on component mount
   useEffect(() => {
@@ -1447,7 +751,6 @@ export const AdminProvider = ({ children }) => {
           setDepartments(departmentsData);
         } catch (error) {
           console.warn("Could not fetch departments from API, using fallback data");
-          // Используем fallback данные из components.js
           setDepartments([]);
         }
         
@@ -1489,7 +792,6 @@ export const AdminProvider = ({ children }) => {
         
       } catch (error) {
         console.error("Error in fetchData:", error);
-        // В случае общей ошибки, оставляем пустые массивы
       } finally {
         setIsLoading(false);
       }
@@ -1498,8 +800,6 @@ export const AdminProvider = ({ children }) => {
     fetchData();
   }, []);
   
-
-
   // Функции для управления данными
   const updateSiteSettings = (newSettings) => {
     setSiteSettings(newSettings);
@@ -1661,6 +961,38 @@ export const AdminProvider = ({ children }) => {
     setGalleryImages(galleryImages.filter(img => img.id !== id));
   };
 
+  // Функции для управления категориями галереи
+  const addGalleryCategory = (category) => {
+    const newId = galleryCategories.length > 0 ? Math.max(...galleryCategories.map(c => parseInt(c.id))) + 1 : 1;
+    setGalleryCategories([...galleryCategories, { ...category, id: newId.toString() }]);
+  };
+
+  const updateGalleryCategory = (id, updatedCategory) => {
+    setGalleryCategories(galleryCategories.map(cat => 
+      cat.id === id ? { ...updatedCategory, id } : cat
+    ));
+  };
+
+  const deleteGalleryCategory = (id) => {
+    setGalleryCategories(galleryCategories.filter(cat => cat.id !== id));
+  };
+
+  // Функции для управления вакансиями
+  const addVacancy = (vacancy) => {
+    const newId = vacancies.length > 0 ? Math.max(...vacancies.map(v => parseInt(v.id))) + 1 : 1;
+    setVacancies([...vacancies, { ...vacancy, id: newId.toString(), isActive: true, createdAt: new Date().toISOString() }]);
+  };
+
+  const updateVacancy = (id, updatedVacancy) => {
+    setVacancies(vacancies.map(vacancy => 
+      vacancy.id === id ? { ...updatedVacancy, id } : vacancy
+    ));
+  };
+
+  const deleteVacancy = (id) => {
+    setVacancies(vacancies.filter(vacancy => vacancy.id !== id));
+  };
+
   const adminData = {
     departments: departments || [],
     doctors: doctors || [],
@@ -1669,6 +1001,8 @@ export const AdminProvider = ({ children }) => {
     accounts,
     leadership,
     galleryImages: galleryImages || [],
+    galleryCategories,
+    vacancies,
     siteSettings,
     seoSettings,
     isLoading
@@ -1706,6 +1040,14 @@ export const AdminProvider = ({ children }) => {
     addGalleryImage,
     updateGalleryImage,
     deleteGalleryImage,
+    // Функции для категорий галереи
+    addGalleryCategory,
+    updateGalleryCategory,
+    deleteGalleryCategory,
+    // Функции для вакансий
+    addVacancy,
+    updateVacancy,
+    deleteVacancy,
     // Функции для настроек
     updateSiteSettings,
     updateSeoSettings,
@@ -1716,7 +1058,9 @@ export const AdminProvider = ({ children }) => {
     setServices,
     setAccounts,
     setLeadership,
-    setGalleryImages
+    setGalleryImages,
+    setGalleryCategories,
+    setVacancies
   };
 
   return (
