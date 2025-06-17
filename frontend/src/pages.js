@@ -188,10 +188,11 @@ export const ServicesPage = () => {
 
   // Группируем услуги по категориям только если есть данные
   const servicesByCategory = services.reduce((acc, service) => {
-    if (!acc[service.category]) {
-      acc[service.category] = [];
+    const categoryName = getFieldByLanguage(service, 'category') || service.category || 'Общие';
+    if (!acc[categoryName]) {
+      acc[categoryName] = [];
     }
-    acc[service.category].push(service);
+    acc[categoryName].push(service);
     return acc;
   }, {});
 
