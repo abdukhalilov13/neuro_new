@@ -182,6 +182,11 @@ export const HomePage = () => {
       
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center bg-gradient-to-br from-blue-50 to-white">
+        {/* Индикатор текущего языка для отладки */}
+        <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
+          Язык: {language.toUpperCase()}
+        </div>
+        
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Левая колонка с текстом */}
