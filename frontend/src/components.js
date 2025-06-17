@@ -502,10 +502,14 @@ export { Header, Footer, siteData, DoctorDashboard, UnifiedAdminPanel };
 
 // О центре
 export const AboutPage = () => {
-  const { t } = useLanguage(); // Добавляем поддержку переводов
+  const { t, language } = useLanguage(); // Добавляем поддержку переводов
   const { adminData } = useAdmin(); // Получаем данные из админ-панели
   const [selectedLeader, setSelectedLeader] = useState(null);
   const [isBioModalOpen, setIsBioModalOpen] = useState(false);
+
+  const getFieldByLanguage = (item, fieldName) => {
+    return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
+  };
 
   // Используем данные о руководстве из админ-панели или fallback данные
   const leadershipData = adminData?.leadership || [
