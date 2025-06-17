@@ -7,9 +7,10 @@ import { useAdmin, useLanguage } from './contexts';
 
 // Вакансии
 export const VacanciesPage = () => {
-  const { adminData } = useAdmin(); // Получаем данные из админ-панели
-  const { t } = useLanguage(); // Добавляем поддержку переводов
+  const { t } = useLanguage();
   const [selectedVacancy, setSelectedVacancy] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
   const [applicationForm, setApplicationForm] = useState({
     name: '',
     phone: '',
@@ -18,8 +19,6 @@ export const VacanciesPage = () => {
     education: '',
     coverLetter: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
 
   // Используем данные из админ-панели или fallback данные
   const vacancies = adminData?.vacancies || [
