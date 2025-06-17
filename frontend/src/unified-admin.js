@@ -795,6 +795,54 @@ const UnifiedAdminPanel = () => {
     setEvents(events.filter(event => event.id !== id));
   };
 
+  // Функции управления вакансиями
+  const handleVacancySubmit = (e) => {
+    e.preventDefault();
+    if (editingVacancy) {
+      updateVacancy(editingVacancy.id, newVacancy);
+      alert('Вакансия обновлена!');
+    } else {
+      addVacancy(newVacancy);
+      alert('Вакансия добавлена!');
+    }
+    setIsVacancyModalOpen(false);
+    resetVacancyForm();
+  };
+
+  const resetVacancyForm = () => {
+    setNewVacancy({
+      title_ru: '', title_uz: '', title_en: '',
+      department_ru: '', department_uz: '', department_en: '',
+      type_ru: '', type_uz: '', type_en: '',
+      salary: '',
+      requirements_ru: [''], requirements_uz: [''], requirements_en: [''],
+      responsibilities_ru: [''], responsibilities_uz: [''], responsibilities_en: [''],
+      benefits_ru: [''], benefits_uz: [''], benefits_en: ['']
+    });
+    setEditingVacancy(null);
+  };
+
+  const startEditVacancy = (vacancy) => {
+    setEditingVacancy(vacancy);
+    setNewVacancy(vacancy);
+    setIsVacancyModalOpen(true);
+  };
+
+  // Обновляем данные заявок при изменении localStorage
+  useEffect(() => {
+    const handleStorageChange = () => {
+      try {
+        const saved = localStorage.getItem('neuro_job_applications');
+        setJobApplications(saved ? JSON.parse(saved) : []);
+      } catch {
+        setJobApplications([]);
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
   // Функции управления пользователями
   const handleUserSubmit = (e) => {
     e.preventDefault();
