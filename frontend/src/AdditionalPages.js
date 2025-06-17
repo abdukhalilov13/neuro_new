@@ -616,13 +616,11 @@ export const GalleryPage = () => {
     : images.filter(img => img.category === selectedCategory);
 
   const getCategoryName = (category) => {
-    const currentLang = t === undefined ? 'ru' : 'ru'; // Default to ru for now
-    return category[`name_${currentLang}`] || category.name_ru;
+    return getFieldByLanguage(category, 'name');
   };
 
   const getImageAlt = (image) => {
-    const currentLang = t === undefined ? 'ru' : 'ru'; // Default to ru for now
-    return image[`alt_${currentLang}`] || image.alt_ru || image.title;
+    return getFieldByLanguage(image, 'alt') || image.title;
   };
 
   return (
