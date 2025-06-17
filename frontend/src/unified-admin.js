@@ -833,19 +833,18 @@ const UnifiedAdminPanel = () => {
   const handleUserSubmit = (e) => {
     e.preventDefault();
     if (editingUser) {
-      const updatedUsers = users.map(user => 
-        user.id === editingUser.id ? { ...newUser, id: editingUser.id } : user
+      // Обновляем в adminData
+      updateAccount(editingUser.id, newUser);
+      // Также обновляем в localStorage для корректного сохранения пароля
+      const accounts = JSON.parse(localStorage.getItem('neuro_accounts') || '[]');
+      const updatedAccounts = accounts.map(acc => 
+        acc.id === editingUser.id ? { ...acc, ...newUser } : acc
       );
-      setUsers(updatedUsers);
-      alert('Пользователь обновлен!');
+      localStorage.setItem('neuro_accounts', JSON.stringify(updatedAccounts));
+      alert('Пользователь обновлен! Пароль изменен.');
     } else {
-      const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
-      setUsers([...users, { 
-        ...newUser, 
-        id: newId,
-        created_at: new Date().toISOString().split('T')[0],
-        last_login: '-'
-      }]);
+      // Добавляем в adminData
+      addAccount(newUser);
       alert('Пользователь создан!');
     }
     setIsUserModalOpen(false);
