@@ -392,8 +392,6 @@ const UnifiedAdminPanel = () => {
     password: '',
     status: 'active'
   });
-    status: 'active'
-  });
   
   // Новые записи с многоязычностью
   const [newDepartment, setNewDepartment] = useState({
