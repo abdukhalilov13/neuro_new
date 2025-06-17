@@ -977,7 +977,7 @@ export const LanguageProvider = ({ children }) => {
       scheduleAppointment: 'Schedule appointment',
       
       // Additional missing translations
-      professionalTeam: 'Professional team',
+      whyWorkWithUs: 'Why choose us?',
       workWithBestSpecialists: 'Work with the best specialists in neurosurgery',
       modernEquipment: 'Modern equipment',
       latestTechnologies: 'Latest technologies and treatment methods',
@@ -989,6 +989,7 @@ export const LanguageProvider = ({ children }) => {
       upcomingEvents: 'Upcoming events',
       needConsultationQuestion: 'Need consultation?',
       contactForHelp: 'Contact us for professional medical help',
+      learnMore: 'Learn More',
       
       // Job application form
       fullName: 'Full Name',
