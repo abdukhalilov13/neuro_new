@@ -15,7 +15,7 @@ class NeuroAPITester:
                             break
             except Exception as e:
                 print(f"Error reading .env file: {str(e)}")
-                base_url = "https://e4935fc8-1c5d-4af5-b8e1-d221750b0ddc.preview.emergentagent.com/api"
+                base_url = "https://a28a8467-f73a-4ef4-b1b2-bda298d97266.preview.emergentagent.com/api"
         
         self.base_url = base_url
         print(f"Using API base URL: {self.base_url}")
