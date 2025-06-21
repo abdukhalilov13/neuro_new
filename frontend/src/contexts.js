@@ -989,23 +989,44 @@ export const AdminProvider = ({ children }) => {
     }
   };
 
-  // Функции для управления врачами
-  const addDoctor = (doctor) => {
-    const newId = doctors.length > 0 ? Math.max(...doctors.map(d => parseInt(d.id))) + 1 : 1;
-    const newDoctors = [...doctors, { ...doctor, id: newId.toString() }];
-    setDoctors(newDoctors);
+  // Функции для управления врачами (ПЕРЕДЕЛАНО ДЛЯ API)
+  const addDoctor = async (doctor) => {
+    try {
+      const result = await apiService.createDoctor(doctor);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedDoctors = await apiService.getDoctors();
+      setDoctors(updatedDoctors);
+      return result;
+    } catch (error) {
+      console.error('Failed to add doctor:', error);
+      throw error;
+    }
   };
 
-  const updateDoctor = (id, updatedDoctor) => {
-    const newDoctors = doctors.map(doctor => 
-      doctor.id === id ? { ...updatedDoctor, id } : doctor
-    );
-    setDoctors(newDoctors);
+  const updateDoctor = async (id, updatedDoctor) => {
+    try {
+      const result = await apiService.updateDoctor(id, updatedDoctor);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedDoctors = await apiService.getDoctors();
+      setDoctors(updatedDoctors);
+      return result;
+    } catch (error) {
+      console.error('Failed to update doctor:', error);
+      throw error;
+    }
   };
 
-  const deleteDoctor = (id) => {
-    const newDoctors = doctors.filter(doctor => doctor.id !== id);
-    setDoctors(newDoctors);
+  const deleteDoctor = async (id) => {
+    try {
+      const result = await apiService.deleteDoctor(id);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedDoctors = await apiService.getDoctors();
+      setDoctors(updatedDoctors);
+      return result;
+    } catch (error) {
+      console.error('Failed to delete doctor:', error);
+      throw error;
+    }
   };
 
   // Функции для управления новостями
