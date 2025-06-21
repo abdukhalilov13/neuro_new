@@ -874,6 +874,24 @@ export const AdminProvider = ({ children }) => {
           setGalleryImages([]);
         }
         
+        // Fetch events
+        try {
+          const eventsData = await apiService.getEvents();
+          setEvents(eventsData);
+        } catch (error) {
+          console.warn("Could not fetch events from API, using fallback data");
+          setEvents([]);
+        }
+        
+        // Fetch leadership
+        try {
+          const leadershipData = await apiService.getLeadership();
+          setLeadership(leadershipData);
+        } catch (error) {
+          console.warn("Could not fetch leadership from API, using fallback data");
+          setLeadership([]);
+        }
+        
       } catch (error) {
         console.error("Error in fetchData:", error);
       } finally {
