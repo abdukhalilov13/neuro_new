@@ -520,36 +520,32 @@ const UnifiedAdminPanel = () => {
   const { t } = useLanguage();
   const languages = ['ru', 'uz', 'en'];
   
-  // Мок данные для записей на сегодня
-  const [todayAppointments, setTodayAppointments] = useState([
-    {
-      id: 1,
-      time: '09:00',
-      patient_name: 'Иванов Алексей Петрович',
-      doctor_name: 'Кариев Габрат Маратович',
-      service: 'Консультация нейрохирурга',
-      status: 'confirmed',
-      phone: '+998 90 123-45-67'
-    },
-    {
-      id: 2,
-      time: '10:30',
-      patient_name: 'Петрова Мария Ивановна',
-      doctor_name: 'Асадуллаев Улугбек Максудович',
-      service: 'МРТ головного мозга',
-      status: 'pending',
-      phone: '+998 91 234-56-78'
-    },
-    {
-      id: 3,
-      time: '14:00',
-      patient_name: 'Сидоров Петр Иванович',
-      doctor_name: 'Кодашев Равшан Муслимович',
-      service: 'Повторная консультация',
-      status: 'confirmed',
-      phone: '+998 93 345-67-89'
-    }
-  ]);
+  // Записи на сегодня (ЗАГРУЗКА ИЗ API)
+  const [todayAppointments, setTodayAppointments] = useState([]);
+  const [appointmentsLoading, setAppointmentsLoading] = useState(true);
+
+  // Загрузка записей на сегодня
+  useEffect(() => {
+    const fetchTodayAppointments = async () => {
+      try {
+        setAppointmentsLoading(true);
+        const appointments = await apiService.getAppointments();
+        
+        // Фильтруем записи на сегодня
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+        const todayApps = appointments.filter(app => app.date === today);
+        
+        setTodayAppointments(todayApps);
+      } catch (error) {
+        console.error('Failed to fetch today appointments:', error);
+        setTodayAppointments([]);
+      } finally {
+        setAppointmentsLoading(false);
+      }
+    };
+
+    fetchTodayAppointments();
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
