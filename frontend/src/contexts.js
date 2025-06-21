@@ -754,6 +754,7 @@ export const AdminProvider = ({ children }) => {
     { id: 3, name: 'Доктор Асадуллаев', email: 'asadullaev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-02-01' },
     { id: 4, name: 'Доктор Кодашев', email: 'kodashev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-02-10' }
   ]));
+  const [events, setEvents] = useState(() => loadFromStorage('events', []));
   const [leadership, setLeadership] = useState(() => loadFromStorage('leadership', [
     {
       id: 1,
