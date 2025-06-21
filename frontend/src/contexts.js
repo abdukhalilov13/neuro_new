@@ -1029,29 +1029,49 @@ export const AdminProvider = ({ children }) => {
     }
   };
 
-  // Функции для управления новостями
-  const addNews = (newsItem) => {
-    const newId = news.length > 0 ? Math.max(...news.map(n => parseInt(n.id))) + 1 : 1;
-    const newNewsItem = {
-      ...newsItem,
-      id: newId.toString(),
-      date: new Date().toLocaleDateString('ru-RU'),
-      is_published: newsItem.is_published !== false
-    };
-    const newNews = [...news, newNewsItem];
-    setNews(newNews);
+  // Функции для управления новостями (ПЕРЕДЕЛАНО ДЛЯ API)
+  const addNews = async (newsItem) => {
+    try {
+      const newsData = {
+        ...newsItem,
+        date: new Date().toLocaleDateString('ru-RU'),
+        is_published: newsItem.is_published !== false
+      };
+      const result = await apiService.createNews(newsData);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedNews = await apiService.getNews();
+      setNews(updatedNews);
+      return result;
+    } catch (error) {
+      console.error('Failed to add news:', error);
+      throw error;
+    }
   };
 
-  const updateNews = (id, updatedNews) => {
-    const newNewsArray = news.map(item => 
-      item.id === id ? { ...updatedNews, id } : item
-    );
-    setNews(newNewsArray);
+  const updateNews = async (id, updatedNews) => {
+    try {
+      const result = await apiService.updateNews(id, updatedNews);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedNewsArray = await apiService.getNews();
+      setNews(updatedNewsArray);
+      return result;
+    } catch (error) {
+      console.error('Failed to update news:', error);
+      throw error;
+    }
   };
 
-  const deleteNews = (id) => {
-    const newNews = news.filter(item => item.id !== id);
-    setNews(newNews);
+  const deleteNews = async (id) => {
+    try {
+      const result = await apiService.deleteNews(id);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedNews = await apiService.getNews();
+      setNews(updatedNews);
+      return result;
+    } catch (error) {
+      console.error('Failed to delete news:', error);
+      throw error;
+    }
   };
 
   // Функции для управления аккаунтами
