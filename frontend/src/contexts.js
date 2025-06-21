@@ -733,75 +733,29 @@ export const AdminProvider = ({ children }) => {
     }
   };
 
-  // Initialize with empty arrays, will be populated from API or localStorage
-  const [departments, setDepartments] = useState(() => loadFromStorage('departments', []));
-  const [doctors, setDoctors] = useState(() => loadFromStorage('doctors', []));
-  const [news, setNews] = useState(() => loadFromStorage('news', []));
-  const [services, setServices] = useState(() => loadFromStorage('services', []));
-  const [galleryImages, setGalleryImages] = useState(() => loadFromStorage('galleryImages', []));
-  const [galleryCategories, setGalleryCategories] = useState(() => loadFromStorage('galleryCategories', [
+  // Initialize with empty arrays, will be populated from API only (УБРАЛИ LOCALSTORAGE)
+  const [departments, setDepartments] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const [news, setNews] = useState([]);
+  const [services, setServices] = useState([]);
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [galleryCategories, setGalleryCategories] = useState([
     { id: 'all', name_ru: 'Все фотографии', name_uz: 'Barcha suratlar', name_en: 'All photos' },
     { id: 'operations', name_ru: 'Операционные', name_uz: 'Operatsiya xonalari', name_en: 'Operating rooms' },
     { id: 'equipment', name_ru: 'Оборудование', name_uz: 'Jihozlar', name_en: 'Equipment' },
     { id: 'building', name_ru: 'Здание центра', name_uz: 'Markaz binosi', name_en: 'Center building' },
     { id: 'staff', name_ru: 'Персонал', name_uz: 'Xodimlar', name_en: 'Staff' },
     { id: 'patients', name_ru: 'Пациенты', name_uz: 'Bemorlar', name_en: 'Patients' }
-  ]));
-  const [vacancies, setVacancies] = useState(() => loadFromStorage('vacancies', []));
-  const [accounts, setAccounts] = useState(() => loadFromStorage('accounts', [
+  ]);
+  const [vacancies, setVacancies] = useState([]);
+  const [accounts, setAccounts] = useState([
     { id: 1, name: 'Админ', email: 'admin@neuro.uz', password: 'admin123', role: 'admin', status: 'active', createdAt: '2025-01-01' },
     { id: 2, name: 'Доктор Кариев', email: 'kariev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-01-15' },
     { id: 3, name: 'Доктор Асадуллаев', email: 'asadullaev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-02-01' },
     { id: 4, name: 'Доктор Кодашев', email: 'kodashev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-02-10' }
-  ]));
-  const [events, setEvents] = useState(() => loadFromStorage('events', []));
-  const [leadership, setLeadership] = useState(() => loadFromStorage('leadership', [
-    {
-      id: 1,
-      name_ru: 'Кариев Габрат Маратович',
-      name_uz: 'Kariyev Gabrat Maratovich',
-      name_en: 'Kariev Gabrat Maratovich',
-      position_ru: 'Директор центра',
-      position_uz: 'Markaz direktori',
-      position_en: 'Center Director',
-      image: 'https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg',
-      phone: '+998 71 264-96-10',
-      email: 'director@neuro.uz',
-      biography_ru: 'Заслуженный врач Республики Узбекистан, доктор медицинских наук. Более 30 лет опыта в нейрохирургии.',
-      biography_uz: 'O\'zbekiston Respublikasining xizmatli shifokori, tibbiyot fanlari doktori. Neyroxirurgiyada 30 yildan ortiq tajriba.',
-      biography_en: 'Honored Doctor of the Republic of Uzbekistan, Doctor of Medical Sciences. Over 30 years of experience in neurosurgery.'
-    },
-    {
-      id: 2,
-      name_ru: 'Асадуллаев Улугбек Максудович',
-      name_uz: 'Asadullayev Ulug\'bek Masud o\'g\'li',
-      name_en: 'Asadullaev Ulugbek Maksudovich',
-      position_ru: 'Заместитель директора по научной работе',
-      position_uz: 'Ilmiy ish bo\'yicha direktor o\'rinbosari',
-      position_en: 'Deputy Director for Scientific Work',
-      image: 'https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg',
-      phone: '+998 71 264-96-15',
-      email: 'asadullaev@neuro.uz',
-      biography_ru: 'Кандидат медицинских наук, старший научный сотрудник. Специалист по сосудистой нейрохирургии.',
-      biography_uz: 'Tibbiyot fanlari nomzodi, katta ilmiy xodim. Qon tomir neyroxirurgiyasi bo\'yicha mutaxassis.',
-      biography_en: 'Candidate of Medical Sciences, Senior Research Fellow. Specialist in vascular neurosurgery.'
-    },
-    {
-      id: 3,
-      name_ru: 'Кодашев Равшан Муслимович',
-      name_uz: 'Qodashev Ravshan Muslimovich',
-      name_en: 'Kodashev Ravshan Muslimovich',
-      position_ru: 'Заведующий отделением детской нейрохирургии',
-      position_uz: 'Bolalar neyroxirurgiyasi bo\'limi mudiri',
-      position_en: 'Head of Pediatric Neurosurgery Department',
-      image: 'https://images.unsplash.com/photo-1536064479547-7ee40b74b807',
-      phone: '+998 71 264-96-09',
-      email: 'kodashev@neuro.uz',
-      biography_ru: 'Доктор медицинских наук, профессор. 20 лет опыта в детской нейрохирургии.',
-      biography_uz: 'Tibbiyot fanlari doktori, professor. Bolalar neyroxirurgiyasida 20 yillik tajriba.',
-      biography_en: 'Doctor of Medical Sciences, Professor. 20 years of experience in pediatric neurosurgery.'
-    }
-  ]));
+  ]);
+  const [events, setEvents] = useState([]);
+  const [leadership, setLeadership] = useState([]);
   const [siteSettings, setSiteSettings] = useState({
     phones: ['+998 71 264-96-10', '+998 71 264-96-09', '+998 78 113-33-78'],
     emails: ['admin@neuro.uz', 'info@neuro.uz'],
