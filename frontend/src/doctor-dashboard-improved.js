@@ -349,7 +349,6 @@ export const ImprovedDoctorDashboard = () => {
 
           <div className="mt-6 p-4 bg-blue-50 rounded-lg">
             <p className="text-sm text-blue-700">
-              <strong>Для входа:</strong><br />
               Используйте email врача из базы данных<br />
               Пароль: doctor123
             </p>
