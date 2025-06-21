@@ -240,21 +240,33 @@ async def get_leadership():
     return [
         {
             "id": "1",
-            "name": "Кариев Габрат Маратович",
-            "position": "Директор центра",
+            "name_ru": "Кариев Габрат Маратович",
+            "name_uz": "Kariyev Gabrat Maratovich", 
+            "name_en": "Kariev Gabrat Maratovich",
+            "position_ru": "Директор центра",
+            "position_uz": "Markaz direktori",
+            "position_en": "Center Director",
             "image": "https://images.pexels.com/photos/8460374/pexels-photo-8460374.jpeg",
             "phone": "+998 71 264-96-10",
             "email": "director@neuro.uz",
-            "biography": "Заслуженный врач Республики Узбекистан, доктор медицинских наук. Более 30 лет опыта в нейрохирургии."
+            "biography_ru": "Заслуженный врач Республики Узбекистан, доктор медицинских наук. Более 30 лет опыта в нейрохирургии.",
+            "biography_uz": "O'zbekiston Respublikasining xizmatli shifokori, tibbiyot fanlari doktori. Neyroxirurgiyada 30 yildan ortiq tajriba.",
+            "biography_en": "Honored Doctor of the Republic of Uzbekistan, Doctor of Medical Sciences. Over 30 years of experience in neurosurgery."
         },
         {
             "id": "2",
-            "name": "Асадуллаев Улугбек Максудович",
-            "position": "Заместитель директора по научной работе",
+            "name_ru": "Асадуллаев Улугбек Максудович",
+            "name_uz": "Asadullayev Ulug'bek Masud o'g'li",
+            "name_en": "Asadullaev Ulugbek Maksudovich",
+            "position_ru": "Заместитель директора по научной работе",
+            "position_uz": "Ilmiy ish bo'yicha direktor o'rinbosari",
+            "position_en": "Deputy Director for Scientific Work",
             "image": "https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg",
             "phone": "+998 71 264-96-15",
             "email": "asadullaev@neuro.uz",
-            "biography": "Кандидат медицинских наук, старший научный сотрудник. Специалист по сосудистой нейрохирургии."
+            "biography_ru": "Кандидат медицинских наук, старший научный сотрудник. Специалист по сосудистой нейрохирургии.",
+            "biography_uz": "Tibbiyot fanlari nomzodi, katta ilmiy xodim. Qon tomir neyroxirurgiyasi bo'yicha mutaxassis.",
+            "biography_en": "Candidate of Medical Sciences, Senior Research Fellow. Specialist in vascular neurosurgery."
         }
     ]
 
