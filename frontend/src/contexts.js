@@ -1229,6 +1229,7 @@ export const AdminProvider = ({ children }) => {
     services: services || [],
     accounts,
     leadership,
+    events: events || [],
     galleryImages: galleryImages || [],
     galleryCategories,
     vacancies,
