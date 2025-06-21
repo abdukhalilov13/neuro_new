@@ -1009,8 +1009,7 @@ const UnifiedAdminPanel = () => {
               { id: 'contacts', label: 'Контакты', icon: Phone },
               { id: 'seo', label: 'SEO настройки', icon: Settings },
               { id: 'redirects', label: 'Редиректы', icon: ArrowRight },
-              { id: 'contacts', label: 'Контакты', icon: Settings },
-    { id: 'users', label: 'Пользователи', icon: UserPlus }
+              { id: 'users', label: 'Пользователи', icon: UserPlus }
             ].map((tab) => (
               <button
                 key={tab.id}
