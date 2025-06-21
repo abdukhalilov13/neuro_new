@@ -893,20 +893,44 @@ export const AdminProvider = ({ children }) => {
     setSeoSettings(newSettings);
   };
 
-  // Функции для управления услугами
-  const addService = (service) => {
-    const newId = services.length > 0 ? Math.max(...services.map(s => parseInt(s.id))) + 1 : 1;
-    setServices([...services, { ...service, id: newId.toString() }]);
+  // Функции для управления услугами (ПЕРЕДЕЛАНО ДЛЯ API)
+  const addService = async (service) => {
+    try {
+      const result = await apiService.createService(service);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedServices = await apiService.getServices();
+      setServices(updatedServices);
+      return result;
+    } catch (error) {
+      console.error('Failed to add service:', error);
+      throw error;
+    }
   };
 
-  const updateService = (id, updatedService) => {
-    setServices(services.map(service => 
-      service.id === id ? { ...updatedService, id } : service
-    ));
+  const updateService = async (id, updatedService) => {
+    try {
+      const result = await apiService.updateService(id, updatedService);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedServices = await apiService.getServices();
+      setServices(updatedServices);
+      return result;
+    } catch (error) {
+      console.error('Failed to update service:', error);
+      throw error;
+    }
   };
 
-  const deleteService = (id) => {
-    setServices(services.filter(service => service.id !== id));
+  const deleteService = async (id) => {
+    try {
+      const result = await apiService.deleteService(id);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedServices = await apiService.getServices();
+      setServices(updatedServices);
+      return result;
+    } catch (error) {
+      console.error('Failed to delete service:', error);
+      throw error;
+    }
   };
 
   // Функции для управления отделениями (ПЕРЕДЕЛАНО ДЛЯ API)
