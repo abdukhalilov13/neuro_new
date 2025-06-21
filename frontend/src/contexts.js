@@ -946,28 +946,47 @@ export const AdminProvider = ({ children }) => {
     setServices(services.filter(service => service.id !== id));
   };
 
-  // Функции для управления отделениями
-  const addDepartment = (department) => {
-    const newId = departments.length > 0 ? Math.max(...departments.map(d => parseInt(d.id))) + 1 : 1;
-    const newDepartments = [...departments, { ...department, id: newId.toString() }];
-    setDepartments(newDepartments);
+  // Функции для управления отделениями (ПЕРЕДЕЛАНО ДЛЯ API)
+  const addDepartment = async (department) => {
+    try {
+      const result = await apiService.createDepartment(department);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedDepartments = await apiService.getDepartments();
+      setDepartments(updatedDepartments);
+      return result;
+    } catch (error) {
+      console.error('Failed to add department:', error);
+      throw error;
+    }
   };
 
-  const updateDepartment = (id, updatedDepartment) => {
-    const newDepartments = departments.map(dept => 
-      dept.id === id ? { ...updatedDepartment, id } : dept
-    );
-    setDepartments(newDepartments);
+  const updateDepartment = async (id, updatedDepartment) => {
+    try {
+      const result = await apiService.updateDepartment(id, updatedDepartment);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedDepartments = await apiService.getDepartments();
+      setDepartments(updatedDepartments);
+      return result;
+    } catch (error) {
+      console.error('Failed to update department:', error);
+      throw error;
+    }
   };
 
-  const deleteDepartment = (id) => {
-    const newDepartments = departments.filter(dept => dept.id !== id);
-    setDepartments(newDepartments);
-    // Отвязываем врачей от удаленного отделения
-    const newDoctors = doctors.map(doctor => 
-      doctor.departmentId === id ? { ...doctor, departmentId: null } : doctor
-    );
-    setDoctors(newDoctors);
+  const deleteDepartment = async (id) => {
+    try {
+      const result = await apiService.deleteDepartment(id);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedDepartments = await apiService.getDepartments();
+      setDepartments(updatedDepartments);
+      // Также обновляем врачей, если их отделение было удалено
+      const updatedDoctors = await apiService.getDoctors();
+      setDoctors(updatedDoctors);
+      return result;
+    } catch (error) {
+      console.error('Failed to delete department:', error);
+      throw error;
+    }
   };
 
   // Функции для управления врачами
