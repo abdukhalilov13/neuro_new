@@ -1266,6 +1266,10 @@ export const AdminProvider = ({ children }) => {
     addLeadership,
     updateLeadership,
     deleteLeadership,
+    // Функции для событий
+    addEvent,
+    updateEvent,
+    deleteEvent,
     // Функции для галереи
     addGalleryImage,
     updateGalleryImage,
