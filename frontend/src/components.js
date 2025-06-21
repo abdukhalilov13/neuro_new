@@ -175,6 +175,7 @@ export const HomePage = () => {
   const { t, language } = useLanguage(); // Добавляем поддержку переводов
   const departments = adminData?.departments || siteData.departments;
   const news = adminData?.news || siteData.news;
+  const events = adminData?.events || [];
 
   // Отладочная информация для проверки изменения языка
   React.useEffect(() => {
