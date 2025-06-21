@@ -1070,36 +1070,84 @@ export const AdminProvider = ({ children }) => {
     ));
   };
 
-  // Функции для управления руководством
-  const addLeadership = (leader) => {
-    const newId = leadership.length > 0 ? Math.max(...leadership.map(l => l.id)) + 1 : 1;
-    setLeadership([...leadership, { ...leader, id: newId }]);
+  // Функции для управления руководством (ПЕРЕДЕЛАНО ДЛЯ API)
+  const addLeadership = async (leader) => {
+    try {
+      const result = await apiService.createLeadership(leader);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedLeadership = await apiService.getLeadership();
+      setLeadership(updatedLeadership);
+      return result;
+    } catch (error) {
+      console.error('Failed to add leadership:', error);
+      throw error;
+    }
   };
 
-  const updateLeadership = (id, updatedLeader) => {
-    setLeadership(leadership.map(leader => 
-      leader.id === id ? { ...updatedLeader, id } : leader
-    ));
+  const updateLeadership = async (id, updatedLeader) => {
+    try {
+      const result = await apiService.updateLeadership(id, updatedLeader);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedLeadership = await apiService.getLeadership();
+      setLeadership(updatedLeadership);
+      return result;
+    } catch (error) {
+      console.error('Failed to update leadership:', error);
+      throw error;
+    }
   };
 
-  const deleteLeadership = (id) => {
-    setLeadership(leadership.filter(leader => leader.id !== id));
+  const deleteLeadership = async (id) => {
+    try {
+      const result = await apiService.deleteLeadership(id);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedLeadership = await apiService.getLeadership();
+      setLeadership(updatedLeadership);
+      return result;
+    } catch (error) {
+      console.error('Failed to delete leadership:', error);
+      throw error;
+    }
   };
 
-  // Функции для управления галереей
-  const addGalleryImage = (image) => {
-    const newId = galleryImages.length > 0 ? Math.max(...galleryImages.map(img => parseInt(img.id))) + 1 : 1;
-    setGalleryImages([...galleryImages, { ...image, id: newId.toString() }]);
+  // Функции для управления галереей (ПЕРЕДЕЛАНО ДЛЯ API)
+  const addGalleryImage = async (image) => {
+    try {
+      const result = await apiService.createGalleryImage(image);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedGallery = await apiService.getGallery();
+      setGalleryImages(updatedGallery);
+      return result;
+    } catch (error) {
+      console.error('Failed to add gallery image:', error);
+      throw error;
+    }
   };
 
-  const updateGalleryImage = (id, updatedImage) => {
-    setGalleryImages(galleryImages.map(img => 
-      img.id === id ? { ...updatedImage, id } : img
-    ));
+  const updateGalleryImage = async (id, updatedImage) => {
+    try {
+      const result = await apiService.updateGalleryImage(id, updatedImage);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedGallery = await apiService.getGallery();
+      setGalleryImages(updatedGallery);
+      return result;
+    } catch (error) {
+      console.error('Failed to update gallery image:', error);
+      throw error;
+    }
   };
 
-  const deleteGalleryImage = (id) => {
-    setGalleryImages(galleryImages.filter(img => img.id !== id));
+  const deleteGalleryImage = async (id) => {
+    try {
+      const result = await apiService.deleteGalleryImage(id);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedGallery = await apiService.getGallery();
+      setGalleryImages(updatedGallery);
+      return result;
+    } catch (error) {
+      console.error('Failed to delete gallery image:', error);
+      throw error;
+    }
   };
 
   // Функции для управления категориями галереи
