@@ -500,6 +500,69 @@ export const HomePage = () => {
         </div>
       </section>
 
+      {/* Events Section - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ */}
+      <section className="py-16 bg-blue-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('upcomingEvents')}</h2>
+            <p className="text-xl text-gray-600">{t('eventsDescription')}</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {events && events.length > 0 ? events.slice(0, 3).map((event, index) => (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <div className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                      <Calendar className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-blue-600 font-medium">{event.date}</p>
+                      <p className="text-sm text-gray-500">{event.time}</p>
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{event.title_ru || event.title}</h3>
+                  <p className="text-gray-600 mb-4">{event.description_ru || event.description}</p>
+                  <div className="flex items-center text-sm text-gray-500">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    <span>{event.location_ru || event.location}</span>
+                  </div>
+                </div>
+              </motion.div>
+            )) : (
+              <div className="col-span-full text-center py-12">
+                <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                <p className="text-gray-500 text-lg">{t('noEventsScheduled')}</p>
+              </div>
+            )}
+          </div>
+
+          {events && events.length > 3 && (
+            <div className="text-center mt-8">
+              <Link
+                to="/events"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors"
+              >
+                {t('allEvents')}
+              </Link>
+            </div>
+          )}
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
