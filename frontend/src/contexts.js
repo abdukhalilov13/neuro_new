@@ -1166,6 +1166,46 @@ export const AdminProvider = ({ children }) => {
     setGalleryCategories(galleryCategories.filter(cat => cat.id !== id));
   };
 
+  // Функции для управления событиями (ПЕРЕДЕЛАНО ДЛЯ API)
+  const addEvent = async (event) => {
+    try {
+      const result = await apiService.createEvent(event);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedEvents = await apiService.getEvents();
+      setEvents(updatedEvents);
+      return result;
+    } catch (error) {
+      console.error('Failed to add event:', error);
+      throw error;
+    }
+  };
+
+  const updateEvent = async (id, updatedEvent) => {
+    try {
+      const result = await apiService.updateEvent(id, updatedEvent);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedEvents = await apiService.getEvents();
+      setEvents(updatedEvents);
+      return result;
+    } catch (error) {
+      console.error('Failed to update event:', error);
+      throw error;
+    }
+  };
+
+  const deleteEvent = async (id) => {
+    try {
+      const result = await apiService.deleteEvent(id);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedEvents = await apiService.getEvents();
+      setEvents(updatedEvents);
+      return result;
+    } catch (error) {
+      console.error('Failed to delete event:', error);
+      throw error;
+    }
+  };
+
   // Функции для управления вакансиями
   const addVacancy = (vacancy) => {
     const newId = vacancies.length > 0 ? Math.max(...vacancies.map(v => parseInt(v.id))) + 1 : 1;
