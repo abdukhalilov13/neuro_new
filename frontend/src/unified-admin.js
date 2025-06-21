@@ -1291,52 +1291,66 @@ const UnifiedAdminPanel = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {todayAppointments.map((appointment) => (
-                    <tr key={appointment.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {appointment.time}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0 h-8 w-8">
-                            <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
-                              <User className="h-4 w-4 text-blue-600" />
-                            </div>
-                          </div>
-                          <div className="ml-3">
-                            <div className="text-sm font-medium text-gray-900">{appointment.patient_name}</div>
-                            <div className="text-sm text-gray-500">ID: {appointment.id}</div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {appointment.doctor_name}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {appointment.service}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                          appointment.status === 'confirmed' 
-                            ? 'bg-green-100 text-green-800'
-                            : appointment.status === 'pending'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : appointment.status === 'completed'
-                            ? 'bg-blue-100 text-blue-800'
-                            : 'bg-red-100 text-red-800'
-                        }`}>
-                          {appointment.status === 'confirmed' ? 'Подтверждено' :
-                           appointment.status === 'pending' ? 'Ожидает' :
-                           appointment.status === 'completed' ? 'Завершено' :
-                           'Отменено'}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        <div>{appointment.phone}</div>
-                        <div className="text-gray-500">{appointment.email}</div>
+                  {appointmentsLoading ? (
+                    <tr>
+                      <td colSpan="6" className="px-6 py-4 text-center text-gray-500">
+                        Загрузка записей...
                       </td>
                     </tr>
-                  ))}
+                  ) : todayAppointments.length === 0 ? (
+                    <tr>
+                      <td colSpan="6" className="px-6 py-4 text-center text-gray-500">
+                        Записей на сегодня нет
+                      </td>
+                    </tr>
+                  ) : (
+                    todayAppointments.map((appointment) => (
+                      <tr key={appointment.id} className="hover:bg-gray-50">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {appointment.time}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0 h-8 w-8">
+                              <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                <User className="h-4 w-4 text-blue-600" />
+                              </div>
+                            </div>
+                            <div className="ml-3">
+                              <div className="text-sm font-medium text-gray-900">{appointment.patient?.name || appointment.patient_name}</div>
+                              <div className="text-sm text-gray-500">ID: {appointment.id}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {appointment.doctorName || appointment.doctor_name}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {appointment.patient?.complaint || appointment.service || appointment.type}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                            appointment.status === 'confirmed' 
+                              ? 'bg-green-100 text-green-800'
+                              : appointment.status === 'pending'
+                              ? 'bg-yellow-100 text-yellow-800'
+                              : appointment.status === 'completed'
+                              ? 'bg-blue-100 text-blue-800'
+                              : 'bg-red-100 text-red-800'
+                          }`}>
+                            {appointment.status === 'confirmed' ? 'Подтверждено' :
+                             appointment.status === 'pending' ? 'Ожидает' :
+                             appointment.status === 'completed' ? 'Завершено' :
+                             'Отменено'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          <div>{appointment.patient?.phone || appointment.phone}</div>
+                          <div className="text-gray-500">{appointment.patient?.email || appointment.email}</div>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
               
