@@ -496,10 +496,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Translations Test"
-    - "Fixed Appointment Booking Step 3"
-    - "Doctor Dashboard Appointments Display"
-    - "Job Application with Translations"
+    - "Backend API Integration"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
