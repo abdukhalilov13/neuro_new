@@ -39,6 +39,26 @@ class ApiService {
     return this.request(`/departments/${id}`);
   }
 
+  async createDepartment(data) {
+    return this.request('/departments', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateDepartment(id, data) {
+    return this.request(`/departments/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteDepartment(id) {
+    return this.request(`/departments/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
   // Doctors
   async getDoctors() {
     return this.request('/doctors');
@@ -46,6 +66,26 @@ class ApiService {
 
   async getDoctor(id) {
     return this.request(`/doctors/${id}`);
+  }
+
+  async createDoctor(data) {
+    return this.request('/doctors', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateDoctor(id, data) {
+    return this.request(`/doctors/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteDoctor(id) {
+    return this.request(`/doctors/${id}`, {
+      method: 'DELETE',
+    });
   }
 
   // Services
@@ -57,6 +97,26 @@ class ApiService {
     return this.request(`/services/${id}`);
   }
 
+  async createService(data) {
+    return this.request('/services', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateService(id, data) {
+    return this.request(`/services/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteService(id) {
+    return this.request(`/services/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
   // News
   async getNews() {
     return this.request('/news');
@@ -66,9 +126,99 @@ class ApiService {
     return this.request(`/news/${id}`);
   }
 
+  async createNews(data) {
+    return this.request('/news', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateNews(id, data) {
+    return this.request(`/news/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteNews(id) {
+    return this.request(`/news/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
   // Gallery
   async getGallery() {
     return this.request('/gallery');
+  }
+
+  async createGalleryImage(data) {
+    return this.request('/gallery', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateGalleryImage(id, data) {
+    return this.request(`/gallery/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteGalleryImage(id) {
+    return this.request(`/gallery/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Events
+  async getEvents() {
+    return this.request('/events');
+  }
+
+  async createEvent(data) {
+    return this.request('/events', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateEvent(id, data) {
+    return this.request(`/events/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteEvent(id) {
+    return this.request(`/events/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Leadership
+  async getLeadership() {
+    return this.request('/leadership');
+  }
+
+  async createLeadership(data) {
+    return this.request('/leadership', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateLeadership(id, data) {
+    return this.request(`/leadership/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteLeadership(id) {
+    return this.request(`/leadership/${id}`, {
+      method: 'DELETE',
+    });
   }
 
   // Appointments
