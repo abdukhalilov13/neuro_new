@@ -823,44 +823,7 @@ export const AdminProvider = ({ children }) => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  // Автосохранение данных в localStorage
-  useEffect(() => {
-    localStorage.setItem('neuro_departments', JSON.stringify(departments));
-  }, [departments]);
-
-  useEffect(() => {
-    localStorage.setItem('neuro_doctors', JSON.stringify(doctors));
-  }, [doctors]);
-
-  useEffect(() => {
-    localStorage.setItem('neuro_news', JSON.stringify(news));
-  }, [news]);
-
-  useEffect(() => {
-    localStorage.setItem('neuro_services', JSON.stringify(services));
-  }, [services]);
-
-  useEffect(() => {
-    localStorage.setItem('neuro_galleryImages', JSON.stringify(galleryImages));
-  }, [galleryImages]);
-
-  useEffect(() => {
-    localStorage.setItem('neuro_galleryCategories', JSON.stringify(galleryCategories));
-  }, [galleryCategories]);
-
-  useEffect(() => {
-    localStorage.setItem('neuro_vacancies', JSON.stringify(vacancies));
-  }, [vacancies]);
-
-  useEffect(() => {
-    localStorage.setItem('neuro_accounts', JSON.stringify(accounts));
-  }, [accounts]);
-
-  useEffect(() => {
-    localStorage.setItem('neuro_leadership', JSON.stringify(leadership));
-  }, [leadership]);
-  
-  // Fetch data from API on component mount
+  // Fetch data from API on component mount (УБРАЛИ АВТОСОХРАНЕНИЕ В LOCALSTORAGE)
   useEffect(() => {
     const fetchData = async () => {
       try {
