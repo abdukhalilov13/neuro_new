@@ -997,7 +997,7 @@ export const AppointmentPage = () => {
                     onClick={nextStep}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
                   >
-                    Далее
+                    {t('nextButton')}
                   </button>
                 </div>
               </div>
