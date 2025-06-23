@@ -193,18 +193,8 @@ export const ImprovedDoctorDashboard = () => {
     
     setAppointments(updatedAppointments);
     
-    // Сохраняем в localStorage
-    try {
-      const allAppointments = JSON.parse(localStorage.getItem('neuro_appointments') || '[]');
-      const otherDoctorAppointments = allAppointments.filter(apt => 
-        apt.doctorId !== currentDoctor?.id && apt.doctorId !== String(currentDoctor?.id)
-      );
-      const finalAppointments = [...otherDoctorAppointments, ...updatedAppointments.filter(apt => !apt.id.toString().startsWith('demo'))];
-      localStorage.setItem('neuro_appointments', JSON.stringify(finalAppointments));
-      console.log('Записи обновлены в localStorage');
-    } catch (error) {
-      console.error('Ошибка сохранения:', error);
-    }
+    // TODO: Обновить через API (УБРАЛИ LOCALSTORAGE)
+    console.log('Записи обновлены в памяти, нужно синхронизировать с API');
     
     setSelectedAppointment(null);
     setIsAppointmentModalOpen(false);
