@@ -1063,13 +1063,13 @@ export const AppointmentPage = () => {
 
             {step === 3 && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Личные данные</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('personalDataTitle')}</h2>
                 
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Имя *
+                        {t('firstName')} *
                       </label>
                       <input
                         type="text"
