@@ -169,18 +169,28 @@ const siteData = {
 
 
 
-// Главная страница - ИСПОЛЬЗУЕМ ДАННЫЕ ИЗ АДМИНКИ
+// Главная страница - ИСПОЛЬЗУЕМ ТОЛЬКО ДАННЫЕ ИЗ API
 export const HomePage = () => {
   const { adminData, isLoading } = useAdmin();
   const { t, language } = useLanguage(); // Добавляем поддержку переводов
-  const departments = adminData?.departments || siteData.departments;
-  const news = adminData?.news || siteData.news;
+  
+  // Используем ТОЛЬКО данные из API, без fallback на siteData
+  const departments = adminData?.departments || [];
+  const news = adminData?.news || [];
   const events = adminData?.events || [];
 
   // Отладочная информация для проверки изменения языка
   React.useEffect(() => {
     console.log('HomePage: Language changed to:', language);
   }, [language]);
+  
+  // Отладка данных админки
+  React.useEffect(() => {
+    console.log('HomePage adminData:', adminData);
+    console.log('HomePage departments:', departments);
+    console.log('HomePage adminData.departments:', adminData?.departments);
+    console.log('HomePage siteData.departments:', siteData.departments);
+  }, [adminData, departments]);
   
   return (
     <div className="min-h-screen">

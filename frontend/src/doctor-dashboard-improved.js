@@ -30,6 +30,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { useLanguage, useAdmin } from './contexts';
+import { apiService } from './api';
 
 // Модальное окно
 const Modal = ({ isOpen, onClose, title, children, size = 'default' }) => {
@@ -85,120 +86,81 @@ export const ImprovedDoctorDashboard = () => {
   const [filterStatus, setFilterStatus] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Загрузка записей для текущего врача
+  // Загрузка записей для текущего врача (ИСПРАВЛЕНО: ИЗ API ВМЕСТО LOCALSTORAGE)
   useEffect(() => {
     if (currentDoctor) {
       loadAppointments();
     }
   }, [currentDoctor, filterDate, filterStatus]);
 
-  // Загрузка записей для текущего врача
-  useEffect(() => {
-    if (currentDoctor) {
-      loadAppointments();
-    }
-  }, [currentDoctor, filterDate, filterStatus]);
-
-  const loadAppointments = () => {
+  const loadAppointments = async () => {
     try {
-      // Загружаем реальные записи из localStorage
-      const savedAppointments = JSON.parse(localStorage.getItem('neuro_appointments') || '[]');
-      console.log('Все записи:', savedAppointments);
+      // Загружаем реальные записи из API
+      const allAppointments = await apiService.getAppointments();
+      console.log('Все записи из API:', allAppointments);
       console.log('Текущий врач ID:', currentDoctor?.id);
       
       // Фильтруем записи по врачу
-      const doctorAppointments = savedAppointments.filter(apt => {
+      const doctorAppointments = allAppointments.filter(apt => {
         const matchesDoctor = apt.doctorId === currentDoctor?.id || apt.doctorId === String(currentDoctor?.id);
         const matchesDate = !filterDate || apt.date === filterDate;
         const matchesStatus = filterStatus === 'all' || apt.status === filterStatus;
-        const matchesSearch = !searchTerm || apt.patient.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesSearch = !searchTerm || apt.patient?.name?.toLowerCase().includes(searchTerm.toLowerCase());
         
         return matchesDoctor && matchesDate && matchesStatus && matchesSearch;
       });
       
       console.log('Записи врача:', doctorAppointments);
-      
-      // Если нет реальных записей, добавляем demo данные для этого врача
-      if (doctorAppointments.length === 0) {
-        const mockData = [
-          {
-            id: `demo-${currentDoctor.id}-1`,
-            doctorId: currentDoctor?.id,
-            doctorName: currentDoctor?.name_ru || currentDoctor?.name,
-            date: new Date().toISOString().split('T')[0],
-            time: '09:00',
-            patient: {
-              name: 'Демо пациент Иванов А.П.',
-              phone: '+998 90 123-45-67',
-              email: 'demo@mail.uz',
-              age: 45,
-              complaint: 'Демо жалоба: головные боли и головокружение'
-            },
-            status: 'pending',
-            type: 'consultation',
-            createdAt: new Date().toISOString(),
-            notes: ''
-          }
-        ];
-        setAppointments(mockData);
-      } else {
-        setAppointments(doctorAppointments);
-      }
+      setAppointments(doctorAppointments);
     } catch (error) {
-      console.error('Ошибка загрузки записей:', error);
+      console.error('Failed to load appointments:', error);
       setAppointments([]);
     }
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setLoginError('');
     
-    // Проверяем email в списке врачей из контекста
-    const doctor = adminData.doctors?.find(doc => 
-      doc.email === loginData.email || 
-      doc.email_ru === loginData.email ||
-      doc.email_uz === loginData.email ||
-      doc.email_en === loginData.email
-    );
-    
-    // Если врач найден в базе данных
-    if (doctor && loginData.password === 'doctor123') {
-      setCurrentDoctor(doctor);
-      setIsAuthenticated(true);
-      return;
-    }
-    
-    // Проверяем специальные тестовые аккаунты
-    const testAccounts = [
-      { email: 'doctor@neuro.uz', password: 'doctor123', name: 'Тестовый врач', specialization: 'Нейрохирург', id: 'test-1' },
-      { email: 'neuro.doctor@mail.uz', password: 'doctor123', name: 'Доктор Тест', specialization: 'Невролог', id: 'test-2' }
-    ];
-    
-    const testAccount = testAccounts.find(acc => 
-      acc.email === loginData.email && acc.password === loginData.password
-    );
-    
-    if (testAccount) {
-      setCurrentDoctor({
-        id: testAccount.id,
-        name_ru: testAccount.name,
-        name: testAccount.name,
-        specialization_ru: testAccount.specialization,
-        specialization: testAccount.specialization,
-        email: testAccount.email
-      });
-      setIsAuthenticated(true);
-    } else {
-      setLoginError(`Неверный email или пароль. 
+    try {
+      // Используем новый login API
+      const loginResult = await apiService.login(loginData.email, loginData.password);
       
-Доступные варианты входа:
-1. Email любого врача из базы данных + пароль: doctor123
-2. Тестовые аккаунты:
-   - doctor@neuro.uz / doctor123
-   - neuro.doctor@mail.uz / doctor123
-   
-Ваш email: ${loginData.email}`);
+      if (loginResult.error) {
+        setLoginError(loginResult.error);
+        return;
+      }
+      
+      if (loginResult.user.role !== 'doctor') {
+        setLoginError('Доступ только для врачей');
+        return;
+      }
+      
+      // Устанавливаем данные врача из ответа API
+      if (loginResult.doctor_profile) {
+        setCurrentDoctor({
+          id: loginResult.doctor_profile.id,
+          name: loginResult.doctor_profile.name,
+          email: loginResult.doctor_profile.email,
+          specialization: loginResult.doctor_profile.specialization,
+          department_id: loginResult.doctor_profile.department_id
+        });
+      } else {
+        // Fallback если профиль врача не найден
+        setCurrentDoctor({
+          id: loginResult.user.doctorId || loginResult.user.id,
+          name: loginResult.user.name,
+          email: loginResult.user.email,
+          specialization: 'Врач'
+        });
+      }
+      
+      setIsAuthenticated(true);
+      console.log('Login successful:', loginResult.user.name);
+      
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginError('Ошибка при входе в систему. Проверьте правильность данных.');
     }
   };
 

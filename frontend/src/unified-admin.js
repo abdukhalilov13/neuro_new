@@ -841,25 +841,32 @@ const UnifiedAdminPanel = () => {
   }, []);
 
   // Функции управления пользователями
-  const handleUserSubmit = (e) => {
+  const handleUserSubmit = async (e) => {
     e.preventDefault();
-    if (editingUser) {
-      // Обновляем в adminData
-      updateAccount(editingUser.id, newUser);
-      // Также обновляем в localStorage для корректного сохранения пароля
-      const accounts = JSON.parse(localStorage.getItem('neuro_accounts') || '[]');
-      const updatedAccounts = accounts.map(acc => 
-        acc.id === editingUser.id ? { ...acc, ...newUser } : acc
-      );
-      localStorage.setItem('neuro_accounts', JSON.stringify(updatedAccounts));
-      alert('Пользователь обновлен! Пароль изменен.');
-    } else {
-      // Добавляем в adminData
-      addAccount(newUser);
-      alert('Пользователь создан!');
+    try {
+      console.log('handleUserSubmit called');
+      console.log('editingUser:', editingUser);
+      console.log('newUser:', newUser);
+      
+      if (editingUser) {
+        // Обновляем через API (удалили дублирование localStorage)
+        console.log('Updating user with ID:', editingUser.id);
+        const result = await updateAccount(editingUser.id, newUser);
+        console.log('Update result:', result);
+        alert('Пользователь обновлен! Пароль изменен.');
+      } else {
+        // Добавляем через API (удалили дублирование localStorage)
+        console.log('Creating new user');
+        const result = await addAccount(newUser);
+        console.log('Create result:', result);
+        alert('Пользователь создан!');
+      }
+      setIsUserModalOpen(false);
+      resetUserForm();
+    } catch (error) {
+      console.error('Error saving user:', error);
+      alert('Ошибка при сохранении пользователя!');
     }
-    setIsUserModalOpen(false);
-    resetUserForm();
   };
 
   const resetUserForm = () => {
@@ -1865,6 +1872,9 @@ const UnifiedAdminPanel = () => {
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Роль
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Связанный врач
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Контакты

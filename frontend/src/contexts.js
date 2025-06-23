@@ -748,12 +748,7 @@ export const AdminProvider = ({ children }) => {
     { id: 'patients', name_ru: 'Пациенты', name_uz: 'Bemorlar', name_en: 'Patients' }
   ]);
   const [vacancies, setVacancies] = useState([]);
-  const [accounts, setAccounts] = useState([
-    { id: 1, name: 'Админ', email: 'admin@neuro.uz', password: 'admin123', role: 'admin', status: 'active', createdAt: '2025-01-01' },
-    { id: 2, name: 'Доктор Кариев', email: 'kariev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-01-15' },
-    { id: 3, name: 'Доктор Асадуллаев', email: 'asadullaev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-02-01' },
-    { id: 4, name: 'Доктор Кодашев', email: 'kodashev@neuro.uz', password: 'demo123', role: 'doctor', status: 'active', createdAt: '2025-02-10' }
-  ]);
+  const [accounts, setAccounts] = useState([]); // Теперь загружается из API
   const [events, setEvents] = useState([]);
   const [leadership, setLeadership] = useState([]);
   const [siteSettings, setSiteSettings] = useState({
@@ -847,6 +842,15 @@ export const AdminProvider = ({ children }) => {
           setLeadership([]);
         }
         
+        // Fetch users/accounts
+        try {
+          const usersData = await apiService.getUsers();
+          setAccounts(usersData);
+        } catch (error) {
+          console.warn("Could not fetch users from API, using fallback data");
+          setAccounts([]);
+        }
+        
       } catch (error) {
         console.error("Error in fetchData:", error);
       } finally {
@@ -935,16 +939,25 @@ export const AdminProvider = ({ children }) => {
 
   const deleteDepartment = async (id) => {
     try {
+      console.log('Deleting department with ID:', id);
       const result = await apiService.deleteDepartment(id);
+      console.log('Delete result:', result);
+      
       // Обновляем локальное состояние новыми данными с сервера
+      console.log('Refreshing departments list...');
       const updatedDepartments = await apiService.getDepartments();
       setDepartments(updatedDepartments);
+      
       // Также обновляем врачей, если их отделение было удалено
+      console.log('Refreshing doctors list...');
       const updatedDoctors = await apiService.getDoctors();
       setDoctors(updatedDoctors);
+      
+      console.log('Department deletion completed successfully');
       return result;
     } catch (error) {
       console.error('Failed to delete department:', error);
+      console.error('Error details:', error.message, error.stack);
       throw error;
     }
   };
@@ -1034,40 +1047,57 @@ export const AdminProvider = ({ children }) => {
     }
   };
 
-  // Функции для управления аккаунтами
-  const addAccount = (account) => {
-    const newId = accounts.length > 0 ? Math.max(...accounts.map(a => a.id)) + 1 : 1;
-    const today = new Date().toISOString().split('T')[0];
-    setAccounts([...accounts, { 
-      ...account, 
-      id: newId, 
-      createdAt: today,
-      status: 'active'
-    }]);
+  // Функции для управления аккаунтами (ПЕРЕДЕЛАНО ДЛЯ API)
+  const addAccount = async (account) => {
+    try {
+      const result = await apiService.createUser(account);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedAccounts = await apiService.getUsers();
+      setAccounts(updatedAccounts);
+      return result;
+    } catch (error) {
+      console.error('Failed to add account:', error);
+      throw error;
+    }
   };
 
-  const updateAccount = (id, updatedAccount) => {
-    setAccounts(accounts.map(account => 
-      account.id === id ? { 
-        ...updatedAccount, 
-        id, 
-        createdAt: account.createdAt,
-        status: account.status 
-      } : account
-    ));
+  const updateAccount = async (id, updatedAccount) => {
+    try {
+      const result = await apiService.updateUser(id, updatedAccount);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedAccounts = await apiService.getUsers();
+      setAccounts(updatedAccounts);
+      return result;
+    } catch (error) {
+      console.error('Failed to update account:', error);
+      throw error;
+    }
   };
 
-  const deleteAccount = (id) => {
-    setAccounts(accounts.filter(account => account.id !== id));
+  const deleteAccount = async (id) => {
+    try {
+      const result = await apiService.deleteUser(id);
+      // Обновляем локальное состояние новыми данными с сервера
+      const updatedAccounts = await apiService.getUsers();
+      setAccounts(updatedAccounts);
+      return result;
+    } catch (error) {
+      console.error('Failed to delete account:', error);
+      throw error;
+    }
   };
 
-  const toggleAccountStatus = (id) => {
-    setAccounts(accounts.map(account => 
-      account.id === id ? { 
-        ...account, 
-        status: account.status === 'active' ? 'inactive' : 'active' 
-      } : account
-    ));
+  const toggleAccountStatus = async (id) => {
+    try {
+      const account = accounts.find(acc => acc.id === id);
+      if (account) {
+        const newStatus = account.status === 'active' ? 'inactive' : 'active';
+        await updateAccount(id, { ...account, status: newStatus });
+      }
+    } catch (error) {
+      console.error('Failed to toggle account status:', error);
+      throw error;
+    }
   };
 
   // Функции для управления руководством (ПЕРЕДЕЛАНО ДЛЯ API)

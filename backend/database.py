@@ -2,7 +2,33 @@ from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 import os
+from bson import ObjectId
 from .models import *
+
+def serialize_document(document):
+    """Convert MongoDB document to JSON-serializable format"""
+    if document is None:
+        return None
+    
+    if isinstance(document, list):
+        return [serialize_document(doc) for doc in document]
+    
+    if isinstance(document, dict):
+        result = {}
+        for key, value in document.items():
+            if isinstance(value, ObjectId):
+                result[key] = str(value)
+            elif isinstance(value, datetime):
+                result[key] = value.isoformat()
+            elif isinstance(value, dict):
+                result[key] = serialize_document(value)
+            elif isinstance(value, list):
+                result[key] = serialize_document(value)
+            else:
+                result[key] = value
+        return result
+    
+    return document
 
 class DatabaseManager:
     def __init__(self, mongo_url: str, db_name: str):
@@ -20,7 +46,8 @@ class DatabaseManager:
         return str(result.inserted_id)
         
     async def get_item(self, collection: str, item_id: str) -> Optional[dict]:
-        return await self.db[collection].find_one({"id": item_id})
+        document = await self.db[collection].find_one({"id": item_id})
+        return serialize_document(document)
         
     async def get_items(
         self, 
@@ -33,7 +60,8 @@ class DatabaseManager:
     ) -> List[dict]:
         cursor = self.db[collection].find(filter_dict)
         cursor = cursor.sort(sort_by, sort_order).skip(skip).limit(limit)
-        return await cursor.to_list(length=limit)
+        documents = await cursor.to_list(length=limit)
+        return serialize_document(documents)
         
     async def update_item(self, collection: str, item_id: str, update_data: dict) -> bool:
         update_data["updated_at"] = datetime.utcnow()

@@ -8,6 +8,8 @@ class ApiService {
 
   async request(endpoint, options = {}) {
     const url = `${this.baseURL}${endpoint}`;
+    console.log('API Request:', options.method || 'GET', url);
+    
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -18,14 +20,29 @@ class ApiService {
 
     try {
       const response = await fetch(url, config);
+      console.log('API Response status:', response.status, response.statusText);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      return await response.json();
+      // Check if response has content before parsing JSON
+      const contentType = response.headers.get('content-type');
+      console.log('Response content-type:', contentType);
+      
+      if (contentType && contentType.includes('application/json')) {
+        const result = await response.json();
+        console.log('API Response data:', result);
+        return result;
+      } else {
+        // For DELETE operations or empty responses
+        const text = await response.text();
+        console.log('API Response text:', text);
+        return text ? JSON.parse(text) : {};
+      }
     } catch (error) {
       console.error('API request failed:', error);
+      console.error('Request details:', options.method || 'GET', url, config);
       throw error;
     }
   }
@@ -218,6 +235,64 @@ class ApiService {
   async deleteLeadership(id) {
     return this.request(`/leadership/${id}`, {
       method: 'DELETE',
+    });
+  }
+
+  // Appointments
+  async getAppointments(doctorId = null) {
+    const url = doctorId ? `/appointments?doctor_id=${doctorId}` : '/appointments';
+    return this.request(url);
+  }
+
+  async createAppointment(data) {
+    return this.request('/appointments', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateAppointment(id, data) {
+    return this.request(`/appointments/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteAppointment(id) {
+    return this.request(`/appointments/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Users/Accounts
+  async getUsers() {
+    return this.request('/users');
+  }
+
+  async createUser(data) {
+    return this.request('/users', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateUser(id, data) {
+    return this.request(`/users/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteUser(id) {
+    return this.request(`/users/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  async login(email, password) {
+    return this.request('/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
     });
   }
 

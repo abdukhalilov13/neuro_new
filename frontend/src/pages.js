@@ -27,7 +27,9 @@ import { siteData } from './components';
 export const DepartmentsPage = () => {
   const { adminData } = useAdmin();
   const { t, language } = useLanguage();
-  const departments = adminData?.departments || siteData.departments;
+  
+  // Используем ТОЛЬКО данные из API, без fallback на siteData
+  const departments = adminData?.departments || [];
 
   const getFieldByLanguage = (item, fieldName) => {
     return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
@@ -85,7 +87,9 @@ export const DepartmentsPage = () => {
 export const DoctorsPage = () => {
   const { adminData } = useAdmin();
   const { t, language } = useLanguage();
-  const doctors = adminData?.doctors || siteData.doctors;
+  
+  // Используем ТОЛЬКО данные из API, без fallback на siteData
+  const doctors = adminData?.doctors || [];
 
   const getFieldByLanguage = (item, fieldName) => {
     return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];

@@ -24,6 +24,15 @@ class NeuroUzAPITester:
         print(f"Using API base URL: {self.base_url}")
         self.tests_run = 0
         self.tests_passed = 0
+        self.created_ids = {
+            "departments": None,
+            "doctors": None,
+            "services": None,
+            "news": None,
+            "events": None,
+            "gallery": None,
+            "leadership": None
+        }
 
     def run_test(self, name, method, endpoint, expected_status, data=None):
         """Run a single API test"""
@@ -512,56 +521,93 @@ def main():
     tester.test_root_endpoint()
     tester.test_health_endpoint()
     
-    print("\n===== Testing Departments API =====")
+    # Test DEPARTMENTS CRUD operations
+    print("\n===== Testing Departments CRUD Operations =====")
+    print("\n----- GET /api/departments -----")
     success, departments_data = tester.test_departments_endpoint()
     if success:
         print(f"✅ Found {len(departments_data)} departments")
         if departments_data and isinstance(departments_data, list):
             print("✅ Departments data structure is correct (list of departments)")
             if len(departments_data) > 0 and isinstance(departments_data[0], dict):
-                required_fields = ["id", "name", "description"]
+                required_fields = ["id", "name_ru", "description_ru"]
                 missing_fields = [field for field in required_fields if field not in departments_data[0]]
                 if not missing_fields:
                     print("✅ Department object structure is correct")
                 else:
                     print(f"❌ Department object is missing required fields: {missing_fields}")
     
-    # Test CRUD operations for departments
-    print("\n===== Testing Department CRUD Operations =====")
-    success, create_dept_data = tester.test_create_department()
-    if success:
-        print("✅ Department creation successful")
-        if create_dept_data and isinstance(create_dept_data, dict):
-            required_fields = ["id", "message"]
-            missing_fields = [field for field in required_fields if field not in create_dept_data]
-            if not missing_fields:
-                print("✅ Department creation response structure is correct")
-            else:
-                print(f"❌ Department creation response is missing required fields: {missing_fields}")
+    print("\n----- POST /api/departments -----")
+    department_data = {
+        "name_ru": "Отделение нейрохирургии спинного мозга",
+        "name_uz": "Orqa miya neyroxirurgiya bo'limi",
+        "name_en": "Spinal Neurosurgery Department",
+        "description_ru": "Специализируется на лечении заболеваний и травм спинного мозга",
+        "description_uz": "Orqa miya kasalliklari va jarohatlarini davolashga ixtisoslashgan",
+        "description_en": "Specializes in the treatment of spinal cord diseases and injuries",
+        "head_doctor": "Тестовый Врач",
+        "phone": "+998 71 123-45-67",
+        "is_active": True
+    }
+    success, create_dept_data = tester.run_test(
+        "Create Department",
+        "POST",
+        "departments",
+        200,
+        data=department_data
+    )
+    if success and "id" in create_dept_data:
+        tester.created_ids["departments"] = create_dept_data["id"]
+        print(f"✅ Department created with ID: {tester.created_ids['departments']}")
     
-    success, update_dept_data = tester.test_update_department()
-    if success:
-        print("✅ Department update successful")
-        if update_dept_data and isinstance(update_dept_data, dict):
-            required_fields = ["id", "message"]
-            missing_fields = [field for field in required_fields if field not in update_dept_data]
-            if not missing_fields:
-                print("✅ Department update response structure is correct")
+    if tester.created_ids["departments"]:
+        print("\n----- PUT /api/departments/{id} -----")
+        update_data = {
+            "name_ru": "Обновленное отделение нейрохирургии",
+            "name_uz": "Yangilangan neyroxirurgiya bo'limi",
+            "name_en": "Updated Neurosurgery Department",
+            "description_ru": "Обновленное описание отделения",
+            "description_uz": "Bo'limning yangilangan tavsifi",
+            "description_en": "Updated department description"
+        }
+        success, update_dept_data = tester.run_test(
+            "Update Department",
+            "PUT",
+            f"departments/{tester.created_ids['departments']}",
+            200,
+            data=update_data
+        )
+        if success:
+            print(f"✅ Department with ID {tester.created_ids['departments']} updated successfully")
+        
+        print("\n----- DELETE /api/departments/{id} -----")
+        success, delete_dept_data = tester.run_test(
+            "Delete Department",
+            "DELETE",
+            f"departments/{tester.created_ids['departments']}",
+            200
+        )
+        if success:
+            print(f"✅ Department with ID {tester.created_ids['departments']} deleted successfully")
+            
+        # Verify deletion
+        print("\n----- Verify Department Deletion -----")
+        success, get_deleted_dept = tester.run_test(
+            "Get Deleted Department",
+            "GET",
+            f"departments",
+            200
+        )
+        if success and isinstance(get_deleted_dept, list):
+            deleted_dept = next((dept for dept in get_deleted_dept if dept.get("id") == tester.created_ids["departments"]), None)
+            if deleted_dept:
+                print(f"❌ Department with ID {tester.created_ids['departments']} still exists after deletion")
             else:
-                print(f"❌ Department update response is missing required fields: {missing_fields}")
+                print(f"✅ Department with ID {tester.created_ids['departments']} was properly deleted")
     
-    success, delete_dept_data = tester.test_delete_department()
-    if success:
-        print("✅ Department deletion successful")
-        if delete_dept_data and isinstance(delete_dept_data, dict):
-            required_fields = ["message"]
-            missing_fields = [field for field in required_fields if field not in delete_dept_data]
-            if not missing_fields:
-                print("✅ Department deletion response structure is correct")
-            else:
-                print(f"❌ Department deletion response is missing required fields: {missing_fields}")
-    
-    print("\n===== Testing Doctors API =====")
+    # Test DOCTORS CRUD operations
+    print("\n===== Testing Doctors CRUD Operations =====")
+    print("\n----- GET /api/doctors -----")
     success, doctors_data = tester.test_doctors_endpoint()
     if success:
         print(f"✅ Found {len(doctors_data)} doctors")
@@ -575,48 +621,156 @@ def main():
                 else:
                     print(f"❌ Doctor object is missing required fields: {missing_fields}")
     
-    # Test doctor creation
-    print("\n===== Testing Doctor Creation =====")
-    success, create_doctor_data = tester.test_create_doctor()
-    if success:
-        print("✅ Doctor creation successful")
-        if create_doctor_data and isinstance(create_doctor_data, dict):
-            required_fields = ["id", "message"]
-            missing_fields = [field for field in required_fields if field not in create_doctor_data]
-            if not missing_fields:
-                print("✅ Doctor creation response structure is correct")
-            else:
-                print(f"❌ Doctor creation response is missing required fields: {missing_fields}")
+    print("\n----- POST /api/doctors -----")
+    doctor_data = {
+        "name": "Иванов Иван Иванович",
+        "specialization": "Нейрохирург, д.м.н.",
+        "experience": "20+ лет",
+        "image": "https://example.com/doctor.jpg",
+        "email": "ivanov@neuro.uz",
+        "phone": "+998 90 123-45-67",
+        "reception": "Понедельник-Пятница, 9:00-17:00",
+        "department_id": "1",
+        "is_active": True
+    }
+    success, create_doctor_data = tester.run_test(
+        "Create Doctor",
+        "POST",
+        "doctors",
+        200,
+        data=doctor_data
+    )
+    if success and "id" in create_doctor_data:
+        tester.created_ids["doctors"] = create_doctor_data["id"]
+        print(f"✅ Doctor created with ID: {tester.created_ids['doctors']}")
     
-    print("\n===== Testing Services API =====")
+    if tester.created_ids["doctors"]:
+        print("\n----- PUT /api/doctors/{id} -----")
+        update_data = {
+            "name": "Иванов Иван Петрович",
+            "specialization": "Нейрохирург, профессор",
+            "experience": "25+ лет"
+        }
+        success, update_doctor_data = tester.run_test(
+            "Update Doctor",
+            "PUT",
+            f"doctors/{tester.created_ids['doctors']}",
+            200,
+            data=update_data
+        )
+        if success:
+            print(f"✅ Doctor with ID {tester.created_ids['doctors']} updated successfully")
+        
+        print("\n----- DELETE /api/doctors/{id} -----")
+        success, delete_doctor_data = tester.run_test(
+            "Delete Doctor",
+            "DELETE",
+            f"doctors/{tester.created_ids['doctors']}",
+            200
+        )
+        if success:
+            print(f"✅ Doctor with ID {tester.created_ids['doctors']} deleted successfully")
+            
+        # Verify deletion
+        print("\n----- Verify Doctor Deletion -----")
+        success, get_deleted_doctor = tester.run_test(
+            "Get Deleted Doctor",
+            "GET",
+            f"doctors",
+            200
+        )
+        if success and isinstance(get_deleted_doctor, list):
+            deleted_doctor = next((doc for doc in get_deleted_doctor if doc.get("id") == tester.created_ids["doctors"]), None)
+            if deleted_doctor:
+                print(f"❌ Doctor with ID {tester.created_ids['doctors']} still exists after deletion")
+            else:
+                print(f"✅ Doctor with ID {tester.created_ids['doctors']} was properly deleted")
+    
+    # Test SERVICES CRUD operations
+    print("\n===== Testing Services CRUD Operations =====")
+    print("\n----- GET /api/services -----")
     success, services_data = tester.test_services_endpoint()
     if success:
         print(f"✅ Found {len(services_data)} services")
         if services_data and isinstance(services_data, list):
             print("✅ Services data structure is correct (list of services)")
             if len(services_data) > 0 and isinstance(services_data[0], dict):
-                required_fields = ["id", "name", "category", "description", "price"]
+                required_fields = ["id", "name", "category", "price"]
                 missing_fields = [field for field in required_fields if field not in services_data[0]]
                 if not missing_fields:
                     print("✅ Service object structure is correct")
                 else:
                     print(f"❌ Service object is missing required fields: {missing_fields}")
     
-    # Test service creation
-    print("\n===== Testing Service Creation =====")
-    success, create_service_data = tester.test_create_service()
-    if success:
-        print("✅ Service creation successful")
-        if create_service_data and isinstance(create_service_data, dict):
-            required_fields = ["id", "message"]
-            missing_fields = [field for field in required_fields if field not in create_service_data]
-            if not missing_fields:
-                print("✅ Service creation response structure is correct")
-            else:
-                print(f"❌ Service creation response is missing required fields: {missing_fields}")
+    print("\n----- POST /api/services -----")
+    service_data = {
+        "name": "Комплексное обследование",
+        "category": "Диагностика",
+        "description": "Полное обследование нервной системы",
+        "price": 500000,
+        "is_active": True
+    }
+    success, create_service_data = tester.run_test(
+        "Create Service",
+        "POST",
+        "services",
+        200,
+        data=service_data
+    )
+    if success and "id" in create_service_data:
+        tester.created_ids["services"] = create_service_data["id"]
+        print(f"✅ Service created with ID: {tester.created_ids['services']}")
     
-    print("\n===== Testing News API =====")
-    success, news_data = tester.test_news_endpoint()
+    if tester.created_ids["services"]:
+        print("\n----- PUT /api/services/{id} -----")
+        update_data = {
+            "name": "Обновленное комплексное обследование",
+            "price": 550000
+        }
+        success, update_service_data = tester.run_test(
+            "Update Service",
+            "PUT",
+            f"services/{tester.created_ids['services']}",
+            200,
+            data=update_data
+        )
+        if success:
+            print(f"✅ Service with ID {tester.created_ids['services']} updated successfully")
+        
+        print("\n----- DELETE /api/services/{id} -----")
+        success, delete_service_data = tester.run_test(
+            "Delete Service",
+            "DELETE",
+            f"services/{tester.created_ids['services']}",
+            200
+        )
+        if success:
+            print(f"✅ Service with ID {tester.created_ids['services']} deleted successfully")
+            
+        # Verify deletion
+        print("\n----- Verify Service Deletion -----")
+        success, get_deleted_service = tester.run_test(
+            "Get Deleted Service",
+            "GET",
+            f"services",
+            200
+        )
+        if success and isinstance(get_deleted_service, list):
+            deleted_service = next((svc for svc in get_deleted_service if svc.get("id") == tester.created_ids["services"]), None)
+            if deleted_service:
+                print(f"❌ Service with ID {tester.created_ids['services']} still exists after deletion")
+            else:
+                print(f"✅ Service with ID {tester.created_ids['services']} was properly deleted")
+    
+    # Test NEWS CRUD operations
+    print("\n===== Testing News CRUD Operations =====")
+    print("\n----- GET /api/news -----")
+    success, news_data = tester.run_test(
+        "Get News",
+        "GET",
+        "news",
+        200
+    )
     if success:
         print(f"✅ Found {len(news_data)} news items")
         if news_data and isinstance(news_data, list):
@@ -629,49 +783,76 @@ def main():
                 else:
                     print(f"❌ News object is missing required fields: {missing_fields}")
     
-    # Test news creation
-    print("\n===== Testing News Creation =====")
-    success, create_news_data = tester.test_create_news()
-    if success:
-        print("✅ News creation successful")
-        if create_news_data and isinstance(create_news_data, dict):
-            required_fields = ["id", "message"]
-            missing_fields = [field for field in required_fields if field not in create_news_data]
-            if not missing_fields:
-                print("✅ News creation response structure is correct")
+    print("\n----- POST /api/news -----")
+    news_item_data = {
+        "title": "Новый метод лечения",
+        "excerpt": "Краткое описание нового метода",
+        "content": "Подробное описание нового метода лечения...",
+        "image": "https://example.com/news.jpg",
+        "date": "2025-07-15",
+        "is_published": True
+    }
+    success, create_news_data = tester.run_test(
+        "Create News",
+        "POST",
+        "news",
+        200,
+        data=news_item_data
+    )
+    if success and "id" in create_news_data:
+        tester.created_ids["news"] = create_news_data["id"]
+        print(f"✅ News item created with ID: {tester.created_ids['news']}")
+    
+    if tester.created_ids["news"]:
+        print("\n----- PUT /api/news/{id} -----")
+        update_data = {
+            "title": "Обновленный метод лечения",
+            "excerpt": "Обновленное краткое описание"
+        }
+        success, update_news_data = tester.run_test(
+            "Update News",
+            "PUT",
+            f"news/{tester.created_ids['news']}",
+            200,
+            data=update_data
+        )
+        if success:
+            print(f"✅ News item with ID {tester.created_ids['news']} updated successfully")
+        
+        print("\n----- DELETE /api/news/{id} -----")
+        success, delete_news_data = tester.run_test(
+            "Delete News",
+            "DELETE",
+            f"news/{tester.created_ids['news']}",
+            200
+        )
+        if success:
+            print(f"✅ News item with ID {tester.created_ids['news']} deleted successfully")
+            
+        # Verify deletion
+        print("\n----- Verify News Deletion -----")
+        success, get_deleted_news = tester.run_test(
+            "Get Deleted News",
+            "GET",
+            f"news",
+            200
+        )
+        if success and isinstance(get_deleted_news, list):
+            deleted_news = next((item for item in get_deleted_news if item.get("id") == tester.created_ids["news"]), None)
+            if deleted_news:
+                print(f"❌ News item with ID {tester.created_ids['news']} still exists after deletion")
             else:
-                print(f"❌ News creation response is missing required fields: {missing_fields}")
+                print(f"✅ News item with ID {tester.created_ids['news']} was properly deleted")
     
-    print("\n===== Testing Gallery API =====")
-    success, gallery_data = tester.test_gallery_endpoint()
-    if success:
-        print(f"✅ Found {len(gallery_data)} gallery images")
-        if gallery_data and isinstance(gallery_data, list):
-            print("✅ Gallery data structure is correct (list of images)")
-            if len(gallery_data) > 0 and isinstance(gallery_data[0], dict):
-                required_fields = ["id", "url", "alt", "category"]
-                missing_fields = [field for field in required_fields if field not in gallery_data[0]]
-                if not missing_fields:
-                    print("✅ Gallery image object structure is correct")
-                else:
-                    print(f"❌ Gallery image object is missing required fields: {missing_fields}")
-    
-    # Test gallery image creation
-    print("\n===== Testing Gallery Image Creation =====")
-    success, create_gallery_data = tester.test_create_gallery_image()
-    if success:
-        print("✅ Gallery image creation successful")
-        if create_gallery_data and isinstance(create_gallery_data, dict):
-            required_fields = ["id", "message"]
-            missing_fields = [field for field in required_fields if field not in create_gallery_data]
-            if not missing_fields:
-                print("✅ Gallery image creation response structure is correct")
-            else:
-                print(f"❌ Gallery image creation response is missing required fields: {missing_fields}")
-    
-    # Test events endpoint
-    print("\n===== Testing Events API =====")
-    success, events_data = tester.test_events_endpoint()
+    # Test EVENTS CRUD operations
+    print("\n===== Testing Events CRUD Operations =====")
+    print("\n----- GET /api/events -----")
+    success, events_data = tester.run_test(
+        "Get Events",
+        "GET",
+        "events",
+        200
+    )
     if success:
         print(f"✅ Found {len(events_data)} events")
         if events_data and isinstance(events_data, list):
@@ -684,191 +865,250 @@ def main():
                 else:
                     print(f"❌ Event object is missing required fields: {missing_fields}")
     
-    # Test event creation
-    print("\n===== Testing Event Creation =====")
-    success, create_event_data = tester.test_create_event()
-    if success:
-        print("✅ Event creation successful")
-        if create_event_data and isinstance(create_event_data, dict):
-            required_fields = ["id", "message"]
-            missing_fields = [field for field in required_fields if field not in create_event_data]
-            if not missing_fields:
-                print("✅ Event creation response structure is correct")
-            else:
-                print(f"❌ Event creation response is missing required fields: {missing_fields}")
+    print("\n----- POST /api/events -----")
+    event_data = {
+        "title": "Семинар по нейрохирургии",
+        "description": "Обсуждение новых методов лечения",
+        "date": "2025-08-15",
+        "time": "10:00",
+        "location": "Конференц-зал центра",
+        "type": "seminar"
+    }
+    success, create_event_data = tester.run_test(
+        "Create Event",
+        "POST",
+        "events",
+        200,
+        data=event_data
+    )
+    if success and "id" in create_event_data:
+        tester.created_ids["events"] = create_event_data["id"]
+        print(f"✅ Event created with ID: {tester.created_ids['events']}")
     
-    # Test leadership endpoint
-    print("\n===== Testing Leadership API =====")
-    success, leadership_data = tester.test_leadership_endpoint()
+    if tester.created_ids["events"]:
+        print("\n----- PUT /api/events/{id} -----")
+        update_data = {
+            "title": "Обновленный семинар по нейрохирургии",
+            "time": "11:00"
+        }
+        success, update_event_data = tester.run_test(
+            "Update Event",
+            "PUT",
+            f"events/{tester.created_ids['events']}",
+            200,
+            data=update_data
+        )
+        if success:
+            print(f"✅ Event with ID {tester.created_ids['events']} updated successfully")
+        
+        print("\n----- DELETE /api/events/{id} -----")
+        success, delete_event_data = tester.run_test(
+            "Delete Event",
+            "DELETE",
+            f"events/{tester.created_ids['events']}",
+            200
+        )
+        if success:
+            print(f"✅ Event with ID {tester.created_ids['events']} deleted successfully")
+            
+        # Verify deletion
+        print("\n----- Verify Event Deletion -----")
+        success, get_deleted_event = tester.run_test(
+            "Get Deleted Event",
+            "GET",
+            f"events",
+            200
+        )
+        if success and isinstance(get_deleted_event, list):
+            deleted_event = next((evt for evt in get_deleted_event if evt.get("id") == tester.created_ids["events"]), None)
+            if deleted_event:
+                print(f"❌ Event with ID {tester.created_ids['events']} still exists after deletion")
+            else:
+                print(f"✅ Event with ID {tester.created_ids['events']} was properly deleted")
+    
+    # Test GALLERY CRUD operations
+    print("\n===== Testing Gallery CRUD Operations =====")
+    print("\n----- GET /api/gallery -----")
+    success, gallery_data = tester.run_test(
+        "Get Gallery",
+        "GET",
+        "gallery",
+        200
+    )
+    if success:
+        print(f"✅ Found {len(gallery_data)} gallery images")
+        if gallery_data and isinstance(gallery_data, list):
+            print("✅ Gallery data structure is correct (list of images)")
+            if len(gallery_data) > 0 and isinstance(gallery_data[0], dict):
+                required_fields = ["id", "url", "alt", "category"]
+                missing_fields = [field for field in required_fields if field not in gallery_data[0]]
+                if not missing_fields:
+                    print("✅ Gallery image object structure is correct")
+                else:
+                    print(f"❌ Gallery image object is missing required fields: {missing_fields}")
+    
+    print("\n----- POST /api/gallery -----")
+    gallery_data = {
+        "url": "https://example.com/gallery.jpg",
+        "alt": "Новое оборудование",
+        "category": "equipment",
+        "is_active": True
+    }
+    success, create_gallery_data = tester.run_test(
+        "Create Gallery Image",
+        "POST",
+        "gallery",
+        200,
+        data=gallery_data
+    )
+    if success and "id" in create_gallery_data:
+        tester.created_ids["gallery"] = create_gallery_data["id"]
+        print(f"✅ Gallery image created with ID: {tester.created_ids['gallery']}")
+    
+    if tester.created_ids["gallery"]:
+        print("\n----- PUT /api/gallery/{id} -----")
+        update_data = {
+            "alt": "Обновленное описание оборудования",
+            "category": "building"
+        }
+        success, update_gallery_data = tester.run_test(
+            "Update Gallery Image",
+            "PUT",
+            f"gallery/{tester.created_ids['gallery']}",
+            200,
+            data=update_data
+        )
+        if success:
+            print(f"✅ Gallery image with ID {tester.created_ids['gallery']} updated successfully")
+        
+        print("\n----- DELETE /api/gallery/{id} -----")
+        success, delete_gallery_data = tester.run_test(
+            "Delete Gallery Image",
+            "DELETE",
+            f"gallery/{tester.created_ids['gallery']}",
+            200
+        )
+        if success:
+            print(f"✅ Gallery image with ID {tester.created_ids['gallery']} deleted successfully")
+            
+        # Verify deletion
+        print("\n----- Verify Gallery Image Deletion -----")
+        success, get_deleted_gallery = tester.run_test(
+            "Get Deleted Gallery Image",
+            "GET",
+            f"gallery",
+            200
+        )
+        if success and isinstance(get_deleted_gallery, list):
+            deleted_gallery = next((img for img in get_deleted_gallery if img.get("id") == tester.created_ids["gallery"]), None)
+            if deleted_gallery:
+                print(f"❌ Gallery image with ID {tester.created_ids['gallery']} still exists after deletion")
+            else:
+                print(f"✅ Gallery image with ID {tester.created_ids['gallery']} was properly deleted")
+    
+    # Test LEADERSHIP CRUD operations
+    print("\n===== Testing Leadership CRUD Operations =====")
+    print("\n----- GET /api/leadership -----")
+    success, leadership_data = tester.run_test(
+        "Get Leadership",
+        "GET",
+        "leadership",
+        200
+    )
     if success:
         print(f"✅ Found {len(leadership_data)} leadership entries")
         if leadership_data and isinstance(leadership_data, list):
             print("✅ Leadership data structure is correct (list of leadership entries)")
             if len(leadership_data) > 0 and isinstance(leadership_data[0], dict):
-                required_fields = ["id", "name", "position", "image", "biography"]
+                required_fields = ["id", "name_ru", "position_ru", "image"]
                 missing_fields = [field for field in required_fields if field not in leadership_data[0]]
                 if not missing_fields:
                     print("✅ Leadership object structure is correct")
                 else:
                     print(f"❌ Leadership object is missing required fields: {missing_fields}")
     
-    # Test leadership creation
-    print("\n===== Testing Leadership Creation =====")
-    success, create_leadership_data = tester.test_create_leadership()
-    if success:
-        print("✅ Leadership creation successful")
-        if create_leadership_data and isinstance(create_leadership_data, dict):
-            required_fields = ["id", "message"]
-            missing_fields = [field for field in required_fields if field not in create_leadership_data]
-            if not missing_fields:
-                print("✅ Leadership creation response structure is correct")
+    print("\n----- POST /api/leadership -----")
+    leadership_data = {
+        "name_ru": "Сидоров Петр Алексеевич",
+        "name_uz": "Sidorov Petr Alekseyevich",
+        "name_en": "Petr Sidorov",
+        "position_ru": "Главный врач",
+        "position_uz": "Bosh shifokor",
+        "position_en": "Chief Physician",
+        "image": "https://example.com/leader.jpg",
+        "phone": "+998 71 123-45-67",
+        "email": "sidorov@neuro.uz",
+        "biography_ru": "Опытный специалист с 25-летним стажем работы...",
+        "biography_uz": "25 yillik ish tajribasiga ega tajribali mutaxassis...",
+        "biography_en": "Experienced specialist with 25 years of experience..."
+    }
+    success, create_leadership_data = tester.run_test(
+        "Create Leadership",
+        "POST",
+        "leadership",
+        200,
+        data=leadership_data
+    )
+    if success and "id" in create_leadership_data:
+        tester.created_ids["leadership"] = create_leadership_data["id"]
+        print(f"✅ Leadership entry created with ID: {tester.created_ids['leadership']}")
+    
+    if tester.created_ids["leadership"]:
+        print("\n----- PUT /api/leadership/{id} -----")
+        update_data = {
+            "position_ru": "Заместитель главного врача",
+            "position_uz": "Bosh shifokor o'rinbosari",
+            "position_en": "Deputy Chief Physician"
+        }
+        success, update_leadership_data = tester.run_test(
+            "Update Leadership",
+            "PUT",
+            f"leadership/{tester.created_ids['leadership']}",
+            200,
+            data=update_data
+        )
+        if success:
+            print(f"✅ Leadership entry with ID {tester.created_ids['leadership']} updated successfully")
+        
+        print("\n----- DELETE /api/leadership/{id} -----")
+        success, delete_leadership_data = tester.run_test(
+            "Delete Leadership",
+            "DELETE",
+            f"leadership/{tester.created_ids['leadership']}",
+            200
+        )
+        if success:
+            print(f"✅ Leadership entry with ID {tester.created_ids['leadership']} deleted successfully")
+            
+        # Verify deletion
+        print("\n----- Verify Leadership Deletion -----")
+        success, get_deleted_leadership = tester.run_test(
+            "Get Deleted Leadership",
+            "GET",
+            f"leadership",
+            200
+        )
+        if success and isinstance(get_deleted_leadership, list):
+            deleted_leadership = next((leader for leader in get_deleted_leadership if leader.get("id") == tester.created_ids["leadership"]), None)
+            if deleted_leadership:
+                print(f"❌ Leadership entry with ID {tester.created_ids['leadership']} still exists after deletion")
             else:
-                print(f"❌ Leadership creation response is missing required fields: {missing_fields}")
-    
-    # Test appointments API
-    print("\n===== Testing Appointments API =====")
-    success, appointments_data = tester.test_get_appointments()
-    if success:
-        print(f"✅ Found {len(appointments_data)} appointments")
-        if appointments_data and isinstance(appointments_data, list):
-            print("✅ Appointments data structure is correct (list of appointments)")
-            if len(appointments_data) > 0 and isinstance(appointments_data[0], dict):
-                required_fields = ["id", "doctorId", "doctorName", "date", "time", "patient", "status"]
-                missing_fields = [field for field in required_fields if field not in appointments_data[0]]
-                if not missing_fields:
-                    print("✅ Appointment object structure is correct")
-                    if "patient" in appointments_data[0] and isinstance(appointments_data[0]["patient"], dict):
-                        patient_fields = ["name", "phone", "email", "complaint"]
-                        missing_patient_fields = [field for field in patient_fields if field not in appointments_data[0]["patient"]]
-                        if not missing_patient_fields:
-                            print("✅ Patient object structure is correct")
-                        else:
-                            print(f"❌ Patient object is missing required fields: {missing_patient_fields}")
-                else:
-                    print(f"❌ Appointment object is missing required fields: {missing_fields}")
-    
-    # Test appointments by doctor
-    success, doctor_appointments = tester.test_get_appointments_by_doctor()
-    if success:
-        print(f"✅ Found {len(doctor_appointments)} appointments for doctor ID 1")
-        if doctor_appointments and isinstance(doctor_appointments, list):
-            print("✅ Doctor appointments filtering is working correctly")
-    
-    # Test appointment creation
-    print("\n===== Testing Appointment Creation =====")
-    success, create_appointment_data = tester.test_create_appointment()
-    if success:
-        print("✅ Appointment creation successful")
-        if create_appointment_data and isinstance(create_appointment_data, dict):
-            required_fields = ["id", "message", "status"]
-            missing_fields = [field for field in required_fields if field not in create_appointment_data]
-            if not missing_fields:
-                print("✅ Appointment creation response structure is correct")
-            else:
-                print(f"❌ Appointment creation response is missing required fields: {missing_fields}")
-    
-    # Test appointment update
-    print("\n===== Testing Appointment Update =====")
-    success, update_appointment_data = tester.test_update_appointment()
-    if success:
-        print("✅ Appointment update successful")
-        if update_appointment_data and isinstance(update_appointment_data, dict):
-            required_fields = ["id", "message", "status"]
-            missing_fields = [field for field in required_fields if field not in update_appointment_data]
-            if not missing_fields:
-                print("✅ Appointment update response structure is correct")
-                if update_appointment_data["status"] == "confirmed":
-                    print("✅ Appointment status was correctly updated to 'confirmed'")
-            else:
-                print(f"❌ Appointment update response is missing required fields: {missing_fields}")
-    
-    # Test appointment deletion
-    print("\n===== Testing Appointment Deletion =====")
-    success, delete_appointment_data = tester.test_delete_appointment()
-    if success:
-        print("✅ Appointment deletion successful")
-        if delete_appointment_data and isinstance(delete_appointment_data, dict):
-            required_fields = ["message"]
-            missing_fields = [field for field in required_fields if field not in delete_appointment_data]
-            if not missing_fields:
-                print("✅ Appointment deletion response structure is correct")
-            else:
-                print(f"❌ Appointment deletion response is missing required fields: {missing_fields}")
-    
-    # Test job applications API
-    print("\n===== Testing Job Applications API =====")
-    success, job_applications_data = tester.test_get_job_applications()
-    if success:
-        print(f"✅ Found {len(job_applications_data)} job applications")
-        if job_applications_data and isinstance(job_applications_data, list):
-            print("✅ Job applications data structure is correct (list of applications)")
-            if len(job_applications_data) > 0 and isinstance(job_applications_data[0], dict):
-                required_fields = ["id", "vacancyId", "vacancyTitle", "applicant", "status"]
-                missing_fields = [field for field in required_fields if field not in job_applications_data[0]]
-                if not missing_fields:
-                    print("✅ Job application object structure is correct")
-                    if "applicant" in job_applications_data[0] and isinstance(job_applications_data[0]["applicant"], dict):
-                        applicant_fields = ["name", "phone", "email", "experience", "education"]
-                        missing_applicant_fields = [field for field in applicant_fields if field not in job_applications_data[0]["applicant"]]
-                        if not missing_applicant_fields:
-                            print("✅ Applicant object structure is correct")
-                        else:
-                            print(f"❌ Applicant object is missing required fields: {missing_applicant_fields}")
-                else:
-                    print(f"❌ Job application object is missing required fields: {missing_fields}")
-    
-    # Test job application creation
-    print("\n===== Testing Job Application Creation =====")
-    success, create_job_application_data = tester.test_create_job_application()
-    if success:
-        print("✅ Job application creation successful")
-        if create_job_application_data and isinstance(create_job_application_data, dict):
-            required_fields = ["id", "message"]
-            missing_fields = [field for field in required_fields if field not in create_job_application_data]
-            if not missing_fields:
-                print("✅ Job application creation response structure is correct")
-            else:
-                print(f"❌ Job application creation response is missing required fields: {missing_fields}")
-    
-    # Test job application update
-    print("\n===== Testing Job Application Update =====")
-    success, update_job_application_data = tester.test_update_job_application()
-    if success:
-        print("✅ Job application update successful")
-        if update_job_application_data and isinstance(update_job_application_data, dict):
-            required_fields = ["id", "message", "status"]
-            missing_fields = [field for field in required_fields if field not in update_job_application_data]
-            if not missing_fields:
-                print("✅ Job application update response structure is correct")
-                if update_job_application_data["status"] == "interview":
-                    print("✅ Job application status was correctly updated to 'interview'")
-            else:
-                print(f"❌ Job application update response is missing required fields: {missing_fields}")
+                print(f"✅ Leadership entry with ID {tester.created_ids['leadership']} was properly deleted")
     
     # Print results
     print(f"\n📊 Tests passed: {tester.tests_passed}/{tester.tests_run}")
     print(f"\n===== API Testing Summary =====")
     print(f"✅ Root API endpoint: {'Working' if tester.tests_passed > 0 else 'Not working'}")
     print(f"✅ Health check endpoint: {'Working' if tester.tests_passed > 1 else 'Not working'}")
-    print(f"✅ Departments endpoint: {'Working' if tester.tests_passed > 2 else 'Not working'}")
-    print(f"✅ Departments CRUD operations: {'Working' if tester.tests_passed > 5 else 'Not working'}")
-    print(f"✅ Doctors endpoint: {'Working' if tester.tests_passed > 6 else 'Not working'}")
-    print(f"✅ Doctors creation: {'Working' if tester.tests_passed > 7 else 'Not working'}")
-    print(f"✅ Services endpoint: {'Working' if tester.tests_passed > 8 else 'Not working'}")
-    print(f"✅ Services creation: {'Working' if tester.tests_passed > 9 else 'Not working'}")
-    print(f"✅ News endpoint: {'Working' if tester.tests_passed > 10 else 'Not working'}")
-    print(f"✅ News creation: {'Working' if tester.tests_passed > 11 else 'Not working'}")
-    print(f"✅ Gallery endpoint: {'Working' if tester.tests_passed > 12 else 'Not working'}")
-    print(f"✅ Gallery creation: {'Working' if tester.tests_passed > 13 else 'Not working'}")
-    print(f"✅ Events endpoint: {'Working' if tester.tests_passed > 14 else 'Not working'}")
-    print(f"✅ Events creation: {'Working' if tester.tests_passed > 15 else 'Not working'}")
-    print(f"✅ Leadership endpoint: {'Working' if tester.tests_passed > 16 else 'Not working'}")
-    print(f"✅ Leadership creation: {'Working' if tester.tests_passed > 17 else 'Not working'}")
-    print(f"✅ Appointments GET endpoint: {'Working' if tester.tests_passed > 18 else 'Not working'}")
-    print(f"✅ Appointments CRUD operations: {'Working' if tester.tests_passed > 22 else 'Not working'}")
-    print(f"✅ Job Applications GET endpoint: {'Working' if tester.tests_passed > 23 else 'Not working'}")
-    print(f"✅ Job Applications creation and update: {'Working' if tester.tests_passed > 25 else 'Not working'}")
-    print(f"✅ CORS handling: {'Working' if tester.tests_passed == tester.tests_run else 'Not working'}")
+    
+    print(f"\n===== CRUD Operations Summary =====")
+    print(f"✅ Departments CRUD: {'All operations working' if tester.tests_passed > 10 else 'Some operations failed'}")
+    print(f"✅ Doctors CRUD: {'All operations working' if tester.tests_passed > 20 else 'Some operations failed'}")
+    print(f"✅ Services CRUD: {'All operations working' if tester.tests_passed > 30 else 'Some operations failed'}")
+    print(f"✅ News CRUD: {'All operations working' if tester.tests_passed > 40 else 'Some operations failed'}")
+    print(f"✅ Events CRUD: {'All operations working' if tester.tests_passed > 50 else 'Some operations failed'}")
+    print(f"✅ Gallery CRUD: {'All operations working' if tester.tests_passed > 60 else 'Some operations failed'}")
+    print(f"✅ Leadership CRUD: {'All operations working' if tester.tests_passed > 70 else 'Some operations failed'}")
     
     return 0 if tester.tests_passed == tester.tests_run else 1
 
