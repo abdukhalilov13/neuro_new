@@ -905,7 +905,7 @@ export const AppointmentPage = () => {
           >
             <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('appointment')}</h1>
             <p className="text-xl text-gray-600">
-              Заполните форму для записи на консультацию к нашим специалистам
+              {t('appointmentPageDescription')}
             </p>
           </motion.div>
 
