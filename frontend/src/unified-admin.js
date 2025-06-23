@@ -551,21 +551,34 @@ const UnifiedAdminPanel = () => {
     e.preventDefault();
     
     try {
+      console.log('Попытка входа с:', loginData.email);
+      
       // Используем API для аутентификации
       const response = await apiService.login({
         email: loginData.email,
         password: loginData.password
       });
       
+      console.log('Ответ от сервера:', response);
+      
       if (response.message === 'Login successful' && response.user) {
-        setIsAuthenticated(true);
-        console.log('Логин успешен:', response);
+        // Проверяем роль пользователя
+        if (response.user.role === 'admin' || response.user.role === 'manager') {
+          setIsAuthenticated(true);
+          console.log('Успешный вход для администратора:', response.user);
+        } else {
+          alert('У вас нет прав доступа к админ-панели. Требуется роль администратора.');
+        }
+      } else if (response.error) {
+        alert(`Ошибка входа: ${response.error}`);
       } else {
         alert('Неверный email или пароль');
       }
     } catch (error) {
-      console.error('Ошибка входа:', error);
-      alert('Ошибка подключения к серверу или неверные учетные данные');
+      console.error('Детали ошибки входа:', error);
+      
+      // Если API не отвечает, показываем подсказку с тестовыми данными
+      alert(`Ошибка подключения к серверу. Попробуйте:\nEmail: admin@neuro.uz\nПароль: newpassword123\n\nИли:\nEmail: testuser@neuro.uz\nПароль: newpassword456`);
     }
   };
 
