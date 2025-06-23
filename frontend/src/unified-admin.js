@@ -553,15 +553,6 @@ const UnifiedAdminPanel = () => {
     try {
       console.log('Попытка входа с:', loginData.email);
       
-      // ВРЕМЕННЫЙ ПРОСТОЙ ВХОД ДЛЯ ТЕСТИРОВАНИЯ
-      if ((loginData.email === 'admin@neuro.uz' && loginData.password === 'newpassword123') ||
-          (loginData.email === 'testuser@neuro.uz' && loginData.password === 'newpassword456') ||
-          (loginData.email === 'admin@neuro.uz' && loginData.password === 'admin123')) {
-        setIsAuthenticated(true);
-        console.log('Успешный временный вход');
-        return;
-      }
-      
       // Используем API для аутентификации
       const response = await apiService.login({
         email: loginData.email,
@@ -585,7 +576,7 @@ const UnifiedAdminPanel = () => {
       }
     } catch (error) {
       console.error('Детали ошибки входа:', error);
-      alert(`Ошибка подключения к серверу. Используйте:\nEmail: admin@neuro.uz\nПароль: newpassword123 или admin123\n\nИли:\nEmail: testuser@neuro.uz\nПароль: newpassword456`);
+      alert('Ошибка подключения к серверу. Проверьте подключение и попробуйте снова.');
     }
   };
 
