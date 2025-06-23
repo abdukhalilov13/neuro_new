@@ -1005,11 +1005,11 @@ export const AppointmentPage = () => {
 
             {step === 2 && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Выберите дату и время</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('selectDateAndTime')}</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Дата</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('dateLabel')}</label>
                     <input
                       type="date"
                       min={new Date().toISOString().split('T')[0]}
