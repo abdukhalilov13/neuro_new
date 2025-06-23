@@ -1048,7 +1048,7 @@ export const AppointmentPage = () => {
                     onClick={() => setStep(1)}
                     className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-8 py-3 rounded-lg font-medium transition-colors"
                   >
-                    Назад
+                    {t('backButton')}
                   </button>
                   <button
                     type="button"
