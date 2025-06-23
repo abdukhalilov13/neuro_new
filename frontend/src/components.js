@@ -519,7 +519,6 @@ export const HomePage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('upcomingEvents')}</h2>
-            <p className="text-xl text-gray-600">{t('eventsDescription')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
