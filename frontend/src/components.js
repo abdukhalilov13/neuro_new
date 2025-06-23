@@ -247,12 +247,9 @@ export const HomePage = () => {
             >
               <div className="relative">
                 <img 
-                  src={adminData?.galleryImages?.find(img => img.category === 'building')?.url || siteData.hero.buildingImage}
+                  src={siteData.hero.buildingImage}
                   alt="Здание центра нейрохирургии"
                   className="w-full h-80 lg:h-[420px] object-cover rounded-2xl shadow-2xl"
-                  onError={(e) => {
-                    e.target.src = siteData.hero.buildingImage;
-                  }}
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent rounded-2xl"></div>
