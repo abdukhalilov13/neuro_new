@@ -315,6 +315,7 @@ export const NewsPage = () => {
   const { adminData } = useAdmin();
   const { t, language } = useLanguage();
   const news = adminData?.news || siteData.news;
+  const events = adminData?.events || [];
 
   const getFieldByLanguage = (item, fieldName) => {
     return item[`${fieldName}_${language}`] || item[`${fieldName}_ru`] || item[fieldName];
