@@ -532,6 +532,8 @@ export const LanguageProvider = ({ children }) => {
       readFull: 'Read full',
       collapse: 'Collapse',
       upcomingEvents: 'Upcoming events',
+      allEvents: 'All Events',
+      noEventsScheduled: 'No events scheduled',
       needConsultation: 'Need consultation?',
       consultationText: 'Contact us for professional medical assistance',
       scheduleAppointment: 'Schedule appointment',
