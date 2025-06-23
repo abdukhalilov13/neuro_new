@@ -1080,7 +1080,7 @@ export const AppointmentPage = () => {
                           patient: {...appointmentData.patient, firstName: e.target.value}
                         })}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Введите ваше имя"
+                        placeholder={t('firstNamePlaceholder')}
                       />
                       {errors.firstName && <p className="text-red-600 text-sm mt-1">{errors.firstName}</p>}
                     </div>
