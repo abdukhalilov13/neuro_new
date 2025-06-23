@@ -547,12 +547,44 @@ const UnifiedAdminPanel = () => {
     fetchTodayAppointments();
   }, []);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (loginData.email === 'admin@neuro.uz' && loginData.password === 'admin123') {
-      setIsAuthenticated(true);
-    } else {
-      alert('Неверный email или пароль. Попробуйте: admin@neuro.uz / admin123');
+    
+    try {
+      // Используем API для аутентификации
+      const response = await apiService.login({
+        email: loginData.email,
+        password: loginData.password
+      });
+      
+      if (response.success) {
+        setIsAuthenticated(true);
+        console.log('Логин успешен:', response);
+      } else {
+        alert('Неверный email или пароль');
+      }
+    } catch (error) {
+      console.error('Ошибка входа:', error);
+      
+      // Fallback: проверяем через список пользователей если API login не работает
+      try {
+        const users = await apiService.getUsers();
+        const user = users.find(u => 
+          u.email === loginData.email && 
+          u.password === loginData.password && 
+          (u.role === 'admin' || u.role === 'manager')
+        );
+        
+        if (user) {
+          setIsAuthenticated(true);
+          console.log('Вход через пользователей успешен');
+        } else {
+          alert('Неверный email или пароль. Проверьте учетные данные.');
+        }
+      } catch (fallbackError) {
+        console.error('Ошибка fallback аутентификации:', fallbackError);
+        alert('Ошибка подключения к серверу');
+      }
     }
   };
 
