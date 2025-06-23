@@ -931,16 +931,16 @@ export const AppointmentPage = () => {
             </div>
             <div className="flex justify-center mt-4 space-x-8">
               <span className={`text-sm ${step >= 1 ? 'text-blue-600 font-medium' : 'text-gray-500'}`}>
-                Выбор врача
+                {t('stepDoctorSelection')}
               </span>
               <span className={`text-sm ${step >= 2 ? 'text-blue-600 font-medium' : 'text-gray-500'}`}>
-                Дата и время
+                {t('stepDateTime')}
               </span>
               <span className={`text-sm ${step >= 3 ? 'text-blue-600 font-medium' : 'text-gray-500'}`}>
-                Личные данные
+                {t('stepPersonalData')}
               </span>
               <span className={`text-sm ${step >= 4 ? 'text-blue-600 font-medium' : 'text-gray-500'}`}>
-                Подтверждение
+                {t('stepConfirmation')}
               </span>
             </div>
           </div>
