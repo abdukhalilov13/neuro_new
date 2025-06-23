@@ -310,6 +310,8 @@ export const LanguageProvider = ({ children }) => {
       readFull: 'To\'liq o\'qish',
       collapse: 'Yig\'ish',
       upcomingEvents: 'Yaqinlashayotgan tadbirlar',
+      allEvents: 'Barcha tadbirlar',
+      noEventsScheduled: 'Rejalashtirilgan tadbirlar yo\'q',
       needConsultation: 'Konsultatsiya kerakmi?',
       consultationText: 'Professional tibbiy yordam olish uchun biz bilan bog\'laning',
       scheduleAppointment: 'Qabulga yozilish',
