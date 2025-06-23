@@ -238,6 +238,31 @@ class ApiService {
     });
   }
 
+  // Users/Accounts
+  async getUsers() {
+    return this.request('/users');
+  }
+
+  async createUser(data) {
+    return this.request('/users', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateUser(id, data) {
+    return this.request(`/users/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteUser(id) {
+    return this.request(`/users/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
   // Appointments
   async getAppointments(doctorId = null) {
     const url = doctorId ? `/appointments?doctor_id=${doctorId}` : '/appointments';
