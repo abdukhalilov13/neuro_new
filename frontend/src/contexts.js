@@ -88,6 +88,8 @@ export const LanguageProvider = ({ children }) => {
       readFull: 'Читать полностью',
       collapse: 'Свернуть',
       upcomingEvents: 'Ближайшие события',
+      allEvents: 'Все события',
+      noEventsScheduled: 'Нет запланированных событий',
       needConsultation: 'Нужна консультация?',
       consultationText: 'Свяжитесь с нами для получения профессиональной медицинской помощи',
       scheduleAppointment: 'Записаться на прием',
