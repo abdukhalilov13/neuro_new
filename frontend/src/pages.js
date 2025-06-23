@@ -404,18 +404,28 @@ export const NewsPage = () => {
               >
                 <h3 className="text-xl font-bold text-gray-900 mb-4">{t('upcomingEvents')}</h3>
                 <div className="space-y-4">
-                  <div className="border-l-4 border-blue-600 pl-4">
-                    <p className="text-sm text-blue-600 mb-1">25 марта 2025</p>
-                    <p className="text-gray-900 font-medium">Научная конференция по нейрохирургии</p>
-                  </div>
-                  <div className="border-l-4 border-green-600 pl-4">
-                    <p className="text-sm text-green-600 mb-1">30 марта 2025</p>
-                    <p className="text-gray-900 font-medium">День открытых дверей</p>
-                  </div>
-                  <div className="border-l-4 border-purple-600 pl-4">
-                    <p className="text-sm text-purple-600 mb-1">5 апреля 2025</p>
-                    <p className="text-gray-900 font-medium">Мастер-класс по эндоскопии</p>
-                  </div>
+                  {events && events.length > 0 ? events.slice(0, 3).map((event, index) => (
+                    <div key={event.id || index} className={`border-l-4 pl-4 ${
+                      index === 0 ? 'border-blue-600' : 
+                      index === 1 ? 'border-green-600' : 
+                      'border-purple-600'
+                    }`}>
+                      <p className={`text-sm mb-1 ${
+                        index === 0 ? 'text-blue-600' : 
+                        index === 1 ? 'text-green-600' : 
+                        'text-purple-600'
+                      }`}>
+                        {event.date}
+                      </p>
+                      <p className="text-gray-900 font-medium">
+                        {getFieldByLanguage(event, 'title')}
+                      </p>
+                    </div>
+                  )) : (
+                    <div className="text-gray-500 text-center py-4">
+                      {t('noEventsScheduled')}
+                    </div>
+                  )}
                 </div>
               </motion.div>
 
