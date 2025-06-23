@@ -557,7 +557,7 @@ const UnifiedAdminPanel = () => {
         password: loginData.password
       });
       
-      if (response.success) {
+      if (response.message === 'Login successful' && response.user) {
         setIsAuthenticated(true);
         console.log('Логин успешен:', response);
       } else {
@@ -565,26 +565,7 @@ const UnifiedAdminPanel = () => {
       }
     } catch (error) {
       console.error('Ошибка входа:', error);
-      
-      // Fallback: проверяем через список пользователей если API login не работает
-      try {
-        const users = await apiService.getUsers();
-        const user = users.find(u => 
-          u.email === loginData.email && 
-          u.password === loginData.password && 
-          (u.role === 'admin' || u.role === 'manager')
-        );
-        
-        if (user) {
-          setIsAuthenticated(true);
-          console.log('Вход через пользователей успешен');
-        } else {
-          alert('Неверный email или пароль. Проверьте учетные данные.');
-        }
-      } catch (fallbackError) {
-        console.error('Ошибка fallback аутентификации:', fallbackError);
-        alert('Ошибка подключения к серверу');
-      }
+      alert('Ошибка подключения к серверу или неверные учетные данные');
     }
   };
 
