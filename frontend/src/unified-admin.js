@@ -1931,6 +1931,30 @@ const UnifiedAdminPanel = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        {user.role === 'doctor' && user.doctorId ? (
+                          <div className="flex items-center">
+                            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-2">
+                              <Stethoscope className="w-4 h-4 text-blue-600" />
+                            </div>
+                            <div>
+                              <div className="text-sm font-medium text-gray-900">
+                                {(() => {
+                                  const linkedDoctor = adminData.doctors?.find(doc => doc.id === user.doctorId);
+                                  return linkedDoctor ? linkedDoctor.name_ru || linkedDoctor.name : 'Врач не найден';
+                                })()}
+                              </div>
+                              <div className="text-xs text-gray-500">
+                                ID: {user.doctorId}
+                              </div>
+                            </div>
+                          </div>
+                        ) : user.role === 'doctor' ? (
+                          <span className="text-sm text-red-500">Не связан с врачом</span>
+                        ) : (
+                          <span className="text-sm text-gray-400">-</span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         <div>{user.email}</div>
                         <div className="text-gray-500">{user.phone}</div>
                       </td>
