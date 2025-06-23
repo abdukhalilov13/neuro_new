@@ -3232,6 +3232,29 @@ const UnifiedAdminPanel = () => {
               </div>
             </div>
             
+            {/* Поле выбора врача (ДОБАВЛЕНО) - показывается только для роли "doctor" */}
+            {newUser.role === 'doctor' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Связанный врач *</label>
+                <select
+                  value={newUser.doctorId || ''}
+                  onChange={(e) => setNewUser({...newUser, doctorId: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
+                  required
+                >
+                  <option value="">Выберите врача...</option>
+                  {adminData.doctors?.map((doctor) => (
+                    <option key={doctor.id} value={doctor.id}>
+                      {doctor.name_ru || doctor.name} - {doctor.specialization_ru || doctor.specialization}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-sm text-gray-500 mt-1">
+                  Выберите врача из базы данных, с которым будет связан этот аккаунт
+                </p>
+              </div>
+            )}
+            
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 {editingUser ? 'Новый пароль (оставьте пустым, чтобы не менять)' : 'Пароль *'}
