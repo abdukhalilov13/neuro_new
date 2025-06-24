@@ -550,34 +550,48 @@ const UnifiedAdminPanel = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     
+    console.log('=== НАЧАЛО ПРОЦЕССА ВХОДА ===');
+    console.log('Email:', loginData.email);
+    console.log('Password length:', loginData.password.length);
+    console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
+    
     try {
-      console.log('Попытка входа с:', loginData.email);
-      
       // Используем API для аутентификации
       const response = await apiService.login({
         email: loginData.email,
         password: loginData.password
       });
       
-      console.log('Ответ от сервера:', response);
+      console.log('=== ОТВЕТ ОТ СЕРВЕРА ===');
+      console.log('Response:', JSON.stringify(response, null, 2));
       
       if (response.message === 'Login successful' && response.user) {
+        console.log('Пользователь:', response.user);
+        console.log('Роль пользователя:', response.user.role);
+        
         // Проверяем роль пользователя
         if (response.user.role === 'admin' || response.user.role === 'manager') {
+          console.log('✅ УСПЕШНЫЙ ВХОД! Устанавливаю isAuthenticated = true');
           setIsAuthenticated(true);
-          console.log('Успешный вход для администратора:', response.user);
         } else {
+          console.log('❌ ОТКАЗ: Неподходящая роль:', response.user.role);
           alert('У вас нет прав доступа к админ-панели. Требуется роль администратора.');
         }
       } else if (response.error) {
+        console.log('❌ ОШИБКА ОТВЕТА:', response.error);
         alert(`Ошибка входа: ${response.error}`);
       } else {
+        console.log('❌ НЕИЗВЕСТНАЯ СТРУКТУРА ОТВЕТА:', response);
         alert('Неверный email или пароль');
       }
     } catch (error) {
+      console.log('=== ИСКЛЮЧЕНИЕ ===');
       console.error('Детали ошибки входа:', error);
+      console.error('Error stack:', error.stack);
       alert('Ошибка подключения к серверу. Проверьте подключение и попробуйте снова.');
     }
+    
+    console.log('=== КОНЕЦ ПРОЦЕССА ВХОДА ===');
   };
 
   // Функции управления отделениями
