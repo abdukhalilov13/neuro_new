@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import apiService from './api'; // ДОБАВИЛИ ИМПОРТ API SERVICE
 import { 
   Calendar, 
   Clock, 
