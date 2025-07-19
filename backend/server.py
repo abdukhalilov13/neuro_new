@@ -1067,6 +1067,84 @@ async def delete_event(event_id: str, db_manager: DatabaseManager = Depends(get_
         logging.error(f"Error deleting event: {e}")
         return {"error": "Failed to delete event"}
 
+# Vacancies endpoints
+@api_router.get("/vacancies")
+async def get_vacancies(db_manager: DatabaseManager = Depends(get_db_manager)):
+    try:
+        vacancies = await db_manager.get_items("vacancies", {})
+        if not vacancies:
+            # Return fallback data if database is empty
+            return [
+                {
+                    "id": "1",
+                    "title_ru": "Врач-нейрохирург",
+                    "title_uz": "Neyroxirurg shifokor", 
+                    "title_en": "Neurosurgeon",
+                    "description_ru": "Ищем опытного врача-нейрохирурга для работы в современном центре",
+                    "description_uz": "Zamonaviy markazda ishlash uchun tajribali neyroxirurg shifokor izlaymiz",
+                    "description_en": "Looking for experienced neurosurgeon to work in modern center",
+                    "requirements_ru": "Высшее медицинское образование, специализация по нейрохирургии, опыт работы от 3 лет",
+                    "requirements_uz": "Oliy tibbiy ma'lumot, neyroxirurgiya bo'yicha mutaxassislik, 3 yildan ortiq ish tajribasi",
+                    "requirements_en": "Higher medical education, neurosurgery specialization, 3+ years experience",
+                    "salary": "15000000",
+                    "isActive": True,
+                    "category_ru": "Медицинский персонал",
+                    "category_uz": "Tibbiy personal",
+                    "category_en": "Medical Staff"
+                },
+                {
+                    "id": "2",
+                    "title_ru": "Медицинская сестра",
+                    "title_uz": "Tibbiy hamshira",
+                    "title_en": "Nurse", 
+                    "description_ru": "Требуется медицинская сестра в отделение нейрохирургии",
+                    "description_uz": "Neyroxirurgiya bo'limiga tibbiy hamshira kerak",
+                    "description_en": "Nurse needed for neurosurgery department",
+                    "requirements_ru": "Медицинское образование, опыт работы от 2 лет",
+                    "requirements_uz": "Tibbiy ma'lumot, 2 yildan ortiq ish tajribasi",
+                    "requirements_en": "Medical education, 2+ years experience",
+                    "salary": "8000000",
+                    "isActive": True,
+                    "category_ru": "Медицинский персонал",
+                    "category_uz": "Tibbiy personal",
+                    "category_en": "Medical Staff"
+                }
+            ]
+        return vacancies
+    except Exception as e:
+        logging.error(f"Error getting vacancies: {e}")
+        return {"error": "Failed to get vacancies"}
+
+@api_router.post("/vacancies")
+async def create_vacancy(vacancy_data: dict, db_manager: DatabaseManager = Depends(get_db_manager)):
+    try:
+        import uuid
+        vacancy_data["id"] = str(uuid.uuid4())
+        vacancy_data["isActive"] = True
+        await db_manager.create_item("vacancies", vacancy_data)
+        return {"message": "Vacancy created successfully", **vacancy_data}
+    except Exception as e:
+        logging.error(f"Error creating vacancy: {e}")
+        return {"error": "Failed to create vacancy"}
+
+@api_router.put("/vacancies/{vacancy_id}")
+async def update_vacancy(vacancy_id: str, vacancy_data: dict, db_manager: DatabaseManager = Depends(get_db_manager)):
+    try:
+        await db_manager.update_item("vacancies", {"id": vacancy_id}, vacancy_data)
+        return {"message": "Vacancy updated successfully", **vacancy_data}
+    except Exception as e:
+        logging.error(f"Error updating vacancy: {e}")
+        return {"error": "Failed to update vacancy"}
+
+@api_router.delete("/vacancies/{vacancy_id}")
+async def delete_vacancy(vacancy_id: str, db_manager: DatabaseManager = Depends(get_db_manager)):
+    try:
+        await db_manager.delete_item("vacancies", {"id": vacancy_id})
+        return {"message": "Vacancy deleted successfully"}
+    except Exception as e:
+        logging.error(f"Error deleting vacancy: {e}")
+        return {"error": "Failed to delete vacancy"}
+
 # Job applications endpoints  
 @api_router.get("/job-applications")
 async def get_job_applications():
