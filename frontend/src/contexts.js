@@ -205,6 +205,10 @@ export const LanguageProvider = ({ children }) => {
       hrDepartmentContact: 'Отдел кадров всегда на связи',
       apply: 'Откликнуться',
       applicationSuccess: 'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.',
+      // Job/Vacancy related
+      salary: 'Зарплата',
+      jobDescription: 'Описание работы',
+      requirements: 'Требования',
       fullName: 'ФИО',
       workExperience: 'Опыт работы',
       education: 'Образование',
