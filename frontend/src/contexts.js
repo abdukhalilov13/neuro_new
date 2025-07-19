@@ -475,6 +475,8 @@ export const LanguageProvider = ({ children }) => {
       salary: 'Maosh',
       jobDescription: 'Ish tavsifi',
       requirements: 'Talablar',
+      noVacanciesAvailable: 'Mavjud bo\'sh o\'rinlar yo\'q',
+      checkBackLater: 'Iltimos, keyinroq tekshiring yoki biz bilan bog\'laning',
       fullName: 'F.I.Sh.',
       workExperience: 'Ish tajribasi',
       education: 'Ta\'lim',
