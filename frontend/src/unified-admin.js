@@ -676,17 +676,22 @@ const UnifiedAdminPanel = () => {
   };
 
   // Функции управления новостями
-  const handleNewsSubmit = (e) => {
+  const handleNewsSubmit = async (e) => {
     e.preventDefault();
-    if (editingNews) {
-      updateNews(editingNews.id, newNews);
-      alert('Новость обновлена! Изменения синхронизированы с сайтом.');
-    } else {
-      addNews(newNews);
-      alert('Новость добавлена! Изменения синхронизированы с сайтом.');
+    try {
+      if (editingNews) {
+        await updateNews(editingNews.id, newNews);
+        alert('Новость обновлена! Изменения синхронизированы с сайтом.');
+      } else {
+        await addNews(newNews);
+        alert('Новость добавлена! Изменения синхронизированы с сайтом.');
+      }
+      setIsNewsModalOpen(false);
+      resetNewsForm();
+    } catch (error) {
+      console.error('Error with news operation:', error);
+      alert('Ошибка при сохранении новости. Проверьте подключение и попробуйте снова.');
     }
-    setIsNewsModalOpen(false);
-    resetNewsForm();
   };
 
   const resetNewsForm = () => {
