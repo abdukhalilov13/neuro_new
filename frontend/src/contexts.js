@@ -741,6 +741,8 @@ export const LanguageProvider = ({ children }) => {
       salary: 'Salary',
       jobDescription: 'Job Description',
       requirements: 'Requirements',
+      noVacanciesAvailable: 'No vacancies available',
+      checkBackLater: 'Please check back later or contact us',
       fullName: 'Full name',
       workExperience: 'Work experience',
       education: 'Education',
