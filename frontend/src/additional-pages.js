@@ -5,7 +5,7 @@ import { useLanguage, useAdmin } from './contexts';
 import { Link } from 'react-router-dom';
 import { 
   CheckCircle, Mail, Phone, MapPin, Clock, Users, Settings, Award,
-  Calendar, ArrowRight, Filter, Search
+  Calendar, ArrowRight, Filter, Search, X
 } from 'lucide-react';
 
 // Страница вакансий
