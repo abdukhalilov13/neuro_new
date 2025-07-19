@@ -471,6 +471,7 @@ export const LanguageProvider = ({ children }) => {
       sendResume: 'Bizga rezyumengizni yuboring, albatta siz bilan bog\'lanamiz',
       hrDepartmentContact: 'Kadrlar bo\'limi doimo aloqada',
       apply: 'Ariza topshirish',
+      detailsAndApply: 'Batafsil ma\'lumot va ariza topshirish',
       applicationSuccess: 'Ariza muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.',
       // Job/Vacancy related
       salary: 'Maosh',
