@@ -12,6 +12,17 @@ import {
 export const VacanciesPage = () => {
   const { t, currentLanguage } = useLanguage();
   const { adminData } = useAdmin();
+  const [selectedVacancy, setSelectedVacancy] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [applicationForm, setApplicationForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    experience: '',
+    education: '',
+    coverLetter: ''
+  });
   
   // Используем вакансии из API вместо статических данных
   const vacancies = (adminData?.vacancies || []).filter(v => v?.isActive);
@@ -21,6 +32,37 @@ export const VacanciesPage = () => {
     if (!vacancy) return '';
     const field = vacancy[`${fieldName}_${currentLanguage}`];
     return field || vacancy[`${fieldName}_ru`] || '';
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setApplicationForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      // Здесь можно добавить API вызов для отправки заявки
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Симуляция отправки
+      setSubmitStatus('success');
+      setApplicationForm({
+        name: '',
+        phone: '',
+        email: '',
+        experience: '',
+        education: '',
+        coverLetter: ''
+      });
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const benefits = [
