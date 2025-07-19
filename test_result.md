@@ -532,7 +532,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Backend API Integration"
+    - "Critical Login API fixes"
+    - "Critical Appointments API fixes" 
+    - "Critical Users API with doctorId mapping"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
