@@ -39,7 +39,7 @@ Doctor ID: 9208d149-9ab0-4579-8348-e0809c6566dd
 ## API ENDPOINTS
 
 ```
-BASE_URL: https://a28a8467-f73a-4ef4-b1b2-bda298d97266.preview.emergentagent.com/api
+BASE_URL: https://0c0559be-4033-4575-aa41-d05f1cf33531.preview.emergentagent.com/api
 
 POST /login - аутентификация
 GET /users - список пользователей  
