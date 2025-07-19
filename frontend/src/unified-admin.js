@@ -1857,10 +1857,15 @@ const UnifiedAdminPanel = () => {
                         <Edit className="w-4 h-4" />
                       </button>
                       <button
-                        onClick={() => {
+                        onClick={async () => {
                           if (confirm('Удалить это изображение?')) {
-                            deleteGalleryImage(image.id);
-                            alert('Изображение удалено! Изменения применены на сайте.');
+                            try {
+                              await deleteGalleryImage(image.id);
+                              alert('Изображение удалено! Изменения применены на сайте.');
+                            } catch (error) {
+                              console.error('Error deleting gallery image:', error);
+                              alert('Ошибка при удалении изображения. Попробуйте снова.');
+                            }
                           }
                         }}
                         className="p-1 text-red-600 hover:bg-red-50 rounded"
