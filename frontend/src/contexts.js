@@ -971,6 +971,15 @@ export const AdminProvider = ({ children }) => {
           setAccounts([]);
         }
         
+        // Fetch vacancies
+        try {
+          const vacanciesData = await apiService.getVacancies();
+          setVacancies(vacanciesData);
+        } catch (error) {
+          console.warn("Could not fetch vacancies from API, using fallback data");
+          setVacancies([]);
+        }
+        
       } catch (error) {
         console.error("Error in fetchData:", error);
       } finally {
