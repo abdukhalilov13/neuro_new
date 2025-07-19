@@ -114,7 +114,13 @@ export const VacanciesPage = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('noVacanciesAvailable')}</h3>
+              <p className="text-gray-600">{t('checkBackLater')}</p>
+            </div>
+          )}
         </div>
       </section>
 
