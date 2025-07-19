@@ -748,17 +748,22 @@ const UnifiedAdminPanel = () => {
   };
 
   // Функции управления руководством
-  const handleLeadershipSubmit = (e) => {
+  const handleLeadershipSubmit = async (e) => {
     e.preventDefault();
-    if (editingLeadership) {
-      updateLeadership(editingLeadership.id, newLeadership);
-      alert('Руководитель обновлен! Изменения синхронизированы с сайтом.');
-    } else {
-      addLeadership(newLeadership);
-      alert('Руководитель добавлен! Изменения синхронизированы с сайтом.');
+    try {
+      if (editingLeadership) {
+        await updateLeadership(editingLeadership.id, newLeadership);
+        alert('Руководитель обновлен! Изменения синхронизированы с сайтом.');
+      } else {
+        await addLeadership(newLeadership);
+        alert('Руководитель добавлен! Изменения синхронизированы с сайтом.');
+      }
+      setIsLeadershipModalOpen(false);
+      resetLeadershipForm();
+    } catch (error) {
+      console.error('Error with leadership operation:', error);
+      alert('Ошибка при сохранении руководителя. Проверьте подключение и попробуйте снова.');
     }
-    setIsLeadershipModalOpen(false);
-    resetLeadershipForm();
   };
 
   const resetLeadershipForm = () => {
