@@ -1122,7 +1122,13 @@ async def create_vacancy(vacancy_data: dict, db_manager: DatabaseManager = Depen
         vacancy_data["id"] = str(uuid.uuid4())
         vacancy_data["isActive"] = True
         await db_manager.create_item("vacancies", vacancy_data)
-        return {"message": "Vacancy created successfully", **vacancy_data}
+        return {
+            "id": vacancy_data["id"],
+            "message": "Vacancy created successfully",
+            "title_ru": vacancy_data.get("title_ru", ""),
+            "title_uz": vacancy_data.get("title_uz", ""),
+            "title_en": vacancy_data.get("title_en", "")
+        }
     except Exception as e:
         logging.error(f"Error creating vacancy: {e}")
         return {"error": "Failed to create vacancy"}
