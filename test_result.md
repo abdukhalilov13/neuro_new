@@ -213,6 +213,18 @@
         agent: "testing"
         comment: "Tested all job applications endpoints. GET /api/job-applications returns a list of job applications with proper structure including applicant info. POST /api/job-applications successfully creates new job applications. PUT /api/job-applications/{id} correctly updates application status."
 
+  - task: "Vacancies API endpoints"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Tested all vacancies endpoints. GET /api/vacancies returns a list of vacancies with proper multilingual structure (title_ru/uz/en, description_ru/uz/en). POST /api/vacancies successfully creates new vacancies with multilingual data. PUT /api/vacancies/{id} correctly updates existing vacancies. DELETE /api/vacancies/{id} successfully removes vacancies. Fixed critical bug in create_vacancy endpoint - removed **vacancy_data usage that caused ObjectId serialization error. Fixed update_vacancy and delete_vacancy functions - corrected db_manager method parameters."
+
 ## frontend:
   - task: "Admin panel login and authentication"
     implemented: true
