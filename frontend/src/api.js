@@ -340,6 +340,31 @@ class ApiService {
     });
   }
 
+  // Vacancies
+  async getVacancies() {
+    return this.request('/vacancies');
+  }
+
+  async addVacancy(vacancyData) {
+    return this.request('/vacancies', {
+      method: 'POST',
+      body: JSON.stringify(vacancyData),
+    });
+  }
+
+  async updateVacancy(id, vacancyData) {
+    return this.request(`/vacancies/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(vacancyData),
+    });
+  }
+
+  async deleteVacancy(id) {
+    return this.request(`/vacancies/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
   // Health check
   async healthCheck() {
     return this.request('/health');
