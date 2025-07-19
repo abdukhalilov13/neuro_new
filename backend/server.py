@@ -957,10 +957,10 @@ async def delete_user(user_id: str, db_manager: DatabaseManager = Depends(get_db
 
 # Login endpoint
 @api_router.post("/login")
-async def login(login_data: dict, db_manager: DatabaseManager = Depends(get_db_manager)):
+async def login(login_data: LoginData, db_manager: DatabaseManager = Depends(get_db_manager)):
     try:
-        email = login_data.get("email")
-        password = login_data.get("password")
+        email = login_data.email
+        password = login_data.password
         
         if not email or not password:
             return {"error": "Email and password are required"}
