@@ -11,39 +11,10 @@ import {
 // Страница вакансий
 export const VacanciesPage = () => {
   const { t } = useLanguage();
+  const { adminData } = useAdmin();
   
-  const vacancies = [
-    {
-      id: 1,
-      title: t('neurosurgeon'),
-      department: t('neurosurgeryFullTime'),
-      requirements: [
-        t('higherMedicalEducation'),
-        t('neurosurgerySpecialization'),
-        t('experienceFrom3Years')
-      ]
-    },
-    {
-      id: 2,
-      title: t('operatingRoomNurse'),
-      department: t('operatingBlockFullTime'),
-      requirements: [
-        t('secondaryMedicalEducation'),
-        t('operatingNurseCertificate'),
-        t('experienceFrom1Year')
-      ]
-    },
-    {
-      id: 3,
-      title: t('anesthesiologist'),
-      department: t('anesthesiologyFullTime'),
-      requirements: [
-        t('higherMedicalEducation'),
-        t('anesthesiologySpecialization'),
-        t('experienceFrom2Years')
-      ]
-    }
-  ];
+  // Используем вакансии из API вместо статических данных
+  const vacancies = adminData.vacancies?.filter(v => v.isActive) || [];
 
   const benefits = [
     {
