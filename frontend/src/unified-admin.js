@@ -623,17 +623,22 @@ const UnifiedAdminPanel = () => {
   };
 
   // Функции управления врачами
-  const handleDoctorSubmit = (e) => {
+  const handleDoctorSubmit = async (e) => {
     e.preventDefault();
-    if (editingDoctor) {
-      updateDoctor(editingDoctor.id, newDoctor);
-      alert('Врач обновлен! Изменения синхронизированы с сайтом.');
-    } else {
-      addDoctor(newDoctor);
-      alert('Врач добавлен! Изменения синхронизированы с сайтом.');
+    try {
+      if (editingDoctor) {
+        await updateDoctor(editingDoctor.id, newDoctor);
+        alert('Врач обновлен! Изменения синхронизированы с сайтом.');
+      } else {
+        await addDoctor(newDoctor);
+        alert('Врач добавлен! Изменения синхронизированы с сайтом.');
+      }
+      setIsDoctorModalOpen(false);
+      resetDoctorForm();
+    } catch (error) {
+      console.error('Error with doctor operation:', error);
+      alert('Ошибка при сохранении врача. Проверьте подключение и попробуйте снова.');
     }
-    setIsDoctorModalOpen(false);
-    resetDoctorForm();
   };
 
   const resetDoctorForm = () => {
