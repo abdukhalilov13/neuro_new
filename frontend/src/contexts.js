@@ -733,6 +733,10 @@ export const LanguageProvider = ({ children }) => {
       hrDepartmentContact: 'HR department is always in touch',
       apply: 'Apply',
       applicationSuccess: 'Application sent successfully! We will contact you soon.',
+      // Job/Vacancy related
+      salary: 'Salary',
+      jobDescription: 'Job Description',
+      requirements: 'Requirements',
       fullName: 'Full name',
       workExperience: 'Work experience',
       education: 'Education',
