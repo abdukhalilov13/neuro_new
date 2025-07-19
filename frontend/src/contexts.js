@@ -469,6 +469,10 @@ export const LanguageProvider = ({ children }) => {
       hrDepartmentContact: 'Kadrlar bo\'limi doimo aloqada',
       apply: 'Ariza topshirish',
       applicationSuccess: 'Ariza muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.',
+      // Job/Vacancy related
+      salary: 'Maosh',
+      jobDescription: 'Ish tavsifi',
+      requirements: 'Talablar',
       fullName: 'F.I.Sh.',
       workExperience: 'Ish tajribasi',
       education: 'Ta\'lim',
