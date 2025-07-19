@@ -10,11 +10,17 @@ import {
 
 // Страница вакансий
 export const VacanciesPage = () => {
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
   const { adminData } = useAdmin();
   
   // Используем вакансии из API вместо статических данных
   const vacancies = adminData.vacancies?.filter(v => v.isActive) || [];
+
+  // Функция для получения локализованного поля
+  const getLocalizedField = (vacancy, fieldName) => {
+    const field = vacancy[`${fieldName}_${currentLanguage}`];
+    return field || vacancy[`${fieldName}_ru`] || '';
+  };
 
   const benefits = [
     {
