@@ -729,13 +729,13 @@ async def get_appointments(doctor_id: str = None, db_manager: DatabaseManager = 
         
         appointments = await db_manager.get_items("appointments", filter_dict)
         if not appointments:
-            # Return fallback data if database is empty
-            return [
+            # Return fallback data if database is empty with correct doctorIds
+            fallback_appointments = [
                 {
                     "id": "1",
-                    "doctorId": "1",
+                    "doctorId": "b3887eb2-b05a-4917-893a-e78a0a11bd92",
                     "doctorName": "Кариев Габрат Маратович",
-                    "date": "2025-06-23",
+                    "date": "2025-07-19",
                     "time": "09:00",
                     "patient": {
                         "name": "Иванов Алексей Петрович",
@@ -746,13 +746,13 @@ async def get_appointments(doctor_id: str = None, db_manager: DatabaseManager = 
                     },
                     "status": "pending",
                     "type": "consultation",
-                    "createdAt": "2025-06-12T10:30:00"
+                    "createdAt": "2025-07-19T10:30:00"
                 },
                 {
                     "id": "2",
-                    "doctorId": "2", 
-                    "doctorName": "Салимов Фаррух Шухратович",
-                    "date": "2025-06-23",
+                    "doctorId": "c6e2cb32-197f-4a13-8c24-226a27f1f1e5", 
+                    "doctorName": "Кодашев Равшан Муслимович",
+                    "date": "2025-07-19",
                     "time": "10:30",
                     "patient": {
                         "name": "Петрова Мария Ивановна",
@@ -763,9 +763,32 @@ async def get_appointments(doctor_id: str = None, db_manager: DatabaseManager = 
                     },
                     "status": "confirmed",
                     "type": "examination",
-                    "createdAt": "2025-06-12T11:15:00"
+                    "createdAt": "2025-07-19T11:15:00"
+                },
+                {
+                    "id": "3",
+                    "doctorId": "adcefcc2-9bfe-494a-b403-4bc69bde115a", 
+                    "doctorName": "Асадуллаев Улугбек Максудович",
+                    "date": "2025-07-19",
+                    "time": "14:00",
+                    "patient": {
+                        "name": "Сидоров Петр Александрович",
+                        "phone": "+998 93 345-67-89",
+                        "email": "sidorov@mail.uz",
+                        "age": 52,
+                        "complaint": "Боли в шее после ДТП"
+                    },
+                    "status": "confirmed",
+                    "type": "consultation",
+                    "createdAt": "2025-07-19T12:00:00"
                 }
             ]
+            
+            # Filter by doctor if specified
+            if doctor_id:
+                fallback_appointments = [apt for apt in fallback_appointments if apt["doctorId"] == doctor_id]
+            
+            return fallback_appointments
         return appointments
     except Exception as e:
         logging.error(f"Database error in get_appointments: {e}")
