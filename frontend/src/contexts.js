@@ -738,6 +738,7 @@ export const LanguageProvider = ({ children }) => {
       sendResume: 'Send us your resume and we will definitely contact you',
       hrDepartmentContact: 'HR department is always in touch',
       apply: 'Apply',
+      detailsAndApply: 'Details and Apply',
       applicationSuccess: 'Application sent successfully! We will contact you soon.',
       // Job/Vacancy related
       salary: 'Salary',
