@@ -69,15 +69,16 @@ export const VacanciesPage = () => {
 
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="space-y-8">
-            {vacancies.map((vacancy, index) => (
-              <motion.div
-                key={vacancy.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all"
+          {vacancies.length > 0 ? (
+            <div className="space-y-8">
+              {vacancies.map((vacancy, index) => (
+                <motion.div
+                  key={vacancy.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all"
               >
                 <div className="flex justify-between items-start mb-6">
                   <div>
