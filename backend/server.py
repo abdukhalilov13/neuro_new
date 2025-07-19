@@ -1,4 +1,5 @@
 from fastapi import FastAPI, APIRouter, Depends, Request
+from pydantic import BaseModel
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -7,6 +8,11 @@ import logging
 from pathlib import Path
 from datetime import datetime
 from .database import DatabaseManager
+
+# Pydantic models
+class LoginData(BaseModel):
+    email: str
+    password: str
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
