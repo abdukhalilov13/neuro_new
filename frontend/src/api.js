@@ -333,14 +333,6 @@ class ApiService {
     return this.request('/appointments');
   }
 
-  // Authentication
-  async login(credentials) {
-    return this.request('/login', {
-      method: 'POST',
-      body: JSON.stringify(credentials),
-    });
-  }
-
   async register(userData) {
     return this.request('/auth/register', {
       method: 'POST',
