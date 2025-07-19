@@ -2294,10 +2294,15 @@ const UnifiedAdminPanel = () => {
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => {
+                      onClick={async () => {
                         if (confirm('Удалить этого руководителя?')) {
-                          deleteLeadership(leader.id);
-                          alert('Руководитель удален! Изменения применены на сайте.');
+                          try {
+                            await deleteLeadership(leader.id);
+                            alert('Руководитель удален! Изменения применены на сайте.');
+                          } catch (error) {
+                            console.error('Error deleting leadership:', error);
+                            alert('Ошибка при удалении руководителя. Попробуйте снова.');
+                          }
                         }
                       }}
                       className="p-2 text-red-600 hover:bg-red-50 rounded"
