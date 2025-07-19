@@ -112,7 +112,7 @@ export const VacanciesPage = () => {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           {vacancies.length > 0 ? (
-            <div className="space-y-8">
+            <div className="grid gap-6">
               {vacancies.map((vacancy, index) => (
                 <motion.div
                   key={vacancy.id}
@@ -120,42 +120,59 @@ export const VacanciesPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all"
-              >
-                <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                      {getLocalizedField(vacancy, 'title')}
-                    </h3>
-                    <p className="text-blue-600 font-medium">
-                      {getLocalizedField(vacancy, 'category')}
-                    </p>
-                    {vacancy.salary && (
-                      <p className="text-gray-600 mt-1">
-                        {t('salary')}: {parseInt(vacancy.salary).toLocaleString()} UZS
+                  className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all cursor-pointer"
+                  onClick={() => setSelectedVacancy(vacancy)}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                        {getLocalizedField(vacancy, 'title')}
+                      </h2>
+                      <div className="flex items-center space-x-4 text-sm text-gray-600">
+                        <div className="flex items-center space-x-1">
+                          <Users className="w-4 h-4" />
+                          <span>{getLocalizedField(vacancy, 'category')}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Clock className="w-4 h-4" />
+                          <span>Полная занятость</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="flex items-center space-x-1 text-green-600 font-semibold">
+                        <span>{vacancy.salary ? `${parseInt(vacancy.salary).toLocaleString()} сум` : 'По договоренности'}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Описание работы:</h3>
+                      <p className="text-sm text-gray-600 line-clamp-2">
+                        {getLocalizedField(vacancy, 'description')}
                       </p>
-                    )}
+                    </div>
+
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Основные требования:</h3>
+                      <p className="text-sm text-gray-600 line-clamp-2">
+                        {getLocalizedField(vacancy, 'requirements')}
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedVacancy(vacancy);
+                      }}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
+                    >
+                      {t('detailsAndApply')}
+                    </button>
                   </div>
-                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-                    {t('detailsAndApply')}
-                  </button>
-                </div>
-                
-                <div className="mb-6">
-                  <h4 className="text-lg font-semibold text-gray-900 mb-3">{t('jobDescription')}</h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    {getLocalizedField(vacancy, 'description')}
-                  </p>
-                </div>
-                
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-3">{t('requirements')}</h4>
-                  <div className="text-gray-700 leading-relaxed">
-                    {getLocalizedField(vacancy, 'requirements')}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
             </div>
           ) : (
             <div className="text-center py-12">
