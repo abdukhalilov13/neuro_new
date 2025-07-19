@@ -204,6 +204,7 @@ export const LanguageProvider = ({ children }) => {
       sendResume: 'Отправьте нам свое резюме, и мы обязательно свяжемся с вами',
       hrDepartmentContact: 'Отдел кадров всегда на связи',
       apply: 'Откликнуться',
+      detailsAndApply: 'Подробности и подача заявки',
       applicationSuccess: 'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.',
       // Job/Vacancy related
       salary: 'Зарплата',
