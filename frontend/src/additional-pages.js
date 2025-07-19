@@ -80,24 +80,35 @@ export const VacanciesPage = () => {
               >
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{vacancy.title}</h3>
-                    <p className="text-blue-600 font-medium">{vacancy.department}</p>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      {getLocalizedField(vacancy, 'title')}
+                    </h3>
+                    <p className="text-blue-600 font-medium">
+                      {getLocalizedField(vacancy, 'category')}
+                    </p>
+                    {vacancy.salary && (
+                      <p className="text-gray-600 mt-1">
+                        {t('salary')}: {parseInt(vacancy.salary).toLocaleString()} UZS
+                      </p>
+                    )}
                   </div>
                   <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
                     {t('detailsAndApply')}
                   </button>
                 </div>
                 
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-3">{t('jobDescription')}</h4>
+                  <p className="text-gray-700 leading-relaxed">
+                    {getLocalizedField(vacancy, 'description')}
+                  </p>
+                </div>
+                
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-3">{t('mainRequirements')}</h4>
-                  <ul className="space-y-2">
-                    {vacancy.requirements.map((requirement, idx) => (
-                      <li key={idx} className="flex items-center space-x-3">
-                        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                        <span className="text-gray-700">{requirement}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-3">{t('requirements')}</h4>
+                  <div className="text-gray-700 leading-relaxed">
+                    {getLocalizedField(vacancy, 'requirements')}
+                  </div>
                 </div>
               </motion.div>
             ))}
