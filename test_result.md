@@ -162,6 +162,42 @@
         agent: "testing"
         comment: "Tested all appointments endpoints. GET /api/appointments returns a list of appointments with proper structure including patient info. GET with doctor_id filter works correctly. POST /api/appointments successfully creates new appointments. PUT /api/appointments/{id} correctly updates appointment status. DELETE /api/appointments/{id} successfully removes appointments."
         
+  - task: "Critical Login API fixes"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Tested critical login fixes. POST /api/login with doctor credentials (kariev@neuro.uz/123456) works correctly, returns proper structure with user and doctor_profile. POST /api/login with admin credentials (admin@neuro.uz/testpassword) works correctly. Pydantic LoginData model is successfully implemented and working."
+        
+  - task: "Critical Appointments API fixes"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Tested critical appointments fixes. GET /api/appointments returns all appointments with correct structure. GET /api/appointments?doctor_id=b3887eb2-b05a-4917-893a-e78a0a11bd92 correctly filters appointments for Dr. Kariev. Appointments contain correct doctorId and display properly for specific doctors. Fallback data has correct doctorIds."
+        
+  - task: "Critical Users API with doctorId mapping"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Tested users API. GET /api/users returns users with role='doctor' and correct doctorId mappings. Found 3 doctor users with proper doctorId values, including Kariev with doctorId: b3887eb2-b05a-4917-893a-e78a0a11bd92. User-doctor relationship mapping is working correctly."
+
   - task: "Job Applications API endpoints"
     implemented: true
     working: true
