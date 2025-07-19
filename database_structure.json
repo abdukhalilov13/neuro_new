@@ -1,0 +1,471 @@
+{
+  "database_name": "neuro_uz",
+  "collections": {
+    "users": [
+      {
+        "_id": "68592a0a114a9f8457160934",
+        "id": "b3347bb5-68cc-409a-801c-f69cbd0ab025",
+        "name": "Test User",
+        "email": "testuser@neuro.uz",
+        "password": "newpassword456",
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-06-23T10:18:50.824313"
+      },
+      {
+        "_id": "68591f3a6a895edf42f807a8",
+        "id": "6",
+        "name": "Доктор Юлдашева",
+        "email": "yuldasheva@neuro.uz",
+        "password": "demo123",
+        "role": "doctor",
+        "status": "active",
+        "doctorId": "9208d149-9ab0-4579-8348-e0809c6566dd"
+      },
+      {
+        "_id": "68591f3a6a895edf42f807a7",
+        "id": "5",
+        "name": "Доктор Салимов",
+        "email": "salimov@neuro.uz",
+        "password": "demo123",
+        "role": "doctor",
+        "status": "active",
+        "doctorId": "961cc2ac-d521-46e1-a902-1f4d8d277232"
+      },
+      {
+        "_id": "68591f3a6a895edf42f807a6",
+        "id": "4",
+        "name": "Доктор Кодашев",
+        "email": "kodashev@neuro.uz",
+        "password": "demo123",
+        "role": "doctor",
+        "status": "active",
+        "doctorId": "c6e2cb32-197f-4a13-8c24-226a27f1f1e5"
+      },
+      {
+        "_id": "68591f3a6a895edf42f807a5",
+        "id": "3",
+        "name": "Доктор Асадуллаев",
+        "email": "asadullaev@neuro.uz",
+        "password": "demo123",
+        "role": "doctor",
+        "status": "active",
+        "doctorId": "adcefcc2-9bfe-494a-b403-4bc69bde115a"
+      },
+      {
+        "_id": "68591f3a6a895edf42f807a4",
+        "id": "2",
+        "name": "Доктор Кариев",
+        "email": "kariev@neuro.uz",
+        "password": "demo123",
+        "role": "doctor",
+        "status": "active",
+        "doctorId": "b3887eb2-b05a-4917-893a-e78a0a11bd92"
+      },
+      {
+        "_id": "68591f3a6a895edf42f807a3",
+        "id": "1",
+        "name": "Админ",
+        "email": "admin@neuro.uz",
+        "password": "testpassword",
+        "role": "admin",
+        "status": "active",
+        "doctorId": null
+      }
+    ],
+    "doctors": [
+      {
+        "_id": "68592389f6f7a86000cb3e24",
+        "id": "9208d149-9ab0-4579-8348-e0809c6566dd",
+        "name": "Юлдашева Малика Азизовна",
+        "specialization": "Детский нейрохирург",
+        "experience": "12+ лет",
+        "image": "https://images.unsplash.com/photo-1594824919597-a32ebf81ba4c?w=400&h=400&fit=crop&crop=face",
+        "email": "yuldasheva@neuro.uz",
+        "phone": "+998 93 345-67-89",
+        "reception": "Понедельник-Пятница, 8:00-16:00",
+        "department_id": "3",
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7ced3",
+        "id": "c6e2cb32-197f-4a13-8c24-226a27f1f1e5",
+        "name": "Кодашев Равшан Муслимович",
+        "specialization": "Детский нейрохирург, д.м.н., профессор",
+        "experience": "20+ лет",
+        "image": "https://images.unsplash.com/photo-1536064479547-7ee40b74b807?w=400&h=400&fit=crop&crop=face",
+        "email": "kodashev@neuro.uz",
+        "phone": "+998 71 264-96-09",
+        "reception": "Вторник-Суббота, 8:00-17:00",
+        "department_id": "3",
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7ced2",
+        "id": "adcefcc2-9bfe-494a-b403-4bc69bde115a",
+        "name": "Асадуллаев Улугбек Максудович",
+        "specialization": "Нейрохирург, к.м.н.",
+        "experience": "18+ лет",
+        "image": "https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg?w=400&h=400&fit=crop&crop=face",
+        "email": "asadullaev@neuro.uz",
+        "phone": "+998 71 264-96-15",
+        "reception": "Понедельник-Суббота, 9:00-18:00",
+        "department_id": "1",
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7ced0",
+        "id": "961cc2ac-d521-46e1-a902-1f4d8d277232",
+        "name": "Салимов Фаррух Шухратович",
+        "specialization": "Нейрохирург",
+        "experience": "15+ лет",
+        "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
+        "email": "salimov@neuro.uz",
+        "phone": "+998 91 234-56-78",
+        "reception": "Вторник-Суббота, 9:00-17:00",
+        "department_id": "2",
+        "is_active": true
+      },
+      {
+        "_id": "6859199767d9df4781dea976",
+        "id": "b3887eb2-b05a-4917-893a-e78a0a11bd92",
+        "name": "Кариев Габрат Маратович",
+        "specialization": "Нейрохирург, к.м.н.",
+        "experience": "25+ лет",
+        "image": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face",
+        "email": "kariev@neuro.uz",
+        "phone": "+998 90 123-45-67",
+        "reception": "Понедельник-Пятница, 9:00-17:00",
+        "department_id": "1",
+        "is_active": true
+      }
+    ],
+    "departments": [
+      {
+        "_id": "68591a849387cfb4d1b7cece",
+        "id": "b68da441-765e-4d40-ae56-ebf02299fe47",
+        "name_ru": "Сосудистая нейрохирургия",
+        "name_uz": "Qon tomir neyroxirurgiyasi",
+        "name_en": "Vascular Neurosurgery",
+        "description_ru": "Лечение сосудистых заболеваний головного мозга",
+        "description_uz": "Bosh miya qon tomir kasalliklarini davolash",
+        "description_en": "Treatment of cerebrovascular diseases",
+        "head_doctor": "Асадуллаев Улугбек Максудович",
+        "phone": "+998 71 264-96-15",
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7cecd",
+        "id": "7700f715-5e56-4e16-a89d-dc8097632738",
+        "name_ru": "Детская нейрохирургия",
+        "name_uz": "Bolalar neyroxirurgiyasi",
+        "name_en": "Pediatric Neurosurgery",
+        "description_ru": "Специализированная помощь детям с нейрохирургическими заболеваниями",
+        "description_uz": "Neyroxirurgik kasalliklari bo'lgan bolalarga ixtisoslashgan yordam",
+        "description_en": "Specialized care for children with neurosurgical conditions",
+        "head_doctor": "Кодашев Равшан Муслимович",
+        "phone": "+998 71 264-96-09",
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7cecc",
+        "id": "c060bb64-1c9e-4304-83a8-dfb5897c5d23",
+        "name_ru": "Общая нейрохирургия",
+        "name_uz": "Umumiy neyroxirurgiya",
+        "name_en": "General Neurosurgery",
+        "description_ru": "Лечение заболеваний центральной нервной системы",
+        "description_uz": "Markaziy asab tizimi kasalliklarini davolash",
+        "description_en": "Treatment of central nervous system diseases",
+        "head_doctor": "Кариев Габрат Маратович",
+        "phone": "+998 71 264-96-10",
+        "is_active": true
+      }
+    ],
+    "services": [
+      {
+        "_id": "68591a849387cfb4d1b7ced7",
+        "id": "173b1951-fb12-49fa-8804-c18c0904dcdc",
+        "name": "Микрохирургическое удаление опухоли",
+        "category": "Хирургия",
+        "description": "Прецизионное удаление новообразований мозга",
+        "price": 8000000,
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7ced6",
+        "id": "bea6024a-73d5-4093-b6c4-e5d29e7bfcf3",
+        "name": "Удаление опухоли головного мозга",
+        "category": "Хирургия",
+        "description": "Нейрохирургическая операция",
+        "price": 15000000,
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7ced5",
+        "id": "23d3aa02-a27d-401c-bc88-8dde4b78548a",
+        "name": "МРТ головного мозга",
+        "category": "Диагностика",
+        "description": "Магнитно-резонансная томография",
+        "price": 800000,
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7ced4",
+        "id": "7b24f3c7-618d-465d-80f3-03a4fed79419",
+        "name": "Консультация нейрохирурга",
+        "category": "Консультации",
+        "description": "Первичная консультация специалиста",
+        "price": 150000,
+        "is_active": true
+      }
+    ],
+    "news": [
+      {
+        "_id": "68591a849387cfb4d1b7cedb",
+        "id": "ed53e75a-97dc-481d-9111-fe5c0772d4f9",
+        "title": "Успешная операция",
+        "excerpt": "Проведена сложная нейрохирургическая операция",
+        "content": "Описание операции и результатов...",
+        "image": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop",
+        "date": "2025-06-03",
+        "is_published": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7ceda",
+        "id": "067e659f-3a23-46be-aece-48cf33469c97",
+        "title": "Международная конференция",
+        "excerpt": "Специалисты центра приняли участие в конференции",
+        "content": "Детали участия в конференции...",
+        "image": "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&h=400&fit=crop",
+        "date": "2025-06-05",
+        "is_published": true
+      }
+    ],
+    "gallery": [
+      {
+        "_id": "68591a849387cfb4d1b7cee0",
+        "id": "d3f8614e-e0ce-48b7-b42b-043a05d51ad1",
+        "url": "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&h=600&fit=crop",
+        "alt": "Конференц-зал",
+        "category": "building",
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7cedf",
+        "id": "568fe68f-4fa2-4404-9c58-f3db6b3c0faf",
+        "url": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop",
+        "alt": "Медицинское оборудование",
+        "category": "equipment",
+        "is_active": true
+      }
+    ],
+    "events": [
+      {
+        "_id": "68592a0a114a9f8457160933",
+        "id": "4c0db006-b156-49ea-94ec-4861ebcc6f56",
+        "title": "Семинар по нейрохирургии",
+        "description": "Обсуждение новых методов лечения",
+        "date": "2025-08-15",
+        "time": "10:00",
+        "location": "Конференц-зал центра",
+        "type": "seminar",
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7cedd",
+        "id": "4f9eeada-671e-49b7-a5f3-d99102aaaba0",
+        "title": "День открытых дверей",
+        "description": "Экскурсии по центру и консультации",
+        "date": "2025-07-20",
+        "time": "10:00",
+        "location": "Главный холл",
+        "type": "openDay",
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7cedc",
+        "id": "a94807b7-fb1c-42cc-8d22-40a2520713d6",
+        "title": "Международная конференция по нейрохирургии",
+        "description": "Ведущие специалисты обсудят новые методы лечения",
+        "date": "2025-07-15",
+        "time": "09:00",
+        "location": "Главный конференц-зал",
+        "type": "conference",
+        "is_active": true
+      }
+    ],
+    "leadership": [
+      {
+        "_id": "68592a0a114a9f8457160932",
+        "id": "6653dd6b-2f16-44f5-a6e9-cd62093904c7",
+        "name_ru": "Сидоров Петр Алексеевич",
+        "name_uz": "Sidorov Petr Alekseyevich",
+        "name_en": "Petr Sidorov",
+        "position_ru": "Главный врач",
+        "position_uz": "Bosh shifokor",
+        "position_en": "Chief Physician",
+        "image": "https://example.com/leader.jpg",
+        "phone": "+998 71 123-45-67",
+        "email": "sidorov@neuro.uz",
+        "biography_ru": "Опытный специалист с 25-летним стажем работы...",
+        "biography_uz": "25 yillik ish tajribasiga ega tajribali mutaxassis...",
+        "biography_en": "Experienced specialist with 25 years of experience...",
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7cee3",
+        "id": "ba6aa11e-6d49-44b5-b2d2-7316687c9684",
+        "name_ru": "Кодашев Равшан Муслимович",
+        "name_uz": "Qodashev Ravshan Muslimovich",
+        "name_en": "Kodashev Ravshan Muslimovich",
+        "position_ru": "Заведующий отделением детской нейрохирургии",
+        "position_uz": "Bolalar neyroxirurgiyasi bo'limi mudiri",
+        "position_en": "Head of Pediatric Neurosurgery Department",
+        "image": "https://images.unsplash.com/photo-1536064479547-7ee40b74b807",
+        "phone": "+998 71 264-96-09",
+        "email": "kodashev@neuro.uz",
+        "biography_ru": "Доктор медицинских наук, профессор. 20 лет опыта в детской нейрохирургии.",
+        "biography_uz": "Tibbiyot fanlari doktori, professor. Bolalar neyroxirurgiyasida 20 yillik tajriba.",
+        "biography_en": "Doctor of Medical Sciences, Professor. 20 years of experience in pediatric neurosurgery.",
+        "is_active": true
+      },
+      {
+        "_id": "68591a849387cfb4d1b7cee2",
+        "id": "f99852d2-9957-4499-a896-c39a4658248e",
+        "name_ru": "Асадуллаев Улугбек Максудович",
+        "name_uz": "Asadullayev Ulug'bek Masud o'g'li",
+        "name_en": "Asadullaev Ulugbek Maksudovich",
+        "position_ru": "Заместитель директора по научной работе",
+        "position_uz": "Ilmiy ish bo'yicha direktor o'rinbosari",
+        "position_en": "Deputy Director for Scientific Work",
+        "image": "https://images.pexels.com/photos/6129507/pexels-photo-6129507.jpeg",
+        "phone": "+998 71 264-96-15",
+        "email": "asadullaev@neuro.uz",
+        "biography_ru": "Кандидат медицинских наук, старший научный сотрудник. Специалист по сосудистой нейрохирургии.",
+        "biography_uz": "Tibbiyot fanlari nomzodi, katta ilmiy xodim. Qon tomir neyroxirurgiyasi bo'yicha mutaxassis.",
+        "biography_en": "Candidate of Medical Sciences, Senior Research Fellow. Specialist in vascular neurosurgery.",
+        "is_active": true
+      }
+    ],
+    "appointments": [
+      {
+        "id": "1",
+        "doctorId": "1",
+        "doctorName": "Кариев Габрат Маратович",
+        "date": "2025-06-23",
+        "time": "09:00",
+        "patient": {
+          "name": "Иванов Алексей Петрович",
+          "phone": "+998 90 123-45-67",
+          "email": "ivanov@mail.uz",
+          "age": 45,
+          "complaint": "Головные боли и головокружение"
+        },
+        "status": "pending",
+        "type": "consultation",
+        "createdAt": "2025-06-12T10:30:00"
+      },
+      {
+        "id": "2",
+        "doctorId": "2",
+        "doctorName": "Салимов Фаррух Шухратович",
+        "date": "2025-06-23",
+        "time": "10:30",
+        "patient": {
+          "name": "Петрова Мария Ивановна",
+          "phone": "+998 91 234-56-78",
+          "email": "petrova@mail.uz",
+          "age": 38,
+          "complaint": "Боли в спине после травмы"
+        },
+        "status": "confirmed",
+        "type": "examination",
+        "createdAt": "2025-06-12T11:15:00"
+      }
+    ],
+    "job_applications": [
+      {
+        "id": 1,
+        "vacancyId": 1,
+        "vacancyTitle": "Врач-нейрохирург",
+        "applicant": {
+          "name": "Иванов Иван Иванович",
+          "phone": "+998 90 123-45-67",
+          "email": "ivanov@mail.uz",
+          "experience": "5 лет в нейрохирургии",
+          "education": "ТМА, специальность нейрохирургия",
+          "coverLetter": "Хочу работать в вашем центре..."
+        },
+        "submittedAt": "2025-06-13T10:30:00",
+        "status": "new"
+      }
+    ]
+  },
+  "login_credentials": {
+    "admin_accounts": [
+      {
+        "email": "admin@neuro.uz",
+        "password": "testpassword",
+        "role": "admin",
+        "name": "Админ"
+      },
+      {
+        "email": "testuser@neuro.uz", 
+        "password": "newpassword456",
+        "role": "admin",
+        "name": "Test User"
+      }
+    ],
+    "doctor_accounts": [
+      {
+        "email": "kariev@neuro.uz",
+        "password": "demo123",
+        "role": "doctor",
+        "name": "Доктор Кариев",
+        "linked_doctor_id": "b3887eb2-b05a-4917-893a-e78a0a11bd92"
+      },
+      {
+        "email": "asadullaev@neuro.uz",
+        "password": "demo123", 
+        "role": "doctor",
+        "name": "Доктор Асадуллаев",
+        "linked_doctor_id": "adcefcc2-9bfe-494a-b403-4bc69bde115a"
+      },
+      {
+        "email": "kodashev@neuro.uz",
+        "password": "demo123",
+        "role": "doctor", 
+        "name": "Доктор Кодашев",
+        "linked_doctor_id": "c6e2cb32-197f-4a13-8c24-226a27f1f1e5"
+      },
+      {
+        "email": "salimov@neuro.uz",
+        "password": "demo123",
+        "role": "doctor",
+        "name": "Доктор Салимов", 
+        "linked_doctor_id": "961cc2ac-d521-46e1-a902-1f4d8d277232"
+      },
+      {
+        "email": "yuldasheva@neuro.uz",
+        "password": "demo123",
+        "role": "doctor",
+        "name": "Доктор Юлдашева",
+        "linked_doctor_id": "9208d149-9ab0-4579-8348-e0809c6566dd"
+      }
+    ]
+  },
+  "api_endpoints": {
+    "base_url": "https://a28a8467-f73a-4ef4-b1b2-bda298d97266.preview.emergentagent.com/api",
+    "authentication": "/login",
+    "users": "/users",
+    "doctors": "/doctors", 
+    "departments": "/departments",
+    "services": "/services",
+    "news": "/news",
+    "gallery": "/gallery",
+    "events": "/events",
+    "leadership": "/leadership",
+    "appointments": "/appointments",
+    "job_applications": "/job-applications"
+  }
+}

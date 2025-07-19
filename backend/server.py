@@ -913,19 +913,23 @@ async def create_user(user_data: dict, db_manager: DatabaseManager = Depends(get
 @api_router.put("/users/{user_id}")
 async def update_user(user_id: str, user_data: dict, db_manager: DatabaseManager = Depends(get_db_manager)):
     try:
+        # Убираем MongoDB-специфические поля, которые нельзя обновлять
+        clean_data = {k: v for k, v in user_data.items() 
+                     if k not in ['_id', 'created_at', 'updated_at']}
+        
         # Hash password if it's being updated
-        if "password" in user_data:
+        if "password" in clean_data:
             # В реальном проекте здесь должно быть хеширование пароля
-            # user_data["password"] = hash_password(user_data["password"])
+            # clean_data["password"] = hash_password(clean_data["password"])
             pass
             
-        success = await db_manager.update_item("users", user_id, user_data)
+        success = await db_manager.update_item("users", user_id, clean_data)
         if success:
             return {
                 "id": user_id, 
                 "message": "User updated successfully",
-                "name": user_data.get("name", ""),
-                "email": user_data.get("email", "")
+                "name": clean_data.get("name", ""),
+                "email": clean_data.get("email", "")
             }
         else:
             return {"error": "User not found"}
