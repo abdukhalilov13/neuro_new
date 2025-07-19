@@ -1676,10 +1676,15 @@ const UnifiedAdminPanel = () => {
                             <Edit className="w-4 h-4" />
                           </button>
                           <button
-                            onClick={() => {
+                            onClick={async () => {
                               if (confirm('Удалить эту услугу?')) {
-                                deleteService(service.id);
-                                alert('Услуга удалена! Изменения применены на сайте.');
+                                try {
+                                  await deleteService(service.id);
+                                  alert('Услуга удалена! Изменения применены на сайте.');
+                                } catch (error) {
+                                  console.error('Error deleting service:', error);
+                                  alert('Ошибка при удалении услуги. Попробуйте снова.');
+                                }
                               }
                             }}
                             className="text-red-600 hover:text-red-900"
