@@ -2296,12 +2296,13 @@ const UnifiedAdminPanel = () => {
                     </div>
                   </div>
                   
-                  <div className="flex justify-center space-x-2">
+                  <div className="flex justify-center space-x-1 mt-3">
                     <button
                       onClick={() => startEditLeadership(leader)}
-                      className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                      className="px-3 py-1.5 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded flex items-center space-x-1 transition-colors"
                     >
-                      <Edit className="w-4 h-4" />
+                      <Edit className="w-3 h-3" />
+                      <span className="text-xs">Изменить</span>
                     </button>
                     <button
                       onClick={async () => {
@@ -2315,9 +2316,10 @@ const UnifiedAdminPanel = () => {
                           }
                         }
                       }}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded"
+                      className="px-3 py-1.5 bg-red-100 text-red-700 hover:bg-red-200 rounded flex items-center space-x-1 transition-colors"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3 h-3" />
+                      <span className="text-xs">Удалить</span>
                     </button>
                   </div>
                 </div>
