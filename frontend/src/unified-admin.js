@@ -1756,10 +1756,15 @@ const UnifiedAdminPanel = () => {
                           <Edit className="w-4 h-4" />
                         </button>
                         <button
-                          onClick={() => {
+                          onClick={async () => {
                             if (confirm('Удалить эту новость?')) {
-                              deleteNews(newsItem.id);
-                              alert('Новость удалена! Изменения применены на сайте.');
+                              try {
+                                await deleteNews(newsItem.id);
+                                alert('Новость удалена! Изменения применены на сайте.');
+                              } catch (error) {
+                                console.error('Error deleting news:', error);
+                                alert('Ошибка при удалении новости. Попробуйте снова.');
+                              }
                             }
                           }}
                           className="p-1 text-red-600 hover:bg-red-50 rounded"
