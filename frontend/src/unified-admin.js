@@ -707,17 +707,22 @@ const UnifiedAdminPanel = () => {
   };
 
   // Функции управления услугами
-  const handleServiceSubmit = (e) => {
+  const handleServiceSubmit = async (e) => {
     e.preventDefault();
-    if (editingService) {
-      updateService(editingService.id, newService);
-      alert('Услуга обновлена! Изменения синхронизированы с сайтом.');
-    } else {
-      addService(newService);
-      alert('Услуга добавлена! Изменения синхронизированы с сайтом.');
+    try {
+      if (editingService) {
+        await updateService(editingService.id, newService);
+        alert('Услуга обновлена! Изменения синхронизированы с сайтом.');
+      } else {
+        await addService(newService);
+        alert('Услуга добавлена! Изменения синхронизированы с сайтом.');
+      }
+      setIsServiceModalOpen(false);
+      resetServiceForm();
+    } catch (error) {
+      console.error('Error with service operation:', error);
+      alert('Ошибка при сохранении услуги. Проверьте подключение и попробуйте снова.');
     }
-    setIsServiceModalOpen(false);
-    resetServiceForm();
   };
 
   const resetServiceForm = () => {
