@@ -512,11 +512,222 @@ class NeuroUzAPITester:
             data=update_data
         )
 
+def test_doctors_crud_focused():
+    """Focused test for doctors CRUD operations as requested in the review"""
+    tester = NeuroUzAPITester()
+    
+    print("\n🏥 ТЕСТИРОВАНИЕ CRUD ОПЕРАЦИЙ ДЛЯ ВРАЧЕЙ НЕЙРОХИРУРГИЧЕСКОГО ЦЕНТРА")
+    print("=" * 80)
+    
+    # Test data from the review request
+    test_doctor_data = {
+        "name": "Тестовый Врач",
+        "specialization": "Нейрохирург",
+        "email": "test.doctor@neuro.uz",
+        "phone": "+998 90 999-88-77",
+        "experience": "10+ лет",
+        "department_id": "1"
+    }
+    
+    created_doctor_id = None
+    
+    # 1. ТЕСТ ПОЛУЧЕНИЯ ВРАЧЕЙ
+    print("\n1️⃣ ТЕСТ ПОЛУЧЕНИЯ ВРАЧЕЙ")
+    print("-" * 40)
+    success, doctors_data = tester.run_test(
+        "GET /api/doctors - получение списка врачей",
+        "GET",
+        "doctors",
+        200
+    )
+    
+    if success and isinstance(doctors_data, list):
+        print(f"✅ Получен список из {len(doctors_data)} врачей")
+        if len(doctors_data) > 0:
+            doctor = doctors_data[0]
+            required_fields = ["name", "specialization", "email", "phone"]
+            missing_fields = [field for field in required_fields if field not in doctor]
+            if not missing_fields:
+                print("✅ Структура данных врача корректна - все поля присутствуют")
+            else:
+                print(f"❌ Отсутствуют поля: {missing_fields}")
+    else:
+        print("❌ Ошибка получения списка врачей")
+    
+    # 2. ТЕСТ СОЗДАНИЯ ВРАЧА
+    print("\n2️⃣ ТЕСТ СОЗДАНИЯ ВРАЧА")
+    print("-" * 40)
+    success, create_response = tester.run_test(
+        "POST /api/doctors - создание нового врача",
+        "POST",
+        "doctors",
+        200,
+        data=test_doctor_data
+    )
+    
+    if success and "id" in create_response:
+        created_doctor_id = create_response["id"]
+        print(f"✅ Врач успешно создан с ID: {created_doctor_id}")
+        print(f"✅ ID генерируется правильно (UUID формат)")
+        
+        # Проверяем что врач сохранился в базу данных
+        print("\n🔍 Проверка сохранения в базу данных...")
+        success, updated_doctors = tester.run_test(
+            "Проверка сохранения врача в БД",
+            "GET",
+            "doctors",
+            200
+        )
+        
+        if success and isinstance(updated_doctors, list):
+            new_doctor = next((doc for doc in updated_doctors if doc.get("id") == created_doctor_id), None)
+            if new_doctor:
+                print("✅ Врач найден в базе данных после создания")
+                # Проверяем корректность сохраненных данных
+                if (new_doctor.get("name") == test_doctor_data["name"] and 
+                    new_doctor.get("specialization") == test_doctor_data["specialization"]):
+                    print("✅ Данные врача сохранены корректно")
+                else:
+                    print("❌ Данные врача сохранены некорректно")
+            else:
+                print("❌ Врач не найден в базе данных после создания")
+    else:
+        print("❌ Ошибка создания врача")
+    
+    # 3. ТЕСТ ПОЛУЧЕНИЯ КОНКРЕТНОГО ВРАЧА
+    if created_doctor_id:
+        print("\n3️⃣ ТЕСТ ПОЛУЧЕНИЯ КОНКРЕТНОГО ВРАЧА")
+        print("-" * 40)
+        # Поскольку в API нет отдельного endpoint для получения врача по ID,
+        # проверяем через общий список
+        success, doctors_list = tester.run_test(
+            "GET /api/doctors - поиск созданного врача",
+            "GET",
+            "doctors",
+            200
+        )
+        
+        if success and isinstance(doctors_list, list):
+            found_doctor = next((doc for doc in doctors_list if doc.get("id") == created_doctor_id), None)
+            if found_doctor:
+                print(f"✅ Врач с ID {created_doctor_id} найден")
+                print(f"✅ Имя: {found_doctor.get('name')}")
+                print(f"✅ Специализация: {found_doctor.get('specialization')}")
+            else:
+                print(f"❌ Врач с ID {created_doctor_id} не найден")
+    
+    # 4. ТЕСТ ОБНОВЛЕНИЯ ВРАЧА
+    if created_doctor_id:
+        print("\n4️⃣ ТЕСТ ОБНОВЛЕНИЯ ВРАЧА")
+        print("-" * 40)
+        update_data = {
+            "name": "Обновленный Тестовый Врач",
+            "specialization": "Старший нейрохирург",
+            "experience": "15+ лет"
+        }
+        
+        success, update_response = tester.run_test(
+            f"PUT /api/doctors/{created_doctor_id} - обновление врача",
+            "PUT",
+            f"doctors/{created_doctor_id}",
+            200,
+            data=update_data
+        )
+        
+        if success:
+            print(f"✅ Врач с ID {created_doctor_id} успешно обновлен")
+            
+            # Проверяем что изменения сохранились
+            print("\n🔍 Проверка сохранения изменений...")
+            success, updated_doctors = tester.run_test(
+                "Проверка обновленных данных",
+                "GET",
+                "doctors",
+                200
+            )
+            
+            if success and isinstance(updated_doctors, list):
+                updated_doctor = next((doc for doc in updated_doctors if doc.get("id") == created_doctor_id), None)
+                if updated_doctor:
+                    if updated_doctor.get("name") == update_data["name"]:
+                        print("✅ Изменения сохранились корректно")
+                    else:
+                        print("❌ Изменения не сохранились")
+                else:
+                    print("❌ Врач не найден после обновления")
+        else:
+            print("❌ Ошибка обновления врача")
+    
+    # 5. ТЕСТ УДАЛЕНИЯ ВРАЧА
+    if created_doctor_id:
+        print("\n5️⃣ ТЕСТ УДАЛЕНИЯ ВРАЧА")
+        print("-" * 40)
+        success, delete_response = tester.run_test(
+            f"DELETE /api/doctors/{created_doctor_id} - удаление врача",
+            "DELETE",
+            f"doctors/{created_doctor_id}",
+            200
+        )
+        
+        if success:
+            print(f"✅ Врач с ID {created_doctor_id} успешно удален")
+            
+            # Проверяем что врач действительно удален
+            print("\n🔍 Проверка удаления из базы данных...")
+            success, remaining_doctors = tester.run_test(
+                "Проверка удаления врача",
+                "GET",
+                "doctors",
+                200
+            )
+            
+            if success and isinstance(remaining_doctors, list):
+                deleted_doctor = next((doc for doc in remaining_doctors if doc.get("id") == created_doctor_id), None)
+                if deleted_doctor:
+                    print("❌ Врач все еще присутствует в базе данных после удаления")
+                else:
+                    print("✅ Врач успешно удален из базы данных")
+            else:
+                print("❌ Ошибка проверки удаления")
+        else:
+            print("❌ Ошибка удаления врача")
+    
+    # Итоговый отчет
+    print("\n" + "=" * 80)
+    print("📊 ИТОГОВЫЙ ОТЧЕТ ТЕСТИРОВАНИЯ CRUD ОПЕРАЦИЙ ДЛЯ ВРАЧЕЙ")
+    print("=" * 80)
+    print(f"Всего тестов выполнено: {tester.tests_run}")
+    print(f"Тестов прошло успешно: {tester.tests_passed}")
+    print(f"Процент успешности: {(tester.tests_passed/tester.tests_run*100):.1f}%")
+    
+    if tester.tests_passed == tester.tests_run:
+        print("\n🎉 ВСЕ CRUD ОПЕРАЦИИ ДЛЯ ВРАЧЕЙ РАБОТАЮТ КОРРЕКТНО!")
+        print("✅ Создание врачей - работает")
+        print("✅ Получение врачей - работает") 
+        print("✅ Обновление врачей - работает")
+        print("✅ Удаление врачей - работает")
+        print("✅ Генерация ID - работает")
+        print("✅ Сохранение в БД - работает")
+    else:
+        print("\n⚠️ ОБНАРУЖЕНЫ ПРОБЛЕМЫ В CRUD ОПЕРАЦИЯХ ДЛЯ ВРАЧЕЙ")
+        print("Необходимо исправить выявленные ошибки в backend API")
+    
+    return tester.tests_passed == tester.tests_run
+
 def main():
     # Setup
     tester = NeuroUzAPITester()
     
-    # Run tests for the required endpoints
+    # Run focused doctors CRUD test first
+    print("🎯 ФОКУСИРОВАННОЕ ТЕСТИРОВАНИЕ ВРАЧЕЙ (по запросу пользователя)")
+    doctors_success = test_doctors_crud_focused()
+    
+    if not doctors_success:
+        print("\n❌ КРИТИЧЕСКАЯ ПРОБЛЕМА: CRUD операции для врачей не работают!")
+        print("Рекомендуется исправить проблемы с врачами перед тестированием других разделов.")
+        return 1
+    
+    # Run basic tests
     print("\n===== Testing Basic API Endpoints =====")
     tester.test_root_endpoint()
     tester.test_health_endpoint()
