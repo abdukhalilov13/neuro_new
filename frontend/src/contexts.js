@@ -1357,19 +1357,38 @@ export const AdminProvider = ({ children }) => {
   };
 
   // Функции для управления вакансиями
-  const addVacancy = (vacancy) => {
-    const newId = vacancies.length > 0 ? Math.max(...vacancies.map(v => parseInt(v.id))) + 1 : 1;
-    setVacancies([...vacancies, { ...vacancy, id: newId.toString(), isActive: true, createdAt: new Date().toISOString() }]);
+  const addVacancy = async (vacancy) => {
+    try {
+      const newVacancy = await apiService.addVacancy(vacancy);
+      setVacancies(prev => [...prev, newVacancy]);
+      return newVacancy;
+    } catch (error) {
+      console.error('Failed to add vacancy:', error);
+      throw error;
+    }
   };
 
-  const updateVacancy = (id, updatedVacancy) => {
-    setVacancies(vacancies.map(vacancy => 
-      vacancy.id === id ? { ...updatedVacancy, id } : vacancy
-    ));
+  const updateVacancy = async (id, updatedVacancy) => {
+    try {
+      const updated = await apiService.updateVacancy(id, updatedVacancy);
+      setVacancies(prev => prev.map(vacancy => 
+        vacancy.id === id ? { ...updated, id } : vacancy
+      ));
+      return updated;
+    } catch (error) {
+      console.error('Failed to update vacancy:', error);
+      throw error;
+    }
   };
 
-  const deleteVacancy = (id) => {
-    setVacancies(vacancies.filter(vacancy => vacancy.id !== id));
+  const deleteVacancy = async (id) => {
+    try {
+      await apiService.deleteVacancy(id);
+      setVacancies(prev => prev.filter(vacancy => vacancy.id !== id));
+    } catch (error) {
+      console.error('Failed to delete vacancy:', error);
+      throw error;
+    }
   };
 
   const adminData = {
