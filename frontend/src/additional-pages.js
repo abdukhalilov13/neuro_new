@@ -240,6 +240,171 @@ export const VacanciesPage = () => {
         </div>
       </section>
 
+      {/* Модальное окно с подробностями вакансии и формой */}
+      {selectedVacancy && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                    {getLocalizedField(selectedVacancy, 'title')}
+                  </h2>
+                  <p className="text-blue-600 font-medium">
+                    {getLocalizedField(selectedVacancy, 'category')}
+                  </p>
+                  {selectedVacancy.salary && (
+                    <p className="text-green-600 font-semibold mt-1">
+                      Зарплата: {parseInt(selectedVacancy.salary).toLocaleString()} сум
+                    </p>
+                  )}
+                </div>
+                <button
+                  onClick={() => setSelectedVacancy(null)}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Описание работы</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {getLocalizedField(selectedVacancy, 'description')}
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Требования</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {getLocalizedField(selectedVacancy, 'requirements')}
+                  </p>
+                </div>
+
+                <div className="border-t pt-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Подать заявку</h3>
+                  
+                  {submitStatus === 'success' && (
+                    <div className="mb-4 p-4 bg-green-100 border border-green-300 rounded-lg">
+                      <p className="text-green-700">{t('applicationSuccess')}</p>
+                    </div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <div className="mb-4 p-4 bg-red-100 border border-red-300 rounded-lg">
+                      <p className="text-red-700">Произошла ошибка. Попробуйте снова.</p>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          {t('fullName')} *
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={applicationForm.name}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          {t('phone')} *
+                        </label>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={applicationForm.phone}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email *
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={applicationForm.email}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('workExperience')}
+                      </label>
+                      <input
+                        type="text"
+                        name="experience"
+                        value={applicationForm.experience}
+                        onChange={handleInputChange}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('education')}
+                      </label>
+                      <input
+                        type="text"
+                        name="education"
+                        value={applicationForm.education}
+                        onChange={handleInputChange}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('coverLetter')}
+                      </label>
+                      <textarea
+                        name="coverLetter"
+                        value={applicationForm.coverLetter}
+                        onChange={handleInputChange}
+                        rows={4}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="Расскажите о себе и почему хотите работать у нас..."
+                      />
+                    </div>
+
+                    <div className="flex space-x-4">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedVacancy(null)}
+                        className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        Отмена
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   );
