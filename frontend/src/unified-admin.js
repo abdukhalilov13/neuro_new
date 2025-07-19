@@ -1675,9 +1675,10 @@ const UnifiedAdminPanel = () => {
                         <div className="flex space-x-2">
                           <button
                             onClick={() => startEditService(service)}
-                            className="text-blue-600 hover:text-blue-900"
+                            className="px-2 py-1 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded text-xs flex items-center space-x-1"
                           >
-                            <Edit className="w-4 h-4" />
+                            <Edit className="w-3 h-3" />
+                            <span>Изменить</span>
                           </button>
                           <button
                             onClick={async () => {
@@ -1691,7 +1692,7 @@ const UnifiedAdminPanel = () => {
                                 }
                               }
                             }}
-                            className="text-red-600 hover:text-red-900"
+                            className="px-2 py-1 bg-red-100 text-red-700 hover:bg-red-200 rounded text-xs flex items-center space-x-1"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
