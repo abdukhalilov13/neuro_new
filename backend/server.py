@@ -1130,8 +1130,11 @@ async def create_vacancy(vacancy_data: dict, db_manager: DatabaseManager = Depen
 @api_router.put("/vacancies/{vacancy_id}")
 async def update_vacancy(vacancy_id: str, vacancy_data: dict, db_manager: DatabaseManager = Depends(get_db_manager)):
     try:
-        await db_manager.update_item("vacancies", {"id": vacancy_id}, vacancy_data)
-        return {"message": "Vacancy updated successfully", **vacancy_data}
+        success = await db_manager.update_item("vacancies", vacancy_id, vacancy_data)
+        if success:
+            return {"message": "Vacancy updated successfully", **vacancy_data}
+        else:
+            return {"error": "Vacancy not found"}
     except Exception as e:
         logging.error(f"Error updating vacancy: {e}")
         return {"error": "Failed to update vacancy"}
@@ -1139,8 +1142,11 @@ async def update_vacancy(vacancy_id: str, vacancy_data: dict, db_manager: Databa
 @api_router.delete("/vacancies/{vacancy_id}")
 async def delete_vacancy(vacancy_id: str, db_manager: DatabaseManager = Depends(get_db_manager)):
     try:
-        await db_manager.delete_item("vacancies", {"id": vacancy_id})
-        return {"message": "Vacancy deleted successfully"}
+        success = await db_manager.delete_item("vacancies", vacancy_id)
+        if success:
+            return {"message": "Vacancy deleted successfully"}
+        else:
+            return {"error": "Vacancy not found"}
     except Exception as e:
         logging.error(f"Error deleting vacancy: {e}")
         return {"error": "Failed to delete vacancy"}
