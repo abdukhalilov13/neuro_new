@@ -209,6 +209,8 @@ export const LanguageProvider = ({ children }) => {
       salary: 'Зарплата',
       jobDescription: 'Описание работы',
       requirements: 'Требования',
+      noVacanciesAvailable: 'Нет доступных вакансий',
+      checkBackLater: 'Пожалуйста, проверьте позже или свяжитесь с нами',
       fullName: 'ФИО',
       workExperience: 'Опыт работы',
       education: 'Образование',
