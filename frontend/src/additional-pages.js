@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Header, Footer } from './enhanced-components';
 import { useLanguage, useAdmin } from './contexts';
