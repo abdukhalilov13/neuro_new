@@ -1572,12 +1572,13 @@ const UnifiedAdminPanel = () => {
                     </div>
                   </div>
                   
-                  <div className="flex justify-center space-x-2">
+                  <div className="flex justify-center space-x-3 mt-4">
                     <button
                       onClick={() => startEditDoctor(doctor)}
-                      className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                      className="px-4 py-2 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded-md flex items-center space-x-2 transition-colors"
                     >
                       <Edit className="w-4 h-4" />
+                      <span className="text-sm">Изменить</span>
                     </button>
                     <button
                       onClick={async () => {
@@ -1591,9 +1592,10 @@ const UnifiedAdminPanel = () => {
                           }
                         }
                       }}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded"
+                      className="px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-md flex items-center space-x-2 transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
+                      <span className="text-sm">Удалить</span>
                     </button>
                   </div>
                 </div>
