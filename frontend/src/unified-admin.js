@@ -1776,7 +1776,8 @@ const UnifiedAdminPanel = () => {
                           }}
                           className="px-2 py-1 bg-red-100 text-red-700 hover:bg-red-200 rounded text-xs flex items-center space-x-1"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3 h-3" />
+                          <span>Удалить</span>
                         </button>
                       </div>
                     </div>
