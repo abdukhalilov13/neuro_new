@@ -558,10 +558,7 @@ const UnifiedAdminPanel = () => {
     
     try {
       // Используем API для аутентификации
-      const response = await apiService.login({
-        email: loginData.email,
-        password: loginData.password
-      });
+      const response = await apiService.login(loginData.email, loginData.password);
       
       console.log('=== ОТВЕТ ОТ СЕРВЕРА ===');
       console.log('Response:', JSON.stringify(response, null, 2));
