@@ -1493,10 +1493,15 @@ const UnifiedAdminPanel = () => {
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => {
+                      onClick={async () => {
                         if (confirm('Удалить это отделение?')) {
-                          deleteDepartment(department.id);
-                          alert('Отделение удалено! Изменения применены на сайте.');
+                          try {
+                            await deleteDepartment(department.id);
+                            alert('Отделение удалено! Изменения применены на сайте.');
+                          } catch (error) {
+                            console.error('Error deleting department:', error);
+                            alert('Ошибка при удалении отделения. Попробуйте снова.');
+                          }
                         }
                       }}
                       className="p-2 text-red-600 hover:bg-red-50 rounded"
