@@ -1580,10 +1580,15 @@ const UnifiedAdminPanel = () => {
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => {
+                      onClick={async () => {
                         if (confirm('Удалить этого врача?')) {
-                          deleteDoctor(doctor.id);
-                          alert('Врач удален! Изменения применены на сайте.');
+                          try {
+                            await deleteDoctor(doctor.id);
+                            alert('Врач удален! Изменения применены на сайте.');
+                          } catch (error) {
+                            console.error('Error deleting doctor:', error);
+                            alert('Ошибка при удалении врача. Попробуйте снова.');
+                          }
                         }
                       }}
                       className="p-2 text-red-600 hover:bg-red-50 rounded"
