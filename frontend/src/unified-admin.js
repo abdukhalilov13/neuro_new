@@ -671,7 +671,32 @@ const UnifiedAdminPanel = () => {
 
   const startEditDoctor = (doctor) => {
     setEditingDoctor(doctor);
-    setNewDoctor(doctor);
+    // Преобразуем данные врача для многоязычного редактирования
+    setNewDoctor({
+      name_ru: doctor.name || '',
+      name_uz: doctor.name_uz || '',
+      name_en: doctor.name_en || '',
+      specialization_ru: doctor.specialization || '',
+      specialization_uz: doctor.specialization_uz || '',
+      specialization_en: doctor.specialization_en || '',
+      experience: doctor.experience || '',
+      image: doctor.image || '',
+      email: doctor.email || '',
+      phone: doctor.phone || '',
+      reception_ru: doctor.reception || '',
+      reception_uz: doctor.reception_uz || '',
+      reception_en: doctor.reception_en || '',
+      department_id: doctor.department_id || '',
+      schedule: doctor.schedule || {
+        monday: { start: '09:00', end: '17:00', active: true },
+        tuesday: { start: '09:00', end: '17:00', active: true },
+        wednesday: { start: '09:00', end: '17:00', active: true },
+        thursday: { start: '09:00', end: '17:00', active: true },
+        friday: { start: '09:00', end: '17:00', active: true },
+        saturday: { start: '09:00', end: '15:00', active: false },
+        sunday: { start: '09:00', end: '15:00', active: false }
+      }
+    });
     setIsDoctorModalOpen(true);
   };
 
