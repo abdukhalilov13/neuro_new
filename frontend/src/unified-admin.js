@@ -1857,12 +1857,13 @@ const UnifiedAdminPanel = () => {
                     <p className="text-sm text-gray-600 mb-3">
                       {image.alt_ru || image.alt}
                     </p>
-                    <div className="flex justify-center space-x-2">
+                    <div className="flex justify-center space-x-1">
                       <button
                         onClick={() => startEditGalleryImage(image)}
-                        className="p-1 text-blue-600 hover:bg-blue-50 rounded"
+                        className="px-2 py-1 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded text-xs flex items-center space-x-1"
                       >
-                        <Edit className="w-4 h-4" />
+                        <Edit className="w-3 h-3" />
+                        <span>Изменить</span>
                       </button>
                       <button
                         onClick={async () => {
@@ -1876,9 +1877,10 @@ const UnifiedAdminPanel = () => {
                             }
                           }
                         }}
-                        className="p-1 text-red-600 hover:bg-red-50 rounded"
+                        className="px-2 py-1 bg-red-100 text-red-700 hover:bg-red-200 rounded text-xs flex items-center space-x-1"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="w-3 h-3" />
+                        <span>Удалить</span>
                       </button>
                     </div>
                   </div>
