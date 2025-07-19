@@ -785,17 +785,22 @@ const UnifiedAdminPanel = () => {
   };
 
   // Функции управления галереей
-  const handleGallerySubmit = (e) => {
+  const handleGallerySubmit = async (e) => {
     e.preventDefault();
-    if (editingGalleryImage) {
-      updateGalleryImage(editingGalleryImage.id, newGalleryImage);
-      alert('Изображение обновлено! Изменения синхронизированы с сайтом.');
-    } else {
-      addGalleryImage(newGalleryImage);
-      alert('Изображение добавлено! Изменения синхронизированы с сайтом.');
+    try {
+      if (editingGalleryImage) {
+        await updateGalleryImage(editingGalleryImage.id, newGalleryImage);
+        alert('Изображение обновлено! Изменения синхронизированы с сайтом.');
+      } else {
+        await addGalleryImage(newGalleryImage);
+        alert('Изображение добавлено! Изменения синхронизированы с сайтом.');
+      }
+      setIsGalleryModalOpen(false);
+      resetGalleryForm();
+    } catch (error) {
+      console.error('Error with gallery operation:', error);
+      alert('Ошибка при сохранении изображения. Проверьте подключение и попробуйте снова.');
     }
-    setIsGalleryModalOpen(false);
-    resetGalleryForm();
   };
 
   const resetGalleryForm = () => {
