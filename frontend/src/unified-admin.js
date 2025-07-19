@@ -593,17 +593,22 @@ const UnifiedAdminPanel = () => {
   };
 
   // Функции управления отделениями
-  const handleDepartmentSubmit = (e) => {
+  const handleDepartmentSubmit = async (e) => {
     e.preventDefault();
-    if (editingDepartment) {
-      updateDepartment(editingDepartment.id, newDepartment);
-      alert('Отделение обновлено! Изменения синхронизированы с сайтом.');
-    } else {
-      addDepartment(newDepartment);
-      alert('Отделение добавлено! Изменения синхронизированы с сайтом.');
+    try {
+      if (editingDepartment) {
+        await updateDepartment(editingDepartment.id, newDepartment);
+        alert('Отделение обновлено! Изменения синхронизированы с сайтом.');
+      } else {
+        await addDepartment(newDepartment);
+        alert('Отделение добавлено! Изменения синхронизированы с сайтом.');
+      }
+      setIsDepartmentModalOpen(false);
+      resetDepartmentForm();
+    } catch (error) {
+      console.error('Error with department operation:', error);
+      alert('Ошибка при сохранении отделения. Проверьте подключение и попробуйте снова.');
     }
-    setIsDepartmentModalOpen(false);
-    resetDepartmentForm();
   };
 
   const resetDepartmentForm = () => {
